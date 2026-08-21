@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/markalar/create",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.markalar.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeMarkaTanimKaynagi\\Pages\\CreateMuhasebeMarka",
+    "status":  200,
+    "avg_ms":  1651.39,
+    "min_ms":  1651.39,
+    "max_ms":  1651.39,
+    "runs_ms":  "1651.39",
+    "bytes":  144839,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/markalar/create",
+    "error":  null
+}

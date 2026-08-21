@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teklif-yonetimi",
+    "uri":  "admin/teklif-yonetimi/teklifler",
+    "name":  "filament.admin.teklif-yonetimi.resources.teklifler.index",
+    "action":  "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifKaynagi\\Pages\\ListTeklifler",
+    "status":  200,
+    "avg_ms":  2313.12,
+    "min_ms":  2313.12,
+    "max_ms":  2313.12,
+    "runs_ms":  "2313.12",
+    "bytes":  170182,
+    "final_url":  "http://localhost/yalova-kamera/admin/teklif-yonetimi/teklifler",
+    "error":  null
+}

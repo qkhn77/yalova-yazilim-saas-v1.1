@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/stok-kategorileri",
+    "name":  "filament.admin.muhasebe.pages.tanimlar.stok-kategorileri",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\StokKategoriTanimlariSayfasi",
+    "status":  200,
+    "avg_ms":  1603.4,
+    "min_ms":  1603.4,
+    "max_ms":  1603.4,
+    "runs_ms":  "1603.4",
+    "bytes":  112201,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/stok-kategorileri",
+    "error":  null
+}

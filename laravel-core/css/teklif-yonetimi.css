@@ -1,0 +1,856 @@
+/* Teklif yönetimi: Dhonu invoice-create görünümünü Filament formu üzerinde uygular */
+:root {
+    --teklif-accent: #2563eb;
+    --teklif-accent-soft: rgba(37, 99, 235, 0.1);
+    --teklif-border: rgba(148, 163, 184, 0.22);
+    --teklif-muted: #64748b;
+    --teklif-bg: #f4f7fb;
+}
+
+body:has(.fi-resource-teklifler) {
+    background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 26%),
+        linear-gradient(180deg, #f8fbff 0%, var(--teklif-bg) 100%) !important;
+}
+
+.fi-resource-teklifler,
+.fi-resource-teklifler * {
+    font-family: "Inter", "Segoe UI", sans-serif !important;
+}
+
+.fi-resource-teklifler {
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 1.4rem 1rem 3rem;
+}
+
+.fi-resource-teklifler .fi-page-header {
+    margin-bottom: 1.5rem;
+}
+
+.fi-resource-teklifler .fi-header-heading,
+.fi-resource-teklifler .fi-page-heading {
+    color: #0f172a !important;
+    font-size: 1.65rem !important;
+    line-height: 1.2 !important;
+    font-weight: 700 !important;
+}
+
+.fi-resource-teklifler .fi-header-subheading,
+.fi-resource-teklifler .fi-page-subheading {
+    color: var(--teklif-muted) !important;
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+}
+
+.fi-resource-teklifler .grid {
+    row-gap: 1.5rem !important;
+}
+
+.fi-resource-teklifler .fi-section,
+.fi-resource-teklifler .teklif-hero-card,
+.fi-resource-teklifler .teklif-editor-card,
+.fi-resource-teklifler .teklif-summary-card,
+.fi-resource-teklifler .teklif-preview-card {
+    background: #fff !important;
+    border: 1px solid var(--teklif-border) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06) !important;
+}
+
+.fi-resource-teklifler .fi-section {
+    overflow: visible;
+}
+
+.fi-resource-teklifler .teklif-hero-card {
+    min-height: 210px;
+}
+
+.fi-resource-teklifler .teklif-editor-card {
+    min-height: 220px;
+}
+
+.fi-resource-teklifler .teklif-customer-card {
+    min-height: 0 !important;
+}
+
+.fi-resource-teklifler .teklif-summary-card {
+    min-height: 220px;
+    align-self: start;
+}
+
+.fi-resource-teklifler .fi-section-header {
+    padding: 1.5rem 1.5rem 0.75rem !important;
+    background: transparent !important;
+}
+
+.fi-resource-teklifler .fi-section-content,
+.fi-resource-teklifler .teklif-hero-card .fi-section-content,
+.fi-resource-teklifler .teklif-editor-card .fi-section-content,
+.fi-resource-teklifler .teklif-summary-card .fi-section-content,
+.fi-resource-teklifler .teklif-preview-card .fi-section-content {
+    padding: 0 1.5rem 1.6rem !important;
+    border-top: 0 !important;
+}
+
+.fi-resource-teklifler .fi-section-heading {
+    color: #0f172a !important;
+    font-size: 1.04rem !important;
+    line-height: 1.3 !important;
+    font-weight: 700 !important;
+}
+
+.fi-resource-teklifler .fi-section-description {
+    color: var(--teklif-muted) !important;
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+}
+
+.fi-resource-teklifler .fi-fo-field-wrp-label,
+.fi-resource-teklifler .fi-in-entry-wrp-label {
+    color: #0f172a !important;
+    font-size: 0.94rem !important;
+    line-height: 1.35 !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.45rem !important;
+}
+
+.fi-resource-teklifler .fi-input-wrp,
+.fi-resource-teklifler .fi-select-input,
+.fi-resource-teklifler .fi-fo-textarea,
+.fi-resource-teklifler .choices__inner,
+.fi-resource-teklifler .ts-control {
+    border: 1px solid rgba(148, 163, 184, 0.22) !important;
+    border-radius: 12px !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    min-height: 50px;
+}
+
+.fi-resource-teklifler .fi-input-wrp {
+    padding-left: 0.15rem !important;
+    padding-right: 0.15rem !important;
+}
+
+.fi-resource-teklifler .fi-input-wrp:focus-within,
+.fi-resource-teklifler .fi-select-input:focus-within,
+.fi-resource-teklifler .choices__inner:focus-within,
+.fi-resource-teklifler .ts-control.focus,
+.fi-resource-teklifler .ts-control:focus-within {
+    border-color: rgba(37, 99, 235, 0.38) !important;
+    box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.1) !important;
+}
+
+.fi-resource-teklifler input,
+.fi-resource-teklifler select,
+.fi-resource-teklifler textarea,
+.fi-resource-teklifler .choices__input,
+.fi-resource-teklifler .ts-control input {
+    color: #0f172a !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    font-weight: 400 !important;
+}
+
+.fi-resource-teklifler textarea {
+    min-height: 150px !important;
+}
+
+.fi-resource-teklifler .teklif-notes-card textarea {
+    min-height: 0 !important;
+    height: 100% !important;
+    resize: none !important;
+    overflow: hidden !important;
+    max-height: none !important;
+    line-height: 1.35 !important;
+    padding-top: 0.45rem !important;
+    padding-bottom: 0.45rem !important;
+}
+
+.fi-resource-teklifler .teklif-notes-card .grid {
+    align-items: start !important;
+}
+
+.fi-resource-teklifler .teklif-notes-card .fi-fo-field-wrp {
+    align-self: start !important;
+}
+
+.fi-resource-teklifler .teklif-notes-card .fi-input-wrp,
+.fi-resource-teklifler .teklif-notes-card .fi-fo-textarea {
+    min-height: 0 !important;
+    height: auto !important;
+    align-items: stretch !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.fi-resource-teklifler .teklif-notes-card .fi-fo-textarea > div[wire\\:ignore\\.self] {
+    min-height: 2.25rem !important;
+    height: auto !important;
+}
+
+.fi-resource-teklifler input::placeholder,
+.fi-resource-teklifler textarea::placeholder {
+    color: #94a3b8 !important;
+    opacity: 1 !important;
+}
+
+.fi-resource-teklifler .fi-input,
+.fi-resource-teklifler .fi-select-input,
+.fi-resource-teklifler textarea,
+.fi-resource-teklifler .choices__inner,
+.fi-resource-teklifler .ts-control {
+    padding-top: 0.72rem !important;
+    padding-bottom: 0.72rem !important;
+}
+
+.fi-resource-teklifler .ts-wrapper,
+.fi-resource-teklifler .choices,
+.fi-resource-teklifler .choices[data-type*="select-one"] {
+    position: relative;
+}
+
+.fi-resource-teklifler .ts-dropdown,
+.fi-resource-teklifler .choices__list--dropdown {
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+}
+
+.fi-resource-teklifler .ts-wrapper {
+    position: relative;
+}
+
+.fi-resource-teklifler .ts-dropdown,
+.fi-resource-teklifler .choices__list--dropdown[aria-expanded="true"],
+.fi-resource-teklifler .choices__list--dropdown.is-active {
+    pointer-events: auto !important;
+}
+
+.fi-resource-teklifler .ts-dropdown-content,
+.fi-resource-teklifler .choices__list--dropdown[aria-expanded="true"],
+.fi-resource-teklifler .choices__list--dropdown.is-active {
+    max-height: min(18rem, 45vh) !important;
+    min-height: 13.5rem !important;
+}
+
+.fi-resource-teklifler .choices__list--dropdown[aria-expanded="false"] {
+    display: none !important;
+    min-height: 0 !important;
+}
+
+.fi-resource-teklifler .choices__list--dropdown .choices__item,
+.fi-resource-teklifler .ts-dropdown .option {
+    min-height: 2.5rem;
+    padding-top: 0.55rem !important;
+    padding-bottom: 0.55rem !important;
+    line-height: 1.35 !important;
+}
+
+.fi-resource-teklifler .fi-fo-repeater-item {
+    border-radius: 20px !important;
+    border: 1px solid rgba(148, 163, 184, 0.16) !important;
+    background: #fbfdff !important;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04) !important;
+    position: relative !important;
+}
+
+.fi-resource-teklifler .teklif-kur-note {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.65rem;
+    padding: 1rem 1.1rem;
+    border-radius: 16px;
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(255, 255, 255, 0.96));
+    color: #0f172a;
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.fi-resource-teklifler .teklif-kur-note__item {
+    display: grid;
+    min-width: 0;
+    gap: 0.15rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.fi-resource-teklifler .teklif-kur-note__item strong,
+.fi-resource-teklifler .teklif-kur-note__item em {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+.fi-resource-teklifler .teklif-kur-note__item strong {
+    color: #64748b;
+    font-size: 0.72rem;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.fi-resource-teklifler .teklif-kur-note__item em {
+    color: #0f172a;
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.fi-resource-teklifler .teklif-kur-note--danger {
+    display: block;
+    border-color: rgba(185, 28, 28, 0.14);
+    background: rgba(254, 242, 242, 0.95);
+    color: #991b1b;
+    font-weight: 600;
+}
+
+.fi-resource-teklifler .teklif-kur-loading {
+    position: fixed !important;
+    inset: 0 !important;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 80;
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+    background: rgba(15, 23, 42, 0.18);
+}
+
+.fi-resource-teklifler .teklif-kur-loading__box {
+    min-width: 260px;
+    padding: 1rem 1.35rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+    text-align: center;
+    color: #0f172a;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.fi-resource-teklifler .teklif-line-head {
+    display: grid;
+    grid-template-columns: 0.25fr 5.75fr 1fr 1fr 2fr 1fr 1fr;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.375rem 0.75rem;
+    color: #64748b;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.fi-resource-teklifler .teklif-line-head > span {
+    display: flex;
+    align-items: center;
+    min-height: 1rem;
+}
+
+.fi-resource-teklifler .teklif-line-head > span:first-child {
+    justify-content: center;
+    text-align: center;
+}
+
+.fi-resource-teklifler .teklif-line-head > span:nth-child(2) {
+    padding-left: 0.35rem;
+}
+
+.fi-resource-teklifler .teklif-line-repeater {
+    counter-reset: teklif-line;
+}
+
+.fi-resource-teklifler .teklif-line-repeater .fi-fo-repeater-item {
+    counter-increment: teklif-line;
+}
+
+.fi-resource-teklifler .teklif-line-index {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.fi-resource-teklifler .teklif-line-index::before {
+    content: counter(teklif-line, decimal-leading-zero);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 36px;
+    color: #64748b !important;
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+}
+
+.fi-resource-teklifler .teklif-line-index .fi-fo-placeholder {
+    display: none !important;
+}
+
+.fi-resource-teklifler .fi-fo-repeater-item-header {
+    background: transparent !important;
+    border-bottom: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: 0 !important;
+    overflow: visible !important;
+    gap: 0 !important;
+}
+
+.fi-resource-teklifler .fi-fo-repeater-item-content {
+    padding: 0.5rem 0.75rem 0.7rem !important;
+}
+
+.fi-resource-teklifler .teklif-line-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1rem;
+    align-items: center;
+    color: #334155;
+    font-size: 0.82rem;
+}
+
+.fi-resource-teklifler .teklif-line-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 1.7rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(249, 115, 22, 0.12);
+    color: #c2410c;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.fi-resource-teklifler .teklif-line-warning {
+    color: #b91c1c;
+    font-size: 0.79rem;
+    line-height: 1.45;
+    font-weight: 600;
+    padding-top: 0.15rem;
+}
+
+.fi-resource-teklifler .fi-fo-repeater-item-header > h4,
+.fi-resource-teklifler .fi-fo-repeater-item-header > ul:not(.ms-auto) {
+    display: none !important;
+}
+
+.fi-resource-teklifler .fi-fo-repeater-item-header > ul.ms-auto {
+    position: absolute !important;
+    right: 0.75rem !important;
+    bottom: 0.62rem !important;
+    z-index: 2 !important;
+    gap: 0.35rem !important;
+}
+
+.fi-resource-teklifler .fi-fo-repeater-item-header > ul.ms-auto > li {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.fi-resource-teklifler .fi-fo-repeater-item-header > ul.ms-auto .fi-btn {
+    min-height: 30px !important;
+    padding: 0.35rem !important;
+    border-radius: 9px !important;
+}
+
+.fi-resource-teklifler .fi-fo-repeater-item-header > ul.ms-auto .fi-btn-label {
+    font-size: 0.72rem !important;
+    line-height: 1.1 !important;
+}
+
+.fi-resource-teklifler .fi-fo-repeater-item .grid {
+    row-gap: 0.45rem !important;
+    column-gap: 0.65rem !important;
+}
+
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item .fi-fo-field-wrp-label {
+    display: none !important;
+}
+
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item .fi-fo-field-wrp {
+    margin-bottom: 0 !important;
+}
+
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item .fi-input-wrp,
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item .fi-select-input,
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item .choices__inner,
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item .ts-control {
+    min-height: 36px !important;
+    border-radius: 10px !important;
+}
+
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item input,
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item select,
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item .choices__input,
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item .ts-control input {
+    font-size: 0.84rem !important;
+}
+
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item .fi-input,
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item .fi-select-input,
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item .choices__inner,
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-item .ts-control {
+    padding-top: 0.42rem !important;
+    padding-bottom: 0.42rem !important;
+}
+
+.fi-resource-teklifler .fi-btn {
+    border-radius: 12px !important;
+    font-size: 0.95rem !important;
+    line-height: 1.25 !important;
+    font-weight: 600 !important;
+    min-height: 46px;
+    padding: 0.8rem 1.05rem !important;
+}
+
+.fi-resource-teklifler .fi-btn-color-primary {
+    background: #2563eb !important;
+    border-color: #2563eb !important;
+}
+
+.fi-resource-teklifler .fi-btn-color-gray {
+    background: #f8fafc !important;
+    border-color: rgba(148, 163, 184, 0.18) !important;
+    color: #334155 !important;
+}
+
+.fi-resource-teklifler .teklif-summary-card {
+    position: sticky;
+    top: 1rem;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal {
+    position: static !important;
+    min-height: auto !important;
+}
+
+.fi-resource-teklifler .teklif-customer-card .fi-section-header,
+.fi-resource-teklifler .teklif-notes-card .fi-section-header,
+.fi-resource-teklifler .teklif-summary-horizontal .fi-section-header {
+    padding: 0.45rem 0.8rem 0.18rem !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-section-header {
+    padding: 0.3rem 0.55rem 0.12rem !important;
+}
+
+.fi-resource-teklifler .teklif-customer-card .fi-section-content,
+.fi-resource-teklifler .teklif-notes-card .fi-section-content,
+.fi-resource-teklifler .teklif-summary-horizontal .fi-section-content {
+    padding: 0 0.8rem 0.55rem !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-section-content {
+    padding: 0 0.55rem 0.36rem !important;
+}
+
+.fi-resource-teklifler .teklif-customer-card .fi-section-heading,
+.fi-resource-teklifler .teklif-notes-card .fi-section-heading,
+.fi-resource-teklifler .teklif-summary-horizontal .fi-section-heading {
+    line-height: 1.15 !important;
+    margin-bottom: 0 !important;
+}
+
+.fi-resource-teklifler .teklif-customer-card .fi-fo-field-wrp-label,
+.fi-resource-teklifler .teklif-notes-card .fi-fo-field-wrp-label {
+    margin-bottom: 0.08rem !important;
+}
+
+.fi-resource-teklifler .teklif-customer-card .grid,
+.fi-resource-teklifler .teklif-notes-card .grid {
+    row-gap: 0.35rem !important;
+}
+
+.fi-resource-teklifler .teklif-customer-card .fi-fo-field-wrp,
+.fi-resource-teklifler .teklif-notes-card .fi-fo-field-wrp,
+.fi-resource-teklifler .teklif-summary-horizontal .fi-fo-field-wrp {
+    margin-bottom: 0 !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-section-content {
+    padding-top: 0 !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-section-content > .grid {
+    row-gap: 0.12rem !important;
+    column-gap: 0.22rem !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-fo-field-wrp {
+    padding-right: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-fo-field-wrp > div,
+.fi-resource-teklifler .teklif-summary-horizontal .fi-fo-field-wrp > div > div {
+    row-gap: 0.05rem !important;
+    gap-row: 0.05rem !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-fo-field-wrp-label {
+    margin-bottom: 0 !important;
+    font-size: 0.78rem !important;
+    color: #64748b !important;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1 !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-fo-placeholder {
+    font-size: 0.94rem !important;
+    line-height: 1 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .teklif-grand-total {
+    width: auto;
+    justify-content: center;
+    padding: 0.28rem 0.48rem;
+    border-radius: 14px;
+    font-size: 0.92rem;
+    line-height: 1.1;
+    display: inline-flex;
+}
+
+.fi-resource-teklifler .teklif-summary-card .fi-fo-placeholder {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.fi-resource-teklifler .teklif-summary-card .fi-fo-field-wrp {
+    margin-bottom: 0.45rem !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal {
+    border-radius: 8px !important;
+    border-color: rgba(15, 23, 42, 0.08) !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-section-header {
+    padding: 0.65rem 0.85rem 0 !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-section-heading {
+    font-size: 0.86rem !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-section-content {
+    padding: 0.45rem 0.85rem 0.8rem !important;
+}
+
+.fi-resource-teklifler .teklif-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.fi-resource-teklifler .teklif-summary-item {
+    min-width: 0;
+    padding: 0.55rem 0.65rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.fi-resource-teklifler .teklif-summary-item span {
+    display: block;
+    margin-bottom: 0.28rem;
+    color: #64748b;
+    font-size: 0.68rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+.fi-resource-teklifler .teklif-summary-item strong {
+    display: block;
+    min-width: 0;
+    color: #0f172a;
+    font-size: 0.88rem;
+    line-height: 1.15;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .teklif-grand-total,
+.fi-resource-teklifler .teklif-summary-grid .teklif-grand-total {
+    display: inline-flex;
+    width: auto;
+    max-width: 100%;
+    min-height: 1.45rem;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #047857;
+    font-size: 0.92rem;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.fi-resource-teklifler .teklif-summary-grid .teklif-summary-item:last-child {
+    border-color: rgba(16, 185, 129, 0.22);
+    background: #f0fdf4;
+}
+
+@media (max-width: 1279px) {
+    .fi-resource-teklifler .teklif-summary-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 767px) {
+    .fi-resource-teklifler .teklif-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.fi-resource-teklifler .teklif-line-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    padding: 0.15rem 8.25rem 0 0;
+    color: #475569;
+    font-size: 0.76rem;
+    line-height: 1.5;
+}
+
+.fi-resource-teklifler .teklif-line-summary strong {
+    color: #0f172a;
+}
+
+.fi-resource-teklifler .teklif-grand-total {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.65rem;
+    border-radius: 18px;
+    background: #0f172a;
+    color: #fff;
+    font-weight: 700;
+    width: fit-content;
+}
+
+.fi-resource-teklifler .teklif-check-list {
+    margin: 0;
+    padding-left: 1rem;
+    color: var(--teklif-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+.fi-resource-teklifler .teklif-check-list li + li {
+    margin-top: 0.45rem;
+}
+
+.fi-resource-teklifler .teklif-line-card .fi-fo-repeater-actions {
+    margin-top: 0.65rem !important;
+}
+
+.fi-resource-teklifler .fi-fo-placeholder {
+    color: #475569 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+}
+
+.fi-resource-teklifler .fi-ta-text {
+    color: #0f172a !important;
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+}
+
+@media (max-width: 1279px) {
+    .fi-resource-teklifler .teklif-summary-card {
+        position: static;
+        min-height: auto;
+    }
+}
+
+@media (min-width: 1280px) {
+    .fi-resource-teklifler {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-section-content > .grid > * {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .fi-fo-placeholder,
+.fi-resource-teklifler .teklif-summary-horizontal .fi-fo-field-wrp,
+.fi-resource-teklifler .teklif-summary-horizontal .fi-fo-field-wrp > div,
+.fi-resource-teklifler .teklif-summary-horizontal .fi-fo-field-wrp > div > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .teklif-summary-grid {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    gap: 0.65rem !important;
+    align-items: stretch !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .teklif-summary-item {
+    min-width: 0 !important;
+    min-height: 4.1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.68rem 0.78rem !important;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .teklif-summary-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fi-resource-teklifler .teklif-summary-horizontal .teklif-summary-item strong,
+.fi-resource-teklifler .teklif-summary-horizontal .teklif-grand-total {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 1279px) {
+    .fi-resource-teklifler .teklif-summary-horizontal .teklif-summary-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .fi-resource-teklifler .teklif-summary-horizontal .teklif-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .fi-resource-teklifler .teklif-summary-horizontal .teklif-summary-grid {
+        grid-template-columns: 1fr !important;
+    }
+}

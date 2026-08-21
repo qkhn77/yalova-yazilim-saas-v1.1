@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/adisyon-kalemleri",
+    "name":  "filament.admin.restoran.resources.adisyon-kalemleri.index",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranAdisyonKalemiKaynagi\\Pages\\ListRestoranAdisyonKalemleri",
+    "status":  200,
+    "avg_ms":  227.61,
+    "min_ms":  138.76,
+    "max_ms":  406.18,
+    "runs_ms":  "256,64|138,76|172,08|406,18|164,4",
+    "bytes":  156830,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/adisyon-kalemleri",
+    "error":  null
+}

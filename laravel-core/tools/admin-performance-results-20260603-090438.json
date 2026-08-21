@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "e-ticaret",
+    "uri":  "admin/e-ticaret/odeme-yonetimi",
+    "name":  "filament.admin.e-ticaret.pages.odeme-yonetimi",
+    "action":  "App\\Filament\\Clusters\\ETicaret\\Pages\\OdemeYonetimiSayfasi",
+    "status":  200,
+    "avg_ms":  1712.82,
+    "min_ms":  1694.76,
+    "max_ms":  1730.87,
+    "runs_ms":  "1730,87|1694,76",
+    "bytes":  140202,
+    "final_url":  "http://localhost/yalova-kamera/admin/e-ticaret/odeme-yonetimi",
+    "error":  null
+}

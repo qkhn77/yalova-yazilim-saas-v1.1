@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/fatura-kaynagis/create","filament.admin.muhasebe.resources.fatura-kaynagis.create","App\Filament\Clusters\Muhasebe\Resources\FaturaKaynagi\Pages\CreateFatura","200","4158,64","2909,82","7323","7323|4130,66|3375|2909,82|3054,71","287515","http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/create",

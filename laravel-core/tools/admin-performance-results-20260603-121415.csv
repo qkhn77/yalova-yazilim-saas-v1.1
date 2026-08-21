@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teknik-servis","admin/teknik-servis/servis-dashboard","filament.admin.teknik-servis.pages.servis-dashboard","App\Filament\Clusters\TeknikServis\Pages\ServisDashboard","200","1550,08","1550,08","1550,08","1550.08","111986","http://localhost/yalova-kamera/admin/teknik-servis/servis-dashboard",

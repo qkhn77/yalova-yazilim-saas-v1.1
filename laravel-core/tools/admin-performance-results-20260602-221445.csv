@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","sistem-roller","admin/sistem-roller","filament.admin.resources.sistem-roller.index","App\Filament\Resources\RoleResource\Pages\ListRoles","200","1734,74","1661,28","1947,28","1947,28|1725,88|1675,1|1664,13|1661,28","140128","http://localhost/yalova-kamera/admin/sistem-roller",

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/avanslar/create",
+    "name":  "filament.admin.personel-takip.resources.avanslar.create",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelAvansKaynagi\\Pages\\CreatePersonelAvans",
+    "status":  200,
+    "avg_ms":  1717.09,
+    "min_ms":  1717.09,
+    "max_ms":  1717.09,
+    "runs_ms":  "1717.09",
+    "bytes":  162575,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/avanslar/create",
+    "error":  null
+}

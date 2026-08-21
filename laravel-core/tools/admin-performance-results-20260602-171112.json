@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/satis/barkod-esleme-listesi",
+    "name":  "filament.admin.muhasebe.pages.satis.barkod-esleme-listesi",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\BarkodluSatisBarkodListesiSayfasi",
+    "status":  200,
+    "avg_ms":  2287.34,
+    "min_ms":  2105.58,
+    "max_ms":  2501.58,
+    "runs_ms":  "2355,73|2501,58|2105,58|2165,35|2308,46",
+    "bytes":  554373,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/barkod-esleme-listesi",
+    "error":  null
+}

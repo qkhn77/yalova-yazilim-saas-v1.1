@@ -1,0 +1,2 @@
+﻿"rank","module","uri","uri_template","name","action","model","record_key","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","sistem-kullanicilar","admin/sistem-kullanicilar/1/edit","admin/sistem-kullanicilar/{record}/edit","filament.admin.resources.sistem-kullanicilar.edit","App\Filament\Resources\UserResource\Pages\EditUser","App\Models\User","1","200","1693,93","1693,93","1693,93","1693.93","142958","http://localhost/yalova-kamera/admin/sistem-kullanicilar/1/edit",

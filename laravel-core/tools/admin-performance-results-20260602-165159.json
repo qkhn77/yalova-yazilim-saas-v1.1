@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/adisyonlar/create",
+    "name":  "filament.admin.restoran.resources.adisyonlar.create",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranAdisyonKaynagi\\Pages\\CreateRestoranAdisyon",
+    "status":  200,
+    "avg_ms":  1972.25,
+    "min_ms":  1815.52,
+    "max_ms":  2278.49,
+    "runs_ms":  "2278,49|1822,73|1815,52",
+    "bytes":  196911,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/adisyonlar/create",
+    "error":  null
+}

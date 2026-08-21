@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/vade-takibi",
+    "name":  "filament.admin.muhasebe.pages.finans.vade-takibi",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\VadeTakipSayfasi",
+    "status":  200,
+    "avg_ms":  2099.46,
+    "min_ms":  1900.34,
+    "max_ms":  2423.54,
+    "runs_ms":  "2238,66|2423,54|1922,45|1900,34|2012,33",
+    "bytes":  261976,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/vade-takibi",
+    "error":  null
+}

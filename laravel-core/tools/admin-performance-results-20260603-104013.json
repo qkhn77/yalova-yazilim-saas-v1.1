@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/satis/pos-satis",
+    "name":  "filament.admin.muhasebe.pages.satis.pos-satis",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\PosSatis",
+    "status":  200,
+    "avg_ms":  2091.21,
+    "min_ms":  2091.21,
+    "max_ms":  2091.21,
+    "runs_ms":  "2091.21",
+    "bytes":  165098,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/finans-hareketleri",
+    "error":  null
+}

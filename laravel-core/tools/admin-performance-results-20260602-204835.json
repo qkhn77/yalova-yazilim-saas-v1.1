@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/poslar",
+    "name":  "filament.admin.muhasebe.resources.finans.poslar.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\PosHesabiKaynagi\\Pages\\ListPosHesaplari",
+    "status":  200,
+    "avg_ms":  2591.25,
+    "min_ms":  1792.77,
+    "max_ms":  5419.37,
+    "runs_ms":  "5419,37|1792,77|1984,85|1953,95|1805,32",
+    "bytes":  256394,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/poslar",
+    "error":  null
+}

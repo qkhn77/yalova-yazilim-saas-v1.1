@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/fatura-kaynagis/create/gelen-iade-faturasi",
+    "name":  "filament.admin.muhasebe.resources.fatura-kaynagis.createGelenIade",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\CreateGelenIadeFaturasi",
+    "status":  200,
+    "avg_ms":  1852.69,
+    "min_ms":  1852.69,
+    "max_ms":  1852.69,
+    "runs_ms":  "1852.69",
+    "bytes":  192760,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/create/gelen-iade-faturasi",
+    "error":  null
+}

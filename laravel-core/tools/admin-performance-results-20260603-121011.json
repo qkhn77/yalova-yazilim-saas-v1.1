@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/web-moduller",
+    "name":  "filament.admin.web.pages.web-moduller",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\WebModuller",
+    "status":  200,
+    "avg_ms":  1805.3,
+    "min_ms":  1805.3,
+    "max_ms":  1805.3,
+    "runs_ms":  "1805.3",
+    "bytes":  113176,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/web-moduller",
+    "error":  null
+}

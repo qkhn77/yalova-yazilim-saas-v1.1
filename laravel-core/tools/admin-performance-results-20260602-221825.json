@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-yetkiler",
+    "uri":  "admin/sistem-yetkiler/create",
+    "name":  "filament.admin.resources.sistem-yetkiler.create",
+    "action":  "App\\Filament\\Resources\\YetkiYonetimKaynagi\\Pages\\YetkiOlustur",
+    "status":  200,
+    "avg_ms":  1812.25,
+    "min_ms":  1676.8,
+    "max_ms":  2000.34,
+    "runs_ms":  "2000,34|1676,8|1759,62",
+    "bytes":  138647,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-yetkiler/create",
+    "error":  null
+}

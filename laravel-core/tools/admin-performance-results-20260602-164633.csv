@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","e-ticaret","admin/e-ticaret/pazaryeri-entegrasyonu","filament.admin.e-ticaret.pages.pazaryeri-entegrasyonu","App\Filament\Clusters\ETicaret\Pages\PazaryeriEntegrasyonuSayfasi","200","1818,92","1763,08","1868,81","1868,81|1834,89|1763,08|1788,09|1839,71","135743","http://localhost/yalova-kamera/admin/e-ticaret/pazaryeri-entegrasyonu",

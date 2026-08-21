@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/tanimlar/cihazlar/create",
+    "name":  "filament.admin.teknik-servis.resources.tanimlar.cihazlar.create",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisCihazKaynagi\\Pages\\CreateTeknikServisCihazi",
+    "status":  200,
+    "avg_ms":  1968.32,
+    "min_ms":  1968.32,
+    "max_ms":  1968.32,
+    "runs_ms":  "1968.32",
+    "bytes":  140706,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/cihazlar/create",
+    "error":  null
+}

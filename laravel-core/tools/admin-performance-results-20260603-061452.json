@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/stok/stok-listesi/create",
+    "name":  "filament.admin.muhasebe.resources.stok.stok-listesi.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\StokKartiKaynagi\\Pages\\CreateStokKarti",
+    "status":  200,
+    "avg_ms":  2012.31,
+    "min_ms":  1952.19,
+    "max_ms":  2072.43,
+    "runs_ms":  "1952,19|2072,43",
+    "bytes":  241802,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/stok/stok-listesi/create",
+    "error":  null
+}

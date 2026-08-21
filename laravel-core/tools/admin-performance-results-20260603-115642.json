@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/banka-hesaplari/create",
+    "name":  "filament.admin.muhasebe.resources.finans.banka-hesaplari.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\BankaHesabiKaynagi\\Pages\\CreateBankaHesabi",
+    "status":  200,
+    "avg_ms":  1777.73,
+    "min_ms":  1777.73,
+    "max_ms":  1777.73,
+    "runs_ms":  "1777.73",
+    "bytes":  165852,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/banka-hesaplari/create",
+    "error":  null
+}

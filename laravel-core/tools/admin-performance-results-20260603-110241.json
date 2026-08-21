@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/tanimlar/vardiya-sablonlari",
+    "name":  "filament.admin.personel-takip.resources.tanimlar.vardiya-sablonlari.index",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelVardiyaSablonuKaynagi\\Pages\\ListPersonelVardiyaSablonlari",
+    "status":  200,
+    "avg_ms":  1738.41,
+    "min_ms":  1738.41,
+    "max_ms":  1738.41,
+    "runs_ms":  "1738.41",
+    "bytes":  158840,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/tanimlar/vardiya-sablonlari",
+    "error":  null
+}

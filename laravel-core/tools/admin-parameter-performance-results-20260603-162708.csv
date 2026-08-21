@@ -1,0 +1,2 @@
+﻿"rank","module","uri","uri_template","name","action","model","record_key","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","product-categories","admin/product-categories/1/edit","admin/product-categories/{record}/edit","filament.admin.resources.product-categories.edit","App\Filament\Resources\ProductCategoryResource\Pages\EditProductCategory","App\Models\ProductCategory","1","200","3325,32","3258,43","3402,32","3402,32|3258,43|3315,2","165230","http://localhost/yalova-kamera/admin/web/urunler/urun-kategorileri",

@@ -1,0 +1,230 @@
+/* Yalova Kamera - Yazılım teması. İçerik ve menü verileri ortak, görünüm bu katmanda değişir. */
+:root {
+    --software-ink: #e7eef9;
+    --software-muted: #91a1b8;
+    --software-bg: #07111f;
+    --software-panel: #0d1b2d;
+    --software-line: rgba(148, 163, 184, .18);
+    --software-accent: #55e6a5;
+    --software-accent-2: #6ea8fe;
+}
+
+body.front-theme-software { background: var(--software-bg); color: var(--software-ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+body.front-theme-software .utility-bar { background: #050b14; border-bottom: 1px solid var(--software-line); color: var(--software-muted); }
+body.front-theme-software .utility-bar a, body.front-theme-software .utility-bar select { color: var(--software-muted); }
+body.front-theme-software .main-header { background: rgba(7, 17, 31, .92); border-bottom: 1px solid var(--software-line); position: relative; z-index: 20; }
+body.front-theme-software .main-header .navbar { background: transparent !important; padding: 18px 0; }
+body.front-theme-software .site-logo img { max-height: 48px; filter: brightness(1.15) saturate(.8); }
+body.front-theme-software .software-brand-mark { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; margin-right: 10px; border: 1px solid rgba(85, 230, 165, .45); border-radius: 10px; color: var(--software-accent); font: 700 15px ui-monospace, SFMono-Regular, Menlo, monospace; }
+body.front-theme-software .software-brand-copy { display: inline-flex; flex-direction: column; vertical-align: middle; color: #fff; line-height: 1.1; }
+body.front-theme-software .software-brand-copy strong { font-size: 15px; letter-spacing: .01em; }
+body.front-theme-software .software-brand-copy small { margin-top: 4px; color: var(--software-muted); font-size: 8px; letter-spacing: .16em; text-transform: uppercase; }
+body.front-theme-software .main-header .nav-link { color: var(--software-ink) !important; font-size: 14px; font-weight: 600; letter-spacing: .02em; padding: 12px 15px !important; border-radius: 8px; }
+body.front-theme-software .main-header .nav-link:hover, body.front-theme-software .main-header .nav-item.active > .nav-link { background: rgba(85, 230, 165, .1) !important; color: var(--software-accent) !important; }
+body.front-theme-software .main-header .header-call-btn { background: var(--software-accent); border: 0; border-radius: 8px; color: #052016; box-shadow: 0 8px 24px rgba(85, 230, 165, .16); }
+body.front-theme-software .main-header .header-call-btn-label { color: #052016; }
+body.front-theme-software .main-header .header-call-btn-number { color: #123d2c; }
+body.front-theme-software .main-header .nav-item.submenu > ul { background: var(--software-panel); border: 1px solid var(--software-line); border-radius: 10px; padding: 8px; }
+body.front-theme-software .main-header .nav-item.submenu > ul a { color: var(--software-ink) !important; border-radius: 6px; }
+body.front-theme-software .main-header .nav-item.submenu > ul a:hover { background: rgba(110, 168, 254, .12); color: var(--software-accent-2) !important; }
+body.front-theme-software .section-title h2, body.front-theme-software h1, body.front-theme-software h2, body.front-theme-software h3 { letter-spacing: -.025em; }
+body.front-theme-software .section-title h2::after { background: linear-gradient(90deg, var(--software-accent), var(--software-accent-2)); }
+body.front-theme-software .btn-default { background: var(--software-accent); border-radius: 8px; color: #052016; font-weight: 700; }
+body.front-theme-software .btn-default:hover { background: var(--software-accent-2); color: #fff; }
+body.front-theme-software .service-item, body.front-theme-software .project-item, body.front-theme-software .blog-item, body.front-theme-software .product-item, body.front-theme-software .contact-form, body.front-theme-software .about-us-content { background: var(--software-panel); border: 1px solid var(--software-line); border-radius: 14px; }
+body.front-theme-software .service-item:hover, body.front-theme-software .project-item:hover, body.front-theme-software .blog-item:hover { border-color: rgba(85, 230, 165, .55); transform: translateY(-3px); }
+body.front-theme-software .main-footer { background: #050b14; border-top: 1px solid var(--software-line); }
+body.front-theme-software .main-footer p, body.front-theme-software .main-footer li a { color: var(--software-muted); }
+body.front-theme-software .software-footer-brand { display: inline-flex; align-items: center; color: #fff; font-size: 17px; }
+body.front-theme-software .software-footer-brand .software-brand-mark { margin-right: 12px; }
+body.front-theme-software .footer-copyright { background: #03070d; border-top: 1px solid var(--software-line); }
+body.front-theme-software .floating-contact-button { border-radius: 8px; }
+@media (max-width: 991px) {
+    body.front-theme-software .main-header .navbar { padding: 12px 0; }
+    body.front-theme-software .responsive-menu { background: var(--software-panel); border: 1px solid var(--software-line); }
+    body.front-theme-software .responsive-menu a { color: var(--software-ink); border-bottom-color: var(--software-line); }
+}
+
+/* Ortak ön yüz sayfaları: liste, detay, hesap, sepet, ödeme ve formlar */
+body.front-theme-software main,
+body.front-theme-software .page-content,
+body.front-theme-software .container.py-5 { background: transparent; }
+body.front-theme-software .page-header { background: linear-gradient(135deg, #0b1d32 0%, #102b42 100%); border-bottom: 1px solid var(--software-line); }
+body.front-theme-software .page-header-box h1 { color: #fff; font-weight: 800; }
+body.front-theme-software .page-header-box p,
+body.front-theme-software .text-muted,
+body.front-theme-software .form-text { color: var(--software-muted) !important; }
+body.front-theme-software .section-title h3,
+body.front-theme-software .section-title p { color: var(--software-accent) !important; }
+body.front-theme-software .section-title h2,
+body.front-theme-software .content h1,
+body.front-theme-software .content h2,
+body.front-theme-software .content h3,
+body.front-theme-software .content h4,
+body.front-theme-software .content h5,
+body.front-theme-software .content h6 { color: var(--software-ink); }
+body.front-theme-software .content,
+body.front-theme-software .content p,
+body.front-theme-software .content li { color: #c4d0df; }
+body.front-theme-software .content a { color: var(--software-accent-2); }
+body.front-theme-software .card,
+body.front-theme-software .checkout-card,
+body.front-theme-software .checkout-shell,
+body.front-theme-software .account-page-frame,
+body.front-theme-software .account-profile-frame,
+body.front-theme-software .account-inner-card,
+body.front-theme-software .account-profile-card,
+body.front-theme-software .contact-form,
+body.front-theme-software .message-thread { background: var(--software-panel) !important; border: 1px solid var(--software-line) !important; border-radius: 14px; color: var(--software-ink); box-shadow: 0 16px 40px rgba(0, 0, 0, .16) !important; }
+body.front-theme-software .checkout-card-title,
+body.front-theme-software .checkout-summary-line,
+body.front-theme-software .checkout-address-title,
+body.front-theme-software .checkout-shipping-name,
+body.front-theme-software .checkout-payment-title { color: var(--software-ink); }
+body.front-theme-software .checkout-auth-box,
+body.front-theme-software .checkout-address-option,
+body.front-theme-software .checkout-shipping-option,
+body.front-theme-software .checkout-payment-option,
+body.front-theme-software .checkout-payment-preview { background: #10243a; border-color: var(--software-line); color: var(--software-ink); }
+body.front-theme-software .checkout-address-option:hover,
+body.front-theme-software .checkout-shipping-option:hover,
+body.front-theme-software .checkout-payment-option:hover,
+body.front-theme-software .checkout-address-option:has(input:checked),
+body.front-theme-software .checkout-shipping-option:has(input:checked),
+body.front-theme-software .checkout-payment-option:has(input:checked) { border-color: var(--software-accent); background: rgba(85, 230, 165, .08); }
+body.front-theme-software .form-control,
+body.front-theme-software .form-select,
+body.front-theme-software input:not([type="checkbox"]):not([type="radio"]),
+body.front-theme-software select,
+body.front-theme-software textarea { background-color: #081525; border-color: var(--software-line); color: var(--software-ink); }
+body.front-theme-software .form-control::placeholder,
+body.front-theme-software input::placeholder,
+body.front-theme-software textarea::placeholder { color: #71839a; }
+body.front-theme-software .form-control:focus,
+body.front-theme-software .form-select:focus,
+body.front-theme-software input:focus,
+body.front-theme-software select:focus,
+body.front-theme-software textarea:focus { background-color: #0a1b2e; border-color: var(--software-accent); color: #fff; box-shadow: 0 0 0 .2rem rgba(85, 230, 165, .16); }
+body.front-theme-software .form-label,
+body.front-theme-software .form-check-label { color: #cbd7e5; }
+body.front-theme-software .text-dark,
+body.front-theme-software .text-secondary { color: #cbd7e5 !important; }
+body.front-theme-software .rounded-3[style*="background"],
+body.front-theme-software .p-3[style*="background"] { background: #10243a !important; border: 1px solid var(--software-line); }
+body.front-theme-software hr { border-color: var(--software-line); opacity: 1; }
+body.front-theme-software a { color: #a9c9ff; }
+body.front-theme-software a:hover { color: var(--software-accent); }
+body.front-theme-software .pagination .page-link { background: var(--software-panel); border-color: var(--software-line); color: #a9c9ff; }
+body.front-theme-software .pagination .active .page-link,
+body.front-theme-software .pagination .page-link:hover { background: var(--software-accent); border-color: var(--software-accent); color: #052016; }
+body.front-theme-software .table { --bs-table-bg: transparent; --bs-table-color: var(--software-ink); --bs-table-border-color: var(--software-line); }
+body.front-theme-software .table thead th { color: var(--software-accent); background: #10243a; border-bottom-color: var(--software-accent); }
+body.front-theme-software .table tbody tr:hover { background: rgba(110, 168, 254, .07); }
+body.front-theme-software .bg-white,
+body.front-theme-software .bg-light { background-color: #10243a !important; color: var(--software-ink); }
+body.front-theme-software .btn-primary,
+body.front-theme-software .btn-success { background: var(--software-accent); border-color: var(--software-accent); color: #052016; }
+body.front-theme-software .btn-primary:hover,
+body.front-theme-software .btn-success:hover { background: var(--software-accent-2); border-color: var(--software-accent-2); color: #fff; }
+body.front-theme-software .btn-outline-primary,
+body.front-theme-software .btn-outline-secondary,
+body.front-theme-software .btn-outline-danger { border-color: rgba(110, 168, 254, .55); color: #a9c9ff; }
+body.front-theme-software .btn-outline-primary:hover,
+body.front-theme-software .btn-outline-secondary:hover,
+body.front-theme-software .btn-outline-danger:hover { background: var(--software-accent-2); border-color: var(--software-accent-2); color: #fff; }
+body.front-theme-software .badge.bg-primary { background: var(--software-accent) !important; color: #052016; }
+body.front-theme-software .badge.bg-secondary { background: #38516d !important; }
+body.front-theme-software .alert { border: 1px solid var(--software-line); border-radius: 10px; }
+body.front-theme-software .alert-info { background: rgba(110, 168, 254, .12); color: #c7dcff; }
+body.front-theme-software .alert-warning { background: rgba(245, 180, 70, .12); color: #f8d898; }
+body.front-theme-software .alert-success { background: rgba(85, 230, 165, .12); color: #b8f5d8; }
+body.front-theme-software .alert-danger { background: rgba(248, 113, 113, .12); color: #fecaca; }
+body.front-theme-software .products-list,
+body.front-theme-software .services-list,
+body.front-theme-software .projects-list,
+body.front-theme-software .our-blog { background: transparent; }
+body.front-theme-software .product-item,
+body.front-theme-software .product-card,
+body.front-theme-software .service-card,
+body.front-theme-software .project-card,
+body.front-theme-software .blog-card,
+body.front-theme-software .post-card { background: var(--software-panel); border: 1px solid var(--software-line); border-radius: 14px; }
+body.front-theme-software .product-item h3,
+body.front-theme-software .product-card h3,
+body.front-theme-software .service-card h3,
+body.front-theme-software .project-card h3,
+body.front-theme-software .blog-card h3,
+body.front-theme-software .post-card h3 { color: var(--software-ink); }
+body.front-theme-software .newsletter-modal__dialog { background: var(--software-panel); border: 1px solid var(--software-line); color: var(--software-ink); }
+body.front-theme-software .message-bubble { background: #10243a; border-color: var(--software-line); color: var(--software-ink); }
+body.front-theme-software .message-bubble.mine { background: rgba(85, 230, 165, .15); border-color: rgba(85, 230, 165, .35); }
+body.front-theme-software > footer { background: #03070d !important; border-top: 1px solid var(--software-line); color: var(--software-muted) !important; }
+
+/* Ana sayfanın kamera odaklı hazır görünümünü yazılım ürün sayfası diline çevirir. */
+body.front-theme-software .hero,
+body.front-theme-software .hero-video { background: radial-gradient(circle at 80% 15%, rgba(110, 168, 254, .22), transparent 34%), linear-gradient(135deg, #07111f 0%, #0c2238 100%); min-height: 620px; }
+body.front-theme-software .hero-bg-video,
+body.front-theme-software .hero-image { opacity: 0; pointer-events: none; }
+body.front-theme-software .hero-content { max-width: 680px; padding: 84px 0; }
+body.front-theme-software .hero-content h1 { color: #fff; font-size: clamp(2.5rem, 5vw, 5.2rem); line-height: 1.02; }
+body.front-theme-software .hero-content p { color: #b8c7d9; max-width: 590px; font-size: 18px; }
+body.front-theme-software .hero-content .section-title h3 { color: var(--software-accent); }
+body.front-theme-software .video-play-button { border-color: rgba(85, 230, 165, .35); }
+body.front-theme-software .best-services { background: #0b192a; border-top: 1px solid var(--software-line); border-bottom: 1px solid var(--software-line); }
+body.front-theme-software .best-service-item,
+body.front-theme-software .about-us-content,
+body.front-theme-software .service-item,
+body.front-theme-software .post-item,
+body.front-theme-software .testimonial-item,
+body.front-theme-software .faq-accordion,
+body.front-theme-software .project-item { background: var(--software-panel); border: 1px solid var(--software-line); border-radius: 14px; }
+body.front-theme-software .about-us,
+body.front-theme-software .our-services,
+body.front-theme-software .our-projets,
+body.front-theme-software .our-blog,
+body.front-theme-software .why-choose-us,
+body.front-theme-software .what-we-do,
+body.front-theme-software .our-features,
+body.front-theme-software .our-testimonials,
+body.front-theme-software .faq-section { background: var(--software-bg); }
+body.front-theme-software .about-us-images,
+body.front-theme-software .cta-box-image { opacity: .2; filter: grayscale(1) saturate(.3); }
+body.front-theme-software .service-item h3 a,
+body.front-theme-software .post-item h2 a,
+body.front-theme-software .testimonial-content p,
+body.front-theme-software .faq-accordion .accordion-button { color: var(--software-ink); }
+body.front-theme-software .cta-box { background: linear-gradient(135deg, #102b42, #0a1727); border-top: 1px solid var(--software-line); border-bottom: 1px solid var(--software-line); }
+body.front-theme-software .cta-box .section-title h2,
+body.front-theme-software .cta-box .section-title p,
+body.front-theme-software .cta-box-item-content h3 a { color: #fff; }
+body.front-theme-software .cta-box .section-title h3 { color: var(--software-accent); }
+
+/* Yazılım temasının bağımsız ana sayfa şablonu */
+body.front-theme-software .software-home { background: var(--software-bg); }
+body.front-theme-software .software-hero { padding: 112px 0 92px; background: radial-gradient(circle at 82% 18%, rgba(85, 230, 165, .13), transparent 24%), radial-gradient(circle at 58% 80%, rgba(110, 168, 254, .12), transparent 28%), var(--software-bg); }
+body.front-theme-software .software-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, .72fr); gap: 80px; align-items: center; }
+body.front-theme-software .software-eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--software-accent); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+body.front-theme-software .software-eyebrow::before { content: ''; width: 22px; height: 1px; background: currentColor; }
+body.front-theme-software .software-hero h1 { margin: 20px 0 24px; max-width: 760px; color: #fff; font-size: clamp(3rem, 6vw, 6.8rem); font-weight: 800; letter-spacing: -.065em; line-height: .96; }
+body.front-theme-software .software-hero h1 span { color: var(--software-accent); }
+body.front-theme-software .software-hero-copy > p { max-width: 560px; color: var(--software-muted); font-size: 18px; line-height: 1.7; }
+body.front-theme-software .software-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 26px; margin-top: 36px; }
+body.front-theme-software .software-text-link { display: inline-flex; align-items: center; gap: 10px; color: var(--software-ink); font-size: 14px; font-weight: 700; }
+body.front-theme-software .software-text-link span { color: var(--software-accent); font-size: 20px; transition: transform .2s ease; }
+body.front-theme-software .software-text-link:hover span { transform: translate(3px, -3px); }
+body.front-theme-software .software-hero-console { overflow: hidden; border: 1px solid rgba(110, 168, 254, .28); border-radius: 16px; background: rgba(13, 27, 45, .82); box-shadow: 0 30px 80px rgba(0, 0, 0, .28); }
+body.front-theme-software .software-console-top { display: flex; align-items: center; gap: 7px; padding: 16px 18px; border-bottom: 1px solid var(--software-line); color: var(--software-muted); font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+body.front-theme-software .software-console-top span { width: 8px; height: 8px; border-radius: 50%; background: #f87171; }.software-console-top span:nth-child(2) { background: #fbbf24; }.software-console-top span:nth-child(3) { background: var(--software-accent); }.software-console-top small { margin-left: auto; }
+body.front-theme-software .software-console-body { padding: 32px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+body.front-theme-software .software-console-line { color: #b5c7dc; font-size: 14px; }.software-prompt { color: var(--software-accent); margin-right: 8px; }
+body.front-theme-software .software-console-status { margin: 32px 0; color: var(--software-accent); font-size: 13px; }.software-console-status i { display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--software-accent); box-shadow: 0 0 12px var(--software-accent); }
+body.front-theme-software .software-console-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }.software-console-metrics div { padding: 14px 10px; border: 1px solid var(--software-line); border-radius: 8px; }.software-console-metrics strong { display: block; color: #fff; font-size: 21px; }.software-console-metrics small { color: var(--software-muted); font-size: 10px; }
+body.front-theme-software .software-console-chart { display: flex; align-items: end; gap: 8px; height: 100px; margin-top: 35px; padding-top: 20px; border-top: 1px solid var(--software-line); }.software-console-chart span { flex: 1; border-radius: 3px 3px 0 0; background: linear-gradient(180deg, var(--software-accent-2), rgba(110, 168, 254, .18)); }
+body.front-theme-software .software-trust-strip { border-top: 1px solid var(--software-line); border-bottom: 1px solid var(--software-line); background: #0b192a; }.software-trust-strip .container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 26px 12px; }.software-trust-strip strong, .software-trust-strip span { display: block; }.software-trust-strip strong { color: #fff; font-size: 15px; }.software-trust-strip span { margin-top: 4px; color: var(--software-muted); font-size: 12px; }
+body.front-theme-software .software-section { padding: 112px 0; }.software-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 42px; }.software-section-heading h2 { max-width: 600px; margin: 16px 0 0; color: #fff; font-size: clamp(2rem, 4vw, 3.8rem); letter-spacing: -.05em; line-height: 1; }
+body.front-theme-software .software-service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }.software-feature-card { position: relative; min-height: 260px; padding: 28px; border: 1px solid var(--software-line); border-radius: 12px; background: linear-gradient(145deg, rgba(13, 27, 45, .96), rgba(13, 27, 45, .5)); transition: border-color .2s ease, transform .2s ease; }.software-feature-card:hover { border-color: var(--software-accent); transform: translateY(-5px); }.software-card-number { color: var(--software-accent); font: 12px ui-monospace, monospace; }.software-feature-card h3 { margin: 58px 0 12px; color: #fff; font-size: 22px; }.software-feature-card p { max-width: 280px; color: var(--software-muted); font-size: 14px; line-height: 1.6; }.software-card-arrow { position: absolute; right: 26px; bottom: 23px; color: var(--software-accent); font-size: 24px; }
+body.front-theme-software .software-project-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 16px; }.software-project-card { position: relative; min-height: 330px; overflow: hidden; border: 1px solid var(--software-line); border-radius: 12px; background: var(--software-panel); }.software-project-card:first-child { min-height: 420px; }.software-project-card img { width: 100%; height: 100%; object-fit: cover; opacity: .45; transition: transform .4s ease, opacity .4s ease; }.software-project-card:hover img { opacity: .7; transform: scale(1.04); }.software-project-card > div { position: absolute; right: 22px; bottom: 20px; left: 22px; }.software-project-card span { color: var(--software-accent); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }.software-project-card h3 { margin: 8px 0 0; color: #fff; font-size: 22px; }
+body.front-theme-software .software-cta-section { padding: 82px 0; background: linear-gradient(110deg, #12344e, #0c1c30); border-top: 1px solid var(--software-line); border-bottom: 1px solid var(--software-line); }.software-cta-section .container { display: flex; align-items: end; justify-content: space-between; gap: 30px; }.software-cta-section h2 { max-width: 700px; margin: 16px 0 0; color: #fff; font-size: clamp(2rem, 4vw, 4.4rem); letter-spacing: -.05em; line-height: .98; }.software-cta-section .btn-default span { margin-left: 12px; }
+body.front-theme-software .software-empty-state { grid-column: 1 / -1; padding: 30px; border: 1px dashed var(--software-line); border-radius: 12px; color: var(--software-muted); text-align: center; }
+@media (max-width: 900px) { body.front-theme-software .software-hero-grid, body.front-theme-software .software-service-grid, body.front-theme-software .software-project-grid { grid-template-columns: 1fr 1fr; gap: 14px; } body.front-theme-software .software-hero-copy { grid-column: 1 / -1; }.software-hero-console { max-width: 560px; }.software-project-card:first-child { min-height: 330px; } }
+@media (max-width: 600px) { body.front-theme-software .software-hero { padding: 75px 0 60px; } body.front-theme-software .software-hero-grid, body.front-theme-software .software-service-grid, body.front-theme-software .software-project-grid, body.front-theme-software .software-trust-strip .container { grid-template-columns: 1fr; } body.front-theme-software .software-console-body { padding: 22px; } body.front-theme-software .software-section { padding: 75px 0; } body.front-theme-software .software-section-heading, body.front-theme-software .software-cta-section .container { display: block; }.software-section-heading .software-text-link { margin-top: 20px; }.software-cta-section .btn-default { margin-top: 28px; } }

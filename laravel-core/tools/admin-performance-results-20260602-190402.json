@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/operasyon/mesaj-gecmisi",
+    "name":  "filament.admin.teknik-servis.pages.operasyon.mesaj-gecmisi",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\TeknikServisMesajGecmisiSayfasi",
+    "status":  200,
+    "avg_ms":  2665.55,
+    "min_ms":  2458.95,
+    "max_ms":  2907.77,
+    "runs_ms":  "2907,77|2854,72|2555,95|2458,95|2550,37",
+    "bytes":  112184,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/operasyon/mesaj-gecmisi",
+    "error":  null
+}

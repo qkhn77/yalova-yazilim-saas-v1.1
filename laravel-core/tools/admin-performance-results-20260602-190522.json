@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/qr-menu/urunler",
+    "name":  "filament.admin.restoran.resources.qr-menu.urunler.index",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranMenuUrunKaynagi\\Pages\\ListRestoranMenuUrunleri",
+    "status":  200,
+    "avg_ms":  4433.17,
+    "min_ms":  2391.28,
+    "max_ms":  11972.26,
+    "runs_ms":  "11972,26|2391,28|2669,33|2735,4|2397,57",
+    "bytes":  187672,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/qr-menu/urunler",
+    "error":  null
+}

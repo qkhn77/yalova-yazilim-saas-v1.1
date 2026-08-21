@@ -1,0 +1,205 @@
+/*
+ * CORK Faz 3C - Muhasebe özel Blade UI adapter'ı.
+ *
+ * Bu dosya yalnızca özel muhasebe raporları, finans özetleri ve operasyon
+ * tablolarının sunum katmanını merkezi CORK tokenlarına bağlar. Hesaplama,
+ * query, Livewire state ve action hedefleri değiştirilmez.
+ */
+
+body.fi-panel-admin .muhasebe-cork-screen {
+    --muh-surface: var(--saas-surface, #ffffff);
+    --muh-surface-muted: var(--saas-surface-muted, #fafafa);
+    --muh-border: var(--saas-border, #e0e6ed);
+    --muh-text: var(--saas-text, #3b3f5c);
+    --muh-text-soft: var(--saas-text-soft, #515365);
+    --muh-muted: var(--saas-text-muted, #888ea8);
+    --muh-radius: var(--saas-radius-md, 0.5rem);
+    --muh-radius-sm: var(--saas-radius-sm, 0.375rem);
+    --muh-shadow: var(--saas-shadow-sm, 0 1px 3px rgb(31 45 61 / 6%));
+    min-width: 0;
+    color: var(--muh-text-soft);
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-card,
+body.fi-panel-admin .muhasebe-cork-screen section.rounded-lg,
+body.fi-panel-admin .muhasebe-cork-screen section.rounded-xl {
+    min-width: 0;
+    overflow: hidden;
+    background: var(--muh-surface) !important;
+    border-color: var(--muh-border) !important;
+    border-radius: var(--muh-radius) !important;
+    box-shadow: var(--muh-shadow) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-toolbar {
+    min-width: 0;
+    border-color: var(--muh-border) !important;
+    background: var(--muh-surface-muted) !important;
+    border-radius: var(--muh-radius) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-toolbar .fi-fo-component-ctn {
+    min-width: 0;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-table-wrap,
+body.fi-panel-admin .muhasebe-cork-screen .overflow-x-auto:has(> table) {
+    min-width: 0;
+    overflow-x: auto;
+    background: var(--muh-surface);
+    border-color: var(--muh-border) !important;
+    border-radius: var(--muh-radius-sm) !important;
+    scrollbar-color: color-mix(in srgb, var(--muh-muted) 45%, transparent) transparent;
+    scrollbar-width: thin;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen table {
+    color: var(--muh-text-soft);
+    border-color: var(--muh-border) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen table thead,
+body.fi-panel-admin .muhasebe-cork-screen table thead tr {
+    background: var(--muh-surface-muted) !important;
+    border-color: var(--muh-border) !important;
+    color: var(--muh-muted) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen table th {
+    border-color: var(--muh-border) !important;
+    padding-block: 0.625rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.035em;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen table tbody,
+body.fi-panel-admin .muhasebe-cork-screen table tbody tr,
+body.fi-panel-admin .muhasebe-cork-screen table td {
+    border-color: var(--muh-border) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen table tbody tr {
+    transition: background-color 150ms ease;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen table tbody tr:hover {
+    background: color-mix(in srgb, var(--saas-primary) 5%, var(--muh-surface)) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen table td,
+body.fi-panel-admin .muhasebe-cork-screen table th {
+    vertical-align: middle;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen table td.text-right,
+body.fi-panel-admin .muhasebe-cork-screen table th.text-right,
+body.fi-panel-admin .muhasebe-cork-screen table td.text-end,
+body.fi-panel-admin .muhasebe-cork-screen table th.text-end,
+body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-number {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen table tfoot,
+body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-total {
+    background: var(--muh-surface-muted) !important;
+    border-color: var(--muh-border) !important;
+    color: var(--muh-text) !important;
+    font-weight: 600;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-kpi-card {
+    min-width: 0;
+    overflow: hidden;
+    background: var(--muh-surface) !important;
+    border-color: var(--muh-border) !important;
+    border-radius: var(--muh-radius) !important;
+    box-shadow: var(--muh-shadow) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-kpi-card .muhasebe-cork-number {
+    color: var(--muh-text);
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-badge,
+body.fi-panel-admin .muhasebe-cork-screen [class*="ring-inset"] {
+    min-height: 1.5rem;
+    border-radius: var(--muh-radius-sm) !important;
+    white-space: nowrap;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-empty {
+    background: var(--muh-surface-muted) !important;
+    color: var(--muh-muted) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen a,
+body.fi-panel-admin .muhasebe-cork-screen button {
+    outline-offset: 2px;
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen a:focus-visible,
+body.fi-panel-admin .muhasebe-cork-screen button:focus-visible,
+body.fi-panel-admin .muhasebe-cork-screen summary:focus-visible {
+    outline: 2px solid var(--saas-primary);
+    outline-offset: 2px;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-action {
+    border-radius: var(--muh-radius-sm) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .senet-ozet-row {
+    min-width: 0;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .senet-ozet-grid > div {
+    min-width: 0;
+    border-color: var(--muh-border) !important;
+    background: var(--muh-surface) !important;
+    border-radius: var(--muh-radius-sm) !important;
+    box-shadow: var(--muh-shadow) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .senet-actions {
+    min-width: 0;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-muted {
+    color: var(--muh-muted) !important;
+}
+
+@media (max-width: 767px) {
+    body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-toolbar {
+        padding: 0.875rem !important;
+    }
+
+    body.fi-panel-admin .muhasebe-cork-screen .muhasebe-cork-kpi-card {
+        border-radius: var(--muh-radius-sm) !important;
+    }
+
+    body.fi-panel-admin .muhasebe-cork-screen table th,
+    body.fi-panel-admin .muhasebe-cork-screen table td {
+        padding-inline: 0.625rem;
+    }
+
+    body.fi-panel-admin .muhasebe-cork-screen .senet-ozet-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 430px) {
+    body.fi-panel-admin .muhasebe-cork-screen .senet-ozet-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.fi-panel-admin .muhasebe-cork-screen a,
+    body.fi-panel-admin .muhasebe-cork-screen button,
+    body.fi-panel-admin .muhasebe-cork-screen table tbody tr {
+        transition: none;
+    }
+}

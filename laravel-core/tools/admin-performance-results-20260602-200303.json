@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/tanimlar/cihazlar",
+    "name":  "filament.admin.teknik-servis.resources.tanimlar.cihazlar.index",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisCihazKaynagi\\Pages\\ListTeknikServisCihazlari",
+    "status":  200,
+    "avg_ms":  2410.34,
+    "min_ms":  1645.12,
+    "max_ms":  5374.3,
+    "runs_ms":  "5374,3|1686,54|1681,12|1645,12|1664,63",
+    "bytes":  141955,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/cihazlar",
+    "error":  null
+}

@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "product-categories",
+    "uri":  "admin/product-categories/1/edit",
+    "uri_template":  "admin/product-categories/{record}/edit",
+    "name":  "filament.admin.resources.product-categories.edit",
+    "action":  "App\\Filament\\Resources\\ProductCategoryResource\\Pages\\EditProductCategory",
+    "model":  "App\\Models\\ProductCategory",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  3325.32,
+    "min_ms":  3258.43,
+    "max_ms":  3402.32,
+    "runs_ms":  "3402,32|3258,43|3315,2",
+    "bytes":  165230,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/urunler/urun-kategorileri",
+    "error":  null
+}

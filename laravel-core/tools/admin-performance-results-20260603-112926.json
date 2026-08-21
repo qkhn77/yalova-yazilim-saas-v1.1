@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayitlari/liste/garantiye-gonderilen",
+    "name":  "filament.admin.teknik-servis.resources.servis-kayitlari.garantiye_gonderilen",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\TeknikServisKayitlariGarantiyeGonderilenSayfasi",
+    "status":  200,
+    "avg_ms":  1675.91,
+    "min_ms":  1675.91,
+    "max_ms":  1675.91,
+    "runs_ms":  "1675.91",
+    "bytes":  146000,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/garantiye-gonderilen",
+    "error":  null
+}

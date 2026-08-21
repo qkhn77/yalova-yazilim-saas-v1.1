@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","sistem-moduller","admin/sistem-moduller","filament.admin.resources.sistem-moduller.index","App\Filament\Resources\ModulYonetimKaynagi\Pages\ModulListesi","200","2277,46","1635,75","4703,11","4703,11|1635,75|1739,35|1645,5|1663,59","132350","http://localhost/yalova-kamera/admin/sistem-moduller",

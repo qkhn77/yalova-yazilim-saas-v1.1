@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teklif-yonetimi",
+    "uri":  "admin/teklif-yonetimi/teklifler/create",
+    "name":  "filament.admin.teklif-yonetimi.resources.teklifler.create",
+    "action":  "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifKaynagi\\Pages\\CreateTeklif",
+    "status":  200,
+    "avg_ms":  4157.93,
+    "min_ms":  4157.93,
+    "max_ms":  4157.93,
+    "runs_ms":  "4157.93",
+    "bytes":  252848,
+    "final_url":  "http://localhost/yalova-kamera/admin/teklif-yonetimi/teklifler/create",
+    "error":  null
+}

@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/para-birimleri/1/edit",
+    "uri_template":  "admin/muhasebe/tanimlar/para-birimleri/{record}/edit",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.para-birimleri.edit",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\ParaBirimiTanimKaynagi\\Pages\\EditParaBirimi",
+    "model":  "App\\Models\\Muhasebe\\ParaBirimi",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  2399.32,
+    "min_ms":  1687.07,
+    "max_ms":  3111.56,
+    "runs_ms":  "3111,56|1687,07",
+    "bytes":  137916,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/para-birimleri/1/edit",
+    "error":  null
+}

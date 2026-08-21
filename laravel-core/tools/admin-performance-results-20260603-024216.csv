@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teknik-servis","admin/teknik-servis/tanimlar/arizalar/create","filament.admin.teknik-servis.resources.tanimlar.arizalar.create","App\Filament\Clusters\TeknikServis\Resources\TeknikServisArizaKaynagi\Pages\CreateTeknikServisArizasi","200","1655,61","1655,61","1655,61","1655.61","147740","http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/arizalar/create",

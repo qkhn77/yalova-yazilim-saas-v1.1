@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "firma-ici-kullanicilar",
+    "uri":  "admin/firma-ici-kullanicilar",
+    "name":  "filament.admin.resources.firma-ici-kullanicilar.index",
+    "action":  "App\\Filament\\Resources\\FirmaIciKullaniciKaynagi\\Pages\\FirmaIciKullaniciListesi",
+    "status":  200,
+    "avg_ms":  5842.15,
+    "min_ms":  2563.48,
+    "max_ms":  18123.8,
+    "runs_ms":  "18123,8|2563,48|2735,02|3177,57|2610,88",
+    "bytes":  400081,
+    "final_url":  "http://localhost/yalova-kamera/admin/firma-ici-kullanicilar",
+    "error":  null
+}

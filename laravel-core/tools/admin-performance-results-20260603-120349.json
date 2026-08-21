@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/logo-turleri",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.logo-turleri.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeLogoTuruTanimKaynagi\\Pages\\ListMuhasebeLogoTurleri",
+    "status":  200,
+    "avg_ms":  1748.75,
+    "min_ms":  1748.75,
+    "max_ms":  1748.75,
+    "runs_ms":  "1748.75",
+    "bytes":  160789,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/logo-turleri",
+    "error":  null
+}

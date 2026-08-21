@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/bloglar/blog-kategori",
+    "name":  "filament.admin.web.pages.bloglar.blog-kategori",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\BlogKategori",
+    "status":  200,
+    "avg_ms":  4397.77,
+    "min_ms":  1714.14,
+    "max_ms":  7081.4,
+    "runs_ms":  "7081,4|1714,14",
+    "bytes":  168293,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/bloglar/blog-kategori",
+    "error":  null
+}

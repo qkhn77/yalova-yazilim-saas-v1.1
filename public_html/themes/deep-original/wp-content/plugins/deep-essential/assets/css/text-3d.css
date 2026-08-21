@@ -1,0 +1,148 @@
+/* =========================================================
+   Deep Text 3D — SAFE KEYFRAMES VERSION
+   ========================================================= */
+.text-3d{
+  --text-3d-delay: 0s;
+  --text-3d-duration: 1s;
+  --text-3d-perspective-x: 50%;
+  --text-3d-rotate-delay: 0.06s; /* small optional offset; set 0s for perfectly simultaneous */
+
+  display: inline-block;
+  opacity: 1;
+  transform: none;
+}
+
+/* Stage */
+.text-3d-inner{
+  position: relative;
+  display: inline-block;
+  perspective: 1000px;
+  perspective-origin: var(--text-3d-perspective-x) 50%;
+  transform-style: preserve-3d;
+}
+
+/* Front determines height */
+.text-3d-front{
+  position: relative;
+  z-index: 2;
+  display: block;
+  backface-visibility: hidden;
+}
+
+/* Back fill layer */
+.text-3d-hack{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.text-3d-back{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+
+/* =========================================================
+   PLAY: keyframes run with delay (no hidden init state!)
+   ========================================================= */
+.text-3d.bb-3d--play{
+  animation: bb3d-wrap var(--text-3d-duration) cubic-bezier(0.8, 0, 0.2, 1) both;
+  animation-delay: var(--text-3d-delay);
+}
+
+.text-3d.bb-3d--play .text-3d-front{
+  transform-origin: var(--text-3d-perspective-x) 100%;
+  animation: bb3d-front var(--text-3d-duration) cubic-bezier(0.8, 0, 0.2, 1) both;
+  animation-delay: calc(var(--text-3d-delay) + var(--text-3d-rotate-delay));
+}
+
+.text-3d.bb-3d--play .text-3d-back{
+  transform-origin: var(--text-3d-perspective-x) 0%;
+  animation: bb3d-back var(--text-3d-duration) cubic-bezier(0.8, 0, 0.2, 1) both;
+  animation-delay: calc(var(--text-3d-delay) + var(--text-3d-rotate-delay));
+}
+
+.bb-wcf-hover-deep .bb-nav-inner { overflow: hidden !important; }
+
+@keyframes bb3d-wrap{
+  0%   { opacity: 0; transform: translateY(3.25rem); }
+  100% { opacity: 1; transform: none; }
+}
+
+@keyframes bb3d-front{
+  0%   { opacity: 1; transform: translateY(0) rotateX(0); }
+  100% { opacity: 0; transform: translateY(-100%) rotateX(90deg); }
+}
+
+@keyframes bb3d-back{
+  0%   { opacity: 0; transform: translateY(100%) rotateX(-90deg); }
+  100% { opacity: 1; transform: translateY(0) rotateX(0); }
+}
+
+/* Print safety */
+@media print{
+  .text-3d{ opacity: 1 !important; transform: none !important; }
+  .text-3d-front, .text-3d-back{ opacity: 1 !important; transform: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .text-3d,
+  .text-3d *{
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+
+.text-3d.deep-text-3d.bb-3d--replay.bb-3d--play{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.text-3d.deep-text-3d.bb-3d--replay.bb-3d--ready{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.text-3d.deep-text-3d.bb-3d--replay.bb-3d--play{
+  animation: bb3dIn 900ms ease forwards;
+}
+
+/* AA Sticky header is not working */
+.elementor-control-aae_sec_header_sticky-area{display: none !important;}
+
+@media (min-width: 992px) {
+    .wcf-library-templates {
+        -moz-column-count: 3 !important;
+        column-count: 3 !important;
+    }
+}
+
+#wcf-template-library .elementor-templates-modal__header__logo-area {
+    background-image: url(../build/images/logo-icon-round.svg) !important;
+}
+
+.library--action.insert {
+    color: #fff !important;
+    background-color: #19be5f !important;
+}
+
+
+.wcf-library-template .title {
+    padding-top: 10px !important;
+    color: #000000 !important;
+}
+
+@media (max-width: 1439px) {
+    #elementor-template-library-preview iframe {
+        width: 1740px !important;
+    }
+}

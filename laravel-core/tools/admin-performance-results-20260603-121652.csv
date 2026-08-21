@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","e-ticaret","admin/e-ticaret/mesaj-yonetimi/urun-mesajlari","filament.admin.e-ticaret.pages.mesaj-yonetimi.urun-mesajlari","App\Filament\Clusters\ETicaret\Pages\UrunMesajlariSayfasi","200","1782,89","1782,89","1782,89","1782.89","132790","http://localhost/yalova-kamera/admin/e-ticaret/mesaj-yonetimi/urun-mesajlari",

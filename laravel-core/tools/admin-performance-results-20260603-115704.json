@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/malzeme-turleri/create",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.malzeme-turleri.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeMalzemeTuruTanimKaynagi\\Pages\\CreateMuhasebeMalzemeTuru",
+    "status":  200,
+    "avg_ms":  1748.05,
+    "min_ms":  1748.05,
+    "max_ms":  1748.05,
+    "runs_ms":  "1748.05",
+    "bytes":  144889,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/malzeme-turleri/create",
+    "error":  null
+}

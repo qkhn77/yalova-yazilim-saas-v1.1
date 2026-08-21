@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-yetkiler",
+    "uri":  "admin/sistem-yetkiler/1/edit",
+    "uri_template":  "admin/sistem-yetkiler/{record}/edit",
+    "name":  "filament.admin.resources.sistem-yetkiler.edit",
+    "action":  "App\\Filament\\Resources\\YetkiYonetimKaynagi\\Pages\\YetkiDuzenle",
+    "model":  "App\\Models\\Yetki",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  2025.14,
+    "min_ms":  2006.05,
+    "max_ms":  2044.23,
+    "runs_ms":  "2044,23|2006,05",
+    "bytes":  137092,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-yetkiler/1/edit",
+    "error":  null
+}

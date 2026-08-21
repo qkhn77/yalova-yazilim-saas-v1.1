@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teklif-yonetimi","admin/teklif-yonetimi","filament.admin.teklif-yonetimi","App\Filament\Clusters\TeklifYonetimi","200","1796,04","1796,04","1796,04","1796.04","110961","http://localhost/yalova-kamera/admin/teklif-yonetimi",

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/raporlar/durum-bazli",
+    "name":  "filament.admin.teknik-servis.pages.raporlar.durum-bazli",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\TeknikServisDurumBazliRaporuSayfasi",
+    "status":  200,
+    "avg_ms":  1703.47,
+    "min_ms":  1703.47,
+    "max_ms":  1703.47,
+    "runs_ms":  "1703.47",
+    "bytes":  112193,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/raporlar/durum-bazli",
+    "error":  null
+}

@@ -1,0 +1,428 @@
+/* CORK Faz 2A - Merkezi Filament form tasarım sistemi. */
+
+body.fi-panel-admin {
+    --saas-form-control-height: 2.625rem;
+    --saas-form-control-bg: var(--saas-surface, #ffffff);
+    --saas-form-control-border: var(--saas-border, #e0e6ed);
+    --saas-form-control-text: var(--saas-text, #3b3f5c);
+    --saas-form-control-placeholder: var(--saas-text-muted, #888ea8);
+    --saas-form-focus: var(--saas-primary, #4361ee);
+    --saas-form-focus-ring: rgb(67 97 238 / 16%);
+    --saas-form-danger: var(--saas-danger, #e7515a);
+    --saas-form-danger-ring: rgb(231 81 90 / 14%);
+}
+
+/* Alan başlığı, yardım ve doğrulama metinleri. */
+body.fi-panel-admin .fi-fo-field-wrp-label {
+    color: var(--saas-form-control-text);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    letter-spacing: 0.0125rem;
+}
+
+body.fi-panel-admin .fi-fo-field-wrp-helper-text,
+body.fi-panel-admin .fi-fo-field-wrp-hint {
+    color: var(--saas-text-muted);
+}
+
+body.fi-panel-admin .fi-fo-field-wrp-helper-text,
+body.fi-panel-admin .fi-fo-field-wrp-hint,
+body.fi-panel-admin .fi-fo-field-wrp-error-message {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+}
+
+body.fi-panel-admin .fi-fo-field-wrp-error-message {
+    color: var(--saas-form-danger) !important;
+    font-weight: 500;
+}
+
+/* Stok takip açıklaması alanın altında okunmalı; form temasındaki ortak
+ * grid sırası bu tek alanda açıklamayı inputun üstüne taşıyabiliyor. */
+body.fi-panel-admin .stok-takip-yontemi-field .fi-input-wrp {
+    order: 2;
+}
+
+body.fi-panel-admin .stok-takip-yontemi-field .fi-fo-field-wrp-helper-text,
+body.fi-panel-admin .stok-takip-yontemi-field .fi-fo-field-wrp-hint {
+    order: 3;
+}
+
+/* TextInput, Select, Textarea ve tarih/saat alanlarının ortak kabuğu. */
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp {
+    min-height: var(--saas-form-control-height);
+    overflow: visible;
+    background: var(--saas-form-control-bg) !important;
+    border: 1px solid var(--saas-form-control-border);
+    border-radius: var(--saas-radius-md, 0.5rem) !important;
+    box-shadow: 0 1px 2px rgb(31 45 61 / 3%) !important;
+    transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+}
+
+body.fi-panel-admin .fi-fo-text-input.fi-input-wrp,
+body.fi-panel-admin .fi-fo-textarea.fi-input-wrp {
+    overflow: hidden;
+}
+
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp:not(.fi-disabled):hover {
+    border-color: color-mix(in srgb, var(--saas-form-control-border) 58%, var(--saas-form-focus));
+}
+
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp:not(.fi-disabled):focus-within {
+    border-color: var(--saas-form-focus) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px var(--saas-form-focus-ring) !important;
+}
+
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp.fi-invalid {
+    border-color: var(--saas-form-danger) !important;
+    box-shadow: 0 0 0 1px rgb(231 81 90 / 8%) !important;
+}
+
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp.fi-invalid:focus-within {
+    box-shadow: 0 0 0 3px var(--saas-form-danger-ring) !important;
+}
+
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp.fi-disabled {
+    background: var(--saas-surface-muted, #fafafa) !important;
+    box-shadow: none !important;
+    opacity: 0.78;
+}
+
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp .fi-input,
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp .fi-select-input,
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp textarea,
+body.fi-panel-admin .fi-fo-date-time-picker-display-text-input {
+    min-height: calc(var(--saas-form-control-height) - 2px);
+    color: var(--saas-form-control-text) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: inherit;
+    box-shadow: none !important;
+    outline: none !important;
+    font-size: 0.84375rem;
+    line-height: 1.375rem;
+}
+
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp textarea {
+    min-height: 5.5rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    line-height: 1.5;
+}
+
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp .fi-input::placeholder,
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp textarea::placeholder,
+body.fi-panel-admin .fi-fo-date-time-picker-display-text-input::placeholder {
+    color: var(--saas-form-control-placeholder) !important;
+    opacity: 0.9;
+}
+
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp-prefix,
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp-suffix,
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp-icon,
+body.fi-panel-admin .fi-fo-field-wrp .fi-input-wrp-label {
+    color: var(--saas-text-muted) !important;
+}
+
+/* Filament Choices tabanlı arama ve çoklu seçim alanları. */
+body.fi-panel-admin .fi-fo-select .choices,
+body.fi-panel-admin .fi-fo-select .choices__inner {
+    width: 100%;
+    min-height: calc(var(--saas-form-control-height) - 2px);
+}
+
+body.fi-panel-admin .fi-fo-select .choices__inner {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem !important;
+    color: var(--saas-form-control-text);
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: inherit !important;
+    font-size: 0.84375rem;
+}
+
+body.fi-panel-admin .fi-fo-select .choices__list--single {
+    min-width: 0;
+    padding: 0 !important;
+}
+
+body.fi-panel-admin .fi-fo-select .choices__input,
+body.fi-panel-admin .fi-fo-select .choices__input--cloned {
+    min-height: 2rem;
+    margin: 0;
+    color: var(--saas-form-control-text) !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+body.fi-panel-admin .fi-fo-select .choices__list--dropdown,
+body.fi-panel-admin .fi-fo-select .choices__list[aria-expanded] {
+    z-index: 50;
+    margin-top: 0.375rem;
+    overflow: hidden;
+    color: var(--saas-form-control-text);
+    background: var(--saas-surface) !important;
+    border: 1px solid var(--saas-form-control-border) !important;
+    border-radius: var(--saas-radius-md, 0.5rem) !important;
+    box-shadow: var(--saas-shadow-md, 0 10px 30px rgb(31 45 61 / 8%)) !important;
+}
+
+body.fi-panel-admin .fi-fo-select .choices__list--dropdown .choices__input,
+body.fi-panel-admin .fi-fo-select .choices__list[aria-expanded] .choices__input {
+    min-height: 2.375rem;
+    width: calc(100% - 1rem);
+    margin: 0.5rem;
+    padding: 0.45rem 0.65rem;
+    background: var(--saas-surface-muted) !important;
+    border: 1px solid var(--saas-form-control-border) !important;
+    border-radius: var(--saas-radius-sm, 0.375rem);
+}
+
+body.fi-panel-admin .fi-fo-select .choices__item--choice {
+    padding: 0.5625rem 0.75rem;
+    color: var(--saas-text-soft);
+    font-size: 0.8125rem;
+    transition: color 120ms ease, background-color 120ms ease;
+}
+
+body.fi-panel-admin .fi-fo-select .choices__item--choice.is-highlighted,
+body.fi-panel-admin .fi-fo-select .choices__item--choice:hover {
+    color: var(--saas-primary);
+    background: var(--saas-primary-soft) !important;
+}
+
+body.fi-panel-admin .fi-fo-select .choices__item--choice.is-selected {
+    color: var(--saas-primary);
+    font-weight: 600;
+}
+
+body.fi-panel-admin .fi-fo-select .choices__item.is-disabled {
+    color: var(--saas-text-muted);
+    opacity: 0.55;
+}
+
+body.fi-panel-admin .fi-fo-select .choices__list--multiple .choices__item {
+    margin: 0.125rem;
+    padding: 0.2rem 0.5rem;
+    color: var(--saas-primary);
+    background: var(--saas-primary-soft);
+    border: 1px solid rgb(67 97 238 / 20%);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Filament'in kendi tarih ve saat paneli; davranış sınıflarına dokunulmaz. */
+body.fi-panel-admin .fi-fo-date-time-picker-panel {
+    color: var(--saas-form-control-text);
+    background: var(--saas-surface) !important;
+    border: 1px solid var(--saas-form-control-border);
+    border-radius: var(--saas-radius-lg, 0.75rem) !important;
+    box-shadow: var(--saas-shadow-lg, 0 18px 36px rgb(31 45 61 / 12%)) !important;
+}
+
+body.fi-panel-admin .fi-fo-date-time-picker-panel select,
+body.fi-panel-admin .fi-fo-date-time-picker-panel input {
+    color: var(--saas-form-control-text) !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+body.fi-panel-admin .fi-fo-date-time-picker-panel [role="grid"] [role="option"] {
+    border-radius: 50%;
+}
+
+body.fi-panel-admin .fi-fo-date-time-picker-panel [role="grid"] [role="option"]:not(.pointer-events-none):hover,
+body.fi-panel-admin .fi-fo-date-time-picker-panel [role="grid"] [role="option"][aria-selected="true"] {
+    color: var(--saas-primary) !important;
+    background: var(--saas-primary-soft) !important;
+    font-weight: 600;
+}
+
+/* Checkbox, radio ve toggle. */
+body.fi-panel-admin .fi-checkbox-input,
+body.fi-panel-admin .fi-radio-input {
+    color: var(--saas-primary) !important;
+    background-color: var(--saas-surface) !important;
+    border: 1px solid var(--saas-form-control-border) !important;
+    box-shadow: none !important;
+}
+
+body.fi-panel-admin .fi-checkbox-input:checked,
+body.fi-panel-admin .fi-radio-input:checked {
+    background-color: var(--saas-primary) !important;
+    border-color: var(--saas-primary) !important;
+}
+
+body.fi-panel-admin .fi-checkbox-input:focus,
+body.fi-panel-admin .fi-radio-input:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px var(--saas-form-focus-ring) !important;
+}
+
+body.fi-panel-admin .fi-fo-toggle[aria-checked="true"] {
+    background: var(--saas-primary) !important;
+    box-shadow: 0 0 0 1px rgb(67 97 238 / 18%);
+}
+
+body.fi-panel-admin .fi-fo-toggle[aria-checked="false"] {
+    background: #c2c8d0 !important;
+}
+
+body.fi-panel-admin .fi-fo-toggle:focus-visible {
+    box-shadow: 0 0 0 3px var(--saas-form-focus-ring) !important;
+}
+
+/* Form bölümleri, fieldset ve repeater kartları. */
+body.fi-panel-admin .fi-form .fi-section,
+body.fi-panel-admin .fi-modal .fi-section {
+    background: var(--saas-surface) !important;
+    border: 1px solid var(--saas-border);
+    border-radius: var(--saas-radius-lg, 0.75rem) !important;
+    box-shadow: var(--saas-shadow-sm, 0 1px 3px rgb(31 45 61 / 6%)) !important;
+}
+
+body.fi-panel-admin .fi-form .fi-section-header-heading,
+body.fi-panel-admin .fi-modal .fi-section-header-heading {
+    color: var(--saas-text) !important;
+    font-size: 0.9375rem;
+    letter-spacing: 0.01rem;
+}
+
+body.fi-panel-admin .fi-form .fi-section-header-description,
+body.fi-panel-admin .fi-modal .fi-section-header-description {
+    color: var(--saas-text-muted) !important;
+    font-size: 0.78125rem;
+}
+
+body.fi-panel-admin .fi-form .fi-section-content-ctn,
+body.fi-panel-admin .fi-modal .fi-section-content-ctn,
+body.fi-panel-admin .fi-form .fi-section-footer,
+body.fi-panel-admin .fi-modal .fi-section-footer {
+    border-color: var(--saas-border) !important;
+}
+
+body.fi-panel-admin .fi-fieldset {
+    background: color-mix(in srgb, var(--saas-surface) 94%, var(--saas-primary));
+    border-color: var(--saas-border) !important;
+    border-radius: var(--saas-radius-lg, 0.75rem) !important;
+}
+
+body.fi-panel-admin .fi-fieldset > legend {
+    color: var(--saas-text);
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+body.fi-panel-admin .fi-fo-repeater-item {
+    background: var(--saas-surface) !important;
+    border: 1px solid var(--saas-border);
+    border-radius: var(--saas-radius-lg, 0.75rem) !important;
+    box-shadow: var(--saas-shadow-sm) !important;
+}
+
+body.fi-panel-admin .fi-fo-repeater-item-header {
+    background: var(--saas-surface-muted);
+    border-color: var(--saas-border) !important;
+}
+
+/* Fatura kalemindeki ölçü dağılımı: masaüstünde tek satır, mobilde akışkan. */
+body.fi-panel-admin .fatura-olcu-dagilimlari-repeater {
+    min-width: 0;
+    width: 100%;
+}
+
+body.fi-panel-admin .fatura-olcu-dagilimlari-repeater > ul,
+body.fi-panel-admin .fatura-olcu-dagilimlari-repeater > ul > div,
+body.fi-panel-admin .fatura-olcu-dagilimlari-repeater .fi-fo-repeater-item,
+body.fi-panel-admin .fatura-olcu-dagilimlari-repeater .fi-fo-repeater-item-content {
+    min-width: 0;
+    width: 100%;
+}
+
+body.fi-panel-admin .fatura-olcu-dagilimlari-repeater .fi-fo-repeater-item-content {
+    overflow-x: auto;
+}
+
+@media (max-width: 767px) {
+    body.fi-panel-admin .fatura-olcu-dagilimlari-repeater .fi-fo-repeater-item-content {
+        overflow-x: visible;
+    }
+}
+
+body.fi-panel-admin .fi-fo-placeholder {
+    color: var(--saas-text-soft);
+}
+
+/* FileUpload / FilePond: yalnızca yüzey ve durum renkleri. */
+body.fi-panel-admin .fi-fo-file-upload .filepond--panel-root {
+    background: var(--saas-surface-muted) !important;
+    border: 1px dashed var(--saas-form-control-border);
+    border-radius: var(--saas-radius-lg, 0.75rem);
+}
+
+body.fi-panel-admin .fi-fo-file-upload .filepond--drop-label {
+    color: var(--saas-text-soft) !important;
+}
+
+body.fi-panel-admin .fi-fo-file-upload .filepond--label-action {
+    color: var(--saas-primary) !important;
+    font-weight: 600;
+}
+
+/* Koyu tema CORK renkleri; Filament'in html.dark sınıfı kullanılır. */
+.dark body.fi-panel-admin {
+    --saas-form-control-bg: var(--saas-surface, #0e1726);
+    --saas-form-control-border: var(--saas-border, #25324a);
+    --saas-form-control-text: var(--saas-text, #e0e6ed);
+    --saas-form-focus-ring: rgb(109 128 247 / 20%);
+    --saas-form-danger-ring: rgb(231 81 90 / 20%);
+}
+
+.dark body.fi-panel-admin .fi-fo-toggle[aria-checked="false"] {
+    background: #3b4664 !important;
+}
+
+.dark body.fi-panel-admin .fi-checkbox-input,
+.dark body.fi-panel-admin .fi-radio-input {
+    background-color: var(--saas-surface-muted) !important;
+}
+
+/* Dar ekranlarda yatay taşmayı önle; alanların davranış ve kolonları korunur. */
+@media (max-width: 767px) {
+    body.fi-panel-admin .fi-form {
+        row-gap: 1rem;
+    }
+
+    body.fi-panel-admin .fi-form .fi-section-header,
+    body.fi-panel-admin .fi-form .fi-section-content,
+    body.fi-panel-admin .fi-modal .fi-section-header,
+    body.fi-panel-admin .fi-modal .fi-section-content {
+        padding: 1rem !important;
+    }
+
+    body.fi-panel-admin .fi-fo-date-time-picker-panel {
+        max-width: calc(100vw - 1.5rem);
+    }
+
+    body.fi-panel-admin .fi-fieldset {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 359px) {
+    body.fi-panel-admin {
+        --saas-form-control-height: 2.5rem;
+    }
+
+    body.fi-panel-admin .fi-form .fi-section-header,
+    body.fi-panel-admin .fi-form .fi-section-content {
+        padding: 0.875rem !important;
+    }
+}

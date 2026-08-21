@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/tanimlar/tasarimlar/create","filament.admin.muhasebe.resources.tanimlar.tasarimlar.create","App\Filament\Clusters\Muhasebe\Resources\Tanimlar\MuhasebeTasarimTanimKaynagi\Pages\CreateMuhasebeTasarim","200","1763,3","1763,3","1763,3","1763.3","144839","http://localhost/yalova-kamera/admin/muhasebe/tanimlar/tasarimlar/create",

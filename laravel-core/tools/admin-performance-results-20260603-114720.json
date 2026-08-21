@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/sablonlar/teslim-belgesi",
+    "name":  "filament.admin.teknik-servis.pages.sablonlar.teslim-belgesi",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\TeslimEdildiBelgesiSablonuSayfasi",
+    "status":  200,
+    "avg_ms":  2684.94,
+    "min_ms":  2684.94,
+    "max_ms":  2684.94,
+    "runs_ms":  "2684.94",
+    "bytes":  166555,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/sablonlar/teslim-belgesi",
+    "error":  null
+}

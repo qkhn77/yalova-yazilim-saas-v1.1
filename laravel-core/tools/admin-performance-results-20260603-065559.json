@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/web-ayarlar/web-mail-ayarlar",
+    "name":  "filament.admin.web.pages.web-ayarlar.web-mail-ayarlar",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\WebMailAyarlar",
+    "status":  200,
+    "avg_ms":  1681.44,
+    "min_ms":  1671.46,
+    "max_ms":  1691.43,
+    "runs_ms":  "1691,43|1671,46",
+    "bytes":  148857,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/web-ayarlar/web-mail-ayarlar",
+    "error":  null
+}

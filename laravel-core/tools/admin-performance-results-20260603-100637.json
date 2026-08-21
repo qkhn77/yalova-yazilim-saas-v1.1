@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/satis/barkodlu-satis-gecmisi",
+    "name":  "filament.admin.muhasebe.pages.satis.barkodlu-satis-gecmisi",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\BarkodluSatisGecmisiSayfasi",
+    "status":  200,
+    "avg_ms":  2682.63,
+    "min_ms":  1976.72,
+    "max_ms":  3388.53,
+    "runs_ms":  "3388,53|1976,72",
+    "bytes":  206440,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-gecmisi",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/raporlar/bilanco",
+    "name":  "filament.admin.muhasebe.pages.raporlar.bilanco",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\BilancoRaporuTaslakSayfasi",
+    "status":  200,
+    "avg_ms":  1853.69,
+    "min_ms":  1853.69,
+    "max_ms":  1853.69,
+    "runs_ms":  "1853.69",
+    "bytes":  112136,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/raporlar/bilanco",
+    "error":  null
+}

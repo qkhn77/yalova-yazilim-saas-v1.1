@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/fatura-kaynagis/create/proforma-fatura",
+    "name":  "filament.admin.muhasebe.resources.fatura-kaynagis.createProforma",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\CreateProformaFatura",
+    "status":  200,
+    "avg_ms":  2954.74,
+    "min_ms":  2637.24,
+    "max_ms":  3474.6,
+    "runs_ms":  "2835,45|3474,6|2637,24|2855,08|2971,34",
+    "bytes":  287612,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/create/proforma-fatura",
+    "error":  null
+}

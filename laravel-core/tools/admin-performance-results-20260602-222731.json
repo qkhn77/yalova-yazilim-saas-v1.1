@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/banka-hesaplari",
+    "name":  "filament.admin.muhasebe.resources.finans.banka-hesaplari.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\BankaHesabiKaynagi\\Pages\\ListBankaHesaplari",
+    "status":  200,
+    "avg_ms":  2807.29,
+    "min_ms":  1663.29,
+    "max_ms":  7278.46,
+    "runs_ms":  "7278,46|1738,83|1687,55|1668,33|1663,29",
+    "bytes":  166900,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/banka-hesaplari",
+    "error":  null
+}

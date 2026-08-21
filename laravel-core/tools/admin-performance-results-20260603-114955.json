@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/senet",
+    "name":  "filament.admin.muhasebe.pages.finans.senet",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\SenetYonetimiSayfasi",
+    "status":  200,
+    "avg_ms":  1565.27,
+    "min_ms":  1565.27,
+    "max_ms":  1565.27,
+    "runs_ms":  "1565.27",
+    "bytes":  112099,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/senet",
+    "error":  null
+}

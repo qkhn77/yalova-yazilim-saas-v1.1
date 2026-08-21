@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","personel-takip","admin/personel-takip/izinler/create","filament.admin.personel-takip.resources.izinler.create","App\Filament\Clusters\PersonelTakip\Resources\PersonelIzinKaynagi\Pages\CreatePersonelIzin","200","1687,69","1687,69","1687,69","1687.69","163918","http://localhost/yalova-kamera/admin/personel-takip/izinler/create",

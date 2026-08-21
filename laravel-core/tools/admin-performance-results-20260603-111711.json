@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/operasyon/bakim-hatirlatmalari",
+    "name":  "filament.admin.teknik-servis.pages.operasyon.bakim-hatirlatmalari",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\BakimHatirlatmalariSayfasi",
+    "status":  200,
+    "avg_ms":  5902.97,
+    "min_ms":  5902.97,
+    "max_ms":  5902.97,
+    "runs_ms":  "5902.97",
+    "bytes":  142208,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/operasyon/bakim-hatirlatmalari",
+    "error":  null
+}

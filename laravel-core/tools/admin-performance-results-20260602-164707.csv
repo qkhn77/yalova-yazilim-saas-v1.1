@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/sayfalar/hakkimizda","filament.admin.web.pages.sayfalar.hakkimizda","App\Filament\Clusters\Web\Pages\Hakkimizda","200","2421,09","2355,37","2526,97","2526,97|2456,71|2405,3|2355,37|2361,08","937397","http://localhost/yalova-kamera/admin/web/sayfalar/hakkimizda",

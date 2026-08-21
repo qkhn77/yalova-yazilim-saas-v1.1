@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis",
+    "name":  "filament.admin.teknik-servis",
+    "action":  "App\\Filament\\Clusters\\TeknikServis",
+    "status":  200,
+    "avg_ms":  1878,
+    "min_ms":  1878,
+    "max_ms":  1878,
+    "runs_ms":  "1878",
+    "bytes":  110848,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis",
+    "error":  null
+}

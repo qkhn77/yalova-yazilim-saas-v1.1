@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/faturalar/iptal-faturalar",
+    "name":  "filament.admin.muhasebe.pages.faturalar.iptal-faturalar",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\IptalFatura",
+    "status":  200,
+    "avg_ms":  1743.89,
+    "min_ms":  1743.89,
+    "max_ms":  1743.89,
+    "runs_ms":  "1743.89",
+    "bytes":  158808,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/faturalar/iptal-faturalar",
+    "error":  null
+}

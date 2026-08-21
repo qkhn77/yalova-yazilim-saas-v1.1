@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/logo-turleri/create",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.logo-turleri.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeLogoTuruTanimKaynagi\\Pages\\CreateMuhasebeLogoTuru",
+    "status":  200,
+    "avg_ms":  2006.45,
+    "min_ms":  2006.45,
+    "max_ms":  2006.45,
+    "runs_ms":  "2006.45",
+    "bytes":  144859,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/logo-turleri/create",
+    "error":  null
+}

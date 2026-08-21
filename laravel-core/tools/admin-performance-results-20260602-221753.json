@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-yetkiler",
+    "uri":  "admin/sistem-yetkiler",
+    "name":  "filament.admin.resources.sistem-yetkiler.index",
+    "action":  "App\\Filament\\Resources\\YetkiYonetimKaynagi\\Pages\\YetkiListesi",
+    "status":  200,
+    "avg_ms":  1692.76,
+    "min_ms":  1629.13,
+    "max_ms":  1734.81,
+    "runs_ms":  "1734,81|1682,19|1629,13|1707,81|1709,87",
+    "bytes":  149538,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-yetkiler",
+    "error":  null
+}

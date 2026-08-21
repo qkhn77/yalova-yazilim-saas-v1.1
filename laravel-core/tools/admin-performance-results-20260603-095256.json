@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "e-ticaret",
+    "uri":  "admin/e-ticaret/varyasyon-yonetimi",
+    "name":  "filament.admin.e-ticaret.pages.varyasyon-yonetimi",
+    "action":  "App\\Filament\\Clusters\\ETicaret\\Pages\\VaryasyonYonetimiSayfasi",
+    "status":  200,
+    "avg_ms":  1848.58,
+    "min_ms":  1787.61,
+    "max_ms":  1909.54,
+    "runs_ms":  "1909,54|1787,61",
+    "bytes":  112937,
+    "final_url":  "http://localhost/yalova-kamera/admin/e-ticaret/varyasyon-yonetimi",
+    "error":  null
+}

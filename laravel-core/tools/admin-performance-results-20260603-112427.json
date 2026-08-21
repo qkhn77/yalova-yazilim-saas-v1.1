@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/poslar/create",
+    "name":  "filament.admin.muhasebe.resources.finans.poslar.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\PosHesabiKaynagi\\Pages\\CreatePosHesabi",
+    "status":  200,
+    "avg_ms":  1839.5,
+    "min_ms":  1839.5,
+    "max_ms":  1839.5,
+    "runs_ms":  "1839.5",
+    "bytes":  222672,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/poslar/create",
+    "error":  null
+}

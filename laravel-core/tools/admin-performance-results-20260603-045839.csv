@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/cari-yonetimi/cari-ekstreleri","filament.admin.muhasebe.pages.cari-yonetimi.cari-ekstreleri","App\Filament\Clusters\Muhasebe\Pages\CariEkstreSayfasi","200","1667,09","1667,09","1667,09","1667.09","132482","http://localhost/yalova-kamera/admin/muhasebe/cari-yonetimi/cari-ekstreleri",

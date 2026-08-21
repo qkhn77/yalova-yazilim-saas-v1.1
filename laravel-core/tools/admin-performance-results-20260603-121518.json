@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/raporlar/personel-performans",
+    "name":  "filament.admin.teknik-servis.pages.raporlar.personel-performans",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\TeknikServisPersonelPerformansRaporuSayfasi",
+    "status":  200,
+    "avg_ms":  1868.05,
+    "min_ms":  1868.05,
+    "max_ms":  1868.05,
+    "runs_ms":  "1868.05",
+    "bytes":  112252,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/raporlar/personel-performans",
+    "error":  null
+}

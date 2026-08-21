@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "siparisler",
+    "uri":  "admin/siparisler/basarisiz",
+    "name":  "filament.admin.resources.siparisler.failed",
+    "action":  "App\\Filament\\Resources\\SiparisKaynagi\\Pages\\ListBasarisizSiparisler",
+    "status":  200,
+    "avg_ms":  1766.59,
+    "min_ms":  1761.27,
+    "max_ms":  1771.91,
+    "runs_ms":  "1771,91|1761,27",
+    "bytes":  201615,
+    "final_url":  "http://localhost/yalova-kamera/admin/siparisler/basarisiz",
+    "error":  null
+}

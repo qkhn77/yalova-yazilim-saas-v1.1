@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/finans-hareketleri",
+    "name":  "filament.admin.muhasebe.pages.finans.finans-hareketleri",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\FinansHareketleriListesiSayfasi",
+    "status":  200,
+    "avg_ms":  3828.56,
+    "min_ms":  2093.62,
+    "max_ms":  9626.15,
+    "runs_ms":  "9626,15|2093,62|2368,32|2775,23|2279,49",
+    "bytes":  165097,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/finans-hareketleri",
+    "error":  null
+}

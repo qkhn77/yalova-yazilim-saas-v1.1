@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/tanimlar/departmanlar",
+    "name":  "filament.admin.personel-takip.resources.tanimlar.departmanlar.index",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelDepartmanKaynagi\\Pages\\ListPersonelDepartmanlari",
+    "status":  200,
+    "avg_ms":  2805.68,
+    "min_ms":  1645.61,
+    "max_ms":  7344.88,
+    "runs_ms":  "7344,88|1702,08|1650,68|1685,16|1645,61",
+    "bytes":  158344,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/tanimlar/departmanlar",
+    "error":  null
+}

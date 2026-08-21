@@ -1,0 +1,2 @@
+﻿"rank","module","uri","uri_template","name","action","model","record_key","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","products","admin/products/1/edit","admin/products/{record}/edit","filament.admin.resources.products.edit","App\Filament\Resources\ProductResource\Pages\EditProduct","App\Models\Product","1","500","1555,72","1534,99","1591,59","1591,59|1540,57|1534,99","0","http://localhost/yalova-kamera/admin/products/1/edit","Uzak sunucu hata döndürdü: (500) İç Sunucu Hatası."

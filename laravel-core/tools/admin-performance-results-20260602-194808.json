@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/masa-ekrani",
+    "name":  "filament.admin.restoran.pages.masa-ekrani",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Pages\\RestoranMasaEkraniSayfasi",
+    "status":  200,
+    "avg_ms":  1811.33,
+    "min_ms":  1707.17,
+    "max_ms":  2052.92,
+    "runs_ms":  "1827,75|2052,92|1749,01|1719,77|1707,17",
+    "bytes":  120918,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/masa-ekrani",
+    "error":  null
+}

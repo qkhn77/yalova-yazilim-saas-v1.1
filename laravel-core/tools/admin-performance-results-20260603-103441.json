@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/maas-donemleri/create",
+    "name":  "filament.admin.personel-takip.resources.maas-donemleri.create",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelMaasDonemiKaynagi\\Pages\\CreatePersonelMaasDonemi",
+    "status":  200,
+    "avg_ms":  2371.98,
+    "min_ms":  2371.98,
+    "max_ms":  2371.98,
+    "runs_ms":  "2371.98",
+    "bytes":  155954,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/maas-donemleri/create",
+    "error":  null
+}

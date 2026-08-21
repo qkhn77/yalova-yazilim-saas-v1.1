@@ -1,0 +1,47 @@
+﻿[
+    {
+        "rank":  1,
+        "module":  "restoran",
+        "uri":  "admin/restoran",
+        "name":  "filament.admin.restoran",
+        "action":  "App\\Filament\\Clusters\\Restoran",
+        "status":  200,
+        "avg_ms":  3745.46,
+        "min_ms":  3702.84,
+        "max_ms":  3829.85,
+        "runs_ms":  "3829,85|3702,84|3703,69",
+        "bytes":  166948,
+        "final_url":  "http://localhost/yalova-kamera/admin/restoran/qr-menu/receteler",
+        "error":  null
+    },
+    {
+        "rank":  2,
+        "module":  "teknik-servis",
+        "uri":  "admin/teknik-servis",
+        "name":  "filament.admin.teknik-servis",
+        "action":  "App\\Filament\\Clusters\\TeknikServis",
+        "status":  200,
+        "avg_ms":  1883.78,
+        "min_ms":  1797.42,
+        "max_ms":  1985.24,
+        "runs_ms":  "1985,24|1797,42|1868,68",
+        "bytes":  110847,
+        "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis",
+        "error":  null
+    },
+    {
+        "rank":  3,
+        "module":  "e-ticaret",
+        "uri":  "admin/e-ticaret",
+        "name":  "filament.admin.e-ticaret",
+        "action":  "App\\Filament\\Clusters\\ETicaret",
+        "status":  200,
+        "avg_ms":  1848.9,
+        "min_ms":  1817.47,
+        "max_ms":  1903.16,
+        "runs_ms":  "1903,16|1817,47|1826,06",
+        "bytes":  110823,
+        "final_url":  "http://localhost/yalova-kamera/admin/e-ticaret",
+        "error":  null
+    }
+]

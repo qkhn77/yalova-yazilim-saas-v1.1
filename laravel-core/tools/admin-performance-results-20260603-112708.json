@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "firma-kullanici-gruplari",
+    "uri":  "admin/firma-kullanici-gruplari/create",
+    "name":  "filament.admin.resources.firma-kullanici-gruplari.create",
+    "action":  "App\\Filament\\Resources\\FirmaKullaniciGrubuKaynagi\\Pages\\CreateFirmaKullaniciGrubu",
+    "status":  200,
+    "avg_ms":  1667.5,
+    "min_ms":  1667.5,
+    "max_ms":  1667.5,
+    "runs_ms":  "1667.5",
+    "bytes":  131281,
+    "final_url":  "http://localhost/yalova-kamera/admin/firma-kullanici-gruplari/create",
+    "error":  null
+}

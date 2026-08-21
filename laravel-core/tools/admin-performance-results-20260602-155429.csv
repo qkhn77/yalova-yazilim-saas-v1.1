@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","restoran","admin/restoran","filament.admin.restoran","App\Filament\Clusters\Restoran","500","2034,55","1778,66","2360,65","1854,93|1778,66|2360,65|2229,34|1949,16","0","http://localhost/yalova-kamera/admin/restoran","Uzak sunucu hata döndürdü: (500) İç Sunucu Hatası."

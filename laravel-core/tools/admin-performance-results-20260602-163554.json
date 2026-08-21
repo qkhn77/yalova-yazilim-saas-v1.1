@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "e-ticaret",
+    "uri":  "admin/e-ticaret/kargo-yonetimi",
+    "name":  "filament.admin.e-ticaret.pages.kargo-yonetimi",
+    "action":  "App\\Filament\\Clusters\\ETicaret\\Pages\\KargoYonetimiSayfasi",
+    "status":  200,
+    "avg_ms":  1947.98,
+    "min_ms":  1803.11,
+    "max_ms":  2289.18,
+    "runs_ms":  "2289,18|1970,06|1830,35|1803,11|1847,2",
+    "bytes":  171149,
+    "final_url":  "http://localhost/yalova-kamera/admin/e-ticaret/kargo-yonetimi",
+    "error":  null
+}

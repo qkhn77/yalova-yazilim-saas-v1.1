@@ -1,0 +1,109 @@
+.tt-marquee {
+	overflow: hidden;
+	width: 100%;
+	position: relative;
+	--tt-marquee-shadow-color: #ffffff;
+}
+
+.tt-marquee__track {
+	display: flex;
+	width: max-content;
+	will-change: transform;
+}
+
+.tt-marquee__group {
+	display: flex;
+	gap: 28px;
+	padding-right: 28px;
+}
+
+.tt-marquee__item {
+	display: inline-flex;
+	align-items: center;
+	white-space: nowrap;
+	padding: 10px 18px;
+	background: #0d3e66;
+	color: #fff;
+	text-decoration: none;
+}
+
+.tt-marquee__item--text {
+	gap: 10px;
+}
+
+.tt-marquee__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+	flex-shrink: 0;
+	width: 1em;
+	height: 1em;
+	min-width: 1em;
+	min-height: 1em;
+}
+
+.tt-marquee__icon i,
+.tt-marquee__icon svg {
+	display: block;
+	width: 1em !important;
+	height: 1em !important;
+}
+
+.tt-marquee__icon i {
+	font-size: 1em;
+	line-height: 1;
+}
+
+.tt-marquee__icon svg {
+	fill: currentColor !important;
+	stroke: currentColor !important;
+}
+
+.tt-marquee__item--image {
+	background: transparent;
+	padding: 0;
+}
+
+.tt-marquee__item--image img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+.tt-marquee--vertical .tt-marquee__track,
+.tt-marquee--vertical .tt-marquee__group {
+	flex-direction: column;
+	width: 100%;
+}
+
+.tt-marquee--vertical .tt-marquee__group {
+	padding-right: 0;
+	padding-bottom: 28px;
+}
+
+.tt-marquee--shadow::before,
+.tt-marquee--shadow::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 20%;
+	z-index: 3;
+	pointer-events: none;
+}
+
+.tt-marquee--shadow::before {
+	left: 0;
+	background: linear-gradient(90deg, var(--tt-marquee-shadow-color), transparent);
+}
+
+.tt-marquee--shadow::after {
+	right: 0;
+	background: linear-gradient(270deg, var(--tt-marquee-shadow-color), transparent);
+}
+
+.tt-marquee--shadow-hide-start::before,
+.tt-marquee--shadow-hide-end::after {
+	display: none;
+}

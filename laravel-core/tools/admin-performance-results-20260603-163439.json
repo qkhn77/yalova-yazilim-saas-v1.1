@@ -1,0 +1,32 @@
+﻿[
+    {
+        "rank":  1,
+        "module":  "products",
+        "uri":  "admin/products",
+        "name":  "filament.admin.resources.products.index",
+        "action":  "App\\Filament\\Resources\\ProductResource\\Pages\\ListProducts",
+        "status":  200,
+        "avg_ms":  1771.84,
+        "min_ms":  1703.46,
+        "max_ms":  1865.28,
+        "runs_ms":  "1865,28|1746,78|1703,46",
+        "bytes":  187277,
+        "final_url":  "http://localhost/yalova-kamera/admin/web/urunler/urun-listesi",
+        "error":  null
+    },
+    {
+        "rank":  2,
+        "module":  "product-categories",
+        "uri":  "admin/product-categories",
+        "name":  "filament.admin.resources.product-categories.index",
+        "action":  "App\\Filament\\Resources\\ProductCategoryResource\\Pages\\ListProductCategories",
+        "status":  200,
+        "avg_ms":  1706.9,
+        "min_ms":  1641.67,
+        "max_ms":  1756.66,
+        "runs_ms":  "1756,66|1722,38|1641,67",
+        "bytes":  165230,
+        "final_url":  "http://localhost/yalova-kamera/admin/web/urunler/urun-kategorileri",
+        "error":  null
+    }
+]

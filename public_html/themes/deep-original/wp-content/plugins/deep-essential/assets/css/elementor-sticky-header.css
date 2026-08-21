@@ -1,0 +1,86 @@
+/* Deep sticky header core styles.
+ * Widget-level sticky overrides were removed intentionally.
+ */
+.bb-sticky-header {
+  width: 100%;
+  z-index: var(--bb-sticky-z-index, 999);
+}
+
+.bb-sticky-shell {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: var(--bb-sticky-z-index, 999);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, calc(-100% - 12px), 0);
+  will-change: transform, opacity;
+  transition:
+    transform .34s cubic-bezier(.2, .7, .2, 1),
+    opacity .22s ease-out,
+    visibility 0s linear .34s;
+}
+
+.bb-sticky-shell.bb-clone-visible {
+  visibility: visible;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: 0s, 0s, 0s;
+}
+
+.bb-sticky-shell.bb-clone-hiding {
+  visibility: visible;
+  opacity: 0;
+  transform: translate3d(0, calc(-100% - 12px), 0);
+  transition:
+    transform .34s cubic-bezier(.4, 0, .2, 1),
+    opacity .2s ease-in,
+    visibility 0s linear .34s;
+}
+
+.bb-sticky-clone-target,
+.bb-sticky-clone-target > .e-con-inner,
+.bb-sticky-clone-target > .elementor-container,
+.bb-sticky-header,
+.bb-sticky-header > .e-con-inner,
+.bb-sticky-header > .elementor-container {
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background-color .25s ease,
+    color .25s ease,
+    padding .25s ease,
+    min-height .25s ease,
+    opacity .2s ease;
+}
+
+.bb-sticky-clone-target.bb-has-sticky-bg,
+.bb-sticky-clone-target.bb-has-sticky-bg > .e-con-inner,
+.bb-sticky-clone-target.bb-has-sticky-bg > .elementor-container,
+.bb-sticky-shell .bb-sticky-clone-target.bb-has-sticky-bg,
+.bb-sticky-shell .bb-sticky-clone-target.bb-has-sticky-bg > .e-con-inner,
+.bb-sticky-shell .bb-sticky-clone-target.bb-has-sticky-bg > .elementor-container {
+  background-color: var(--bb-sticky-bg, transparent) !important;
+  background-image: none;
+}
+
+.bb-sticky-clone-target.bb-has-sticky-shadow,
+.bb-sticky-header.bb-has-sticky-shadow {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.elementor-widget-container button:not(.wcf-menu-hamburger) svg .cls-1,
+.elementor-widget-container .aae--btn-pro-wrapper svg .cls-1,
+.elementor-widget-container .wcf__btn svg .cls-1{stroke:none !important;}
+
+/* Mobile nav open: sticky clone must not cover the drawer */
+@media (max-width: 1024px) {
+  body:has(.deep__nav-menu.deep-nav-is-toggled) .bb-sticky-shell,
+  body:has(.wcf__nav-menu.wcf-nav-is-toggled) .bb-sticky-shell {
+    z-index: 0 !important;
+    pointer-events: none !important;
+  }
+}

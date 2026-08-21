@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "ayarlar",
+    "uri":  "admin/ayarlar/mesaj-merkezi",
+    "name":  "filament.admin.ayarlar.pages.mesaj-merkezi",
+    "action":  "App\\Filament\\Clusters\\Ayarlar\\Pages\\MesajMerkeziSayfasi",
+    "status":  200,
+    "avg_ms":  1685.22,
+    "min_ms":  1685.22,
+    "max_ms":  1685.22,
+    "runs_ms":  "1685.22",
+    "bytes":  117695,
+    "final_url":  "http://localhost/yalova-kamera/admin/ayarlar/mesaj-merkezi",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/fatura-kaynagis/create/giden-iade-faturasi",
+    "name":  "filament.admin.muhasebe.resources.fatura-kaynagis.createGidenIade",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\CreateGidenIadeFaturasi",
+    "status":  200,
+    "avg_ms":  2892.03,
+    "min_ms":  2651.04,
+    "max_ms":  3360.88,
+    "runs_ms":  "2836,27|3360,88|2840,15|2651,04|2771,83",
+    "bytes":  287644,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/create/giden-iade-faturasi",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/urunler/urun-listesi/create",
+    "name":  "filament.admin.web.resources.urunler.urun-listesi.create",
+    "action":  "App\\Filament\\Clusters\\Web\\Resources\\UrunKaynagi\\Pages\\CreateUrun",
+    "status":  200,
+    "avg_ms":  1858.54,
+    "min_ms":  1858.54,
+    "max_ms":  1858.54,
+    "runs_ms":  "1858.54",
+    "bytes":  241383,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/urunler/urun-listesi/create",
+    "error":  null
+}

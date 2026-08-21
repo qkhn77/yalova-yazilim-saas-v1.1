@@ -1,0 +1,2 @@
+﻿"rank","module","uri","uri_template","name","action","model","record_key","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","sistem-moduller","admin/sistem-moduller/1/edit","admin/sistem-moduller/{record}/edit","filament.admin.resources.sistem-moduller.edit","App\Filament\Resources\ModulYonetimKaynagi\Pages\ModulDuzenle","App\Models\Modul","1","200","2031,18","2031,18","2031,18","2031.18","134013","http://localhost/yalova-kamera/admin/sistem-moduller/1/edit",

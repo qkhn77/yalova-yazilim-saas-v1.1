@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/sayfalar/hakkimizda",
+    "name":  "filament.admin.web.pages.sayfalar.hakkimizda",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\Hakkimizda",
+    "status":  200,
+    "avg_ms":  1705.7,
+    "min_ms":  1705.7,
+    "max_ms":  1705.7,
+    "runs_ms":  "1705.7",
+    "bytes":  175772,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/sayfalar/hakkimizda",
+    "error":  null
+}

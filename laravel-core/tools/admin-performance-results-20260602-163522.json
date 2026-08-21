@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teklif-yonetimi",
+    "uri":  "admin/teklif-yonetimi/sablonlar",
+    "name":  "filament.admin.teklif-yonetimi.resources.sablonlar.index",
+    "action":  "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifSablonKaynagi\\Pages\\ListTeklifSablonlari",
+    "status":  200,
+    "avg_ms":  2195.81,
+    "min_ms":  2029.45,
+    "max_ms":  2492.73,
+    "runs_ms":  "2223,68|2492,73|2029,45|2045,55|2187,65",
+    "bytes":  376392,
+    "final_url":  "http://localhost/yalova-kamera/admin/teklif-yonetimi/sablonlar",
+    "error":  null
+}

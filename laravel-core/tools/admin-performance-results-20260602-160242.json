@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teklif-yonetimi",
+    "uri":  "admin/teklif-yonetimi/sablonlar/create",
+    "name":  "filament.admin.teklif-yonetimi.resources.sablonlar.create",
+    "action":  "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifSablonKaynagi\\Pages\\CreateTeklifSablonu",
+    "status":  200,
+    "avg_ms":  2735.12,
+    "min_ms":  2542.76,
+    "max_ms":  2903.26,
+    "runs_ms":  "2674,42|2717,98|2837,19|2542,76|2903,26",
+    "bytes":  211835,
+    "final_url":  "http://localhost/yalova-kamera/admin/teklif-yonetimi/sablonlar/create",
+    "error":  null
+}

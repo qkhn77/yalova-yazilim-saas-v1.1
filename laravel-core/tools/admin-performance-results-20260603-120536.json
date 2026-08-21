@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "ayarlar",
+    "uri":  "admin/ayarlar/kullanici-ayarlari/kullanici-gruplari",
+    "name":  "filament.admin.ayarlar.pages.kullanici-ayarlari.kullanici-gruplari",
+    "action":  "App\\Filament\\Clusters\\Ayarlar\\Pages\\KullaniciGruplari",
+    "status":  200,
+    "avg_ms":  1727.01,
+    "min_ms":  1727.01,
+    "max_ms":  1727.01,
+    "runs_ms":  "1727.01",
+    "bytes":  112010,
+    "final_url":  "http://localhost/yalova-kamera/admin/ayarlar/kullanici-ayarlari/kullanici-gruplari",
+    "error":  null
+}

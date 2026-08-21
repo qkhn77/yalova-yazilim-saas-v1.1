@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/tanimlar/vardiya-sablonlari/1/edit",
+    "uri_template":  "admin/personel-takip/tanimlar/vardiya-sablonlari/{record}/edit",
+    "name":  "filament.admin.personel-takip.resources.tanimlar.vardiya-sablonlari.edit",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelVardiyaSablonuKaynagi\\Pages\\EditPersonelVardiyaSablonu",
+    "model":  "App\\Models\\Personel\\PersonelVardiyaSablonu",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  2737.85,
+    "min_ms":  2737.85,
+    "max_ms":  2737.85,
+    "runs_ms":  "2737.85",
+    "bytes":  153315,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/tanimlar/vardiya-sablonlari/1/edit",
+    "error":  null
+}

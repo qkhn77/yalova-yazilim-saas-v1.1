@@ -1,0 +1,206 @@
+/*
+ * CORK Faz 3E - Personel özel operasyon UI adapter'ı.
+ *
+ * Bu dosya yalnızca PersonelTakip özel Blade görünümlerini biçimlendirir.
+ * KPI, rapor, vardiya, izin, puantaj ve PIN terminali state/Livewire davranışı
+ * değiştirilmez; genel Filament resource listeleri merkezi CORK katmanını kullanır.
+ */
+
+body.fi-panel-admin .personel-cork-screen,
+body.fi-panel-admin .personel-cork-form-screen {
+    --personel-surface: var(--saas-surface, #ffffff);
+    --personel-surface-muted: var(--saas-surface-muted, #fafafa);
+    --personel-border: var(--saas-border, #e0e6ed);
+    --personel-text: var(--saas-text, #3b3f5c);
+    --personel-text-soft: var(--saas-text-soft, #515365);
+    --personel-muted: var(--saas-text-muted, #888ea8);
+    --personel-radius: var(--saas-radius-md, 0.5rem);
+    --personel-radius-sm: var(--saas-radius-sm, 0.375rem);
+    --personel-shadow: var(--saas-shadow-sm, 0 1px 3px rgb(31 45 61 / 6%));
+    min-width: 0;
+    color: var(--personel-text-soft);
+}
+
+body.fi-panel-admin .personel-cork-screen > *,
+body.fi-panel-admin .personel-cork-form-screen > * {
+    min-width: 0;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-toolbar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: end;
+    gap: 0.75rem;
+    min-width: 0;
+    padding: 0.875rem;
+    border: 1px solid var(--personel-border);
+    border-radius: var(--personel-radius);
+    background: var(--personel-surface-muted);
+    box-shadow: var(--personel-shadow);
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-toolbar > * {
+    min-width: 0;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-toolbar button {
+    min-height: 2.625rem;
+    white-space: nowrap;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-kpi-grid {
+    min-width: 0;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-kpi-card,
+body.fi-panel-admin .personel-cork-form-screen > form,
+body.fi-panel-admin .personel-cork-form-screen > [data-filament-form] {
+    min-width: 0;
+    border: 1px solid var(--personel-border);
+    border-radius: var(--personel-radius) !important;
+    background: var(--personel-surface) !important;
+    box-shadow: var(--personel-shadow);
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-kpi-card {
+    transition: box-shadow 150ms ease, transform 150ms ease;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-kpi-card:hover {
+    box-shadow: var(--saas-shadow-md, 0 10px 30px rgb(31 45 61 / 8%));
+    transform: translateY(-1px);
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-kpi-card .text-sm,
+body.fi-panel-admin .personel-cork-screen .personel-cork-kpi-card .text-gray-500 {
+    color: var(--personel-muted) !important;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-kpi-card .text-2xl,
+body.fi-panel-admin .personel-cork-screen .personel-cork-kpi-card .text-3xl {
+    color: var(--personel-text) !important;
+    font-variant-numeric: tabular-nums;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-table-wrap {
+    min-width: 0;
+    overflow-x: auto;
+    border: 1px solid var(--personel-border);
+    border-radius: var(--personel-radius-sm);
+    background: var(--personel-surface);
+    scrollbar-color: color-mix(in srgb, var(--personel-muted) 45%, transparent) transparent;
+    scrollbar-width: thin;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-table {
+    width: 100%;
+    min-width: 42rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: var(--personel-text-soft);
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-table thead {
+    background: var(--personel-surface-muted);
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-table th {
+    color: var(--personel-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-table th,
+body.fi-panel-admin .personel-cork-screen .personel-cork-table td {
+    border-color: var(--personel-border) !important;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-table tbody tr {
+    transition: background-color 150ms ease;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-table tbody tr:hover {
+    background: color-mix(in srgb, var(--saas-primary, #4361ee) 4%, var(--personel-surface));
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-empty {
+    color: var(--personel-muted) !important;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
+    padding-inline: 0.5rem;
+    border: 1px solid color-mix(in srgb, var(--saas-primary, #4361ee) 22%, var(--personel-border));
+    border-radius: 999px;
+    color: var(--saas-primary, #4361ee);
+    background: color-mix(in srgb, var(--saas-primary, #4361ee) 8%, var(--personel-surface));
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-terminal-layout {
+    min-width: 0;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-terminal-card {
+    min-width: 0;
+}
+
+body.fi-panel-admin .personel-cork-screen .personel-cork-terminal-card .fi-section {
+    height: 100%;
+}
+
+body.fi-panel-admin .personel-cork-form-screen {
+    max-width: 64rem;
+}
+
+body.fi-panel-admin .personel-cork-form-screen > form {
+    padding: 1.25rem;
+}
+
+body.fi-panel-admin .personel-cork-form-screen select,
+body.fi-panel-admin .personel-cork-form-screen input:not([type='checkbox']):not([type='radio']) {
+    border-color: var(--personel-border);
+    background: var(--personel-surface);
+    color: var(--personel-text);
+}
+
+body.fi-panel-admin .personel-cork-form-screen button {
+    min-height: 2.625rem;
+}
+
+body.fi-panel-admin.dark .personel-cork-screen .personel-cork-table tbody tr:hover,
+body.fi-panel-admin.dark .personel-cork-screen .personel-cork-badge {
+    background: color-mix(in srgb, var(--saas-primary, #4361ee) 13%, var(--personel-surface));
+}
+
+@media (max-width: 767px) {
+    body.fi-panel-admin .personel-cork-screen .personel-cork-toolbar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body.fi-panel-admin .personel-cork-screen .personel-cork-toolbar button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 479px) {
+    body.fi-panel-admin .personel-cork-screen .personel-cork-toolbar {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 0.75rem;
+    }
+
+    body.fi-panel-admin .personel-cork-screen .personel-cork-table {
+        min-width: 36rem;
+    }
+
+    body.fi-panel-admin .personel-cork-form-screen > form {
+        padding: 0.875rem;
+    }
+}

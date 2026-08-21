@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/web-ayarlar/web-api-ayarlar",
+    "name":  "filament.admin.web.pages.web-ayarlar.web-api-ayarlar",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\WebApiAyarlar",
+    "status":  200,
+    "avg_ms":  1616.46,
+    "min_ms":  1605.48,
+    "max_ms":  1627.43,
+    "runs_ms":  "1605,48|1627,43",
+    "bytes":  140841,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/web-ayarlar/web-api-ayarlar",
+    "error":  null
+}

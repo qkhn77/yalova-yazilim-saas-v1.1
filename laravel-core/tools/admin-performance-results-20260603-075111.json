@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/bloglar/blog-listesi",
+    "name":  "filament.admin.web.pages.bloglar.blog-listesi",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\BlogListesi",
+    "status":  200,
+    "avg_ms":  3949.59,
+    "min_ms":  1701.43,
+    "max_ms":  6197.75,
+    "runs_ms":  "6197,75|1701,43",
+    "bytes":  181629,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/bloglar/blog-listesi",
+    "error":  null
+}

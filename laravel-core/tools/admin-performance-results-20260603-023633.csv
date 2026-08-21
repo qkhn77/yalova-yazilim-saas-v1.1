@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teknik-servis","admin/teknik-servis/servis-kayitlari/olustur/arizali-cihaz","filament.admin.teknik-servis.resources.servis-kayitlari.create_arizali","App\Filament\Clusters\TeknikServis\Resources\TeknikServisKaydiKaynagi\Pages\ArizaliCihazKaydiOlusturSayfasi","200","4744,15","4744,15","4744,15","4744.15","261200","http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/olustur/arizali-cihaz",

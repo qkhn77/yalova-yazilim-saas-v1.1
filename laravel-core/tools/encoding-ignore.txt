@@ -1,0 +1,10 @@
+# Geçici baseline: mevcut repoda önceden var olan karakter borçları.
+# Yeni dosya eklemeyin; borç temizlendikçe buradan çıkarın.
+
+app/Filament/Clusters/Muhasebe/Resources/StokKartiKaynagi.php
+database/seeders/SaasPermissionsSeeder.php
+hikvisionturkiye.net/urunler/products.json
+resources/views/filament/components/custom-sidebar.blade.php
+tests/Feature/UI/TurkceKarakterButunluguTest.php
+tools/scrape_hikvisionturkiye.php
+app/Filament/Clusters/Muhasebe/Resources/FaturaKaynagi.php

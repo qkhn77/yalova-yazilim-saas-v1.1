@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayitlari/liste/tezgahta",
+    "name":  "filament.admin.teknik-servis.resources.servis-kayitlari.tezgahta",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\TeknikServisKayitlariTezgahtaSayfasi",
+    "status":  200,
+    "avg_ms":  1756.5,
+    "min_ms":  1756.5,
+    "max_ms":  1756.5,
+    "runs_ms":  "1756.5",
+    "bytes":  145932,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/tezgahta",
+    "error":  null
+}

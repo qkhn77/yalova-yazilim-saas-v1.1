@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "e-ticaret",
+    "uri":  "admin/e-ticaret/kampanya-yonetimi",
+    "name":  "filament.admin.e-ticaret.pages.kampanya-yonetimi",
+    "action":  "App\\Filament\\Clusters\\ETicaret\\Pages\\KampanyaYonetimiSayfasi",
+    "status":  200,
+    "avg_ms":  3625.63,
+    "min_ms":  1661.28,
+    "max_ms":  5589.98,
+    "runs_ms":  "5589,98|1661,28",
+    "bytes":  137942,
+    "final_url":  "http://localhost/yalova-kamera/admin/e-ticaret/kampanya-yonetimi",
+    "error":  null
+}

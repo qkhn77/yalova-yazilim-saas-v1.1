@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/marka-ureticileri",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.marka-ureticileri.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeMarkaUreticiTanimKaynagi\\Pages\\ListMuhasebeMarkaUreticileri",
+    "status":  200,
+    "avg_ms":  1738.54,
+    "min_ms":  1738.54,
+    "max_ms":  1738.54,
+    "runs_ms":  "1738.54",
+    "bytes":  160847,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/marka-ureticileri",
+    "error":  null
+}

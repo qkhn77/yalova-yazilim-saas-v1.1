@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html
+    lang="tr"
+    dir="ltr"
+    class="fi min-h-screen"
+>
+    <head>
+        
+
+        <meta charset="utf-8" />
+        <meta name="csrf-token" content="eyPNl5AVUNm55VQ1uODNbybtk3dnR3AzGlhpN38M" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        
+        
+        <title>
+            Muhasebe -  Yalova Kamera
+        </title>
+
+        
+
+        <style>
+            [x-cloak=''],
+            [x-cloak='x-cloak'],
+            [x-cloak='1'] {
+                display: none !important;
+            }
+
+            @media (max-width: 1023px) {
+                [x-cloak='-lg'] {
+                    display: none !important;
+                }
+            }
+
+            @media (min-width: 1024px) {
+                [x-cloak='lg'] {
+                    display: none !important;
+                }
+            }
+        </style>
+
+        <link
+            href="http://localhost/yalova-kamera/css/filament/forms/forms.css?v=3.3.0.0"
+            rel="stylesheet"
+            data-navigate-track
+        />
+                <link
+            href="http://localhost/yalova-kamera/css/filament/support/support.css?v=3.3.0.0"
+            rel="stylesheet"
+            data-navigate-track
+        />
+    
+<style>
+    :root {
+         --danger-50:254, 242, 242;  --danger-100:254, 226, 226;  --danger-200:254, 202, 202;  --danger-300:252, 165, 165;  --danger-400:248, 113, 113;  --danger-500:239, 68, 68;  --danger-600:220, 38, 38;  --danger-700:185, 28, 28;  --danger-800:153, 27, 27;  --danger-900:127, 29, 29;  --danger-950:69, 10, 10;  --gray-50:250, 250, 250;  --gray-100:244, 244, 245;  --gray-200:228, 228, 231;  --gray-300:212, 212, 216;  --gray-400:161, 161, 170;  --gray-500:113, 113, 122;  --gray-600:82, 82, 91;  --gray-700:63, 63, 70;  --gray-800:39, 39, 42;  --gray-900:24, 24, 27;  --gray-950:9, 9, 11;  --info-50:239, 246, 255;  --info-100:219, 234, 254;  --info-200:191, 219, 254;  --info-300:147, 197, 253;  --info-400:96, 165, 250;  --info-500:59, 130, 246;  --info-600:37, 99, 235;  --info-700:29, 78, 216;  --info-800:30, 64, 175;  --info-900:30, 58, 138;  --info-950:23, 37, 84;  --primary-50:255, 251, 235;  --primary-100:254, 243, 199;  --primary-200:253, 230, 138;  --primary-300:252, 211, 77;  --primary-400:251, 191, 36;  --primary-500:245, 158, 11;  --primary-600:217, 119, 6;  --primary-700:180, 83, 9;  --primary-800:146, 64, 14;  --primary-900:120, 53, 15;  --primary-950:69, 26, 3;  --success-50:240, 253, 244;  --success-100:220, 252, 231;  --success-200:187, 247, 208;  --success-300:134, 239, 172;  --success-400:74, 222, 128;  --success-500:34, 197, 94;  --success-600:22, 163, 74;  --success-700:21, 128, 61;  --success-800:22, 101, 52;  --success-900:20, 83, 45;  --success-950:5, 46, 22;  --warning-50:255, 251, 235;  --warning-100:254, 243, 199;  --warning-200:253, 230, 138;  --warning-300:252, 211, 77;  --warning-400:251, 191, 36;  --warning-500:245, 158, 11;  --warning-600:217, 119, 6;  --warning-700:180, 83, 9;  --warning-800:146, 64, 14;  --warning-900:120, 53, 15;  --warning-950:69, 26, 3;     }
+</style>
+
+        <link
+            href="http://localhost/yalova-kamera/css/filament/filament/app.css?v=3.3.0.0"
+            rel="stylesheet"
+            data-navigate-track
+        />
+        
+            <link rel="preconnect" href="https://fonts.bunny.net">
+            <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+        
+
+        <style>
+            :root {
+                --font-family: 'Inter';
+                --sidebar-width: 20rem;
+                --collapsed-sidebar-width: 4.5rem;
+                --default-theme-mode: system;
+                --fi-input-focus: rgb(21 94 253);
+            }
+        </style>
+        <style>
+            /* Input/select/textarea: görünür kenarlık (border-none override) */
+            .fi-body input[type="text"],
+            .fi-body input[type="email"],
+            .fi-body input[type="url"],
+            .fi-body input[type="tel"],
+            .fi-body input[type="number"],
+            .fi-body input[type="password"],
+            .fi-body input[type="search"],
+            .fi-body select,
+            .fi-body textarea,
+            .fi-body .fi-input {
+                border: 1px solid rgb(203 213 225) !important;
+            }
+            .dark .fi-body input[type="text"],
+            .dark .fi-body input[type="email"],
+            .dark .fi-body input[type="url"],
+            .dark .fi-body input[type="tel"],
+            .dark .fi-body input[type="number"],
+            .dark .fi-body input[type="password"],
+            .dark .fi-body input[type="search"],
+            .dark .fi-body select,
+            .dark .fi-body textarea,
+            .dark .fi-body .fi-input {
+                border-color: rgb(71 85 105) !important;
+            }
+            /* Input vurgu: odakta net mavi çizgi (arka planla karışmasın) */
+            .fi-body input:focus,
+            .fi-body .fi-input:focus,
+            .fi-body .fi-input input:focus,
+            .fi-body select:focus,
+            .fi-body textarea:focus {
+                border-color: rgb(21 94 253) !important;
+                border-width: 2px !important;
+                outline: none !important;
+                box-shadow: 0 0 0 2px rgb(21 94 253) !important;
+                --tw-ring-color: rgb(21 94 253) !important;
+                --tw-ring-shadow: 0 0 0 2px rgb(21 94 253) !important;
+            }
+            /* Wrapper odakta: ring/shadow arka plan rengi almasın, sadece mavi */
+            .fi-body [data-slot="input"]:focus-within,
+            .fi-body [data-slot="input-wrapper"]:focus-within {
+                --tw-ring-color: rgb(21 94 253) !important;
+                --tw-ring-shadow: 0 0 0 2px rgb(21 94 253) !important;
+                box-shadow: 0 0 0 2px rgb(21 94 253) !important;
+            }
+            .fi-body [data-slot="input"]:focus-within .fi-input,
+            .fi-body [data-slot="input-wrapper"]:focus-within .fi-input {
+                border-color: rgb(21 94 253) !important;
+                box-shadow: 0 0 0 2px rgb(21 94 253) !important;
+            }
+            /* Metin seçimi: görünür arka plan */
+            .fi-body ::selection {
+                background-color: rgb(21 94 253) !important;
+                color: rgb(255 255 255) !important;
+            }
+            /* Kaydet / primary butonlar */
+            .fi-body button[type="submit"].fi-btn,
+            .fi-body .fi-btn-primary,
+            .fi-body a.fi-btn-primary,
+            .fi-body [class*="fi-btn"][class*="primary"] {
+                background-color: rgb(21 94 253) !important;
+                border-color: rgb(21 94 253) !important;
+                color: rgb(255 255 255) !important;
+            }
+            .fi-body button[type="submit"].fi-btn:hover,
+            .fi-body .fi-btn-primary:hover,
+            .fi-body a.fi-btn-primary:hover {
+                background-color: rgb(19 85 228) !important;
+                border-color: rgb(19 85 228) !important;
+                color: rgb(255 255 255) !important;
+            }
+        </style>
+
+        
+        <link rel="stylesheet" href="http://localhost/yalova-kamera/theme/yalovakamera/css/admin-panel-overrides.css?v=1784424768">
+<link rel="stylesheet" href="http://localhost/yalova-kamera/theme/yalovakamera/css/admin-custom-sidebar.css?v=1780690502">
+
+<script defer src="http://localhost/yalova-kamera/theme/yalovakamera/js/admin-panel-overrides.js?v=1785929917"></script>
+<script defer src="http://localhost/yalova-kamera/theme/yalovakamera/js/admin-custom-sidebar.js?v=1780256989"></script>
+
+
+        
+        <style data-input-focus-override>
+            .fi-body .fi-input {
+                border: 1px solid rgb(203, 213, 225) !important;
+            }
+            .dark .fi-body .fi-input {
+                border-color: rgb(71, 85, 105) !important;
+            }
+            .fi-body input:focus,
+            .fi-body .fi-input:focus,
+            .fi-body select:focus,
+            .fi-body textarea:focus {
+                border: 2px solid rgb(21, 94, 253) !important;
+                box-shadow: 0 0 0 2px rgb(21, 94, 253) !important;
+                outline: none !important;
+                --tw-ring-color: rgb(21, 94, 253) !important;
+                --tw-ring-shadow: 0 0 0 2px rgb(21, 94, 253) !important;
+            }
+            .fi-body [data-slot="input"]:focus-within,
+            .fi-body [data-slot="input-wrapper"]:focus-within {
+                --tw-ring-color: rgb(21, 94, 253) !important;
+                box-shadow: 0 0 0 2px rgb(21, 94, 253) !important;
+            }
+            .fi-body [data-slot="input"]:focus-within .fi-input,
+            .fi-body [data-slot="input-wrapper"]:focus-within .fi-input,
+            .fi-body [data-slot="input"]:focus-within input,
+            .fi-body [data-slot="input-wrapper"]:focus-within input {
+                border: 2px solid rgb(21, 94, 253) !important;
+                box-shadow: 0 0 0 2px rgb(21, 94, 253) !important;
+            }
+        </style>
+
+                    <script>
+                const loadDarkMode = () => {
+                    window.theme = localStorage.getItem('theme') ?? 'system'
+                    if (
+                        window.theme === 'dark' ||
+                        (window.theme === 'system' &&
+                            window.matchMedia('(prefers-color-scheme: dark)')
+                                .matches)
+                    ) {
+                        document.documentElement.classList.add('dark')
+                    }
+                }
+
+                loadDarkMode()
+
+                document.addEventListener('livewire:navigated', loadDarkMode)
+            </script>
+        
+        
+    </head>
+
+    <body
+        class="fi-body fi-panel-admin min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white"
+    >
+        
+
+        <div
+        class="fi-layout flex min-h-screen w-full flex-row-reverse flex-nowrap items-stretch overflow-x-clip"
+    >
+        <div
+                            x-data="{}"
+                x-bind:style="'display: flex; opacity:1;'" 
+                        class="fi-main-ctn w-full min-w-0 flex-1 flex-col opacity-0"
+        >
+                            
+
+                <div
+    class="fi-topbar sticky top-0 z-20 overflow-x-clip"
+>
+    <nav
+        class="flex h-16 items-center gap-x-4 bg-white px-4 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 md:px-6 lg:px-8"
+    >
+        
+
+                    <button
+                                style="--c-300:var(--gray-300);--c-400:var(--gray-400);--c-500:var(--gray-500);--c-600:var(--gray-600);" class="fi-icon-btn relative flex items-center justify-center rounded-lg outline-none transition duration-75 focus-visible:ring-2 -m-1.5 h-9 w-9 text-gray-400 hover:text-gray-500 focus-visible:ring-primary-600 dark:text-gray-500 dark:hover:text-gray-400 dark:focus-visible:ring-primary-500 fi-color-gray fi-topbar-open-sidebar-btn lg:hidden" title="Kenar çubuğunu genişlet" type="button" wire:loading.attr="disabled" x-cloak="x-cloak" x-data="{}" x-on:click="$store.sidebar.open()" x-show="! $store.sidebar.isOpen"
+    >
+                    <span class="sr-only">
+                Kenar çubuğunu genişlet
+            </span>
+        
+        <svg class="fi-icon-btn-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+        
+            </button>
+
+            <button
+                                style="--c-300:var(--gray-300);--c-400:var(--gray-400);--c-500:var(--gray-500);--c-600:var(--gray-600);" class="fi-icon-btn relative flex items-center justify-center rounded-lg outline-none transition duration-75 focus-visible:ring-2 -m-1.5 h-9 w-9 text-gray-400 hover:text-gray-500 focus-visible:ring-primary-600 dark:text-gray-500 dark:hover:text-gray-400 dark:focus-visible:ring-primary-500 fi-color-gray fi-topbar-close-sidebar-btn lg:hidden" title="Kenar çubuğunu daralt" type="button" wire:loading.attr="disabled" x-cloak="x-cloak" x-data="{}" x-on:click="$store.sidebar.close()" x-show="$store.sidebar.isOpen"
+    >
+                    <span class="sr-only">
+                Kenar çubuğunu daralt
+            </span>
+        
+        <svg class="fi-icon-btn-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+        
+            </button>
+        
+        
+        <div
+                            x-persist="topbar.end"
+                        class="ms-auto flex items-center gap-x-4"
+        >
+            
+
+                            <div wire:snapshot="{&quot;data&quot;:{&quot;search&quot;:&quot;&quot;},&quot;memo&quot;:{&quot;id&quot;:&quot;N6L0VcixSpk3OY4zI6n7&quot;,&quot;name&quot;:&quot;filament.livewire.global-search&quot;,&quot;path&quot;:&quot;admin\/muhasebe&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;tr&quot;},&quot;checksum&quot;:&quot;63467747e1fdfb9f5ab68776ad3af555fc8e8f5e2eec210932d5fea6cadc5259&quot;}" wire:effects="[]" wire:id="N6L0VcixSpk3OY4zI6n7"
+    x-data="{ ykGlobalSearchOpen: false }"
+    x-bind:class="{ 'yk-global-search-open': ykGlobalSearchOpen }"
+    x-on:click="ykGlobalSearchOpen = true; $nextTick(() => $el.querySelector('input[type=search]')?.focus())"
+    x-on:click.outside="if (! $el.querySelector('input[type=search]')?.value) ykGlobalSearchOpen = false"
+    x-on:keydown.escape.window="if ($el.contains(document.activeElement) && ! $el.querySelector('input[type=search]')?.value) { ykGlobalSearchOpen = false; document.activeElement?.blur() }"
+    x-on:focus-first-global-search-result.stop="$el.querySelector('.fi-global-search-result-link')?.focus()"
+    class="fi-global-search flex items-center"
+>
+    
+
+    <div class="sm:relative">
+        <div
+    x-id="['input']"
+    class="fi-global-search-field"
+>
+    <label x-bind:for="$id('input')" class="sr-only">
+        Genel arama
+    </label>
+
+    <div
+        class="fi-input-wrp flex rounded-lg shadow-sm ring-1 transition duration-75 bg-white dark:bg-white/5 [&amp;:not(:has(.fi-ac-action:focus))]:focus-within:ring-2 ring-gray-950/10 dark:ring-white/20 [&amp;:not(:has(.fi-ac-action:focus))]:focus-within:ring-primary-600 dark:[&amp;:not(:has(.fi-ac-action:focus))]:focus-within:ring-primary-500"
+>
+    <!--[if BLOCK]><![endif]-->        <div
+                        class="fi-input-wrp-prefix items-center gap-x-3 ps-3 flex pe-2"
+        >
+            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+            <!--[if BLOCK]><![endif]-->                <!--[if BLOCK]><![endif]-->    <svg style=";" wire:loading.remove.delay.default="1" wire:target="search" class="fi-input-wrp-icon h-5 w-5 text-gray-400 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+  <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd"/>
+</svg><!--[if ENDBLOCK]><![endif]-->            <!--[if ENDBLOCK]><![endif]-->
+            <!--[if BLOCK]><![endif]-->                <svg
+    fill="none"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    class="animate-spin fi-input-wrp-icon h-5 w-5 text-gray-400 dark:text-gray-500" wire:loading.delay.default="" wire:target="search"
+>
+    <path
+        clip-rule="evenodd"
+        d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+        fill-rule="evenodd"
+        fill="currentColor"
+        opacity="0.2"
+    ></path>
+    <path
+        d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z"
+        fill="currentColor"
+    ></path>
+</svg>
+            <!--[if ENDBLOCK]><![endif]-->
+            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        </div>
+    <!--[if ENDBLOCK]><![endif]-->
+    <div
+                class="fi-input-wrp-input min-w-0 flex-1"
+    >
+        <input
+    class="fi-input block w-full border-none py-1.5 text-base text-gray-950 transition duration-75 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.400)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] dark:disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.500)] sm:text-sm sm:leading-6 bg-white/0 ps-0 pe-3" autocomplete="off" maxlength="1000" placeholder="Ara" type="search" wire:key="global-search.field.input" x-bind:id="$id('input')" x-on:keydown.down.prevent.stop="$dispatch('focus-first-global-search-result')" x-data="{}" wire:model.live.debounce.500ms="search"
+/>
+    </div>
+
+    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]--></div>
+</div>
+
+        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->    </div>
+
+    
+</div>
+            
+            
+
+                            
+                <div
+    x-data="{
+        toggle: function (event) {
+            $refs.panel.toggle(event)
+        },
+
+        open: function (event) {
+            $refs.panel.open(event)
+        },
+
+        close: function (event) {
+            $refs.panel.close(event)
+        },
+    }"
+    class="fi-dropdown fi-user-menu"
+>
+    <div
+        x-on:click="toggle"
+        class="fi-dropdown-trigger flex cursor-pointer"
+    >
+        <button
+            aria-label="Kullanıcı menüsü"
+            type="button"
+            class="shrink-0"
+        >
+            <img
+    class="fi-avatar object-cover object-center fi-circular rounded-full h-8 w-8 fi-user-avatar" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2040%2040%22%3E%3Crect%20width%3D%2240%22%20height%3D%2240%22%20rx%3D%2220%22%20fill%3D%22%2309090b%22%2F%3E%3Ctext%20x%3D%2220%22%20y%3D%2221%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2213%22%20font-weight%3D%22600%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EY%20B%3C%2Ftext%3E%3C%2Fsvg%3E" alt="filament-panels::layout.avatar.alt"
+/>
+        </button>
+    </div>
+
+            <div
+            x-cloak
+            x-float.placement.bottom-end.flip.teleport.offset="{ offset: 8,  }"
+            x-ref="panel"
+            x-transition:enter-start="opacity-0"
+            x-transition:leave-end="opacity-0"
+                        class="fi-dropdown-panel absolute z-10 w-screen divide-y divide-gray-100 rounded-lg bg-white shadow-lg ring-1 ring-gray-950/5 transition dark:divide-white/5 dark:bg-gray-900 dark:ring-white/10 !max-w-[14rem]"
+            style=""
+        >
+            <div class="fi-dropdown-list p-1">
+    <a
+        href="http://localhost/yalova-kamera/admin/profil" wire:navigate
+                                style=";" class="fi-dropdown-list-item flex w-full items-center gap-2 whitespace-nowrap rounded-md p-2 text-sm transition-colors duration-75 outline-none disabled:pointer-events-none disabled:opacity-70 hover:bg-gray-50 focus-visible:bg-gray-50 dark:hover:bg-white/5 dark:focus-visible:bg-white/5 fi-dropdown-list-item-color-gray fi-color-gray"
+    >
+                    <svg class="fi-dropdown-list-item-icon h-5 w-5 text-gray-400 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z" clip-rule="evenodd"/>
+</svg>        
+        
+        <span class="fi-dropdown-list-item-label flex-1 truncate text-start text-gray-700 dark:text-gray-200" style="">
+            Profilim
+        </span>
+
+            </a>
+</div>
+        
+        
+    
+            <div class="fi-dropdown-list p-1">
+    <div
+    x-data="{ theme: null }"
+    x-init="
+        $watch('theme', () => {
+            $dispatch('theme-changed', theme)
+        })
+
+        theme = localStorage.getItem('theme') || 'system'    "
+    class="fi-theme-switcher grid grid-flow-col gap-x-1"
+>
+    <button
+    aria-label="Açık tema"
+    type="button"
+    x-on:click="(theme = 'light') && close()"
+    x-tooltip="{
+        content: 'A\u00e7\u0131k tema',
+        theme: $store.theme,
+    }"
+    class="fi-theme-switcher-btn flex justify-center rounded-md p-2 outline-none transition duration-75 hover:bg-gray-50 focus-visible:bg-gray-50 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"
+    x-bind:class="
+        theme === 'light'            ? 'fi-active bg-gray-50 text-primary-500 dark:bg-white/5 dark:text-primary-400'
+            : 'text-gray-400 hover:text-gray-500 focus-visible:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400 dark:focus-visible:text-gray-400'
+    "
+>
+    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+  <path d="M10 2a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 2ZM10 15a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 15ZM10 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM15.657 5.404a.75.75 0 1 0-1.06-1.06l-1.061 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM6.464 14.596a.75.75 0 1 0-1.06-1.06l-1.06 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM18 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 18 10ZM5 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 5 10ZM14.596 15.657a.75.75 0 0 0 1.06-1.06l-1.06-1.061a.75.75 0 1 0-1.06 1.06l1.06 1.06ZM5.404 6.464a.75.75 0 0 0 1.06-1.06l-1.06-1.06a.75.75 0 1 0-1.061 1.06l1.06 1.06Z"/>
+</svg></button>
+
+    <button
+    aria-label="Koyu tema"
+    type="button"
+    x-on:click="(theme = 'dark') && close()"
+    x-tooltip="{
+        content: 'Koyu tema',
+        theme: $store.theme,
+    }"
+    class="fi-theme-switcher-btn flex justify-center rounded-md p-2 outline-none transition duration-75 hover:bg-gray-50 focus-visible:bg-gray-50 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"
+    x-bind:class="
+        theme === 'dark'            ? 'fi-active bg-gray-50 text-primary-500 dark:bg-white/5 dark:text-primary-400'
+            : 'text-gray-400 hover:text-gray-500 focus-visible:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400 dark:focus-visible:text-gray-400'
+    "
+>
+    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+  <path fill-rule="evenodd" d="M7.455 2.004a.75.75 0 0 1 .26.77 7 7 0 0 0 9.958 7.967.75.75 0 0 1 1.067.853A8.5 8.5 0 1 1 6.647 1.921a.75.75 0 0 1 .808.083Z" clip-rule="evenodd"/>
+</svg></button>
+
+    <button
+    aria-label="Sistem varsayılanı"
+    type="button"
+    x-on:click="(theme = 'system') && close()"
+    x-tooltip="{
+        content: 'Sistem varsay\u0131lan\u0131',
+        theme: $store.theme,
+    }"
+    class="fi-theme-switcher-btn flex justify-center rounded-md p-2 outline-none transition duration-75 hover:bg-gray-50 focus-visible:bg-gray-50 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"
+    x-bind:class="
+        theme === 'system'            ? 'fi-active bg-gray-50 text-primary-500 dark:bg-white/5 dark:text-primary-400'
+            : 'text-gray-400 hover:text-gray-500 focus-visible:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400 dark:focus-visible:text-gray-400'
+    "
+>
+    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+  <path fill-rule="evenodd" d="M2 4.25A2.25 2.25 0 0 1 4.25 2h11.5A2.25 2.25 0 0 1 18 4.25v8.5A2.25 2.25 0 0 1 15.75 15h-3.105a3.501 3.501 0 0 0 1.1 1.677A.75.75 0 0 1 13.26 18H6.74a.75.75 0 0 1-.484-1.323A3.501 3.501 0 0 0 7.355 15H4.25A2.25 2.25 0 0 1 2 12.75v-8.5Zm1.5 0a.75.75 0 0 1 .75-.75h11.5a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-.75.75H4.25a.75.75 0 0 1-.75-.75v-7.5Z" clip-rule="evenodd"/>
+</svg></button>
+</div>
+</div>
+    
+    <div class="fi-dropdown-list p-1">
+    <a
+        href="http://localhost/yalova-kamera/admin/ayarlar/mesaj-merkezi" wire:navigate
+                                style=";" class="fi-dropdown-list-item flex w-full items-center gap-2 whitespace-nowrap rounded-md p-2 text-sm transition-colors duration-75 outline-none disabled:pointer-events-none disabled:opacity-70 hover:bg-gray-50 focus-visible:bg-gray-50 dark:hover:bg-white/5 dark:focus-visible:bg-white/5 fi-dropdown-list-item-color-gray fi-color-gray"
+    >
+                    <svg class="fi-dropdown-list-item-icon h-5 w-5 text-gray-400 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/>
+</svg>        
+        
+        <span class="fi-dropdown-list-item-label flex-1 truncate text-start text-gray-700 dark:text-gray-200" style="">
+            Mesaj Merkezi
+        </span>
+
+            </a>
+        
+        <form
+        action="http://localhost/yalova-kamera/admin/logout" method="post"
+    >
+        <input type="hidden" name="_token" value="eyPNl5AVUNm55VQ1uODNbybtk3dnR3AzGlhpN38M" autocomplete="off">
+        <button
+                                                type="submit"
+            style=";" class="fi-dropdown-list-item flex w-full items-center gap-2 whitespace-nowrap rounded-md p-2 text-sm transition-colors duration-75 outline-none disabled:pointer-events-none disabled:opacity-70 hover:bg-gray-50 focus-visible:bg-gray-50 dark:hover:bg-white/5 dark:focus-visible:bg-white/5 fi-dropdown-list-item-color-gray fi-color-gray"
+        >
+                            <svg class="fi-dropdown-list-item-icon h-5 w-5 text-gray-400 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+  <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clip-rule="evenodd"/>
+  <path fill-rule="evenodd" d="M19 10a.75.75 0 0 0-.75-.75H8.704l1.048-.943a.75.75 0 1 0-1.004-1.114l-2.5 2.25a.75.75 0 0 0 0 1.114l2.5 2.25a.75.75 0 1 0 1.004-1.114l-1.048-.943h9.546A.75.75 0 0 0 19 10Z" clip-rule="evenodd"/>
+</svg>            
+            <span class="fi-dropdown-list-item-label flex-1 truncate text-start text-gray-700 dark:text-gray-200" style="">
+                Oturumu kapat
+            </span>
+
+                    </button>
+    </form>
+</div>
+        </div>
+    </div>
+
+
+                    </div>
+
+        
+    </nav>
+</div>
+
+                
+            
+            <main
+                class="fi-main mx-auto h-full w-full px-4 sm:px-6 md:px-8 lg:px-10 py-6 lg:py-8 max-w-full"
+            >
+                
+
+                <div wire:snapshot="{&quot;data&quot;:{&quot;mountedActions&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;mountedActionsArguments&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;mountedActionsData&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;defaultAction&quot;:null,&quot;defaultActionArguments&quot;:null,&quot;componentFileAttachments&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;mountedFormComponentActions&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;mountedFormComponentActionsArguments&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;mountedFormComponentActionsData&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;mountedFormComponentActionsComponents&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;mountedInfolistActions&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;mountedInfolistActionsData&quot;:[[],{&quot;s&quot;:&quot;arr&quot;}],&quot;mountedInfolistActionsComponent&quot;:null,&quot;mountedInfolistActionsInfolist&quot;:null},&quot;memo&quot;:{&quot;id&quot;:&quot;DEq2kRBgoIaChU2uMw4a&quot;,&quot;name&quot;:&quot;app.filament.clusters.muhasebe&quot;,&quot;path&quot;:&quot;admin\/muhasebe&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;tr&quot;},&quot;checksum&quot;:&quot;ec7bdcc946bd5e7936b5646edd85d3f1dfaa37b414728b5edcdee82ceb85ba53&quot;}" wire:effects="{&quot;url&quot;:{&quot;defaultAction&quot;:{&quot;as&quot;:&quot;action&quot;,&quot;use&quot;:&quot;replace&quot;,&quot;alwaysShow&quot;:false,&quot;except&quot;:null},&quot;defaultActionArguments&quot;:{&quot;as&quot;:&quot;actionArguments&quot;,&quot;use&quot;:&quot;replace&quot;,&quot;alwaysShow&quot;:false,&quot;except&quot;:null}}}" wire:id="DEq2kRBgoIaChU2uMw4a"
+    class="fi-page"
+>
+    
+
+    <section
+        class="flex flex-col gap-y-8 py-8"
+    >
+        <!--[if BLOCK]><![endif]-->            
+            <header
+    class="fi-header flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+>
+    <div>
+        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+        <h1
+            class="fi-header-heading text-2xl font-bold tracking-tight text-gray-950 dark:text-white sm:text-3xl"
+        >
+            Muhasebe
+        </h1>
+
+        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->    </div>
+
+    <div
+        class="flex shrink-0 items-center gap-3"
+    >
+        
+
+        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+        
+    </div>
+</header>
+        <!--[if ENDBLOCK]><![endif]-->
+        <div
+            class=""
+        >
+            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+            <div
+                class="grid flex-1 auto-cols-fr gap-y-8"
+            >
+                
+
+                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                
+
+                
+
+                
+
+                <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                
+            </div>
+
+            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->        </div>
+
+        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->    </section>
+
+    <!--[if BLOCK]><![endif]-->        <!--[if BLOCK]><![endif]-->    <form wire:submit.prevent="callMountedAction">
+        
+        <div
+        aria-modal="true"
+    role="dialog"
+    x-data="{
+        isOpen: false,
+
+        livewire: null,
+
+        close: function () {
+            this.isOpen = false
+
+            this.$refs.modalContainer.dispatchEvent(
+                new CustomEvent('modal-closed', { id: 'DEq2kRBgoIaChU2uMw4a-action' }),
+            )
+        },
+
+        open: function () {
+            this.$nextTick(() => {
+                this.isOpen = true
+
+                                    this.$dispatch('ax-modal-opened')
+                
+                this.$refs.modalContainer.dispatchEvent(
+                    new CustomEvent('modal-opened', { id: 'DEq2kRBgoIaChU2uMw4a-action' }),
+                )
+            })
+        },
+    }"
+            x-on:close-modal.window="if ($event.detail.id === 'DEq2kRBgoIaChU2uMw4a-action') close()"
+        x-on:open-modal.window="if ($event.detail.id === 'DEq2kRBgoIaChU2uMw4a-action') open()"
+        x-trap.noscroll="isOpen"
+    x-bind:class="{
+        'fi-modal-open': isOpen,
+    }"
+    class="fi-modal block"
+>
+    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+    <div x-cloak x-show="isOpen">
+        <div
+            aria-hidden="true"
+            x-show="isOpen"
+            x-transition.duration.300ms.opacity
+            class="fi-modal-close-overlay fixed inset-0 z-40 bg-gray-950/50 dark:bg-gray-950/75"
+        ></div>
+
+        <div
+            class="fixed inset-0 z-40 overflow-y-auto cursor-pointer"
+        >
+            <div
+                x-ref="modalContainer"
+                                    
+                    x-on:click.self="
+                        document.activeElement.selectionStart === undefined &&
+                            document.activeElement.selectionEnd === undefined &&
+                            $dispatch(&#039;close-modal&#039;, { id: &#039;DEq2kRBgoIaChU2uMw4a-action&#039; })
+                    "
+                                class="relative grid min-h-full grid-rows-[1fr_auto_1fr] justify-items-center sm:grid-rows-[1fr_auto_3fr] p-4" x-on:closed-form-component-action-modal.window="if (($event.detail.id === 'DEq2kRBgoIaChU2uMw4a') && $wire.mountedActions.length) open()" x-on:modal-closed.stop="const mountedActionShouldOpenModal = false
+
+
+                if (! mountedActionShouldOpenModal) {
+                    return
+                }
+
+                if ($wire.mountedFormComponentActions.length) {
+                    return
+                }
+
+                $wire.unmountAction(false, false)" x-on:opened-form-component-action-modal.window="if ($event.detail.id === 'DEq2kRBgoIaChU2uMw4a') close()"
+            >
+                <div
+                    x-data="{ isShown: false }"
+                    x-init="
+                        $nextTick(() => {
+                            isShown = isOpen
+                            $watch('isOpen', () => (isShown = isOpen))
+                        })
+                    "
+                                            x-on:keydown.window.escape="$dispatch(&#039;close-modal&#039;, { id: &#039;DEq2kRBgoIaChU2uMw4a-action&#039; })"
+                                        x-show="isShown"
+                    x-transition:enter="duration-300"
+                    x-transition:leave="duration-300"
+                                            x-transition:enter-start="scale-95 opacity-0"
+                        x-transition:enter-end="scale-100 opacity-100"
+                        x-transition:leave-start="scale-100 opacity-100"
+                        x-transition:leave-end="scale-95 opacity-0"
+                                        class="fi-modal-window pointer-events-auto relative row-start-2 flex w-full cursor-default flex-col bg-white shadow-xl ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 mx-auto rounded-xl hidden max-w-sm"
+                >
+                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </form>
+
+    <!--[if ENDBLOCK]><![endif]-->
+<!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+<!--[if BLOCK]><![endif]-->    <form wire:submit.prevent="callMountedInfolistAction">
+        
+        <div
+        aria-modal="true"
+    role="dialog"
+    x-data="{
+        isOpen: false,
+
+        livewire: null,
+
+        close: function () {
+            this.isOpen = false
+
+            this.$refs.modalContainer.dispatchEvent(
+                new CustomEvent('modal-closed', { id: 'DEq2kRBgoIaChU2uMw4a-infolist-action' }),
+            )
+        },
+
+        open: function () {
+            this.$nextTick(() => {
+                this.isOpen = true
+
+                                    this.$dispatch('ax-modal-opened')
+                
+                this.$refs.modalContainer.dispatchEvent(
+                    new CustomEvent('modal-opened', { id: 'DEq2kRBgoIaChU2uMw4a-infolist-action' }),
+                )
+            })
+        },
+    }"
+            x-on:close-modal.window="if ($event.detail.id === 'DEq2kRBgoIaChU2uMw4a-infolist-action') close()"
+        x-on:open-modal.window="if ($event.detail.id === 'DEq2kRBgoIaChU2uMw4a-infolist-action') open()"
+        x-trap.noscroll="isOpen"
+    x-bind:class="{
+        'fi-modal-open': isOpen,
+    }"
+    class="fi-modal block"
+>
+    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+    <div x-cloak x-show="isOpen">
+        <div
+            aria-hidden="true"
+            x-show="isOpen"
+            x-transition.duration.300ms.opacity
+            class="fi-modal-close-overlay fixed inset-0 z-40 bg-gray-950/50 dark:bg-gray-950/75"
+        ></div>
+
+        <div
+            class="fixed inset-0 z-40 overflow-y-auto cursor-pointer"
+        >
+            <div
+                x-ref="modalContainer"
+                                    
+                    x-on:click.self="
+                        document.activeElement.selectionStart === undefined &&
+                            document.activeElement.selectionEnd === undefined &&
+                            $dispatch(&#039;close-modal&#039;, { id: &#039;DEq2kRBgoIaChU2uMw4a-infolist-action&#039; })
+                    "
+                                class="relative grid min-h-full grid-rows-[1fr_auto_1fr] justify-items-center sm:grid-rows-[1fr_auto_3fr] p-4" x-on:closed-form-component-action-modal.window="if (($event.detail.id === 'DEq2kRBgoIaChU2uMw4a') && $wire.mountedInfolistActions.length) open()" x-on:modal-closed.stop="const mountedInfolistActionShouldOpenModal = false
+
+
+                if (! mountedInfolistActionShouldOpenModal) {
+                    return
+                }
+
+                if ($wire.mountedFormComponentActions.length) {
+                    return
+                }
+
+                $wire.unmountInfolistAction(false, false)" x-on:opened-form-component-action-modal.window="if ($event.detail.id === 'DEq2kRBgoIaChU2uMw4a') close()"
+            >
+                <div
+                    x-data="{ isShown: false }"
+                    x-init="
+                        $nextTick(() => {
+                            isShown = isOpen
+                            $watch('isOpen', () => (isShown = isOpen))
+                        })
+                    "
+                                            x-on:keydown.window.escape="$dispatch(&#039;close-modal&#039;, { id: &#039;DEq2kRBgoIaChU2uMw4a-infolist-action&#039; })"
+                                        x-show="isShown"
+                    x-transition:enter="duration-300"
+                    x-transition:leave="duration-300"
+                                            x-transition:enter-start="scale-95 opacity-0"
+                        x-transition:enter-end="scale-100 opacity-100"
+                        x-transition:leave-start="scale-100 opacity-100"
+                        x-transition:leave-end="scale-95 opacity-0"
+                                        class="fi-modal-window pointer-events-auto relative row-start-2 flex w-full cursor-default flex-col bg-white shadow-xl ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 mx-auto rounded-xl hidden max-w-sm"
+                >
+                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </form>
+
+    <!--[if ENDBLOCK]><![endif]-->
+<!--[if BLOCK]><![endif]-->    
+    <form wire:submit.prevent="callMountedFormComponentAction">
+        <div
+        aria-modal="true"
+    role="dialog"
+    x-data="{
+        isOpen: false,
+
+        livewire: null,
+
+        close: function () {
+            this.isOpen = false
+
+            this.$refs.modalContainer.dispatchEvent(
+                new CustomEvent('modal-closed', { id: 'DEq2kRBgoIaChU2uMw4a-form-component-action' }),
+            )
+        },
+
+        open: function () {
+            this.$nextTick(() => {
+                this.isOpen = true
+
+                                    this.$dispatch('ax-modal-opened')
+                
+                this.$refs.modalContainer.dispatchEvent(
+                    new CustomEvent('modal-opened', { id: 'DEq2kRBgoIaChU2uMw4a-form-component-action' }),
+                )
+            })
+        },
+    }"
+            x-on:close-modal.window="if ($event.detail.id === 'DEq2kRBgoIaChU2uMw4a-form-component-action') close()"
+        x-on:open-modal.window="if ($event.detail.id === 'DEq2kRBgoIaChU2uMw4a-form-component-action') open()"
+        x-trap.noscroll="isOpen"
+    x-bind:class="{
+        'fi-modal-open': isOpen,
+    }"
+    class="fi-modal block"
+>
+    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+    <div x-cloak x-show="isOpen">
+        <div
+            aria-hidden="true"
+            x-show="isOpen"
+            x-transition.duration.300ms.opacity
+            class="fi-modal-close-overlay fixed inset-0 z-40 bg-gray-950/50 dark:bg-gray-950/75"
+        ></div>
+
+        <div
+            class="fixed inset-0 z-40 overflow-y-auto cursor-pointer"
+        >
+            <div
+                x-ref="modalContainer"
+                                    
+                    x-on:click.self="
+                        document.activeElement.selectionStart === undefined &&
+                            document.activeElement.selectionEnd === undefined &&
+                            $dispatch(&#039;close-modal&#039;, { id: &#039;DEq2kRBgoIaChU2uMw4a-form-component-action&#039; })
+                    "
+                                class="relative grid min-h-full grid-rows-[1fr_auto_1fr] justify-items-center sm:grid-rows-[1fr_auto_3fr] p-4" x-on:modal-closed.stop="const mountedFormComponentActionShouldOpenModal = false
+
+
+                if (mountedFormComponentActionShouldOpenModal) {
+                    $wire.unmountFormComponentAction(false, false)
+                }"
+            >
+                <div
+                    x-data="{ isShown: false }"
+                    x-init="
+                        $nextTick(() => {
+                            isShown = isOpen
+                            $watch('isOpen', () => (isShown = isOpen))
+                        })
+                    "
+                                            x-on:keydown.window.escape="$dispatch(&#039;close-modal&#039;, { id: &#039;DEq2kRBgoIaChU2uMw4a-form-component-action&#039; })"
+                                        x-show="isShown"
+                    x-transition:enter="duration-300"
+                    x-transition:leave="duration-300"
+                                            x-transition:enter-start="scale-95 opacity-0"
+                        x-transition:enter-end="scale-100 opacity-100"
+                        x-transition:leave-start="scale-100 opacity-100"
+                        x-transition:leave-end="scale-95 opacity-0"
+                                        class="fi-modal-window pointer-events-auto relative row-start-2 flex w-full cursor-default flex-col bg-white shadow-xl ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 mx-auto rounded-xl hidden max-w-sm"
+                >
+                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </form>
+
+    <!--[if ENDBLOCK]><![endif]-->    <!--[if ENDBLOCK]><![endif]-->
+    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+    
+
+    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]--></div>
+
+                
+            </main>
+
+            
+        </div>
+
+        
+                    <div
+                x-cloak
+                x-data="{}"
+                x-on:click="$store.sidebar.close()"
+                x-show="$store.sidebar.isOpen"
+                x-transition.opacity.300ms
+                class="fi-sidebar-close-overlay fixed inset-0 z-30 bg-gray-950/50 transition duration-500 dark:bg-gray-950/75 lg:hidden"
+            ></div>
+
+            <aside
+    x-data="{}"
+                        x-cloak="-lg"
+            x-bind:class="
+                $store.sidebar.isOpen
+                    ? 'fi-sidebar-open w-[--sidebar-width] translate-x-0 shadow-xl ring-1 ring-gray-950\/5 dark:ring-white\/10 rtl:-translate-x-0 lg:sticky'                    : 'w-[--sidebar-width] -translate-x-full rtl:translate-x-full lg:sticky'
+            "
+                class="fi-sidebar fixed inset-y-0 start-0 z-30 flex flex-col h-screen content-start bg-white transition-all dark:bg-gray-900 lg:z-0 lg:bg-transparent lg:shadow-none lg:ring-0 lg:transition-none dark:lg:bg-transparent lg:translate-x-0 rtl:lg:-translate-x-0 fi-main-sidebar shrink-0 self-stretch"
+>
+    <div class="overflow-x-clip">
+        <header
+            class="fi-sidebar-header flex h-16 items-center gap-2 bg-white px-3 sm:px-4 ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 lg:shadow-sm"
+        >
+                            <button
+                                style="--c-300:var(--gray-300);--c-400:var(--gray-400);--c-500:var(--gray-500);--c-600:var(--gray-600);" class="fi-icon-btn relative flex items-center justify-center rounded-lg outline-none transition duration-75 focus-visible:ring-2 -m-1.5 h-9 w-9 text-gray-400 hover:text-gray-500 focus-visible:ring-primary-600 dark:text-gray-500 dark:hover:text-gray-400 dark:focus-visible:ring-primary-500 fi-color-gray fi-sidebar-logo-toggle shrink-0" title="Kenar çubuğunu aç/kapat" type="button" wire:loading.attr="disabled" x-cloak="x-cloak" x-data="{}" x-on:click="$store.sidebar.isOpen
+                            ? $store.sidebar.close()
+                            : $store.sidebar.open()"
+    >
+                    <span class="sr-only">
+                Kenar çubuğunu aç/kapat
+            </span>
+        
+        <svg class="fi-icon-btn-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+</svg>
+        
+            </button>
+            
+            <div
+                            >
+                                    <a href="http://localhost/yalova-kamera/admin" wire:navigate>
+                        <img
+            alt="filament-panels::layout.logo.alt"
+            src="http://localhost/yalova-kamera/storage/teknik-servis-sablon-logolari/iV8V8hfdaQcYmGA4aF6QcjPweytbx7vZtweJFqso.png"
+            style="height: 2.25rem;" class="fi-logo flex"
+        />
+    
+            
+
+                    </a>
+                            </div>
+
+            <button
+                                style="--c-300:var(--gray-300);--c-400:var(--gray-400);--c-500:var(--gray-500);--c-600:var(--gray-600);" class="fi-icon-btn relative flex items-center justify-center rounded-lg outline-none transition duration-75 focus-visible:ring-2 -m-1.5 h-9 w-9 text-gray-400 hover:text-gray-500 focus-visible:ring-primary-600 dark:text-gray-500 dark:hover:text-gray-400 dark:focus-visible:ring-primary-500 fi-color-gray ms-auto lg:hidden" title="Kenar çubuğunu daralt" type="button" wire:loading.attr="disabled" x-cloak="-lg" x-data="{}" x-on:click="$store.sidebar.close()" x-show="$store.sidebar.isOpen"
+    >
+                    <span class="sr-only">
+                Kenar çubuğunu daralt
+            </span>
+        
+        <svg class="fi-icon-btn-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+</svg>
+        
+            </button>
+
+            
+                    </header>
+    </div>
+
+    <nav
+        class="fi-sidebar-nav flex-grow flex flex-col gap-y-7 overflow-y-auto overflow-x-hidden px-3 py-4 sm:px-4 sm:py-6"
+        style="scrollbar-gutter: stable"
+    >
+        <div
+    x-data="{
+        muhasebeOpen: true,
+        muhasebeCariOpen: false,
+        muhasebeStokOpen: false,
+        muhasebeFaturalarOpen: false,
+        finansOpen: false,
+        teklifYonetimiOpen: false,
+        personelTakipOpen: false,
+        personelTanimlarOpen: false,
+        personelRaporlarOpen: false,
+        restoranOpen: false,
+        restoranTanimlarOpen: false,
+        restoranQrMenuOpen: false,
+        barkodluSatisOpen: false,
+        barkodluSatisAyarOpen: false,
+        muhasebeRaporOpen: false,
+        muhasebeTanimOpen: false,
+        masrafTakipOpen: false,
+        teknikServisOpen: false,
+        tsKayitCreateOpen: false,
+        tsKayitListeOpen: false,
+        tsGarantiOpen: false,
+        tsRaporOpen: false,
+        tsAyarlarOpen: false,
+        tsSablonlarOpen: false,
+        eTicaretOpen: false,
+        eTicaretMesajOpen: false,
+        eTicaretBildirimOpen: false,
+        eTicaretUrunYonetimiOpen: false,
+        webOpen: false,
+        sayfalarOpen: false,
+        servislerOpen: false,
+        projelerOpen: false,
+        urunlerOpen: false,
+        bloglarOpen: false,
+        webAyarlarOpen: false,
+        webMenuAyarlariOpen: false,
+        webModullerOpen: false,
+        abonelikSistemiOpen: false,
+        ayarlarOpen: false,
+        kullaniciAyarlariOpen: false,
+        sistemYonetimiOpen: false,
+    }"
+    class="custom-sidebar"
+>
+    <nav class="flex flex-col gap-0.5" aria-label="Ana menü">
+        
+        <a
+            href="http://localhost/yalova-kamera/admin"
+            class="nav-item "
+        >
+            <span class="nav-item-start">
+                <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/>
+</svg>                <span>Gösterge Paneli</span>
+            </span>
+        </a>
+
+        
+                <div class="section-gap" aria-hidden="true"></div>
+
+        
+        <button
+            type="button"
+            class="nav-item is-active"
+            x-on:click="muhasebeOpen = !muhasebeOpen"
+            :aria-expanded="muhasebeOpen"
+        >
+            <span class="nav-item-start">
+                <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+</svg>                <span>Muhasebe</span>
+            </span>
+            <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <div x-show="muhasebeOpen" x-collapse class="nav-group">
+                            <a href="http://localhost/yalova-kamera/admin/muhasebe/muhasebe-panel" class="nav-item "><span>Muhasebe özeti</span></a>
+            
+                            <button type="button" class="nav-item " x-on:click="muhasebeCariOpen = !muhasebeCariOpen" :aria-expanded="muhasebeCariOpen">
+                    <span>Cari Yönetimi</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="muhasebeCariOpen" x-collapse class="nav-group">
+                                            <a href="http://localhost/yalova-kamera/admin/muhasebe/cari-yonetimi/cariler" class="nav-item "><span>Cari Listesi</span></a>
+                        <a href="http://localhost/yalova-kamera/admin/muhasebe/cari-yonetimi/cari-hareketleri" class="nav-item "><span>Cari Hareketleri</span></a>
+                        <a href="http://localhost/yalova-kamera/admin/muhasebe/cari-yonetimi/cari-ekstreleri" class="nav-item "><span>Cari Ekstreleri</span></a>
+                        <a href="http://localhost/yalova-kamera/admin/muhasebe/cari-yonetimi/cari-yaslandirma" class="nav-item "><span>Cari Yaşlandırma</span></a>
+                                                                <a href="http://localhost/yalova-kamera/admin/muhasebe/cari-yonetimi/cariler/create" class="nav-item "><span>Cari Ekle</span></a>
+                                    </div>
+            
+                            <button type="button" class="nav-item " x-on:click="muhasebeStokOpen = !muhasebeStokOpen" :aria-expanded="muhasebeStokOpen">
+                    <span>Stok</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="muhasebeStokOpen" x-collapse class="nav-group">
+                                            <a href="http://localhost/yalova-kamera/admin/muhasebe/stok/stok-listesi" class="nav-item "><span>Stok Listesi</span></a>
+                        <a href="http://localhost/yalova-kamera/admin/muhasebe/stok/stok-hareketleri" class="nav-item "><span>Stok Hareketleri</span></a>
+                        <a href="http://localhost/yalova-kamera/admin/muhasebe/stok/kritik-stoklar" class="nav-item "><span>Kritik Stoklar</span></a>
+                        <a href="http://localhost/yalova-kamera/admin/muhasebe/stok/stok-kategorileri" class="nav-item "><span>Kategoriler</span></a>
+                                                                <a href="http://localhost/yalova-kamera/admin/muhasebe/stok/stok-listesi/create" class="nav-item "><span>Stok Ekle</span></a>
+                                    </div>
+            
+                            <button type="button" class="nav-item " x-on:click="muhasebeFaturalarOpen = !muhasebeFaturalarOpen" :aria-expanded="muhasebeFaturalarOpen">
+                    <span>Faturalar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="muhasebeFaturalarOpen" x-collapse class="nav-group">
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/faturalar/tum-faturalar" class="nav-item "><span>Tüm faturalar</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/faturalar/gelen-faturalar" class="nav-item "><span>Gelen faturalar</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/faturalar/giden-faturalar" class="nav-item "><span>Giden faturalar</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/faturalar/bekleyen-faturalar" class="nav-item "><span>Bekleyen faturalar</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/faturalar/iptal-faturalar" class="nav-item "><span>İptal faturalar</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/faturalar/giden-iade-faturalari" class="nav-item "><span>Giden iade faturaları</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/faturalar/gelen-iade-faturalari" class="nav-item "><span>Gelen iade faturaları</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/faturalar/proforma-fatura" class="nav-item "><span>Proforma</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/faturalar/gider-faturasi" class="nav-item "><span>Gider faturası</span></a>
+                                            <a href="http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/create" class="nav-item "><span>Yeni fatura</span></a>
+                                                                <a href="http://localhost/yalova-kamera/admin/muhasebe/entegrasyonlar/nette-fatura" class="nav-item "><span>NetteFatura Entegrasyonu</span></a>
+                                    </div>
+            
+                            <button type="button" class="nav-item " x-on:click="finansOpen = !finansOpen" :aria-expanded="finansOpen">
+                    <span>Finans</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="finansOpen" x-collapse class="nav-group">
+                                            <a href="http://localhost/yalova-kamera/admin/muhasebe/finans/finans-panel" class="nav-item "><span>Finans paneli</span></a>
+                        <a href="http://localhost/yalova-kamera/admin/muhasebe/finans/finans-hareketleri" class="nav-item "><span>Finans hareketleri</span></a>
+                        <a href="http://localhost/yalova-kamera/admin/muhasebe/finans/kasa-hesaplari" class="nav-item "><span>Kasalar</span></a>
+                        <a href="http://localhost/yalova-kamera/admin/muhasebe/finans/banka-hesaplari" class="nav-item "><span>Bankalar</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/muhasebe/finans/poslar" class="nav-item "><span>POS'lar</span></a>
+                                                                <a href="http://localhost/yalova-kamera/admin/muhasebe/finans/vade-takibi" class="nav-item "><span>Veresiye / Taksit Takibi</span></a>
+                        <a href="http://localhost/yalova-kamera/admin/muhasebe/finans/cek" class="nav-item "><span>Çek</span></a>
+                        <a href="http://localhost/yalova-kamera/admin/muhasebe/finans/senet" class="nav-item "><span>Senet</span></a>
+                                    </div>
+            
+                            <button type="button" class="nav-item " x-on:click="muhasebeRaporOpen = !muhasebeRaporOpen" :aria-expanded="muhasebeRaporOpen">
+                    <span>Raporlar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="muhasebeRaporOpen" x-collapse class="nav-group">
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/raporlar/gelir-gider" class="nav-item "><span>Gelir / gider</span></a>
+                </div>
+            
+                            <button type="button" class="nav-item " x-on:click="muhasebeTanimOpen = !muhasebeTanimOpen" :aria-expanded="muhasebeTanimOpen">
+                    <span>Tanımlar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="muhasebeTanimOpen" x-collapse class="nav-group">
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/cari-gruplari" class="nav-item "><span>Cari grupları</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/birimler" class="nav-item "><span>Birimler</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/vergi-oranlari" class="nav-item "><span>Vergi oranları</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/odeme-yontemleri" class="nav-item "><span>Ödeme yöntemleri</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/para-birimleri" class="nav-item "><span>Para birimleri</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/doviz-kurlari" class="nav-item "><span>Döviz kurları</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/stok-turleri" class="nav-item "><span>Stok türleri</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/marka-ureticileri" class="nav-item "><span>Marka Üreticileri</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/markalar" class="nav-item "><span>Ürün Markaları</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/stok-modelleri" class="nav-item "><span>Ürün Modelleri</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/tasarimlar" class="nav-item "><span>Tasarımlar</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/malzeme-turleri" class="nav-item "><span>Malzeme türleri</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/logo-turleri" class="nav-item "><span>Logo türleri</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/tanimlar/varyantlar" class="nav-item "><span>Varyantlar</span></a>
+                </div>
+                    </div>
+        
+                <div class="section-gap" aria-hidden="true"></div>
+
+        
+        <button
+            type="button"
+            class="nav-item "
+            x-on:click="masrafTakipOpen = !masrafTakipOpen"
+            :aria-expanded="masrafTakipOpen"
+        >
+            <span class="nav-item-start">
+                <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m9 14.25 6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185ZM9.75 9h.008v.008H9.75V9Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm4.125 4.5h.008v.008h-.008V13.5Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
+</svg>                <span>Masraf Takibi</span>
+            </span>
+            <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <div x-show="masrafTakipOpen" x-collapse class="nav-group">
+            <a href="http://localhost/yalova-kamera/admin/masraf-takip/masraflar" class="nav-item "><span>Masraflar</span></a>
+            <a href="http://localhost/yalova-kamera/admin/masraf-takip/raporlar" class="nav-item "><span>Raporlar</span></a>
+            <a href="http://localhost/yalova-kamera/admin/masraf-takip/tanimlar/masraf-turleri" class="nav-item "><span>Masraf Tanımları</span></a>
+            <a href="http://localhost/yalova-kamera/admin/masraf-takip/tanimlar/duzenli-faturalar" class="nav-item "><span>Düzenli Faturalar</span></a>
+            <a href="http://localhost/yalova-kamera/admin/masraf-takip/tanimlar/araclar" class="nav-item "><span>Araçlar</span></a>
+            <a href="http://localhost/yalova-kamera/admin/masraf-takip/tanimlar/projeler" class="nav-item "><span>İşletme Projeleri</span></a>
+            <a href="http://localhost/yalova-kamera/admin/masraf-takip/tanimlar/butceler" class="nav-item "><span>Masraf Bütçeleri</span></a>
+        </div>
+        
+                <div class="section-gap" aria-hidden="true"></div>
+
+        <button type="button" class="nav-item " x-on:click="teklifYonetimiOpen = !teklifYonetimiOpen" :aria-expanded="teklifYonetimiOpen">
+            <span class="nav-item-start">
+                <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v7.5m2.25-6.466a9.016 9.016 0 0 0-3.461-.203c-.536.072-.974.478-1.021 1.017a4.559 4.559 0 0 0-.018.402c0 .464.336.844.775.994l2.95 1.012c.44.15.775.53.775.994 0 .136-.006.27-.018.402-.047.539-.485.945-1.021 1.017a9.077 9.077 0 0 1-3.461-.203M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+</svg>                <span>Teklif Yönetimi</span>
+            </span>
+            <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <div x-show="teklifYonetimiOpen" x-collapse class="nav-group">
+                            <a href="http://localhost/yalova-kamera/admin/teklif-yonetimi/teklifler" class="nav-item "><span>Teklif listesi</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/teklif-yonetimi/teklifler/create" class="nav-item "><span>Yeni teklif</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/teklif-yonetimi/sablonlar" class="nav-item "><span>Şablonlar</span></a>
+                    </div>
+        
+                <div class="section-gap" aria-hidden="true"></div>
+
+        
+        <button type="button" class="nav-item " x-on:click="personelTakipOpen = !personelTakipOpen" :aria-expanded="personelTakipOpen">
+            <span class="nav-item-start">
+                <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/>
+</svg>                <span>Personel Takip</span>
+            </span>
+            <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <div x-show="personelTakipOpen" x-collapse class="nav-group">
+                            <a href="http://localhost/yalova-kamera/admin/personel-takip/ozet" class="nav-item "><span>Özet</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/personel-takip/personeller" class="nav-item "><span>Personeller</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/personel-takip/personeller/create" class="nav-item "><span>Yeni personel</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/personel-takip/vardiyalar" class="nav-item "><span>Vardiya Planı</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/personel-takip/giris-cikis" class="nav-item "><span>Giriş Çıkış</span></a>
+                <a href="http://localhost/yalova-kamera/admin/personel-takip/terminal/pin-giris-cikis" class="nav-item "><span>PIN Terminali</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/personel-takip/izinler" class="nav-item "><span>İzinler</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/personel-takip/avanslar" class="nav-item "><span>Avanslar</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/personel-takip/maas-donemleri" class="nav-item "><span>Maaş / Hakediş</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/personel-takip/raporlar/personel-ozeti" class="nav-item "><span>Raporlar</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/personel-takip/ayarlar" class="nav-item "><span>Ayarlar</span></a>
+                                        <button type="button" class="nav-item " x-on:click="personelTanimlarOpen = !personelTanimlarOpen" :aria-expanded="personelTanimlarOpen">
+                    <span>Tanımlar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="personelTanimlarOpen" x-collapse class="nav-group">
+                    <a href="http://localhost/yalova-kamera/admin/personel-takip/tanimlar/subeler" class="nav-item "><span>Şubeler</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/personel-takip/tanimlar/departmanlar" class="nav-item "><span>Departmanlar</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/personel-takip/tanimlar/gorevler" class="nav-item "><span>Görevler</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/personel-takip/tanimlar/vardiya-sablonlari" class="nav-item "><span>Vardiya şablonları</span></a>
+                </div>
+                    </div>
+        
+                <div class="section-gap" aria-hidden="true"></div>
+
+        
+        <button type="button" class="nav-item " x-on:click="restoranOpen = !restoranOpen" :aria-expanded="restoranOpen">
+            <span class="nav-item-start">
+                <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z"/>
+</svg>                <span>Restoran</span>
+            </span>
+            <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <div x-show="restoranOpen" x-collapse class="nav-group">
+                            <a href="http://localhost/yalova-kamera/admin/restoran/masa-ekrani" class="nav-item "><span>Masa Ekranı</span></a>
+                <a href="http://localhost/yalova-kamera/admin/restoran/masalar" class="nav-item "><span>Masalar</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/restoran/adisyonlar" class="nav-item "><span>Adisyonlar</span></a>
+                <a href="http://localhost/yalova-kamera/admin/restoran/adisyon-kalemleri" class="nav-item "><span>Adisyon Kalemleri</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/restoran/mutfak" class="nav-item "><span>Mutfak</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/restoran/paket-servis" class="nav-item "><span>Paket Servis</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/restoran/raporlar/genel" class="nav-item "><span>Raporlar</span></a>
+                                        <button type="button" class="nav-item " x-on:click="restoranQrMenuOpen = !restoranQrMenuOpen" :aria-expanded="restoranQrMenuOpen">
+                    <span>QR Menü</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="restoranQrMenuOpen" x-collapse class="nav-group">
+                    <a href="http://localhost/yalova-kamera/admin/restoran/qr-menu/kategoriler" class="nav-item "><span>Kategoriler</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/restoran/qr-menu/urunler" class="nav-item "><span>Ürünler</span></a>
+                </div>
+                                        <button type="button" class="nav-item " x-on:click="restoranTanimlarOpen = !restoranTanimlarOpen" :aria-expanded="restoranTanimlarOpen">
+                    <span>Tanımlar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="restoranTanimlarOpen" x-collapse class="nav-group">
+                    <a href="http://localhost/yalova-kamera/admin/restoran/tanimlar/salonlar" class="nav-item "><span>Salonlar</span></a>
+                </div>
+                    </div>
+        
+                <div class="section-gap" aria-hidden="true"></div>
+
+        <button type="button" class="nav-item " x-on:click="barkodluSatisOpen = !barkodluSatisOpen" :aria-expanded="barkodluSatisOpen">
+            <span class="nav-item-start">
+                <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z"/>
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75ZM6.75 16.5h.75v.75h-.75v-.75ZM16.5 6.75h.75v.75h-.75v-.75ZM13.5 13.5h.75v.75h-.75v-.75ZM13.5 19.5h.75v.75h-.75v-.75ZM19.5 13.5h.75v.75h-.75v-.75ZM19.5 19.5h.75v.75h-.75v-.75ZM16.5 16.5h.75v.75h-.75v-.75Z"/>
+</svg>                <span>Barkodlu Satış</span>
+            </span>
+            <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <div x-show="barkodluSatisOpen" x-collapse class="nav-group">
+                            <a href="http://localhost/yalova-kamera/admin/muhasebe/satis/hizli-satis" class="nav-item "><span>Hızlı Satış</span></a>
+                <a href="http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis" class="nav-item "><span>Barkodlu Satis Ekrani</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-gecmisi" class="nav-item "><span>Satis Gecmisi</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-iade-gecmisi" class="nav-item "><span>Iade Gecmisi</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-muhasebe-mutabakat" class="nav-item "><span>Muhasebe Mutabakat</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/muhasebe/satis/barkod-etiket-yazdirma" class="nav-item "><span>Barkod Etiket Yazdirma</span></a>
+                <a href="http://localhost/yalova-kamera/admin/muhasebe/satis/barkod-esleme-listesi" class="nav-item "><span>Barkod Eslestirme Listesi</span></a>
+                                        <button type="button" class="nav-item " x-on:click="barkodluSatisAyarOpen = !barkodluSatisAyarOpen" :aria-expanded="barkodluSatisAyarOpen">
+                    <span>Ayarlar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="barkodluSatisAyarOpen" x-collapse class="nav-group">
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-ayarlar" class="nav-item "><span>Barkodlu Satis Ayarlari</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-fis-sablonlari" class="nav-item "><span>Satis Fisi Duzenle</span></a>
+                </div>
+                    </div>
+        
+                <div class="section-gap" aria-hidden="true"></div>
+
+        
+        <button type="button" class="nav-item " x-on:click="teknikServisOpen = !teknikServisOpen" :aria-expanded="teknikServisOpen">
+            <span class="nav-item-start">
+                <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z"/>
+</svg>                <span>Teknik Servis</span>
+            </span>
+            <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <div x-show="teknikServisOpen" x-collapse class="nav-group">
+            <a href="http://localhost/yalova-kamera/admin/teknik-servis/ozet" class="nav-item "><span>Teknik Servis Dashboard</span></a>
+
+            <button type="button" class="nav-item " x-on:click="tsKayitCreateOpen = !tsKayitCreateOpen" :aria-expanded="tsKayitCreateOpen">
+                <span>Servis Kayıt</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="tsKayitCreateOpen" x-collapse class="nav-group">
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/olustur/arizali-cihaz" class="nav-item "><span>Arızalı Cihaz Kaydı</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/olustur/dis-servis" class="nav-item "><span>Dış Servis Kaydı</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/olustur/bakim" class="nav-item "><span>Bakım Kaydı</span></a>
+            </div>
+
+            <button type="button" class="nav-item " x-on:click="tsKayitListeOpen = !tsKayitListeOpen" :aria-expanded="tsKayitListeOpen">
+                <span>Servis Kayıtları</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="tsKayitListeOpen" x-collapse class="nav-group">
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/yeni" class="nav-item "><span>Yeni Kayıtlar</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/acik" class="nav-item "><span>Açık Servisler</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/tezgahta" class="nav-item "><span>Tezgahtakiler</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/parca-bekleyen" class="nav-item "><span>Parça Bekleyen Servisler</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/garantiye-gonderilen" class="nav-item "><span>Garantiye Gönderilen</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/fiyat-verilen" class="nav-item "><span>Fiyat Verilen Servisler</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/teslim-bekleyen" class="nav-item "><span>Teslim Bekleyen Servisler</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/tamamlanan-dis-servis" class="nav-item "><span>Tamamlanan Dış Servisler</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/teslim-edilen" class="nav-item "><span>Teslim Edilen Servisler</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/iptal" class="nav-item "><span>İptal Edilenler</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/iade" class="nav-item "><span>İade Edilenler</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari" class="nav-item "><span>Tüm Kayıtlar</span></a>
+            </div>
+
+            <button type="button" class="nav-item " x-on:click="tsGarantiOpen = !tsGarantiOpen" :aria-expanded="tsGarantiOpen">
+                <span>Garanti &amp; Hatırlatmalar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="tsGarantiOpen" x-collapse class="nav-group">
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/operasyon/garantili-cihazlar" class="nav-item "><span>Garantili Cihazlar</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/operasyon/bakim-hatirlatmalari" class="nav-item "><span>Bakım Hatırlatmaları</span></a>
+            </div>
+
+            <button type="button" class="nav-item " x-on:click="tsRaporOpen = !tsRaporOpen" :aria-expanded="tsRaporOpen">
+                <span>Raporlar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="tsRaporOpen" x-collapse class="nav-group">
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/raporlar/karlilik" class="nav-item "><span>Servis Karlılık</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/raporlar/personel-performans" class="nav-item "><span>Personel Performans</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/raporlar/durum-bazli" class="nav-item "><span>Durum Bazlı</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/raporlar/garanti-bakim" class="nav-item "><span>Garanti / Bakım</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/raporlar/tahsilat-servis" class="nav-item "><span>Tahsilat / Servis</span></a>
+            </div>
+
+            <button type="button" class="nav-item " x-on:click="tsAyarlarOpen = !tsAyarlarOpen" :aria-expanded="tsAyarlarOpen">
+                <span>Ayarlar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="tsAyarlarOpen" x-collapse class="nav-group">
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/servis-durumlari" class="nav-item "><span>Servis Durumları</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/cihazlar" class="nav-item "><span>Cihazlar</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/markalar" class="nav-item "><span>Markalar</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/aksesuarlar" class="nav-item "><span>Aksesuarlar</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/arizalar" class="nav-item "><span>Arızalar</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/genel-ayarlar" class="nav-item "><span>Genel Ayarlar</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/ayarlar/telegram" class="nav-item "><span>Telegram</span></a>
+
+                <button type="button" class="nav-item " x-on:click="tsSablonlarOpen = !tsSablonlarOpen" :aria-expanded="tsSablonlarOpen">
+                    <span>Şablonlar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="tsSablonlarOpen" x-collapse class="nav-group">
+                    <a href="http://localhost/yalova-kamera/admin/teknik-servis/sablonlar/talep-formu" class="nav-item "><span>Servis Talep Formu</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/teknik-servis/sablonlar/servis-formu" class="nav-item "><span>Teknik Servis Formu</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/teknik-servis/sablonlar/kabul-formu" class="nav-item "><span>Servis Kabul Formu</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/teknik-servis/sablonlar/servis-fisi" class="nav-item "><span>Servis Fişi</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/teknik-servis/sablonlar/teslim-belgesi" class="nav-item "><span>Teslim Edildi Belgesi</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/teknik-servis/sablonlar/whatsapp-sablonlari" class="nav-item "><span>Whatsapp Şablonları</span></a>
+                </div>
+
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/operasyon/islem-loglari" class="nav-item "><span>İşlem Logları</span></a>
+                <a href="http://localhost/yalova-kamera/admin/teknik-servis/operasyon/mesaj-gecmisi" class="nav-item "><span>Mesaj Geçmişi</span></a>
+            </div>
+        </div>
+        
+                <div class="section-gap" aria-hidden="true"></div>
+
+        
+        <button type="button" class="nav-item " x-on:click="eTicaretOpen = !eTicaretOpen" :aria-expanded="eTicaretOpen">
+            <span class="nav-item-start">
+                <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
+</svg>                <span>E-Ticaret</span>
+            </span>
+            <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <div x-show="eTicaretOpen" x-collapse class="nav-group">
+                            <a href="http://localhost/yalova-kamera/admin/siparisler" class="nav-item "><span>Sipariş Yönetimi</span></a>
+            
+                            <button type="button" class="nav-item " x-on:click="eTicaretMesajOpen = !eTicaretMesajOpen" :aria-expanded="eTicaretMesajOpen">
+                    <span>Mesaj Yönetimi</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="eTicaretMesajOpen" x-collapse class="nav-group">
+                                            <a href="http://localhost/yalova-kamera/admin/e-ticaret/mesaj-yonetimi/musteri-mesajlari" class="nav-item "><span>Müşteri Mesajları</span></a>
+                                                                <a href="http://localhost/yalova-kamera/admin/e-ticaret/mesaj-yonetimi/urun-mesajlari" class="nav-item "><span>Ürün Mesajları</span></a>
+                                    </div>
+            
+                            <button type="button" class="nav-item " x-on:click="eTicaretBildirimOpen = !eTicaretBildirimOpen" :aria-expanded="eTicaretBildirimOpen">
+                    <span>Bildirim Yönetimi</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="eTicaretBildirimOpen" x-collapse class="nav-group">
+                    <a href="http://localhost/yalova-kamera/admin/e-ticaret/bildirim-yonetimi/sablonlar" class="nav-item "><span>Şablonlar</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/e-ticaret/bildirim-yonetimi/loglar" class="nav-item "><span>Loglar</span></a>
+                </div>
+            
+                            <button type="button" class="nav-item " x-on:click="eTicaretUrunYonetimiOpen = !eTicaretUrunYonetimiOpen" :aria-expanded="eTicaretUrunYonetimiOpen">
+                    <span>Ürün Yönetimi</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="eTicaretUrunYonetimiOpen" x-collapse class="nav-group">
+                                            <a href="http://localhost/yalova-kamera/admin/web/urunler/urun-listesi" class="nav-item "><span>Ürünler</span></a>
+                                                                <a href="http://localhost/yalova-kamera/admin/web/urunler/urun-kategorileri" class="nav-item "><span>Kategoriler</span></a>
+                                                                <a href="http://localhost/yalova-kamera/admin/e-ticaret/varyasyon-yonetimi" class="nav-item "><span>Varyasyonlar</span></a>
+                                    </div>
+            
+                            <a href="http://localhost/yalova-kamera/admin/e-ticaret/kampanya-yonetimi" class="nav-item "><span>Kampanya Yönetimi</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/e-ticaret/pazaryeri-entegrasyonu" class="nav-item "><span>Pazaryeri Entegrasyonu</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/e-ticaret/kargo-yonetimi" class="nav-item "><span>Kargo Yönetimi</span></a>
+                                        <a href="http://localhost/yalova-kamera/admin/e-ticaret/odeme-yonetimi" class="nav-item "><span>Ödeme Yönetimi</span></a>
+                    </div>
+        
+                <div class="section-gap" aria-hidden="true"></div>
+
+        
+        <button type="button" class="nav-item " x-on:click="webOpen = !webOpen" :aria-expanded="webOpen">
+            <span class="nav-item-start">
+                <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/>
+</svg>                <span>Web</span>
+            </span>
+            <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <div x-show="webOpen" x-collapse class="nav-group">
+            <button type="button" class="nav-item " x-on:click="sayfalarOpen = !sayfalarOpen" :aria-expanded="sayfalarOpen">
+                <span>Sayfalar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="sayfalarOpen" x-collapse class="nav-group">
+                <a href="http://localhost/yalova-kamera/admin/web/sayfalar/bilgi-sayfalari" class="nav-item "><span>Bilgi Sayfaları</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/sayfalar/iletisim" class="nav-item "><span>İletişim</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/sayfalar/hakkimizda" class="nav-item "><span>Hakkımızda</span></a>
+            </div>
+            <button type="button" class="nav-item " x-on:click="webModullerOpen = !webModullerOpen" :aria-expanded="webModullerOpen">
+                <span>Modüller</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="webModullerOpen" x-collapse class="nav-group">
+                <a href="http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/neden-biz" class="nav-item "><span>Neden Biz</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/neler-yapiyoruz" class="nav-item "><span>Neler Yapıyoruz</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/referanslar" class="nav-item "><span>Referanslar</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/rakamlarla-biz" class="nav-item "><span>Rakamlarla Biz</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/teknik-destek" class="nav-item "><span>Teknik Destek</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/musteri-yorumlari" class="nav-item "><span>Müşteri Yorumları</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/faqs" class="nav-item "><span>SSS</span></a>
+            </div>
+            <button type="button" class="nav-item " x-on:click="servislerOpen = !servislerOpen" :aria-expanded="servislerOpen">
+                <span>Servisler</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="servislerOpen" x-collapse class="nav-group">
+                <a href="http://localhost/yalova-kamera/admin/web/servisler/web-servis-listesi" class="nav-item "><span>Servis Listesi</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/servisler/web-servis-kategori" class="nav-item "><span>Servis Kategori</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/servisler/ayarlar" class="nav-item "><span>Ayarlar</span></a>
+            </div>
+                            <button type="button" class="nav-item " x-on:click="urunlerOpen = !urunlerOpen" :aria-expanded="urunlerOpen">
+                    <span>Ürünler</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="urunlerOpen" x-collapse class="nav-group">
+                                            <a href="http://localhost/yalova-kamera/admin/web/urunler/urun-listesi" class="nav-item "><span>Ürün Listesi</span></a>
+                                                                <a href="http://localhost/yalova-kamera/admin/web/urunler/urun-kategorileri" class="nav-item "><span>Ürün Kategorileri</span></a>
+                                    </div>
+                        <button type="button" class="nav-item " x-on:click="projelerOpen = !projelerOpen" :aria-expanded="projelerOpen">
+                <span>Projeler</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="projelerOpen" x-collapse class="nav-group">
+                <a href="http://localhost/yalova-kamera/admin/web/projeler/liste" class="nav-item "><span>Projeler</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/projeler/kategoriler" class="nav-item "><span>Proje Kategorileri</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/projeler/ayarlar" class="nav-item "><span>Ayarlar</span></a>
+            </div>
+            <button type="button" class="nav-item " x-on:click="bloglarOpen = !bloglarOpen" :aria-expanded="bloglarOpen">
+                <span>Bloglar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="bloglarOpen" x-collapse class="nav-group">
+                <a href="http://localhost/yalova-kamera/admin/web/bloglar/blog-listesi" class="nav-item "><span>Blog Listesi</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/bloglar/blog-kategori" class="nav-item "><span>Blog Kategorileri</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/bloglar/ayarlar" class="nav-item "><span>Ayarlar</span></a>
+            </div>
+            <button type="button" class="nav-item " x-on:click="abonelikSistemiOpen = !abonelikSistemiOpen" :aria-expanded="abonelikSistemiOpen">
+                <span>Abone Yönetimi</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="abonelikSistemiOpen" x-collapse class="nav-group">
+                <a href="http://localhost/yalova-kamera/admin/web/web-ayarlar/aboneler" class="nav-item "><span>Aboneler</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/web-ayarlar/mail-gonderim" class="nav-item "><span>Mail Gönderim</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/web-ayarlar/mail-sablonlari" class="nav-item "><span>Mail Şablonları</span></a>
+            </div>
+            <button type="button" class="nav-item " x-on:click="webAyarlarOpen = !webAyarlarOpen" :aria-expanded="webAyarlarOpen">
+                <span>Site Ayarları</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="webAyarlarOpen" x-collapse class="nav-group">
+                <a href="http://localhost/yalova-kamera/admin/web/web-ayarlar/web-genel-ayarlar" class="nav-item "><span>Genel Ayarlar</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/web-ayarlar/web-api-ayarlar" class="nav-item "><span>Api Ayarları</span></a>
+                <a href="http://localhost/yalova-kamera/admin/web/web-ayarlar/web-mail-ayarlar" class="nav-item "><span>Mail Ayarları</span></a>
+                <button type="button" class="nav-item " x-on:click="webMenuAyarlariOpen = !webMenuAyarlariOpen" :aria-expanded="webMenuAyarlariOpen">
+                    <span>Menü Ayarları</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+                <div x-show="webMenuAyarlariOpen" x-collapse class="nav-group">
+                    <a href="http://localhost/yalova-kamera/admin/web/web-ayarlar/menu-ayarlari/menu-duzenleme" class="nav-item "><span>Ana Menü</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/web/web-ayarlar/menu-ayarlari/utility-menu" class="nav-item "><span>Utility Menü</span></a>
+                </div>
+            </div>
+        </div>
+        
+                <div class="section-gap" aria-hidden="true"></div>
+
+        
+        <button type="button" class="nav-item " x-on:click="ayarlarOpen = !ayarlarOpen" :aria-expanded="ayarlarOpen">
+            <span class="nav-item-start">
+                <svg class="nav-item-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/>
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+</svg>                <span>Ayarlar</span>
+            </span>
+            <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <div x-show="ayarlarOpen" x-collapse class="nav-group">
+            <a href="http://localhost/yalova-kamera/admin/ayarlar/mesaj-merkezi" class="nav-item "><span>Mesaj Merkezi</span></a>
+            <button type="button" class="nav-item " x-on:click="kullaniciAyarlariOpen = !kullaniciAyarlariOpen" :aria-expanded="kullaniciAyarlariOpen">
+                <span>Kullanıcı Ayarları</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <div x-show="kullaniciAyarlariOpen" x-collapse class="nav-group">
+                                    <a href="http://localhost/yalova-kamera/admin/firma-ici-kullanicilar" class="nav-item "><span>Firma kullanıcıları</span></a>
+                    <a href="http://localhost/yalova-kamera/admin/firma-kullanici-gruplari" class="nav-item "><span>Firma kullanıcı grupları</span></a>
+                            </div>
+                            <a href="http://localhost/yalova-kamera/admin/firma-ayarlari" class="nav-item "><span>Firma ayarları</span></a>
+                    </div>
+            </nav>
+</div>
+
+
+
+        
+        
+
+        
+    </nav>
+
+    
+</aside>
+
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    setTimeout(() => {
+                        let activeSidebarItem = document.querySelector(
+                            '.fi-main-sidebar .fi-sidebar-item.fi-active',
+                        )
+
+                        if (
+                            !activeSidebarItem ||
+                            activeSidebarItem.offsetParent === null
+                        ) {
+                            activeSidebarItem = document.querySelector(
+                                '.fi-main-sidebar .fi-sidebar-group.fi-active',
+                            )
+                        }
+
+                        if (
+                            !activeSidebarItem ||
+                            activeSidebarItem.offsetParent === null
+                        ) {
+                            return
+                        }
+
+                        const sidebarWrapper = document.querySelector(
+                            '.fi-main-sidebar .fi-sidebar-nav',
+                        )
+
+                        if (!sidebarWrapper) {
+                            return
+                        }
+
+                        sidebarWrapper.scrollTo(
+                            0,
+                            activeSidebarItem.offsetTop -
+                                window.innerHeight / 2,
+                        )
+                    }, 10)
+                })
+            </script>
+            </div>
+
+        <div wire:snapshot="{&quot;data&quot;:{&quot;isFilamentNotificationsComponent&quot;:true,&quot;notifications&quot;:[[],{&quot;class&quot;:&quot;Filament\\Notifications\\Collection&quot;,&quot;s&quot;:&quot;wrbl&quot;}]},&quot;memo&quot;:{&quot;id&quot;:&quot;1hjpheXN5xGW5aJ7Evvs&quot;,&quot;name&quot;:&quot;filament.livewire.notifications&quot;,&quot;path&quot;:&quot;admin\/muhasebe&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;tr&quot;},&quot;checksum&quot;:&quot;b13f0d118869d1ede6e2e0241d1767413f1980e11c40294db087476ae620acc6&quot;}" wire:effects="{&quot;listeners&quot;:[&quot;notificationsSent&quot;,&quot;notificationSent&quot;,&quot;notificationClosed&quot;]}" wire:id="1hjpheXN5xGW5aJ7Evvs">
+    <div
+        class="fi-no pointer-events-none fixed inset-4 z-50 mx-auto flex gap-3 items-end flex-col-reverse justify-end"
+        role="status"
+    >
+        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->    </div>
+
+    <!--[if BLOCK]><![endif]-->        <div
+    x-data="{}"
+    x-init="
+        window.addEventListener('EchoLoaded', () => {
+            window.Echo.private('App.Models.User.9').notification((notification) => {
+                setTimeout(() => $wire.handleBroadcastNotification(notification), 500)
+            })
+        })
+
+        if (window.Echo) {
+            window.dispatchEvent(new CustomEvent('EchoLoaded'))
+        }
+    "
+    
+></div>
+    <!--[if ENDBLOCK]><![endif]--></div>
+
+        
+
+        <script src="/yalova-kamera/livewire/livewire.min.js?id=57eb113f"   data-csrf="eyPNl5AVUNm55VQ1uODNbybtk3dnR3AzGlhpN38M" data-update-uri="/yalova-kamera/livewire/update" data-navigate-once="true"></script>
+
+        <script>
+        window.filamentData = []    </script>
+
+            
+            <script
+                src="http://localhost/yalova-kamera/js/filament/notifications/notifications.js?v=3.3.0.0"
+                
+                
+                
+                
+                data-navigate-once
+                data-navigate-track
+            ></script>
+        
+                
+            <script
+                src="http://localhost/yalova-kamera/js/filament/support/support.js?v=3.3.0.0"
+                
+                
+                
+                
+                data-navigate-once
+                data-navigate-track
+            ></script>
+        
+                
+            <script
+                src="http://localhost/yalova-kamera/js/filament/filament/echo.js?v=3.3.0.0"
+                
+                
+                
+                
+                data-navigate-once
+                data-navigate-track
+            ></script>
+        
+                
+            <script
+                src="http://localhost/yalova-kamera/js/filament/filament/app.js?v=3.3.0.0"
+                
+                
+                
+                
+                data-navigate-once
+                data-navigate-track
+            ></script>
+        
+    
+<style>
+    :root {
+            }
+</style>
+
+        
+                    <script>
+                loadDarkMode()
+            </script>
+        
+        
+        
+
+        
+    </body>
+</html>

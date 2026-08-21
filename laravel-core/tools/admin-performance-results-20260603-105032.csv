@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/tanimlar/stok-modelleri/create","filament.admin.muhasebe.resources.tanimlar.stok-modelleri.create","App\Filament\Clusters\Muhasebe\Resources\Tanimlar\MuhasebeStokModeliTanimKaynagi\Pages\CreateMuhasebeStokModeli","200","1686,1","1686,1","1686,1","1686.1","150525","http://localhost/yalova-kamera/admin/muhasebe/tanimlar/stok-modelleri/create",

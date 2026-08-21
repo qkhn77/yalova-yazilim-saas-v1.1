@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teknik-servis","admin/teknik-servis/operasyon/islem-loglari","filament.admin.teknik-servis.pages.operasyon.islem-loglari","App\Filament\Clusters\TeknikServis\Pages\TeknikServisIslemLoglariSayfasi","200","1604,39","1604,39","1604,39","1604.39","112185","http://localhost/yalova-kamera/admin/teknik-servis/operasyon/islem-loglari",

@@ -1,0 +1,66 @@
+/**
+ * Deep custom cursor — shared (touch + container scope).
+ */
+
+:root {
+	--deep-cursor-z-index: 2147483646;
+}
+
+/*
+ * Top-layer portal for cursor markup (demos 1, 3, 4, 5–8).
+ * Must sit above sticky headers (.bb-sticky-shell defaults to z-index 999).
+ */
+#deep-cursor-root,
+.deep-cursor-root {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	overflow: visible;
+	pointer-events: none;
+	z-index: var(--deep-cursor-z-index);
+}
+
+html > .deep-cursor-root,
+html > .deep-cursor,
+html > .deep-cursor-blend-layer,
+html.deep-custom-cursor-active:not(.deep-custom-cursor-scope-container) > .deep-cursor,
+html.deep-custom-cursor-has-blend > .deep-cursor-blend-layer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	z-index: var(--deep-cursor-z-index);
+}
+
+/*
+ * Blend cursors mount on <html> (outside #smooth-content) so mix-blend-mode
+ * composites against page content and stays fixed while scrolling.
+ */
+html > .deep-cursor.deep-cursor--demo2,
+html > .deep-cursor.deep-cursor--demo3,
+html > .deep-cursor.deep-cursor--demo4,
+html > .deep-cursor-blend-layer,
+html.deep-custom-cursor-has-blend > .deep-cursor {
+	width: 0;
+	height: 0;
+	overflow: visible;
+}
+
+@media (pointer: coarse) {
+	body.deep-custom-cursor-hide-touch.deep-custom-cursor-active,
+	body.deep-custom-cursor-hide-touch.deep-custom-cursor-active a,
+	body.deep-custom-cursor-hide-touch.deep-custom-cursor-active button {
+		cursor: auto !important;
+	}
+
+	html.deep-custom-cursor-hide-touch .deep-cursor,
+	body.deep-custom-cursor-hide-touch .deep-cursor {
+		display: none !important;
+	}
+}
+
+.deep-custom-cursor-scope-container .deep-cursor-area {
+	position: relative;
+}

@@ -1,0 +1,701 @@
+/* Deep Navigation — desktop + mobile accordion */
+
+.deep__nav-menu {
+	display: none;
+}
+
+.deep__nav-menu svg {
+	width: 1em;
+	height: 1em;
+}
+
+.deep__nav-menu .menu-item-has-children > a {
+	align-items: center;
+}
+
+.deep__nav-menu .deep-submenu-indicator {
+	display: inline-flex;
+	flex-shrink: 0;
+	justify-content: center;
+	align-items: center;
+	margin-inline-start: auto;
+	margin-left: auto;
+	padding-left: 5px;
+	line-height: 1;
+	transition: transform 0.35s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.deep__nav-menu .deep-submenu-indicator svg,
+.deep__nav-menu .deep-submenu-indicator i {
+	display: block;
+	flex-shrink: 0;
+}
+
+.deep__nav-menu .menu-item-has-children.is-accordion-open > a .deep-submenu-indicator {
+	transform: rotate(180deg);
+}
+
+.deep__nav-menu .deep-menu-badge {
+	display: none;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 1;
+	position: absolute;
+	right: 15px;
+	padding: 5px 10px;
+	border-radius: 5px;
+	background-color: var(--badge-bg);
+	box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.1);
+	margin-top: -22px;
+}
+
+.deep__nav-menu .deep-menu-badge:after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	border: 5px solid var(--badge-bg);
+	border-bottom-color: transparent !important;
+	border-inline-end-color: transparent !important;
+	border-inline-end-width: 7px;
+	border-inline-start-width: 0;
+}
+
+.deep__nav-menu .deep-menu-hamburger {
+	margin-left: auto;
+	cursor: pointer;
+	font-size: 25px;
+	padding: 4px 8px;
+	border: 1px solid #dee1e7;
+	outline: 0;
+	background: 0 0;
+	line-height: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Animated theme hamburger (Deep Offcanvas style) */
+.deep__nav-menu .deep-menu-hamburger.deep-menu-theme-trigger {
+	background-color: transparent;
+	border: none;
+	padding: 0;
+}
+
+.deep__nav-menu .deep-menu-hamburger.deep-menu-theme-trigger .deep-menu-theme-icon {
+	display: flex;
+	line-height: 0;
+}
+
+.deep__nav-menu .deep-menu-hamburger.deep-menu-theme-trigger .deep-menu-theme-icon svg {
+	width: 1em;
+	height: 1em;
+	display: block;
+}
+
+.deep__nav-menu .deep-menu-hamburger.deep-menu-theme-trigger .line {
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 6;
+	transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.deep__nav-menu .deep-menu-hamburger.deep-menu-theme-trigger .line1 {
+	stroke-dasharray: 60 207;
+	stroke-width: 6;
+}
+
+.deep__nav-menu .deep-menu-hamburger.deep-menu-theme-trigger .line2 {
+	stroke-dasharray: 60 60;
+	stroke-width: 6;
+}
+
+.deep__nav-menu .deep-menu-hamburger.deep-menu-theme-trigger .line3 {
+	stroke-dasharray: 60 207;
+	stroke-width: 6;
+}
+
+.deep__nav-menu .deep-menu-hamburger.deep-menu-theme-trigger.opened .line1 {
+	stroke-dasharray: 90 207;
+	stroke-dashoffset: -134;
+	stroke-width: 6;
+}
+
+.deep__nav-menu .deep-menu-hamburger.deep-menu-theme-trigger.opened .line2 {
+	stroke-dasharray: 1 60;
+	stroke-dashoffset: -30;
+	stroke-width: 6;
+}
+
+.deep__nav-menu .deep-menu-hamburger.deep-menu-theme-trigger.opened .line3 {
+	stroke-dasharray: 90 207;
+	stroke-dashoffset: -134;
+	stroke-width: 6;
+}
+
+/* Slide hover: suppress pseudo-label duplicates (e.g. attr(data-text) from other styles) */
+.deep__nav-menu.treethemes-menu-slide-active .treethemes-nav-item .menu-text::before {
+	content: none !important;
+	display: none !important;
+}
+
+.deep__nav-menu.treethemes-menu-slide-active:not([class*='hover-pointer-']) .treethemes-nav-item .menu-text::after {
+	content: none !important;
+	display: none !important;
+}
+
+/* Slide hover (desktop top-level) */
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .treethemes-nav-item .menu-text,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .deep-nav-item .menu-text {
+	display: inline-block;
+}
+
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .treethemes-nav-inner,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .deep-nav-inner {
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: top;
+}
+
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .treethemes-nav-text,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .treethemes-nav-text-hover,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .deep-nav-text,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .deep-nav-text-hover {
+	display: block;
+	will-change: transform;
+	transition: transform 0.45s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .treethemes-nav-text-hover,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .deep-nav-text-hover {
+	position: absolute;
+	left: 0;
+	top: 100%;
+}
+
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .treethemes-nav-item:hover .treethemes-nav-text,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .treethemes-nav-item:focus .treethemes-nav-text,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .deep-nav-item:hover .deep-nav-text,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .deep-nav-item:focus .deep-nav-text {
+	transform: translateY(-100%);
+}
+
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .treethemes-nav-item:hover .treethemes-nav-text-hover,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .treethemes-nav-item:focus .treethemes-nav-text-hover,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .deep-nav-item:hover .deep-nav-text-hover,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .deep-nav-item:focus .deep-nav-text-hover {
+	transform: translateY(-100%);
+}
+
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .menu-text,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .treethemes-nav-inner,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .deep-nav-inner,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .treethemes-nav-text,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .treethemes-nav-text-hover,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .deep-nav-text,
+.deep__nav-menu.treethemes-menu-slide-active.desktop-menu-active .deep-nav-text-hover {
+	pointer-events: none;
+}
+
+/* Mobile drawer: single visible label (avoid "HomeHome") */
+.deep__nav-menu.mobile-menu-active.treethemes-menu-slide-active .treethemes-nav-item .menu-text,
+.deep__nav-menu.mobile-menu-active.treethemes-menu-slide-active .deep-nav-item .menu-text {
+	display: inline;
+}
+
+.deep__nav-menu.mobile-menu-active.treethemes-menu-slide-active .treethemes-nav-inner,
+.deep__nav-menu.mobile-menu-active.treethemes-menu-slide-active .deep-nav-inner {
+	display: inline;
+	overflow: visible;
+	position: static;
+	vertical-align: baseline;
+}
+
+.deep__nav-menu.mobile-menu-active.treethemes-menu-slide-active .treethemes-nav-text,
+.deep__nav-menu.mobile-menu-active.treethemes-menu-slide-active .deep-nav-text {
+	display: inline;
+	transform: none !important;
+}
+
+.deep__nav-menu.mobile-menu-active.treethemes-menu-slide-active .treethemes-nav-text-hover,
+.deep__nav-menu.mobile-menu-active.treethemes-menu-slide-active .deep-nav-text-hover {
+	display: none !important;
+}
+
+/* Mobile drawer */
+.deep__nav-menu.mobile-menu-active {
+	display: block;
+}
+
+.deep__nav-menu.mobile-menu-active .menu-item-has-children > a {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-submenu-indicator {
+	padding: 8px 10px;
+	margin-top: -8px;
+	margin-right: -10px;
+	margin-bottom: -8px;
+	margin-inline-start: auto;
+	margin-left: auto;
+	cursor: pointer;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-menu-hamburger,
+.deep__nav-menu.mobile-menu-active .treethemes-menu-hamburger {
+	display: inline-flex;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-menu-close {
+	align-self: flex-end;
+	margin: 10px 10px 10px auto;
+	padding: 8px 10px;
+	border: 1px solid #555;
+	outline: 0;
+	background: 0 0;
+	font-size: 15px;
+	line-height: 1;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	min-width: 40px;
+	min-height: 40px;
+}
+
+/* Portfolio inline panel close icon (.bb-close-icon) */
+.deep__nav-menu.mobile-menu-active .deep-menu-close--theme {
+	border: none;
+	border-radius: 0;
+	min-width: 0;
+	min-height: 0;
+	padding: 8px;
+	background: transparent;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-menu-close--theme .bb-close-icon {
+	width: 22px;
+	height: 22px;
+	display: inline-flex;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-menu-close--theme .bb-close-icon svg {
+	width: 100%;
+	height: 100%;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-menu-close--theme .bb-close-line {
+	stroke: currentColor;
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-dasharray: 52;
+	stroke-dashoffset: 0;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-menu-close--theme:hover .bb-close-line-a,
+.deep__nav-menu.mobile-menu-active .deep-menu-close--theme:focus .bb-close-line-a {
+	animation: deepNavCloseDrawA 360ms cubic-bezier(0.667, 1, 0.333, 1);
+}
+
+.deep__nav-menu.mobile-menu-active .deep-menu-close--theme:hover .bb-close-line-b,
+.deep__nav-menu.mobile-menu-active .deep-menu-close--theme:focus .bb-close-line-b {
+	animation: deepNavCloseDrawB 420ms cubic-bezier(0.667, 1, 0.333, 1);
+}
+
+@keyframes deepNavCloseDrawA {
+	0% { stroke-dashoffset: 52; }
+	100% { stroke-dashoffset: 0; }
+}
+
+@keyframes deepNavCloseDrawB {
+	0% { stroke-dashoffset: 52; }
+	100% { stroke-dashoffset: 0; }
+}
+
+.deep__nav-menu.mobile-menu-active .deep-menu-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	background-color: rgba(0, 0, 0, 0.5);
+	height: 100%;
+	width: 100%;
+	transition: 0.4s;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.deep__nav-menu.mobile-menu-active.deep-nav-is-toggled .deep-nav-menu-container {
+	transform: translateX(0);
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+}
+
+.deep__nav-menu.mobile-menu-active.deep-nav-is-toggled .deep-submenu-indicator {
+	position: relative;
+	z-index: 3;
+	pointer-events: auto;
+}
+
+.deep__nav-menu.mobile-menu-active.deep-nav-is-toggled .menu-item-has-children > a {
+	pointer-events: auto;
+}
+
+.deep__nav-menu.mobile-menu-active.deep-nav-is-toggled .deep-menu-overlay {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: none;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-nav-menu-container {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	z-index: 1001;
+	top: 0;
+	bottom: 0;
+	width: 250px;
+	background-color: #fff;
+	overflow-y: auto;
+	overflow-x: hidden;
+	-webkit-overflow-scrolling: touch;
+	transition: 0.45s;
+	height: 100dvh;
+	max-height: 100dvh;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transform: translateX(-100%);
+	left: 0;
+}
+
+.deep__nav-menu.mobile-menu-active.mobile-menu-right .deep-nav-menu-container {
+	right: 0;
+	left: auto;
+	transform: translateX(100%);
+}
+
+.deep__nav-menu.mobile-menu-active.mobile-menu-right.deep-nav-is-toggled .deep-nav-menu-container {
+	transform: translateX(0);
+}
+
+.deep__nav-menu.mobile-menu-active .deep-nav-menu-container .deep-nav-menu-nav,
+.deep__nav-menu.mobile-menu-active .treethemes-nav-menu-container .treethemes-nav-menu-nav,
+.deep__nav-menu.mobile-menu-active .deep-nav-menu-container .treethemes-nav-menu-nav,
+.deep__nav-menu.mobile-menu-active .treethemes-nav-menu-container .deep-nav-menu-nav {
+	flex: 0 0 100%;
+	padding: 0;
+	margin: 0;
+	order: 1;
+}
+
+.deep__nav-menu.mobile-menu-active .menu-item {
+	list-style: none;
+}
+
+.deep__nav-menu.mobile-menu-active .menu-item:not(:last-child) > a {
+	border-bottom: solid 1px #dee1e7;
+}
+
+.deep__nav-menu.mobile-menu-active .menu-item a {
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	padding: 0.5em 1em;
+	font-size: 1rem;
+	line-height: 1.5em;
+	transition: color 0.3s ease;
+}
+
+/* Mobile accordion submenus */
+.deep__nav-menu.mobile-menu-active .menu-item-has-children > .sub-menu {
+	position: static;
+	width: 100%;
+	height: auto;
+	max-height: 0;
+	background: transparent;
+	transform: none;
+	visibility: visible;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	overflow: hidden;
+	transition: max-height 0.45s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.deep__nav-menu.mobile-menu-active .menu-item-has-children.is-accordion-open > .sub-menu {
+	max-height: var(--deep-accordion-max, 1200px);
+}
+
+.deep__nav-menu.mobile-menu-active .sub-menu .menu-item a {
+	border-bottom: none;
+	font-size: 0.95em;
+	opacity: 0.85;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-mega-menu .sub-menu {
+	display: block;
+	max-height: 0;
+	overflow: hidden;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-mega-menu .deep-mega-menu-panel {
+	display: none;
+	max-width: 100% !important;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-mega-menu.is-accordion-open > .deep-mega-menu-panel {
+	display: block;
+	padding: 0.5em 1em;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-mega-menu.mobile-wp-submenu .deep-mega-menu-panel {
+	display: none !important;
+}
+
+.deep__nav-menu.mobile-menu-active .deep-mega-menu.mobile-wp-submenu .sub-menu {
+	display: block;
+}
+
+/* Desktop */
+.deep__nav-menu.desktop-menu-active {
+	display: block;
+}
+
+.deep__nav-menu.desktop-menu-active .deep-menu-close,
+.deep__nav-menu.desktop-menu-active .treethemes-menu-close,
+.deep__nav-menu.desktop-menu-active .deep-menu-hamburger,
+.deep__nav-menu.desktop-menu-active .treethemes-menu-hamburger {
+	display: none !important;
+}
+
+.deep__nav-menu.desktop-menu-active .deep-menu-badge {
+	display: block;
+}
+
+.deep__nav-menu.desktop-menu-active .deep-nav-menu-nav,
+.deep__nav-menu.desktop-menu-active .treethemes-nav-menu-nav {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.deep__nav-menu.desktop-menu-active .deep-nav-menu-nav.menu-layout-vertical,
+.deep__nav-menu.desktop-menu-active .treethemes-nav-menu-nav.menu-layout-vertical {
+	flex-direction: column;
+}
+
+.deep__nav-menu.desktop-menu-active .deep-nav-menu-nav.menu-layout-vertical .menu-item-has-children .sub-menu,
+.deep__nav-menu.desktop-menu-active .treethemes-nav-menu-nav.menu-layout-vertical .menu-item-has-children .sub-menu,
+.deep__nav-menu.desktop-menu-active .deep-nav-menu-nav.menu-layout-vertical .deep-mega-menu .deep-mega-menu-panel,
+.deep__nav-menu.desktop-menu-active .treethemes-nav-menu-nav.menu-layout-vertical .treethemes-mega-menu .treethemes-mega-menu-panel {
+	left: 100%;
+	top: auto;
+}
+
+.deep__nav-menu.desktop-menu-active .menu-item {
+	list-style: none;
+	position: relative;
+	white-space: nowrap;
+}
+
+.deep__nav-menu.desktop-menu-active .menu-item a {
+	position: relative;
+	text-decoration: none;
+	display: flex;
+	padding: 0.5em 1em;
+	transition: 0.4s;
+	color: #1c1d20;
+	fill: #1c1d20;
+}
+
+.deep__nav-menu.desktop-menu-active .menu-item-has-children .sub-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	transform: translateY(-10px);
+	background: #fff;
+	transition: 0.3s;
+	padding: 0;
+	margin: 0;
+	box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+	min-width: 12em;
+	z-index: 99;
+	opacity: 0;
+	visibility: hidden;
+	list-style: none;
+}
+
+.deep__nav-menu.desktop-menu-active .menu-item-has-children .sub-menu a {
+	border-top: solid 1px #dee1e7;
+}
+
+.deep__nav-menu.desktop-menu-active .menu-item-has-children .sub-menu .sub-menu {
+	top: 0;
+	left: 100%;
+}
+
+.deep__nav-menu.desktop-menu-active .menu-item-has-children:not(.deep-mega-menu):not(.treethemes-mega-menu):hover > .sub-menu {
+	transform: translateY(0);
+	opacity: 1;
+	visibility: visible;
+}
+
+.deep__nav-menu.desktop-menu-active .deep-mega-menu.mega-position-static,
+.deep__nav-menu.desktop-menu-active .treethemes-mega-menu.mega-position-static {
+	position: static !important;
+}
+
+.deep__nav-menu.desktop-menu-active .deep-mega-menu .deep-mega-menu-panel,
+.deep__nav-menu.desktop-menu-active .treethemes-mega-menu .treethemes-mega-menu-panel {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	transform: translateY(-10px);
+	transition: 0.3s;
+	padding: 0;
+	margin: 0;
+	min-width: 12em;
+	z-index: 99;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.deep__nav-menu.desktop-menu-active .deep-mega-menu:hover > .deep-mega-menu-panel,
+.deep__nav-menu.desktop-menu-active .treethemes-mega-menu:hover > .treethemes-mega-menu-panel {
+	transform: translateY(0);
+	opacity: 1;
+	visibility: visible;
+}
+
+/* Hover pointers (only when a style is selected in the widget) */
+.deep__nav-menu.desktop-menu-active[class*='hover-pointer-'] .menu-item > a .menu-text {
+	position: relative;
+	display: inline-block;
+}
+
+/* Line pointers (underline / overline / line-through) */
+.deep__nav-menu.desktop-menu-active.hover-pointer-underline .menu-item .menu-text:after,
+.deep__nav-menu.desktop-menu-active.hover-pointer-overline .menu-item .menu-text:after,
+.deep__nav-menu.desktop-menu-active.hover-pointer-line-through .menu-item .menu-text:after {
+	content: "";
+	position: absolute;
+	left: 0;
+	transition: transform 0.25s ease-out;
+	transform: scaleX(0);
+	transform-origin: bottom right;
+	height: 2px;
+	width: 100%;
+	background-color: #3f444b;
+	z-index: 2;
+}
+
+/* Dot pointer — separate from line styles (matches Animation Addons / Deep) */
+.deep__nav-menu.desktop-menu-active.hover-pointer-dot .menu-item .menu-text:after {
+	content: "";
+	position: absolute;
+	width: 3px;
+	height: 3px;
+	border-radius: 100px;
+	bottom: 100%;
+	left: 105%;
+	top: auto;
+	right: auto;
+	transition: transform 0.25s ease-out;
+	transform: translateX(-50%) scale(0);
+	transform-origin: center;
+	background-color: #3f444b;
+	z-index: 2;
+}
+
+.deep__nav-menu.desktop-menu-active.hover-pointer-dot a:hover .menu-text:after {
+	transform: translateX(-50%) scale(1);
+}
+
+.deep__nav-menu.desktop-menu-active.hover-pointer-underline .menu-text:after {
+	bottom: 0;
+}
+
+.deep__nav-menu.desktop-menu-active.hover-pointer-underline a:hover .menu-text:after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
+
+.deep__nav-menu.desktop-menu-active.hover-pointer-overline .menu-text:after {
+	top: 0;
+}
+
+.deep__nav-menu.desktop-menu-active.hover-pointer-overline a:hover .menu-text:after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
+
+.deep__nav-menu.desktop-menu-active.hover-pointer-line-through .menu-text:after {
+	top: 50%;
+	transform: translateY(-50%) scaleX(0);
+}
+
+.deep__nav-menu.desktop-menu-active.hover-pointer-line-through a:hover .menu-text:after {
+	transform: translateY(-50%) scaleX(1);
+	transform-origin: bottom left;
+}
+
+/* One-page / current item — show hover pointer when section is active */
+.deep__nav-menu.desktop-menu-active.hover-pointer-dot .menu-item.deep-nav-section-active > a .menu-text:after,
+.deep__nav-menu.desktop-menu-active.hover-pointer-dot .menu-item.current-menu-item:not(.deep-onepage-link) > a .menu-text:after {
+	transform: translateX(-50%) scale(1);
+}
+
+.deep__nav-menu.desktop-menu-active.hover-pointer-underline .menu-item.deep-nav-section-active > a .menu-text:after,
+.deep__nav-menu.desktop-menu-active.hover-pointer-underline .menu-item.current-menu-item:not(.deep-onepage-link) > a .menu-text:after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
+
+.deep__nav-menu.desktop-menu-active.hover-pointer-overline .menu-item.deep-nav-section-active > a .menu-text:after,
+.deep__nav-menu.desktop-menu-active.hover-pointer-overline .menu-item.current-menu-item:not(.deep-onepage-link) > a .menu-text:after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
+
+.deep__nav-menu.desktop-menu-active.hover-pointer-line-through .menu-item.deep-nav-section-active > a .menu-text:after,
+.deep__nav-menu.desktop-menu-active.hover-pointer-line-through .menu-item.current-menu-item:not(.deep-onepage-link) > a .menu-text:after {
+	transform: translateY(-50%) scaleX(1);
+	transform-origin: bottom left;
+}
+
+/* WCF nav menu — show hover pointer on one-page scroll-spy active item */
+.wcf__nav-menu.desktop-menu-active.hover-pointer-dot .menu-item.deep-nav-section-active > a:after {
+	transform: translateX(-50%) scale(1);
+}
+
+.wcf__nav-menu.desktop-menu-active.hover-pointer-underline .menu-item.deep-nav-section-active > a:after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
+
+.wcf__nav-menu.desktop-menu-active.hover-pointer-overline .menu-item.deep-nav-section-active > a:after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
+
+.wcf__nav-menu.desktop-menu-active.hover-pointer-line-through .menu-item.deep-nav-section-active > a:after {
+	transform: translateY(-50%) scaleX(1);
+	transform-origin: bottom left;
+}
+
+/* Elementor editor: menu links must not navigate away from the canvas */
+.elementor-editor-active .deep__nav-menu .cd-primary-nav a:not(.cd-nav-trigger),
+.elementor-editor-active .deep__nav-menu .treethemes-nav-menu-nav a:not(.cd-nav-trigger),
+.elementor-editor-active nav.nav-style-6 .cd-primary-nav a,
+.elementor-editor-active .tt-bubble-portal .cd-primary-nav a {
+	cursor: default;
+}

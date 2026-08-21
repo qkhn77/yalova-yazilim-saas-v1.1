@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","firma-kullanici-gruplari","admin/firma-kullanici-gruplari","filament.admin.resources.firma-kullanici-gruplari.index","App\Filament\Resources\FirmaKullaniciGrubuKaynagi\Pages\ListFirmaKullaniciGruplari","200","2061,95","1967,65","2253,46","2126,92|2253,46|1967,65|1993,06|1968,67","163302","http://localhost/yalova-kamera/admin/firma-kullanici-gruplari",

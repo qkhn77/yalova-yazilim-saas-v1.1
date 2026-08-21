@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/web-ayarlar/web-genel-ayarlar","filament.admin.web.pages.web-ayarlar.web-genel-ayarlar","App\Filament\Clusters\Web\Pages\WebGenelAyarlar","200","1846,18","1737,51","1995,52","1995,52|1925,92|1831,78|1740,17|1737,51","240422","http://localhost/yalova-kamera/admin/web/web-ayarlar/web-genel-ayarlar",

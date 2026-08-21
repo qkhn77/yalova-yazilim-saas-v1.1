@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/satis/barkodlu-satis-fis-sablonlari",
+    "name":  "filament.admin.muhasebe.pages.satis.barkodlu-satis-fis-sablonlari",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\SatisFisDuzenleSayfasi",
+    "status":  403,
+    "avg_ms":  1577.09,
+    "min_ms":  1577.09,
+    "max_ms":  1577.09,
+    "runs_ms":  "1577.09",
+    "bytes":  0,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-fis-sablonlari",
+    "error":  "Uzak sunucu hata döndürdü: (403) Yasak."
+}

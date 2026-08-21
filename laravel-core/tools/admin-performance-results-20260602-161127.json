@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "products",
+    "uri":  "admin/products",
+    "name":  "filament.admin.resources.products.index",
+    "action":  "App\\Filament\\Resources\\ProductResource\\Pages\\ListProducts",
+    "status":  200,
+    "avg_ms":  4483.32,
+    "min_ms":  4387.79,
+    "max_ms":  4671.13,
+    "runs_ms":  "4671,13|4486,64|4409,78|4461,25|4387,79",
+    "bytes":  187276,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/urunler/urun-listesi",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/satis/kasa-satis",
+    "name":  "filament.admin.muhasebe.pages.satis.kasa-satis",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\KasaSatis",
+    "status":  403,
+    "avg_ms":  5.44,
+    "min_ms":  1.64,
+    "max_ms":  15.31,
+    "runs_ms":  "15,31|1,95|1,64|4,26|4,06",
+    "bytes":  0,
+    "final_url":  "http://localhost/C:/xampp/htdocs/yalova-kamera/admin/muhasebe/finans/finans-hareketleri",
+    "error":  "Uzak sunucu hata döndürdü: (403) Yasak."
+}

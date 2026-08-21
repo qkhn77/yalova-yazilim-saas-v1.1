@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "teklif-yonetimi",
+    "uri":  "admin/teklif-yonetimi/sablonlar/1/preview",
+    "uri_template":  "admin/teklif-yonetimi/sablonlar/{record}/preview",
+    "name":  "filament.admin.teklif-yonetimi.resources.sablonlar.preview",
+    "action":  "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifSablonKaynagi\\Pages\\PreviewTeklifSablonu",
+    "model":  "App\\Models\\TeklifYonetimi\\TeklifBaskiSablonu",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  1874.08,
+    "min_ms":  1816.89,
+    "max_ms":  1931.27,
+    "runs_ms":  "1931,27|1816,89",
+    "bytes":  162540,
+    "final_url":  "http://localhost/yalova-kamera/admin/teklif-yonetimi/sablonlar/1/preview",
+    "error":  null
+}

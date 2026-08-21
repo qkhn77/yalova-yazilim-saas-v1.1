@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/odeme-yontemleri",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.odeme-yontemleri.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\OdemeYontemiTanimKaynagi\\Pages\\ListOdemeYontemleri",
+    "status":  200,
+    "avg_ms":  1690.47,
+    "min_ms":  1690.47,
+    "max_ms":  1690.47,
+    "runs_ms":  "1690.47",
+    "bytes":  160819,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/odeme-yontemleri",
+    "error":  null
+}

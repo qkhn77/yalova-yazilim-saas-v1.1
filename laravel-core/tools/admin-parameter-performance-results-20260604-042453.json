@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "siparisler",
+    "uri":  "admin/siparisler/1",
+    "uri_template":  "admin/siparisler/{record}",
+    "name":  "filament.admin.resources.siparisler.view",
+    "action":  "App\\Filament\\Resources\\SiparisKaynagi\\Pages\\ViewSiparis",
+    "model":  "App\\Models\\Ecommerce\\Siparis",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  552.79,
+    "min_ms":  473.46,
+    "max_ms":  709.56,
+    "runs_ms":  "709,56|475,36|473,46",
+    "bytes":  220463,
+    "final_url":  "http://localhost/yalova-kamera/admin/siparisler/1",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/sablonlar/whatsapp-sablonlari",
+    "name":  "filament.admin.teknik-servis.pages.sablonlar.whatsapp-sablonlari",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\WhatsappSablonlariSayfasi",
+    "status":  200,
+    "avg_ms":  1716.3,
+    "min_ms":  1716.3,
+    "max_ms":  1716.3,
+    "runs_ms":  "1716.3",
+    "bytes":  186146,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/sablonlar/whatsapp-sablonlari",
+    "error":  null
+}

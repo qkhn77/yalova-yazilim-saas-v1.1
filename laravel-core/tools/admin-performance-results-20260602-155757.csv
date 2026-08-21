@@ -1,0 +1,3 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","restoran","admin/restoran","filament.admin.restoran","Closure","200","4726,31","3712,5","6207,54","3812,18|3712,5|5105,47|6207,54|4793,86","181749","http://localhost/yalova-kamera/admin/restoran/masalar",
+"2","restoran","admin/restoran/masalar","filament.admin.restoran.resources.masalar.index","App\Filament\Clusters\Restoran\Resources\RestoranMasaKaynagi\Pages\ListRestoranMasalari","200","2151,82","1849,47","2392,67","2392,67|2081,05|2344,03|2091,88|1849,47","181749","http://localhost/yalova-kamera/admin/restoran/masalar",

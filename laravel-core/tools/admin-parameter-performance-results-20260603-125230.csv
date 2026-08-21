@@ -1,0 +1,2 @@
+﻿"rank","module","uri","uri_template","name","action","model","record_key","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/tanimlar/birimler/1/edit","admin/muhasebe/tanimlar/birimler/{record}/edit","filament.admin.muhasebe.resources.tanimlar.birimler.edit","App\Filament\Clusters\Muhasebe\Resources\Tanimlar\BirimTanimKaynagi\Pages\EditBirim","App\Models\Muhasebe\Birim","1","200","3616,12","3616,12","3616,12","3616.12","137601","http://localhost/yalova-kamera/admin/muhasebe/tanimlar/birimler/1/edit",

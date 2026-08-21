@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","firma-ici-kullanicilar","admin/firma-ici-kullanicilar","filament.admin.resources.firma-ici-kullanicilar.index","App\Filament\Resources\FirmaIciKullaniciKaynagi\Pages\FirmaIciKullaniciListesi","200","1720,59","1720,59","1720,59","1720.59","153019","http://localhost/yalova-kamera/admin/firma-ici-kullanicilar",

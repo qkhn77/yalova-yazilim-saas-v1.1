@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/tanimlar/arizalar/1/edit",
+    "uri_template":  "admin/teknik-servis/tanimlar/arizalar/{record}/edit",
+    "name":  "filament.admin.teknik-servis.resources.tanimlar.arizalar.edit",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisArizaKaynagi\\Pages\\EditTeknikServisArizasi",
+    "model":  "App\\Models\\TeknikServis\\TeknikServisArizaTanimi",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  2021.59,
+    "min_ms":  1691.21,
+    "max_ms":  2351.98,
+    "runs_ms":  "2351,98|1691,21",
+    "bytes":  148773,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/arizalar/1/edit",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/vergi-oranlari/create",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.vergi-oranlari.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\VergiOraniTanimKaynagi\\Pages\\CreateVergiOrani",
+    "status":  200,
+    "avg_ms":  1779.79,
+    "min_ms":  1779.79,
+    "max_ms":  1779.79,
+    "runs_ms":  "1779.79",
+    "bytes":  148317,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/vergi-oranlari/create",
+    "error":  null
+}

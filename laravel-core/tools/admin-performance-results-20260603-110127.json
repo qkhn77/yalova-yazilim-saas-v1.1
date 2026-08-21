@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/tanimlar/gorevler",
+    "name":  "filament.admin.personel-takip.resources.tanimlar.gorevler.index",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelGorevKaynagi\\Pages\\ListPersonelGorevleri",
+    "status":  200,
+    "avg_ms":  1689.67,
+    "min_ms":  1689.67,
+    "max_ms":  1689.67,
+    "runs_ms":  "1689.67",
+    "bytes":  154699,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/tanimlar/gorevler",
+    "error":  null
+}

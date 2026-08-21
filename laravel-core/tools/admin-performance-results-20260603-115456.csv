@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teknik-servis","admin/teknik-servis/servis-kayitlari/liste/teslim-edilen","filament.admin.teknik-servis.resources.servis-kayitlari.teslim_edilen","App\Filament\Clusters\TeknikServis\Resources\TeknikServisKaydiKaynagi\Pages\TeknikServisKayitlariTeslimEdilenSayfasi","200","1675,54","1675,54","1675,54","1675.54","145958","http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/teslim-edilen",

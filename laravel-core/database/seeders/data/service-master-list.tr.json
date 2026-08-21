@@ -1,0 +1,192 @@
+[
+  {
+    "kategori_adi": "Sunucu Sistemleri",
+    "kategori_slug": "sunucu-sistemleri",
+    "servisler": [
+      { "baslik": "Sunucu Kurulumu" },
+      { "baslik": "Windows Server Kurulumu" },
+      { "baslik": "Linux Server Kurulumu" },
+      { "baslik": "Active Directory (Domain) Kurulumu" },
+      { "baslik": "Sanallaştırma (VMware / Hyper-V / Proxmox)" },
+      { "baslik": "Dosya Sunucusu (File Server)" },
+      { "baslik": "Mail Server Kurulumu" },
+      { "baslik": "Web Server Kurulumu" },
+      { "baslik": "NAS Kurulumu" },
+      { "baslik": "RAID Yapılandırma" },
+      { "baslik": "Yedekleme Sistemleri" },
+      { "baslik": "Bulut Yedekleme" },
+      { "baslik": "Felaket Kurtarma (Disaster Recovery)" },
+      { "baslik": "Sunucu Taşıma ve Kurulum" },
+      { "baslik": "Sunucu Performans Optimizasyonu" },
+      { "baslik": "Sunucu Bakım ve Destek" }
+    ]
+  },
+  {
+    "kategori_adi": "Network & Altyapı",
+    "kategori_slug": "network-altyapi",
+    "servisler": [
+      { "baslik": "Network Altyapı Kurulumu" },
+      { "baslik": "Cat5 / Cat6 / Cat7 Kablolama" },
+      { "baslik": "Fiber Optik Altyapı" },
+      { "baslik": "Rack Kabin Kurulumu" },
+      { "baslik": "Patch Panel Düzenleme" },
+      { "baslik": "Switch Kurulumu" },
+      { "baslik": "Router Kurulumu" },
+      { "baslik": "VLAN Yapılandırma" },
+      { "baslik": "IP Planlama ve Ağ Tasarımı" },
+      { "baslik": "Access Point (WiFi) Kurulumu" },
+      { "baslik": "Mesh WiFi Sistemleri" },
+      { "baslik": "Hotspot (Misafir WiFi) Kurulumu" },
+      { "baslik": "Network Arıza Tespit ve Çözüm" },
+      { "baslik": "Ağ Performans Optimizasyonu" },
+      { "baslik": "Network Monitoring (Ağ İzleme)" }
+    ]
+  },
+  {
+    "kategori_adi": "Ağ & Siber Güvenlik",
+    "kategori_slug": "ag-siber-guvenlik",
+    "servisler": [
+      { "baslik": "Firewall Kurulumu" },
+      { "baslik": "VPN Kurulumu (Uzaktan Erişim)" },
+      { "baslik": "Site-to-Site VPN" },
+      { "baslik": "Ağ Güvenlik Analizi" },
+      { "baslik": "Endpoint Güvenlik Sistemleri" },
+      { "baslik": "Antivirus Kurulumu ve Yönetimi" },
+      { "baslik": "Veri Güvenliği Danışmanlığı" }
+    ]
+  },
+  {
+    "kategori_adi": "Yedekleme & Veri Yönetimi",
+    "kategori_slug": "yedekleme-veri-yonetimi",
+    "servisler": [
+      { "baslik": "Otomatik Yedekleme Sistemleri" },
+      { "baslik": "NAS Backup Kurulumu" },
+      { "baslik": "Cloud Yedekleme" },
+      { "baslik": "Felaket Kurtarma Sistemleri" },
+      { "baslik": "Veri Kurtarma Hizmetleri" }
+    ]
+  },
+  {
+    "kategori_adi": "Personel Takip & Geçiş Sistemleri",
+    "kategori_slug": "personel-takip-gecis-sistemleri",
+    "servisler": [
+      { "baslik": "Personel Devam Kontrol Sistemi (PDKS)" },
+      { "baslik": "Parmak İzi Sistemleri" },
+      { "baslik": "Yüz Tanıma Sistemleri" },
+      { "baslik": "Kartlı Geçiş Sistemleri" },
+      { "baslik": "Turnike Sistemleri" },
+      { "baslik": "Vardiya ve Mesai Takip Sistemleri" }
+    ]
+  },
+  {
+    "kategori_adi": "İletişim Sistemleri",
+    "kategori_slug": "iletisim-sistemleri",
+    "servisler": [
+      { "baslik": "IP Santral Kurulumu" },
+      { "baslik": "VoIP Telefon Sistemleri" },
+      { "baslik": "Çağrı Merkezi Kurulumu" },
+      { "baslik": "Ofis İçi Telefon Altyapısı" }
+    ]
+  },
+  {
+    "kategori_adi": "Kurumsal IT Hizmetleri",
+    "kategori_slug": "kurumsal-it-hizmetleri",
+    "servisler": [
+      { "baslik": "Kurumsal IT Destek Hizmeti" },
+      { "baslik": "Bakım Anlaşması (Aylık / Yıllık)" },
+      { "baslik": "Periyodik Bakım Hizmeti" },
+      { "baslik": "IT Danışmanlık Hizmeti" },
+      { "baslik": "Dış Kaynak IT Hizmeti (Outsource IT)" },
+      { "baslik": "Sistem Yönetimi ve İzleme" }
+    ]
+  },
+  {
+    "kategori_adi": "Teknik Servis",
+    "kategori_slug": "teknik-servis",
+    "servisler": [
+      { "baslik": "Bilgisayar Teknik Servis" },
+      { "baslik": "Laptop Tamiri" },
+      { "baslik": "Donanım Arıza Tespiti" },
+      { "baslik": "Format ve Yazılım Kurulumu" },
+      { "baslik": "Yerinde Teknik Servis" },
+      { "baslik": "Uzaktan Destek Hizmeti" }
+    ]
+  },
+  {
+    "kategori_adi": "Bulut & Hosting",
+    "kategori_slug": "bulut-hosting",
+    "servisler": [
+      { "baslik": "VPS / VDS Sunucu Hizmetleri" },
+      { "baslik": "Bulut Sunucu (Cloud Server)" },
+      { "baslik": "Hosting Hizmetleri" },
+      { "baslik": "Domain Hizmetleri" },
+      { "baslik": "Uzaktan Sunucu Yönetimi" }
+    ]
+  },
+  {
+    "kategori_adi": "Güvenlik Sistemleri",
+    "kategori_slug": "guvenlik-sistemleri",
+    "servisler": [
+      { "baslik": "Güvenlik Kamera Kurulumu" },
+      { "baslik": "IP Kamera Sistemleri" },
+      { "baslik": "Analog Kamera Sistemleri" },
+      { "baslik": "Alarm Sistemleri Kurulumu" },
+      { "baslik": "Yangın Alarm Sistemleri" },
+      { "baslik": "Plaka Tanıma Sistemleri" },
+      { "baslik": "Görüntüleme ve Kayıt Sistemleri" }
+    ]
+  },
+  {
+    "kategori_adi": "İşletme Otomasyonları",
+    "kategori_slug": "isletme-otomasyonlari",
+    "servisler": [
+      { "baslik": "Barkod Sistemleri" },
+      { "baslik": "Stok Takip Sistemleri" },
+      { "baslik": "Ön Muhasebe Yazılımları" },
+      { "baslik": "ERP Sistem Kurulumu" },
+      { "baslik": "CRM (Müşteri Yönetimi) Sistemleri" }
+    ]
+  },
+  {
+    "kategori_adi": "Enerji & Altyapı",
+    "kategori_slug": "enerji-altyapi",
+    "servisler": [
+      { "baslik": "UPS (Kesintisiz Güç Kaynağı) Kurulumu" },
+      { "baslik": "Elektrik Altyapı Destek" }
+    ]
+  },
+  {
+    "kategori_adi": "Akıllı Ev Sistemleri",
+    "kategori_slug": "akilli-ev-sistemleri",
+    "servisler": [
+      { "baslik": "Akıllı Ev Sistemleri Kurulumu" },
+      { "baslik": "Mobil Uygulama ile Ev Kontrolü" },
+      { "baslik": "Merkezi Kontrol Paneli" },
+      { "baslik": "Senaryo Otomasyonları" },
+      { "baslik": "Akıllı Aydınlatma Sistemleri" },
+      { "baslik": "Dimmer (Işık Kısma) Sistemleri" },
+      { "baslik": "Hareket Sensörlü Işıklar" },
+      { "baslik": "RGB Aydınlatma Sistemleri" },
+      { "baslik": "Akıllı Kamera Entegrasyonu" },
+      { "baslik": "Akıllı Alarm Sistemleri" },
+      { "baslik": "Akıllı Kapı Kilidi" },
+      { "baslik": "Görüntülü Diafon Sistemleri" },
+      { "baslik": "Akıllı Termostat" },
+      { "baslik": "Klima & Isıtma Kontrolü" },
+      { "baslik": "Yerden Isıtma Kontrolü" },
+      { "baslik": "Akıllı Perde / Panjur" },
+      { "baslik": "Akıllı Priz Sistemleri" },
+      { "baslik": "Enerji Tüketim Takibi" },
+      { "baslik": "Elektrik Yönetimi" },
+      { "baslik": "Ev Sinema Sistemleri" },
+      { "baslik": "Multiroom Ses Sistemleri" },
+      { "baslik": "TV & Medya Kontrol" },
+      { "baslik": "Sesli Komut Sistemleri" },
+      { "baslik": "IoT Akıllı Sistemler" },
+      { "baslik": "Zigbee / Z-Wave Altyapı" },
+      { "baslik": "Merkezi Otomasyon Sistemleri" },
+      { "baslik": "Uzaktan Kontrol Sistemleri" }
+    ]
+  }
+]
+

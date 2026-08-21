@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/para-birimleri/create",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.para-birimleri.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\ParaBirimiTanimKaynagi\\Pages\\CreateParaBirimi",
+    "status":  200,
+    "avg_ms":  1808.69,
+    "min_ms":  1725.52,
+    "max_ms":  2050.55,
+    "runs_ms":  "1801,89|2050,55|1725,52|1727,07|1738,43",
+    "bytes":  145120,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/para-birimleri/create",
+    "error":  null
+}

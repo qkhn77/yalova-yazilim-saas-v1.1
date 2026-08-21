@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/finans/transfer-olustur","filament.admin.muhasebe.pages.finans.transfer-olustur","App\Filament\Clusters\Muhasebe\Pages\TransferOlusturSayfasi","200","1736,6","1736,6","1736,6","1736.6","175701","http://localhost/yalova-kamera/admin/muhasebe/finans/transfer-olustur",

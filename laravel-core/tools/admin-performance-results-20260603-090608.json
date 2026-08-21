@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/ayarlar/kabul-fisi",
+    "name":  "filament.admin.teknik-servis.pages.ayarlar.kabul-fisi",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\KabulFisi",
+    "status":  200,
+    "avg_ms":  1988.63,
+    "min_ms":  1600.11,
+    "max_ms":  2377.16,
+    "runs_ms":  "2377,16|1600,11",
+    "bytes":  115321,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/ayarlar/kabul-fisi",
+    "error":  null
+}

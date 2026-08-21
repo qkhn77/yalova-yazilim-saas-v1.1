@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/cihaz-kayit/arizali-cihazlar",
+    "name":  "filament.admin.teknik-servis.pages.cihaz-kayit.arizali-cihazlar",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\ArizaliCihazlar",
+    "status":  200,
+    "avg_ms":  1704.16,
+    "min_ms":  1704.16,
+    "max_ms":  1704.16,
+    "runs_ms":  "1704.16",
+    "bytes":  112040,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/cihaz-kayit/arizali-cihazlar",
+    "error":  null
+}

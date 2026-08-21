@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/faturalar/gelen-iade-faturalari",
+    "name":  "filament.admin.muhasebe.pages.faturalar.gelen-iade-faturalari",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\GelenIadeFaturasiSayfasi",
+    "status":  200,
+    "avg_ms":  1723.64,
+    "min_ms":  1723.64,
+    "max_ms":  1723.64,
+    "runs_ms":  "1723.64",
+    "bytes":  159552,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/faturalar/gelen-iade-faturalari",
+    "error":  null
+}

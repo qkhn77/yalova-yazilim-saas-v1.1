@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/fatura-kaynagis/create/gelen-fatura",
+    "name":  "filament.admin.muhasebe.resources.fatura-kaynagis.createGelen",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\CreateGelenFatura",
+    "status":  200,
+    "avg_ms":  2173.89,
+    "min_ms":  2100.41,
+    "max_ms":  2247.37,
+    "runs_ms":  "2247,37|2100,41",
+    "bytes":  192816,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/create/gelen-fatura",
+    "error":  null
+}

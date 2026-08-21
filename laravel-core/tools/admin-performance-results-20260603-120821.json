@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayitlari/liste/fiyat-verilen",
+    "name":  "filament.admin.teknik-servis.resources.servis-kayitlari.fiyat_verilen",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\TeknikServisKayitlariFiyatVerilenSayfasi",
+    "status":  200,
+    "avg_ms":  1707.01,
+    "min_ms":  1707.01,
+    "max_ms":  1707.01,
+    "runs_ms":  "1707.01",
+    "bytes":  145958,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/fiyat-verilen",
+    "error":  null
+}

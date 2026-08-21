@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/satis/hizli-satis",
+    "name":  "filament.admin.muhasebe.pages.satis.hizli-satis",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\HizliSatisSayfasi",
+    "status":  200,
+    "avg_ms":  2888.21,
+    "min_ms":  2320.44,
+    "max_ms":  4439.18,
+    "runs_ms":  "4439,18|2837,42|2417,89|2426,12|2320,44",
+    "bytes":  130034,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/hizli-satis",
+    "error":  null
+}

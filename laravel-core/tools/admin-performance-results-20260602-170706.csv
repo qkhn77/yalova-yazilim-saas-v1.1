@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/urunler/urun-kategorileri","filament.admin.web.resources.urunler.urun-kategorileri.index","App\Filament\Clusters\Web\Resources\UrunKategoriKaynagi\Pages\ListUrunKategorileri","200","1890,58","1782,49","2169,91","2169,91|1827,42|1832,52|1840,54|1782,49","165229","http://localhost/yalova-kamera/admin/web/urunler/urun-kategorileri",

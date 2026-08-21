@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","restoran","admin/restoran","filament.admin.restoran","App\Filament\Clusters\Restoran","200","2475,65","1815,16","3993,32","3993,32|2764,28|1891,59|1815,16|1913,88","118426","http://localhost/yalova-kamera/admin/restoran",

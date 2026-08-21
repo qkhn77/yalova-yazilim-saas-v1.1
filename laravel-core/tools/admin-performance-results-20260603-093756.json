@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/urunler/urun-kategorileri",
+    "name":  "filament.admin.web.resources.urunler.urun-kategorileri.index",
+    "action":  "App\\Filament\\Clusters\\Web\\Resources\\UrunKategoriKaynagi\\Pages\\ListUrunKategorileri",
+    "status":  200,
+    "avg_ms":  7444.43,
+    "min_ms":  7444.43,
+    "max_ms":  7444.43,
+    "runs_ms":  "7444.43",
+    "bytes":  165230,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/urunler/urun-kategorileri",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/servisler/web-servis-listesi",
+    "name":  "filament.admin.web.pages.servisler.web-servis-listesi",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\WebServisListesi",
+    "status":  200,
+    "avg_ms":  7219.98,
+    "min_ms":  7219.98,
+    "max_ms":  7219.98,
+    "runs_ms":  "7219.98",
+    "bytes":  180426,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/servisler/web-servis-listesi",
+    "error":  null
+}

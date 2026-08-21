@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/web-moduller/ucuncu-grup/musteri-yorumlari",
+    "name":  "filament.admin.web.pages.web-moduller.ucuncu-grup.musteri-yorumlari",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\ModulMusteriYorumlari",
+    "status":  200,
+    "avg_ms":  1919.42,
+    "min_ms":  1919.42,
+    "max_ms":  1919.42,
+    "runs_ms":  "1919.42",
+    "bytes":  185693,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/musteri-yorumlari",
+    "error":  null
+}

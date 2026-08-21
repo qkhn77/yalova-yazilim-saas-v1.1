@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "e-ticaret",
+    "uri":  "admin/e-ticaret",
+    "name":  "filament.admin.e-ticaret",
+    "action":  "App\\Filament\\Clusters\\ETicaret",
+    "status":  200,
+    "avg_ms":  1666.92,
+    "min_ms":  1666.92,
+    "max_ms":  1666.92,
+    "runs_ms":  "1666.92",
+    "bytes":  110824,
+    "final_url":  "http://localhost/yalova-kamera/admin/e-ticaret",
+    "error":  null
+}

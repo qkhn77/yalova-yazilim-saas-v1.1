@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/urunler/urun-kategorileri/create","filament.admin.web.resources.urunler.urun-kategorileri.create","App\Filament\Clusters\Web\Resources\UrunKategoriKaynagi\Pages\CreateUrunKategorisi","200","3834,26","3834,26","3834,26","3834.26","154895","http://localhost/yalova-kamera/admin/web/urunler/urun-kategorileri/create",

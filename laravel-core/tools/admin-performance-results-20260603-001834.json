@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/para-birimleri",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.para-birimleri.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\ParaBirimiTanimKaynagi\\Pages\\ListParaBirimleri",
+    "status":  200,
+    "avg_ms":  1714.26,
+    "min_ms":  1665.51,
+    "max_ms":  1747.42,
+    "runs_ms":  "1739,43|1747,42|1694,95|1665,51|1723,97",
+    "bytes":  160786,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/para-birimleri",
+    "error":  null
+}

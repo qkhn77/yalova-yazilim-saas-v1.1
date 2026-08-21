@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/tanimlar/departmanlar/create",
+    "name":  "filament.admin.personel-takip.resources.tanimlar.departmanlar.create",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelDepartmanKaynagi\\Pages\\CreatePersonelDepartman",
+    "status":  200,
+    "avg_ms":  1714.57,
+    "min_ms":  1714.57,
+    "max_ms":  1714.57,
+    "runs_ms":  "1714.57",
+    "bytes":  144799,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/tanimlar/departmanlar/create",
+    "error":  null
+}

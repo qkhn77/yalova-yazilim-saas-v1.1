@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/sablonlar/talep-formu",
+    "name":  "filament.admin.teknik-servis.pages.sablonlar.talep-formu",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\ServisTalepFormuSablonuSayfasi",
+    "status":  200,
+    "avg_ms":  1744,
+    "min_ms":  1744,
+    "max_ms":  1744,
+    "runs_ms":  "1744",
+    "bytes":  166507,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/sablonlar/talep-formu",
+    "error":  null
+}

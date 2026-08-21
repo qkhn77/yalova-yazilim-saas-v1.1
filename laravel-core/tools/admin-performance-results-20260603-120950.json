@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/kasa-hesaplari/create",
+    "name":  "filament.admin.muhasebe.resources.finans.kasa-hesaplari.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\KasaHesabiKaynagi\\Pages\\CreateKasaHesabi",
+    "status":  200,
+    "avg_ms":  1687.37,
+    "min_ms":  1687.37,
+    "max_ms":  1687.37,
+    "runs_ms":  "1687.37",
+    "bytes":  154148,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/kasa-hesaplari/create",
+    "error":  null
+}

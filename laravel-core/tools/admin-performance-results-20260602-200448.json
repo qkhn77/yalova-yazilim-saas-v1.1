@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/satis/barkodlu-satis-muhasebe-mutabakat",
+    "name":  "filament.admin.muhasebe.pages.satis.barkodlu-satis-muhasebe-mutabakat",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\BarkodluSatisMuhasebeMutabakatSayfasi",
+    "status":  200,
+    "avg_ms":  1886.96,
+    "min_ms":  1663.49,
+    "max_ms":  2504.73,
+    "runs_ms":  "2504,73|1708,51|1663,49|1673,64|1884,44",
+    "bytes":  157266,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-muhasebe-mutabakat",
+    "error":  null
+}

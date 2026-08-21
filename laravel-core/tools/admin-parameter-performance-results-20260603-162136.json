@@ -1,0 +1,38 @@
+﻿[
+    {
+        "rank":  1,
+        "module":  "products",
+        "uri":  "admin/products/1/edit",
+        "uri_template":  "admin/products/{record}/edit",
+        "name":  "filament.admin.resources.products.edit",
+        "action":  "App\\Filament\\Resources\\ProductResource\\Pages\\EditProduct",
+        "model":  "App\\Models\\Product",
+        "record_key":  "1",
+        "status":  500,
+        "avg_ms":  1582.48,
+        "min_ms":  1564.43,
+        "max_ms":  1610.7,
+        "runs_ms":  "1572,31|1610,7|1564,43",
+        "bytes":  0,
+        "final_url":  "http://localhost/yalova-kamera/admin/products/1/edit",
+        "error":  "Uzak sunucu hata döndürdü: (500) İç Sunucu Hatası."
+    },
+    {
+        "rank":  2,
+        "module":  "product-categories",
+        "uri":  "admin/product-categories/1/edit",
+        "uri_template":  "admin/product-categories/{record}/edit",
+        "name":  "filament.admin.resources.product-categories.edit",
+        "action":  "App\\Filament\\Resources\\ProductCategoryResource\\Pages\\EditProductCategory",
+        "model":  "App\\Models\\ProductCategory",
+        "record_key":  "1",
+        "status":  500,
+        "avg_ms":  1567.71,
+        "min_ms":  1556.49,
+        "max_ms":  1575.61,
+        "runs_ms":  "1556,49|1575,61|1571,03",
+        "bytes":  0,
+        "final_url":  "http://localhost/yalova-kamera/admin/product-categories/1/edit",
+        "error":  "Uzak sunucu hata döndürdü: (500) İç Sunucu Hatası."
+    }
+]

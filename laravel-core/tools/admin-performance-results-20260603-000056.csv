@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/stok/stok-listesi","filament.admin.muhasebe.resources.stok.stok-listesi.index","App\Filament\Clusters\Muhasebe\Resources\StokKartiKaynagi\Pages\ListStokKartlari","200","1740,06","1684,76","1774,5","1735,37|1733,94|1771,7|1774,5|1684,76","187302","http://localhost/yalova-kamera/admin/muhasebe/stok/stok-listesi",

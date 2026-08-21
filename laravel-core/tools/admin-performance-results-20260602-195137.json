@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/raporlar/genel",
+    "name":  "filament.admin.restoran.pages.raporlar.genel",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Pages\\RestoranRaporlariSayfasi",
+    "status":  200,
+    "avg_ms":  1805.16,
+    "min_ms":  1711.72,
+    "max_ms":  2065.84,
+    "runs_ms":  "1766,82|2065,84|1711,72|1754,93|1726,49",
+    "bytes":  129546,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/raporlar/genel",
+    "error":  null
+}

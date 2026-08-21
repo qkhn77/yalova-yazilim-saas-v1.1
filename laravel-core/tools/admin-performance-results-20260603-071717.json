@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/satis/barkodlu-satis-iade-fisi",
+    "name":  "filament.admin.muhasebe.pages.satis.barkodlu-satis-iade-fisi",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\BarkodluSatisIadeFisiSayfasi",
+    "status":  200,
+    "avg_ms":  1736.23,
+    "min_ms":  1603.33,
+    "max_ms":  1869.14,
+    "runs_ms":  "1603,33|1869,14",
+    "bytes":  112435,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-iade-fisi",
+    "error":  null
+}

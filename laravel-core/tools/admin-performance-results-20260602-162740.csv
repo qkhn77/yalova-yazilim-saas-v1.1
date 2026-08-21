@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/muhasebe-panel","filament.admin.muhasebe.pages.muhasebe-panel","App\Filament\Clusters\Muhasebe\Pages\MuhasebeDashboardSayfasi","200","2509,83","2392,89","2802,73","2498,75|2392,89|2419,07|2802,73|2435,72","120327","http://localhost/yalova-kamera/admin/muhasebe/muhasebe-panel",

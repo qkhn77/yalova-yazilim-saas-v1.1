@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-firmalar",
+    "uri":  "admin/sistem-firmalar/1/edit",
+    "uri_template":  "admin/sistem-firmalar/{record}/edit",
+    "name":  "filament.admin.resources.sistem-firmalar.edit",
+    "action":  "App\\Filament\\Resources\\FirmaYonetimKaynagi\\Pages\\FirmaDuzenle",
+    "model":  "App\\Models\\Firma",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  1704.61,
+    "min_ms":  1704.61,
+    "max_ms":  1704.61,
+    "runs_ms":  "1704.61",
+    "bytes":  158549,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-firmalar/1/edit",
+    "error":  null
+}

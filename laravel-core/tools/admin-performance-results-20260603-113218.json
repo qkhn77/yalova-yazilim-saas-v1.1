@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/projeler/ayarlar",
+    "name":  "filament.admin.web.pages.projeler.ayarlar",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\WebProjeAyarlar",
+    "status":  200,
+    "avg_ms":  1938.14,
+    "min_ms":  1938.14,
+    "max_ms":  1938.14,
+    "runs_ms":  "1938.14",
+    "bytes":  146358,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/projeler/ayarlar",
+    "error":  null
+}

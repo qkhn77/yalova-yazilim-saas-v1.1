@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/cari-yonetimi/cari-hareketleri",
+    "name":  "filament.admin.muhasebe.pages.cari-yonetimi.cari-hareketleri",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\CariHareketleriSayfasi",
+    "status":  200,
+    "avg_ms":  1836.02,
+    "min_ms":  1740.51,
+    "max_ms":  1876.32,
+    "runs_ms":  "1876,32|1875,4|1740,51|1829,52|1858,37",
+    "bytes":  161305,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/cari-yonetimi/cari-hareketleri",
+    "error":  null
+}

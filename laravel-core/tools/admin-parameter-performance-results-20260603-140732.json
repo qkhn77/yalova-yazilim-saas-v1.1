@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/fatura-kaynagis/1/edit",
+    "uri_template":  "admin/muhasebe/fatura-kaynagis/{record}/edit",
+    "name":  "filament.admin.muhasebe.resources.fatura-kaynagis.edit",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\EditFatura",
+    "model":  "App\\Models\\Muhasebe\\Fatura",
+    "record_key":  "1",
+    "status":  500,
+    "avg_ms":  1585.04,
+    "min_ms":  1585.04,
+    "max_ms":  1585.04,
+    "runs_ms":  "1585.04",
+    "bytes":  0,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/1/edit",
+    "error":  "Uzak sunucu hata döndürdü: (500) İç Sunucu Hatası."
+}

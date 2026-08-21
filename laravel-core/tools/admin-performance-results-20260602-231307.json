@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "e-ticaret",
+    "uri":  "admin/e-ticaret/bildirim-yonetimi/loglar",
+    "name":  "filament.admin.e-ticaret.pages.bildirim-yonetimi.loglar",
+    "action":  "App\\Filament\\Clusters\\ETicaret\\Pages\\BildirimLoglariSayfasi",
+    "status":  200,
+    "avg_ms":  2352.28,
+    "min_ms":  1625.59,
+    "max_ms":  5138.45,
+    "runs_ms":  "5138,45|1625,59|1679,59|1655,68|1662,08",
+    "bytes":  155614,
+    "final_url":  "http://localhost/yalova-kamera/admin/e-ticaret/bildirim-yonetimi/loglar",
+    "error":  null
+}

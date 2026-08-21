@@ -1,0 +1,4462 @@
+{
+  "schemaVersion": 1,
+  "phase": "4C",
+  "runRole": "baseline",
+  "generatedAt": "2026-08-16T06:19:14.689Z",
+  "baseUrl": "http://127.0.0.1:8000",
+  "tooling": {
+    "browser": "Google Chrome headless (Chrome DevTools Protocol)",
+    "externalBrowserPackageInstalled": false,
+    "screenshotDirectory": "screenshots"
+  },
+  "users": {
+    "manager": {
+      "id": 7,
+      "user": "gokhan",
+      "initialLayout": null
+    },
+    "tenant": {
+      "id": 14,
+      "user": "satis",
+      "initialLayout": null
+    }
+  },
+  "snapshots": [
+    {
+      "id": "admin-modern-dashboard-1440",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "manager",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "modern-sidebar",
+      "layoutGeometry": {
+        "renderer": "modern-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 252,
+          "height": 900,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 251,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 88,
+          "width": 227,
+          "height": 1107,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 252,
+          "y": 0,
+          "width": 1188,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 252,
+          "y": 74,
+          "width": 1188,
+          "height": 826,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 527092,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-modern-dashboard-1440.png"
+    },
+    {
+      "id": "admin-modern-users-1440",
+      "route": "/admin/sistem-kullanicilar",
+      "url": "http://127.0.0.1:8000/admin/sistem-kullanicilar",
+      "userContext": "manager",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 5,
+      "visibleModalCount": 0,
+      "title": "Kullanıcılar (users tablosu) - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "modern-sidebar",
+      "layoutGeometry": {
+        "renderer": "modern-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 252,
+          "height": 900,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 251,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 88,
+          "width": 227,
+          "height": 1464.375,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 252,
+          "y": 0,
+          "width": 1188,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 252,
+          "y": 74,
+          "width": 1188,
+          "height": 853,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Kullanıcılar (users)"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-modern-users-1440.png"
+    },
+    {
+      "id": "admin-modern-users-modal-1440",
+      "route": "/admin/sistem-kullanicilar",
+      "url": "http://127.0.0.1:8000/admin/sistem-kullanicilar",
+      "userContext": "manager",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": null,
+      "openModalAction": "aktif_pasif",
+      "modalCount": 5,
+      "visibleModalCount": 1,
+      "title": "Kullanıcılar (users tablosu) - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "modern-sidebar",
+      "layoutGeometry": {
+        "renderer": "modern-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 252,
+          "height": 900,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 251,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 88,
+          "width": 227,
+          "height": 1464.375,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 252,
+          "y": 0,
+          "width": 1188,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 252,
+          "y": 74,
+          "width": 1188,
+          "height": 853,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Kullanıcılar (users)"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-modern-users-modal-1440.png"
+    },
+    {
+      "id": "admin-modern-companies-1366",
+      "route": "/admin/sistem-firmalar",
+      "url": "http://127.0.0.1:8000/admin/sistem-firmalar",
+      "userContext": "manager",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 5,
+      "visibleModalCount": 0,
+      "title": "Firmalar - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "modern-sidebar",
+      "layoutGeometry": {
+        "renderer": "modern-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 252,
+          "height": 768,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 251,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 88,
+          "width": 227,
+          "height": 1464.375,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 252,
+          "y": 0,
+          "width": 1114,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 252,
+          "y": 74,
+          "width": 1114,
+          "height": 694,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Firmalar"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1366,
+        "clientWidth": 1366
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-modern-companies-1366.png"
+    },
+    {
+      "id": "admin-modern-settings-1024",
+      "route": "/admin/sistem-ayarlari",
+      "url": "http://127.0.0.1:8000/admin/sistem-ayarlari",
+      "userContext": "manager",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Sistem ayarları - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "modern-sidebar",
+      "layoutGeometry": {
+        "renderer": "modern-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 252,
+          "height": 768,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 251,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 88,
+          "width": 227,
+          "height": 1464.375,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 252,
+          "y": 0,
+          "width": 772,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 252,
+          "y": 74,
+          "width": 772,
+          "height": 694,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Sistem ayarları"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1024,
+        "clientWidth": 1024
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 10,
+        "approximateJsBytes": 853732,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-modern-settings-1024.png"
+    },
+    {
+      "id": "admin-modern-dashboard-390",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "manager",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -288,
+          "y": 0,
+          "width": 288,
+          "height": 844,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -288,
+          "y": 0,
+          "width": 287,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -276,
+          "y": 76,
+          "width": 263,
+          "height": 1107,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 390,
+          "height": 782,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-modern-dashboard-390.png"
+    },
+    {
+      "id": "admin-compact-dashboard-1440",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "manager",
+      "activeLayout": "compact-vertical",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-compact-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-compact-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "compact-sidebar",
+      "layoutGeometry": {
+        "renderer": "compact-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 76,
+          "height": 900,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 75,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 10,
+          "y": 88,
+          "width": 55,
+          "height": 702,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 76,
+          "y": 0,
+          "width": 1364,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 76,
+          "y": 74,
+          "width": 1364,
+          "height": 826,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-compact-dashboard-1440.png"
+    },
+    {
+      "id": "admin-compact-users-1440",
+      "route": "/admin/sistem-kullanicilar",
+      "url": "http://127.0.0.1:8000/admin/sistem-kullanicilar",
+      "userContext": "manager",
+      "activeLayout": "compact-vertical",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 5,
+      "visibleModalCount": 0,
+      "title": "Kullanıcılar (users tablosu) - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-compact-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-compact-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "compact-sidebar",
+      "layoutGeometry": {
+        "renderer": "compact-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 76,
+          "height": 900,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 75,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 10,
+          "y": 88,
+          "width": 55,
+          "height": 702,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 76,
+          "y": 0,
+          "width": 1364,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 76,
+          "y": 74,
+          "width": 1364,
+          "height": 853,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Kullanıcılar (users)"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-compact-users-1440.png"
+    },
+    {
+      "id": "admin-compact-submenu-open-1366",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "manager",
+      "activeLayout": "compact-vertical",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "openNavigationGroup": "Sistem yönetimi",
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-compact-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-compact-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "compact-sidebar",
+      "layoutGeometry": {
+        "renderer": "compact-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 252,
+          "height": 768,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 251,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 88,
+          "width": 227,
+          "height": 1464.375,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 252,
+          "y": 0,
+          "width": 1114,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 252,
+          "y": 74,
+          "width": 1114,
+          "height": 694,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1366,
+        "clientWidth": 1366
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-compact-submenu-open-1366.png"
+    },
+    {
+      "id": "admin-compact-dashboard-390",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "manager",
+      "activeLayout": "compact-vertical",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-compact-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-compact-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -288,
+          "y": 0,
+          "width": 288,
+          "height": 844,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -288,
+          "y": 0,
+          "width": 287,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -276,
+          "y": 76,
+          "width": 263,
+          "height": 1107,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 390,
+          "height": 782,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-compact-dashboard-390.png"
+    },
+    {
+      "id": "admin-horizontal-dashboard-1440",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "manager",
+      "activeLayout": "horizontal",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-horizontal min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-horizontal",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "horizontal-navigation",
+      "layoutGeometry": {
+        "renderer": "horizontal-navigation",
+        "sidebar": {
+          "x": 0,
+          "y": 74,
+          "width": 1440,
+          "height": 145,
+          "display": "block",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 82,
+          "width": 1416,
+          "height": 128,
+          "display": "block",
+          "position": "relative"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 219,
+          "width": 1440,
+          "height": 681,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": true
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-horizontal-dashboard-1440.png"
+    },
+    {
+      "id": "admin-horizontal-users-1366",
+      "route": "/admin/sistem-kullanicilar",
+      "url": "http://127.0.0.1:8000/admin/sistem-kullanicilar",
+      "userContext": "manager",
+      "activeLayout": "horizontal",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 5,
+      "visibleModalCount": 0,
+      "title": "Kullanıcılar (users tablosu) - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-horizontal min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-horizontal",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "horizontal-navigation",
+      "layoutGeometry": {
+        "renderer": "horizontal-navigation",
+        "sidebar": {
+          "x": 0,
+          "y": 74,
+          "width": 1366,
+          "height": 145,
+          "display": "block",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 82,
+          "width": 1342,
+          "height": 128,
+          "display": "block",
+          "position": "relative"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 1366,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 219,
+          "width": 1366,
+          "height": 853,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": true
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Kullanıcılar (users)"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1366,
+        "clientWidth": 1366
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-horizontal-users-1366.png"
+    },
+    {
+      "id": "admin-horizontal-dropdown-open-1440",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "manager",
+      "activeLayout": "horizontal",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": "Sistem yönetimi",
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-horizontal min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-horizontal",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "horizontal-navigation",
+      "layoutGeometry": {
+        "renderer": "horizontal-navigation",
+        "sidebar": {
+          "x": 0,
+          "y": 74,
+          "width": 1440,
+          "height": 145,
+          "display": "block",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 82,
+          "width": 1416,
+          "height": 128,
+          "display": "block",
+          "position": "relative"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 219,
+          "width": 1440,
+          "height": 681,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": true
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-horizontal-dropdown-open-1440.png"
+    },
+    {
+      "id": "admin-horizontal-dashboard-390",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "manager",
+      "activeLayout": "horizontal",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-horizontal min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-horizontal",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -288,
+          "y": 0,
+          "width": 288,
+          "height": 844,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -288,
+          "y": 0,
+          "width": 287,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -276,
+          "y": 76,
+          "width": 263,
+          "height": 1107,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 390,
+          "height": 782,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 16,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Sistem yönetimi",
+        "Ajanda ve Görevler",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Masraf Takibi",
+        "Proje Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/admin-horizontal-dashboard-390.png"
+    },
+    {
+      "id": "tenant-modern-dashboard-1440",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "tenant",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "modern-sidebar",
+      "layoutGeometry": {
+        "renderer": "modern-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 252,
+          "height": 900,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 251,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 88,
+          "width": 227,
+          "height": 823,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 252,
+          "y": 0,
+          "width": 1188,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 252,
+          "y": 74,
+          "width": 1188,
+          "height": 2677.828125,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-modern-dashboard-1440.png"
+    },
+    {
+      "id": "tenant-modern-accounting-1440",
+      "route": "/admin/muhasebe/raporlar/gelir-gider",
+      "url": "http://127.0.0.1:8000/admin/muhasebe/raporlar/gelir-gider",
+      "userContext": "tenant",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Gelir Gider Raporu - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "modern-sidebar",
+      "layoutGeometry": {
+        "renderer": "modern-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 252,
+          "height": 900,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 251,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 88,
+          "width": 227,
+          "height": 1154,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 252,
+          "y": 0,
+          "width": 1188,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 252,
+          "y": 74,
+          "width": 1188,
+          "height": 897,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Raporlar",
+        "Gelir / gider"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 10,
+        "approximateJsBytes": 630164,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-modern-accounting-1440.png"
+    },
+    {
+      "id": "tenant-modern-personnel-1024",
+      "route": "/admin/personel-takip/raporlar/personel-ozeti",
+      "url": "http://127.0.0.1:8000/admin/personel-takip/raporlar/personel-ozeti",
+      "userContext": "tenant",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Personel Raporları - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "modern-sidebar",
+      "layoutGeometry": {
+        "renderer": "modern-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 252,
+          "height": 768,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 251,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 88,
+          "width": 227,
+          "height": 1295.5,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 252,
+          "y": 0,
+          "width": 772,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 252,
+          "y": 74,
+          "width": 772,
+          "height": 2193,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Personel Takip",
+        "Raporlar"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1024,
+        "clientWidth": 1024
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-modern-personnel-1024.png"
+    },
+    {
+      "id": "tenant-modern-restaurant-768",
+      "route": "/admin/restoran/masa-ekrani",
+      "url": "http://127.0.0.1:8000/admin/restoran/masa-ekrani",
+      "userContext": "tenant",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Masa Ekrani - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -288,
+          "y": 0,
+          "width": 288,
+          "height": 1024,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -288,
+          "y": 0,
+          "width": 287,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -276,
+          "y": 76,
+          "width": 263,
+          "height": 1180.375,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 768,
+          "height": 962,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Restoran",
+        "Masa Ekranı"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 768,
+        "clientWidth": 768
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-modern-restaurant-768.png"
+    },
+    {
+      "id": "tenant-modern-web-blog-430",
+      "route": "/admin/web/bloglar/blog-listesi",
+      "url": "http://127.0.0.1:8000/admin/web/bloglar/blog-listesi",
+      "userContext": "tenant",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 430,
+        "height": 844
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 5,
+      "visibleModalCount": 0,
+      "title": "Blog Yönetimi - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -288,
+          "y": 0,
+          "width": 288,
+          "height": 844,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -288,
+          "y": 0,
+          "width": 287,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -276,
+          "y": 76,
+          "width": 263,
+          "height": 1230.75,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 430,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 430,
+          "height": 1082,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Web",
+        "Bloglar",
+        "Blog Listesi"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 430,
+        "clientWidth": 430
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-modern-web-blog-430.png"
+    },
+    {
+      "id": "tenant-modern-offers-390",
+      "route": "/admin/teklif-yonetimi/teklifler",
+      "url": "http://127.0.0.1:8000/admin/teklif-yonetimi/teklifler",
+      "userContext": "tenant",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 5,
+      "visibleModalCount": 0,
+      "title": "Teklifler - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -288,
+          "y": 0,
+          "width": 288,
+          "height": 844,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -288,
+          "y": 0,
+          "width": 287,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -276,
+          "y": 76,
+          "width": 263,
+          "height": 950.125,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 390,
+          "height": 782,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Teklif Yönetimi",
+        "Teklif listesi"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 19,
+        "approximateCssBytes": 364059,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-modern-offers-390.png"
+    },
+    {
+      "id": "tenant-modern-barcode-375",
+      "route": "/admin/muhasebe/satis/barkodlu-satis",
+      "url": "http://127.0.0.1:8000/admin/muhasebe/satis/barkodlu-satis",
+      "userContext": "tenant",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Barkodlu satis - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -288,
+          "y": 0,
+          "width": 288,
+          "height": 812,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -288,
+          "y": 0,
+          "width": 287,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -276,
+          "y": 76,
+          "width": 263,
+          "height": 1422.625,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 375,
+          "height": 1662,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Barkodlu Satış",
+        "Barkodlu Satis Ekrani"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 375,
+        "clientWidth": 375
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 10,
+        "approximateJsBytes": 630164,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-modern-barcode-375.png"
+    },
+    {
+      "id": "tenant-modern-dashboard-320",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "tenant",
+      "activeLayout": "modern-vertical",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 320,
+        "height": 800
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-modern-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-modern-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -281.59375,
+          "y": 0,
+          "width": 281.59375,
+          "height": 800,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -281.59375,
+          "y": 0,
+          "width": 280.59375,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -269.59375,
+          "y": 76,
+          "width": 256.59375,
+          "height": 823,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 320,
+          "height": 6236.328125,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-modern-dashboard-320.png"
+    },
+    {
+      "id": "tenant-compact-dashboard-1440",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "tenant",
+      "activeLayout": "compact-vertical",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-compact-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-compact-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "compact-sidebar",
+      "layoutGeometry": {
+        "renderer": "compact-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 76,
+          "height": 900,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 75,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 10,
+          "y": 88,
+          "width": 55,
+          "height": 526,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 76,
+          "y": 0,
+          "width": 1364,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 76,
+          "y": 74,
+          "width": 1364,
+          "height": 2677.828125,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-compact-dashboard-1440.png"
+    },
+    {
+      "id": "tenant-compact-technical-service-1366",
+      "route": "/admin/teknik-servis/servis-kayitlari",
+      "url": "http://127.0.0.1:8000/admin/teknik-servis/servis-kayitlari",
+      "userContext": "tenant",
+      "activeLayout": "compact-vertical",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Tüm servis kayıtları - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-compact-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-compact-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "compact-sidebar",
+      "layoutGeometry": {
+        "renderer": "compact-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 76,
+          "height": 768,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 75,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 10,
+          "y": 88,
+          "width": 55,
+          "height": 526,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 76,
+          "y": 0,
+          "width": 1290,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 76,
+          "y": 74,
+          "width": 1290,
+          "height": 694,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Teknik Servis",
+        "Servis Kayıtları",
+        "Tüm Kayıtlar"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1366,
+        "clientWidth": 1366
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-compact-technical-service-1366.png"
+    },
+    {
+      "id": "tenant-compact-submenu-open-1440",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "tenant",
+      "activeLayout": "compact-vertical",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": "Muhasebe",
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-compact-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-compact-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "compact-sidebar",
+      "layoutGeometry": {
+        "renderer": "compact-sidebar",
+        "sidebar": {
+          "x": 0,
+          "y": 0,
+          "width": 252,
+          "height": 900,
+          "display": "flex",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 251,
+          "height": 74,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 88,
+          "width": 227,
+          "height": 1103.625,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 252,
+          "y": 0,
+          "width": 1188,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 252,
+          "y": 74,
+          "width": 1188,
+          "height": 2677.828125,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-compact-submenu-open-1440.png"
+    },
+    {
+      "id": "tenant-compact-dashboard-430",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "tenant",
+      "activeLayout": "compact-vertical",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 430,
+        "height": 844
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-compact-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-compact-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -288,
+          "y": 0,
+          "width": 288,
+          "height": 844,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -288,
+          "y": 0,
+          "width": 287,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -276,
+          "y": 76,
+          "width": 263,
+          "height": 823,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 430,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 430,
+          "height": 5764.328125,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 430,
+        "clientWidth": 430
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-compact-dashboard-430.png"
+    },
+    {
+      "id": "tenant-compact-dashboard-375",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "tenant",
+      "activeLayout": "compact-vertical",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-compact-vertical min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-compact-vertical",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -288,
+          "y": 0,
+          "width": 288,
+          "height": 812,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -288,
+          "y": 0,
+          "width": 287,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -276,
+          "y": 76,
+          "width": 263,
+          "height": 823,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 375,
+          "height": 5908.328125,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 375,
+        "clientWidth": 375
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-compact-dashboard-375.png"
+    },
+    {
+      "id": "tenant-horizontal-dashboard-1440-light",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "tenant",
+      "activeLayout": "horizontal",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-horizontal min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-horizontal",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "horizontal-navigation",
+      "layoutGeometry": {
+        "renderer": "horizontal-navigation",
+        "sidebar": {
+          "x": 0,
+          "y": 74,
+          "width": 1440,
+          "height": 101,
+          "display": "block",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 82,
+          "width": 1416,
+          "height": 84,
+          "display": "block",
+          "position": "relative"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 175,
+          "width": 1440,
+          "height": 2677.828125,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": true
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-horizontal-dashboard-1440-light.png"
+    },
+    {
+      "id": "tenant-horizontal-accounting-1366-dark",
+      "route": "/admin/muhasebe/raporlar/gelir-gider",
+      "url": "http://127.0.0.1:8000/admin/muhasebe/raporlar/gelir-gider",
+      "userContext": "tenant",
+      "activeLayout": "horizontal",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Gelir Gider Raporu - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-horizontal min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-horizontal",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "horizontal-navigation",
+      "layoutGeometry": {
+        "renderer": "horizontal-navigation",
+        "sidebar": {
+          "x": 0,
+          "y": 74,
+          "width": 1366,
+          "height": 101,
+          "display": "block",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 82,
+          "width": 1342,
+          "height": 84,
+          "display": "block",
+          "position": "relative"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 1366,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 175,
+          "width": 1366,
+          "height": 897,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": true
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Raporlar",
+        "Gelir / gider"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1366,
+        "clientWidth": 1366
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 10,
+        "approximateJsBytes": 630164,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-horizontal-accounting-1366-dark.png"
+    },
+    {
+      "id": "tenant-horizontal-dropdown-open-1440",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "tenant",
+      "activeLayout": "horizontal",
+      "colorTheme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "openNavigationGroup": "Muhasebe",
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-horizontal min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-horizontal",
+      "rootLayoutClassCount": 1,
+      "darkMode": true,
+      "renderer": "horizontal-navigation",
+      "layoutGeometry": {
+        "renderer": "horizontal-navigation",
+        "sidebar": {
+          "x": 0,
+          "y": 74,
+          "width": 1440,
+          "height": 101,
+          "display": "block",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 82,
+          "width": 1416,
+          "height": 84,
+          "display": "block",
+          "position": "relative"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 175,
+          "width": 1440,
+          "height": 2677.828125,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": true
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-horizontal-dropdown-open-1440.png"
+    },
+    {
+      "id": "tenant-horizontal-dashboard-1024",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "tenant",
+      "activeLayout": "horizontal",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-horizontal min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-horizontal",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "horizontal-navigation",
+      "layoutGeometry": {
+        "renderer": "horizontal-navigation",
+        "sidebar": {
+          "x": 0,
+          "y": 74,
+          "width": 1024,
+          "height": 145,
+          "display": "block",
+          "position": "sticky"
+        },
+        "sidebarHeader": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "display": "none",
+          "position": "static"
+        },
+        "navigation": {
+          "x": 12,
+          "y": 82,
+          "width": 1000,
+          "height": 128,
+          "display": "block",
+          "position": "relative"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 74,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 219,
+          "width": 1024,
+          "height": 2779.828125,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": null,
+        "horizontalNavigationVisible": true
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 1024,
+        "clientWidth": 1024
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-horizontal-dashboard-1024.png"
+    },
+    {
+      "id": "tenant-horizontal-dashboard-768",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "tenant",
+      "activeLayout": "horizontal",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-horizontal min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-horizontal",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -288,
+          "y": 0,
+          "width": 288,
+          "height": 1024,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -288,
+          "y": 0,
+          "width": 287,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -276,
+          "y": 76,
+          "width": 263,
+          "height": 823,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 768,
+          "height": 5358.328125,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 768,
+        "clientWidth": 768
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-horizontal-dashboard-768.png"
+    },
+    {
+      "id": "tenant-horizontal-dashboard-390",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "tenant",
+      "activeLayout": "horizontal",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-horizontal min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-horizontal",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -288,
+          "y": 0,
+          "width": 288,
+          "height": 844,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -288,
+          "y": 0,
+          "width": 287,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -276,
+          "y": 76,
+          "width": 263,
+          "height": 823,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 390,
+          "height": 5764.328125,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-horizontal-dashboard-390.png"
+    },
+    {
+      "id": "tenant-horizontal-dashboard-320",
+      "route": "/admin",
+      "url": "http://127.0.0.1:8000/admin",
+      "userContext": "tenant",
+      "activeLayout": "horizontal",
+      "colorTheme": "light",
+      "viewport": {
+        "width": 320,
+        "height": 800
+      },
+      "openNavigationGroup": null,
+      "openModalAction": null,
+      "modalCount": 3,
+      "visibleModalCount": 0,
+      "title": "Genel Bakış - Yalova Yazılım",
+      "bodyClass": "fi-body fi-panel-admin saas-layout-horizontal min-h-screen bg-gray-50 font-normal text-gray-950 antialiased dark:bg-gray-950 dark:text-white",
+      "rootLayoutClass": "saas-layout-horizontal",
+      "rootLayoutClassCount": 1,
+      "darkMode": false,
+      "renderer": "mobile-vertical-drawer",
+      "layoutGeometry": {
+        "renderer": "mobile-vertical-drawer",
+        "sidebar": {
+          "x": -281.59375,
+          "y": 0,
+          "width": 281.59375,
+          "height": 800,
+          "display": "flex",
+          "position": "fixed"
+        },
+        "sidebarHeader": {
+          "x": -281.59375,
+          "y": 0,
+          "width": 280.59375,
+          "height": 62,
+          "display": "flex",
+          "position": "static"
+        },
+        "navigation": {
+          "x": -269.59375,
+          "y": 76,
+          "width": 256.59375,
+          "height": 823,
+          "display": "block",
+          "position": "static"
+        },
+        "topbar": {
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 62,
+          "display": "block",
+          "position": "sticky"
+        },
+        "main": {
+          "x": 0,
+          "y": 62,
+          "width": 320,
+          "height": 6236.328125,
+          "display": "block",
+          "position": "static"
+        },
+        "mobileDrawerExists": true,
+        "horizontalNavigationVisible": false
+      },
+      "activeNavigationItem": [
+        "Gösterge Paneli"
+      ],
+      "navigationCount": 12,
+      "navigationLabels": [
+        "Gösterge Paneli",
+        "Muhasebe",
+        "Depo Yönetimi",
+        "Ürün Yönetimi",
+        "Teklif Yönetimi",
+        "Personel Takip",
+        "Restoran",
+        "Barkodlu Satış",
+        "Teknik Servis",
+        "E-Ticaret",
+        "Web",
+        "Ayarlar"
+      ],
+      "secondaryNavigationCount": {
+        "sidebar": 0,
+        "select": 0,
+        "tabs": 0
+      },
+      "horizontalOverflow": false,
+      "overflowGeometry": {
+        "horizontal": false,
+        "scrollWidth": 320,
+        "clientWidth": 320
+      },
+      "consoleErrorCount": 0,
+      "consoleWarningCount": 0,
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "serverError": false,
+      "httpStatus": 200,
+      "asset404Count": 0,
+      "asset404s": [],
+      "failedRequestCount": 0,
+      "performance": {
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": []
+      },
+      "screenshot": "screenshots/tenant-horizontal-dashboard-320.png"
+    }
+  ],
+  "spa": [
+    {
+      "userContext": "manager",
+      "layout": "modern-vertical",
+      "chain": [
+        "/admin",
+        "/admin/sistem-kullanicilar",
+        "/admin/sistem-firmalar"
+      ],
+      "firstClick": {
+        "ok": true,
+        "count": 1,
+        "url": "http://127.0.0.1:8000/admin/sistem-kullanicilar"
+      },
+      "secondClick": {
+        "ok": true,
+        "count": 1,
+        "url": "http://127.0.0.1:8000/admin/sistem-firmalar"
+      },
+      "markerPreserved": true,
+      "timeOriginPreserved": true,
+      "rootClassPreserved": true
+    },
+    {
+      "userContext": "manager",
+      "layout": "compact-vertical",
+      "chain": [
+        "/admin",
+        "/admin/sistem-kullanicilar",
+        "/admin/sistem-ayarlari"
+      ],
+      "firstClick": {
+        "ok": true,
+        "count": 1,
+        "url": "http://127.0.0.1:8000/admin/sistem-kullanicilar"
+      },
+      "secondClick": {
+        "ok": true,
+        "count": 1,
+        "url": "http://127.0.0.1:8000/admin/sistem-ayarlari"
+      },
+      "markerPreserved": true,
+      "timeOriginPreserved": true,
+      "rootClassPreserved": true
+    },
+    {
+      "userContext": "manager",
+      "layout": "horizontal",
+      "chain": [
+        "/admin",
+        "/admin/sistem-kullanicilar",
+        "/admin/sistem-firmalar"
+      ],
+      "firstClick": {
+        "ok": true,
+        "count": 1,
+        "url": "http://127.0.0.1:8000/admin/sistem-kullanicilar"
+      },
+      "secondClick": {
+        "ok": true,
+        "count": 1,
+        "url": "http://127.0.0.1:8000/admin/sistem-firmalar"
+      },
+      "markerPreserved": true,
+      "timeOriginPreserved": true,
+      "rootClassPreserved": true
+    }
+  ],
+  "persistence": [
+    {
+      "userContext": "manager",
+      "selectedLayout": "horizontal",
+      "hardReloadPreserved": true,
+      "spaNavigation": {
+        "ok": true,
+        "count": 1,
+        "url": "http://127.0.0.1:8000/admin/sistem-kullanicilar"
+      },
+      "spaPreserved": true,
+      "reloginMethod": "browser cookie reset + real login form",
+      "reloginPreserved": true,
+      "databasePreserved": true,
+      "otherUserUnaffected": true
+    },
+    {
+      "userContext": "tenant",
+      "selectedLayout": "compact-vertical",
+      "hardReloadPreserved": true,
+      "spaNavigation": {
+        "ok": true,
+        "count": 1,
+        "url": "http://127.0.0.1:8000/admin/teknik-servis/servis-kayitlari"
+      },
+      "spaPreserved": true,
+      "reloginMethod": "browser cookie reset + real login form",
+      "reloginPreserved": true,
+      "databasePreserved": true,
+      "otherUserUnaffected": true
+    }
+  ],
+  "publicFrontend": [
+    {
+      "route": "/",
+      "httpStatus": 200,
+      "adminLayoutClassCount": 0,
+      "adminLayoutCssLinks": [],
+      "deepAssetPresent": true
+    },
+    {
+      "route": "/giris",
+      "httpStatus": 200,
+      "adminLayoutClassCount": 0,
+      "adminLayoutCssLinks": [],
+      "deepAssetPresent": false
+    },
+    {
+      "route": "/yonetici-giris",
+      "httpStatus": 200,
+      "adminLayoutClassCount": 0,
+      "adminLayoutCssLinks": [],
+      "deepAssetPresent": false
+    }
+  ],
+  "assertions": {
+    "snapshotCount": 34,
+    "screenshotCount": 34,
+    "navigation": {
+      "managerExpected": 16,
+      "tenantExpected": 12,
+      "tenantHiddenModules": [
+        "Masraf Takibi",
+        "Ajanda ve Görevler"
+      ],
+      "passed": true,
+      "details": [
+        {
+          "id": "admin-modern-dashboard-1440",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-modern-users-1440",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-modern-users-modal-1440",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-modern-companies-1366",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-modern-settings-1024",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-modern-dashboard-390",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-compact-dashboard-1440",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-compact-users-1440",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-compact-submenu-open-1366",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-compact-dashboard-390",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-horizontal-dashboard-1440",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-horizontal-users-1366",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-horizontal-dropdown-open-1440",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "admin-horizontal-dashboard-390",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-modern-dashboard-1440",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-modern-accounting-1440",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-modern-personnel-1024",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-modern-restaurant-768",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-modern-web-blog-430",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-modern-offers-390",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-modern-barcode-375",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-modern-dashboard-320",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-compact-dashboard-1440",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-compact-technical-service-1366",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-compact-submenu-open-1440",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-compact-dashboard-430",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-compact-dashboard-375",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-horizontal-dashboard-1440-light",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-horizontal-accounting-1366-dark",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-horizontal-dropdown-open-1440",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-horizontal-dashboard-1024",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-horizontal-dashboard-768",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-horizontal-dashboard-390",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        },
+        {
+          "id": "tenant-horizontal-dashboard-320",
+          "countMatches": true,
+          "requiredPresent": true,
+          "requiredAbsent": true
+        }
+      ]
+    },
+    "secondaryNavigationPassed": true,
+    "rootLayoutClassPassed": true,
+    "desktopGeometryPassed": true,
+    "horizontalOverflowPassed": true,
+    "modalBaseline": {
+      "checked": 1,
+      "passed": true
+    },
+    "mobileFallback": {
+      "checked": 7,
+      "preferenceClassPreserved": true,
+      "verticalDrawerRenderer": true,
+      "horizontalNavigationHidden": true
+    },
+    "darkLightMatrix": {
+      "modernLight": true,
+      "compactDark": true,
+      "horizontalDark": true,
+      "horizontalLight": true
+    },
+    "spaPassed": true,
+    "persistencePassed": true,
+    "publicFrontendPassed": true
+  },
+  "runtime": {
+    "consoleErrorCount": 0,
+    "consoleWarningCount": 0,
+    "serverErrorCount": 0,
+    "http500Count": 0,
+    "asset404Count": 0,
+    "knownAlpineRuntimeErrors": 0,
+    "errors": [],
+    "warnings": []
+  },
+  "performance": {
+    "method": "performance resource timing; bytes are transferSize/encodedBodySize approximations",
+    "representativeSnapshots": [
+      {
+        "id": "admin-modern-dashboard-1440",
+        "userContext": "manager",
+        "layout": "modern-vertical",
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 527092,
+        "duplicateRequestUrls": [],
+        "asset404Count": 0
+      },
+      {
+        "id": "admin-compact-dashboard-1440",
+        "userContext": "manager",
+        "layout": "compact-vertical",
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": [],
+        "asset404Count": 0
+      },
+      {
+        "id": "admin-compact-submenu-open-1366",
+        "userContext": "manager",
+        "layout": "compact-vertical",
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": [],
+        "asset404Count": 0
+      },
+      {
+        "id": "admin-horizontal-dashboard-1440",
+        "userContext": "manager",
+        "layout": "horizontal",
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": [],
+        "asset404Count": 0
+      },
+      {
+        "id": "admin-horizontal-dropdown-open-1440",
+        "userContext": "manager",
+        "layout": "horizontal",
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": [],
+        "asset404Count": 0
+      },
+      {
+        "id": "tenant-modern-dashboard-1440",
+        "userContext": "tenant",
+        "layout": "modern-vertical",
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": [],
+        "asset404Count": 0
+      },
+      {
+        "id": "tenant-compact-dashboard-1440",
+        "userContext": "tenant",
+        "layout": "compact-vertical",
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": [],
+        "asset404Count": 0
+      },
+      {
+        "id": "tenant-compact-submenu-open-1440",
+        "userContext": "tenant",
+        "layout": "compact-vertical",
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": [],
+        "asset404Count": 0
+      },
+      {
+        "id": "tenant-horizontal-dashboard-1440-light",
+        "userContext": "tenant",
+        "layout": "horizontal",
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": [],
+        "asset404Count": 0
+      },
+      {
+        "id": "tenant-horizontal-dropdown-open-1440",
+        "userContext": "tenant",
+        "layout": "horizontal",
+        "cssAssetCount": 18,
+        "approximateCssBytes": 339939,
+        "jsAssetCount": 9,
+        "approximateJsBytes": 526792,
+        "duplicateRequestUrls": [],
+        "asset404Count": 0
+      }
+    ]
+  },
+  "restore": {
+    "ok": true,
+    "restored": [
+      {
+        "id": 7,
+        "type": "manager",
+        "layout": null
+      },
+      {
+        "id": 14,
+        "type": "tenant",
+        "layout": null
+      }
+    ]
+  },
+  "completedAt": "2026-08-16T06:23:22.104Z"
+}

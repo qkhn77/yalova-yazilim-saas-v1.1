@@ -1,0 +1,179 @@
+/*
+ * CORK Faz 3G - Teklif ve belge önizleme admin UI adapter'ı.
+ *
+ * Bu dosya yalnızca admin sunum katmanını düzenler. Teklif hesaplama,
+ * Livewire state, action callback'leri, belge HTML'i ve yazdırma/PDF
+ * yüzeyi bilerek kapsam dışındadır.
+ */
+
+body.fi-panel-admin .teklif-cork-screen,
+body.fi-panel-admin .teklif-cork-form-screen {
+    --teklif-surface: var(--saas-surface, #ffffff);
+    --teklif-surface-muted: var(--saas-surface-muted, #fafafa);
+    --teklif-border: var(--saas-border, #e0e6ed);
+    --teklif-text: var(--saas-text, #3b3f5c);
+    --teklif-text-soft: var(--saas-text-soft, #515365);
+    --teklif-muted: var(--saas-text-muted, #888ea8);
+    --teklif-primary: var(--saas-primary, #4361ee);
+    --teklif-success: var(--saas-success, #00ab55);
+    --teklif-warning: var(--saas-warning, #e2a03f);
+    --teklif-danger: var(--saas-danger, #e7515a);
+    --teklif-radius: var(--saas-radius-md, 0.5rem);
+    --teklif-radius-sm: var(--saas-radius-sm, 0.375rem);
+    --teklif-shadow: var(--saas-shadow-sm, 0 1px 3px rgb(31 45 61 / 6%));
+    min-width: 0;
+    color: var(--teklif-text-soft);
+}
+
+body.fi-panel-admin .teklif-cork-screen > *,
+body.fi-panel-admin .teklif-cork-form-screen > * {
+    min-width: 0;
+}
+
+body.fi-panel-admin .teklif-cork-screen .teklif-cork-summary {
+    min-width: 0;
+    border-color: var(--teklif-border) !important;
+    border-radius: var(--teklif-radius) !important;
+    background: var(--teklif-surface) !important;
+    box-shadow: var(--teklif-shadow) !important;
+}
+
+body.fi-panel-admin .teklif-cork-screen .teklif-cork-summary dt {
+    color: var(--teklif-muted) !important;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+body.fi-panel-admin .teklif-cork-screen .teklif-cork-summary dd {
+    color: var(--teklif-text) !important;
+}
+
+body.fi-panel-admin .teklif-cork-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+body.fi-panel-admin .teklif-cork-screen .teklif-cork-status {
+    display: inline-flex;
+    min-height: 1.5rem;
+    align-items: center;
+    border: 1px solid color-mix(in srgb, var(--teklif-primary) 22%, var(--teklif-border));
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--teklif-primary) 8%, var(--teklif-surface));
+    color: var(--teklif-primary);
+    padding-inline: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+body.fi-panel-admin .teklif-cork-screen .teklif-cork-preview-frame-shell {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--teklif-border);
+    border-radius: var(--teklif-radius);
+    background: var(--teklif-surface-muted);
+    box-shadow: var(--teklif-shadow);
+}
+
+body.fi-panel-admin .teklif-cork-screen .teklif-cork-preview-frame-shell iframe {
+    display: block;
+    width: 100%;
+    min-height: 72vh;
+    border: 0;
+    background: #fff;
+}
+
+body.fi-panel-admin .teklif-cork-screen .teklif-kayit-onizleme {
+    min-width: 0;
+}
+
+body.fi-panel-admin .teklif-cork-screen .teklif-cork-document-host {
+    min-width: 0;
+}
+
+body.fi-panel-admin .teklif-cork-form-screen {
+    min-width: 0;
+}
+
+body.fi-panel-admin .teklif-cork-form-screen > form,
+body.fi-panel-admin .teklif-cork-form-screen > .fi-fo-component-ctn {
+    min-width: 0;
+}
+
+body.fi-panel-admin .teklif-cork-live-preview {
+    min-width: 0;
+    border-color: var(--teklif-border) !important;
+    border-radius: var(--teklif-radius) !important;
+    background: var(--teklif-surface-muted) !important;
+    box-shadow: var(--teklif-shadow);
+}
+
+body.fi-panel-admin .teklif-cork-live-preview > :first-child {
+    border-color: var(--teklif-border) !important;
+    background: var(--teklif-surface) !important;
+}
+
+body.fi-panel-admin .teklif-cork-live-preview > :last-child {
+    min-width: 0;
+    overflow: auto;
+}
+
+body.fi-panel-admin .teklif-cork-live-preview iframe {
+    flex: 0 0 auto;
+}
+
+html.dark body.fi-panel-admin .teklif-cork-screen .teklif-cork-summary,
+html.dark body.fi-panel-admin .teklif-cork-screen .teklif-cork-preview-frame-shell,
+html.dark body.fi-panel-admin .teklif-cork-live-preview,
+html.dark body.fi-panel-admin .teklif-cork-live-preview > :first-child {
+    background: var(--saas-surface, #0e1726) !important;
+    border-color: var(--saas-border, rgb(255 255 255 / 10%)) !important;
+}
+
+html.dark body.fi-panel-admin .teklif-cork-screen .teklif-cork-summary dt {
+    color: var(--saas-text-muted, #888ea8) !important;
+}
+
+html.dark body.fi-panel-admin .teklif-cork-screen .teklif-cork-summary dd {
+    color: var(--saas-text, #f1f2f3) !important;
+}
+
+@media (max-width: 767px) {
+    body.fi-panel-admin .teklif-cork-toolbar {
+        align-items: stretch;
+        justify-content: flex-start;
+    }
+
+    body.fi-panel-admin .teklif-cork-toolbar > * {
+        min-width: min(100%, 16rem);
+        max-width: 100%;
+    }
+
+    body.fi-panel-admin .teklif-cork-screen .teklif-cork-summary {
+        padding: 1rem !important;
+    }
+}
+
+@media (max-width: 479px) {
+    body.fi-panel-admin .teklif-cork-toolbar > * {
+        width: 100%;
+        min-width: 0;
+    }
+
+    body.fi-panel-admin .teklif-cork-screen .teklif-cork-preview-frame-shell {
+        border-radius: var(--teklif-radius-sm);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.fi-panel-admin .teklif-cork-screen a,
+    body.fi-panel-admin .teklif-cork-screen button {
+        transition: none;
+    }
+}

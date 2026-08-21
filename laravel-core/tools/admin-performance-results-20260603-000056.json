@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/stok/stok-listesi",
+    "name":  "filament.admin.muhasebe.resources.stok.stok-listesi.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\StokKartiKaynagi\\Pages\\ListStokKartlari",
+    "status":  200,
+    "avg_ms":  1740.06,
+    "min_ms":  1684.76,
+    "max_ms":  1774.5,
+    "runs_ms":  "1735,37|1733,94|1771,7|1774,5|1684,76",
+    "bytes":  187302,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/stok/stok-listesi",
+    "error":  null
+}

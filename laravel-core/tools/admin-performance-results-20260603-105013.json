@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/doviz-kurlari/create",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.doviz-kurlari.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\DovizKuruTanimKaynagi\\Pages\\CreateDovizKuru",
+    "status":  200,
+    "avg_ms":  1742.56,
+    "min_ms":  1742.56,
+    "max_ms":  1742.56,
+    "runs_ms":  "1742.56",
+    "bytes":  182935,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/doviz-kurlari/create",
+    "error":  null
+}

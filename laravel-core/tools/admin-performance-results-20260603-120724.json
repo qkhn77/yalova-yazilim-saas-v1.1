@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/tanimlar/aksesuarlar/create",
+    "name":  "filament.admin.teknik-servis.resources.tanimlar.aksesuarlar.create",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisAksesuarKaynagi\\Pages\\CreateTeknikServisAksesuar",
+    "status":  200,
+    "avg_ms":  1736.45,
+    "min_ms":  1736.45,
+    "max_ms":  1736.45,
+    "runs_ms":  "1736.45",
+    "bytes":  140735,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/aksesuarlar/create",
+    "error":  null
+}

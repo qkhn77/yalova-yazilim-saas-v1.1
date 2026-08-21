@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/ozet",
+    "name":  "filament.admin.personel-takip.pages.ozet",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Pages\\PersonelTakipOzetSayfasi",
+    "status":  200,
+    "avg_ms":  1733.95,
+    "min_ms":  1733.95,
+    "max_ms":  1733.95,
+    "runs_ms":  "1733.95",
+    "bytes":  114937,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/ozet",
+    "error":  null
+}

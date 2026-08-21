@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/web-moduller/ucuncu-grup/neden-biz","filament.admin.web.pages.web-moduller.ucuncu-grup.neden-biz","App\Filament\Clusters\Web\Pages\ModulNedenBiz","200","1679,05","1653,58","1704,51","1653,58|1704,51","191167","http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/neden-biz",

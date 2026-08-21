@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/sablonlar/kabul-formu",
+    "name":  "filament.admin.teknik-servis.pages.sablonlar.kabul-formu",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\ServisKabulFormuSablonuSayfasi",
+    "status":  200,
+    "avg_ms":  4455.79,
+    "min_ms":  2637.24,
+    "max_ms":  11134.94,
+    "runs_ms":  "11134,94|2637,98|2637,24|2972,81|2895,99",
+    "bytes":  268563,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/sablonlar/kabul-formu",
+    "error":  null
+}

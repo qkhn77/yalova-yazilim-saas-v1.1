@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/belgeler/servis-formu",
+    "name":  "filament.admin.teknik-servis.pages.belgeler.servis-formu",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\ServisFormu",
+    "status":  200,
+    "avg_ms":  1616,
+    "min_ms":  1616,
+    "max_ms":  1616,
+    "runs_ms":  "1616",
+    "bytes":  119656,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/belgeler/servis-formu",
+    "error":  null
+}

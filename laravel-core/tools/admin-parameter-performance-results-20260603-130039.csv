@@ -1,0 +1,2 @@
+﻿"rank","module","uri","uri_template","name","action","model","record_key","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/urunler/urun-kategorileri/1/edit","admin/web/urunler/urun-kategorileri/{record}/edit","filament.admin.web.resources.urunler.urun-kategorileri.edit","App\Filament\Clusters\Web\Resources\UrunKategoriKaynagi\Pages\EditUrunKategorisi","App\Models\Muhasebe\StokKategorisi","1","200","2679,22","1802,72","3555,71","3555,71|1802,72","155457","http://localhost/yalova-kamera/admin/web/urunler/urun-kategorileri/1/edit",

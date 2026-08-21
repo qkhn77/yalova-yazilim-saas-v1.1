@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayitlari/olustur/arizali-cihaz",
+    "name":  "filament.admin.teknik-servis.resources.servis-kayitlari.create_arizali",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\ArizaliCihazKaydiOlusturSayfasi",
+    "status":  200,
+    "avg_ms":  3379.05,
+    "min_ms":  1810.12,
+    "max_ms":  4947.98,
+    "runs_ms":  "4947,98|1810,12",
+    "bytes":  264245,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/olustur/arizali-cihaz",
+    "error":  null
+}

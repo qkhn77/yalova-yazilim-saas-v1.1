@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/ayarlar/telegram",
+    "name":  "filament.admin.teknik-servis.pages.ayarlar.telegram",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\TelegramSayfasi",
+    "status":  200,
+    "avg_ms":  1638.8,
+    "min_ms":  1638.8,
+    "max_ms":  1638.8,
+    "runs_ms":  "1638.8",
+    "bytes":  141968,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/ayarlar/telegram",
+    "error":  null
+}

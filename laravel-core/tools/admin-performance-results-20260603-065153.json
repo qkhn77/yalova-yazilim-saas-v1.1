@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/terminal/pin-giris-cikis",
+    "name":  "filament.admin.personel-takip.pages.terminal.pin-giris-cikis",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Pages\\PersonelPinTerminalSayfasi",
+    "status":  200,
+    "avg_ms":  1667.71,
+    "min_ms":  1656.17,
+    "max_ms":  1679.25,
+    "runs_ms":  "1656,17|1679,25",
+    "bytes":  129455,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/terminal/pin-giris-cikis",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/qr-menu/receteler/create",
+    "name":  "filament.admin.restoran.resources.qr-menu.receteler.create",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranReceteKaynagi\\Pages\\CreateRestoranRecete",
+    "status":  200,
+    "avg_ms":  3072.74,
+    "min_ms":  1886.05,
+    "max_ms":  4259.43,
+    "runs_ms":  "4259,43|1886,05",
+    "bytes":  178095,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/qr-menu/receteler/create",
+    "error":  null
+}

@@ -1,0 +1,692 @@
+﻿[
+    {
+        "uri_template": "admin/firma-ici-kullanicilar/{record}/edit",
+        "uri": "admin/firma-ici-kullanicilar/1/edit",
+        "name": "filament.admin.resources.firma-ici-kullanicilar.edit",
+        "action": "App\\Filament\\Resources\\FirmaIciKullaniciKaynagi\\Pages\\FirmaIciKullaniciDuzenle",
+        "resource": "App\\Filament\\Resources\\FirmaIciKullaniciKaynagi",
+        "model": "App\\Models\\FirmaKullanici",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/firma-kullanici-gruplari/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.resources.firma-kullanici-gruplari.edit",
+        "action": "App\\Filament\\Resources\\FirmaKullaniciGrubuKaynagi\\Pages\\EditFirmaKullaniciGrubu",
+        "resource": "App\\Filament\\Resources\\FirmaKullaniciGrubuKaynagi",
+        "model": "App\\Models\\Rol",
+        "record_key": null,
+        "status": "no_authorization"
+    },
+    {
+        "uri_template": "admin/muhasebe/cari-yonetimi/cariler/{record}",
+        "uri": "admin/muhasebe/cari-yonetimi/cariler/1",
+        "name": "filament.admin.muhasebe.resources.cari-yonetimi.cariler.view",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\CariKartiKaynagi\\Pages\\ViewCari",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\CariKartiKaynagi",
+        "model": "App\\Models\\Muhasebe\\Cari",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/cari-yonetimi/cariler/{record}/edit",
+        "uri": "admin/muhasebe/cari-yonetimi/cariler/1/edit",
+        "name": "filament.admin.muhasebe.resources.cari-yonetimi.cariler.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\CariKartiKaynagi\\Pages\\EditCari",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\CariKartiKaynagi",
+        "model": "App\\Models\\Muhasebe\\Cari",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/fatura-kaynagis/{record}",
+        "uri": "admin/muhasebe/fatura-kaynagis/1",
+        "name": "filament.admin.muhasebe.resources.fatura-kaynagis.view",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\ViewFatura",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi",
+        "model": "App\\Models\\Muhasebe\\Fatura",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/fatura-kaynagis/{record}/edit",
+        "uri": "admin/muhasebe/fatura-kaynagis/1/edit",
+        "name": "filament.admin.muhasebe.resources.fatura-kaynagis.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\EditFatura",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi",
+        "model": "App\\Models\\Muhasebe\\Fatura",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/finans/banka-hesaplari/{record}",
+        "uri": "admin/muhasebe/finans/banka-hesaplari/1",
+        "name": "filament.admin.muhasebe.resources.finans.banka-hesaplari.view",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\BankaHesabiKaynagi\\Pages\\ViewBankaHesabi",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\BankaHesabiKaynagi",
+        "model": "App\\Models\\Muhasebe\\BankaHesabi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/finans/banka-hesaplari/{record}/edit",
+        "uri": "admin/muhasebe/finans/banka-hesaplari/1/edit",
+        "name": "filament.admin.muhasebe.resources.finans.banka-hesaplari.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\BankaHesabiKaynagi\\Pages\\EditBankaHesabi",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\BankaHesabiKaynagi",
+        "model": "App\\Models\\Muhasebe\\BankaHesabi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/finans/kasa-hesaplari/{record}",
+        "uri": "admin/muhasebe/finans/kasa-hesaplari/1",
+        "name": "filament.admin.muhasebe.resources.finans.kasa-hesaplari.view",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\KasaHesabiKaynagi\\Pages\\ViewKasaHesabi",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\KasaHesabiKaynagi",
+        "model": "App\\Models\\Muhasebe\\KasaHesabi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/finans/kasa-hesaplari/{record}/edit",
+        "uri": "admin/muhasebe/finans/kasa-hesaplari/1/edit",
+        "name": "filament.admin.muhasebe.resources.finans.kasa-hesaplari.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\KasaHesabiKaynagi\\Pages\\EditKasaHesabi",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\KasaHesabiKaynagi",
+        "model": "App\\Models\\Muhasebe\\KasaHesabi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/finans/poslar/{record}",
+        "uri": "admin/muhasebe/finans/poslar/1",
+        "name": "filament.admin.muhasebe.resources.finans.poslar.view",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\PosHesabiKaynagi\\Pages\\ViewPosHesabi",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\PosHesabiKaynagi",
+        "model": "App\\Models\\Muhasebe\\PosHesabi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/finans/poslar/{record}/edit",
+        "uri": "admin/muhasebe/finans/poslar/1/edit",
+        "name": "filament.admin.muhasebe.resources.finans.poslar.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\PosHesabiKaynagi\\Pages\\EditPosHesabi",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\PosHesabiKaynagi",
+        "model": "App\\Models\\Muhasebe\\PosHesabi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/stok/stok-kategorileri/{record}/edit",
+        "uri": "admin/muhasebe/stok/stok-kategorileri/1/edit",
+        "name": "filament.admin.muhasebe.resources.stok.stok-kategorileri.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\StokKategoriKaynagi\\Pages\\EditStokKategorisi",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\StokKategoriKaynagi",
+        "model": "App\\Models\\Muhasebe\\StokKategorisi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/stok/stok-listesi/{record}",
+        "uri": "admin/muhasebe/stok/stok-listesi/1",
+        "name": "filament.admin.muhasebe.resources.stok.stok-listesi.view",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\StokKartiKaynagi\\Pages\\ViewStokKarti",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\StokKartiKaynagi",
+        "model": "App\\Models\\Muhasebe\\StokKarti",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/stok/stok-listesi/{record}/edit",
+        "uri": "admin/muhasebe/stok/stok-listesi/1/edit",
+        "name": "filament.admin.muhasebe.resources.stok.stok-listesi.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\StokKartiKaynagi\\Pages\\EditStokKarti",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\StokKartiKaynagi",
+        "model": "App\\Models\\Muhasebe\\StokKarti",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/birimler/{record}/edit",
+        "uri": "admin/muhasebe/tanimlar/birimler/1/edit",
+        "name": "filament.admin.muhasebe.resources.tanimlar.birimler.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\BirimTanimKaynagi\\Pages\\EditBirim",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\BirimTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\Birim",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/cari-gruplari/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.muhasebe.resources.tanimlar.cari-gruplari.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\CariGrubuTanimKaynagi\\Pages\\EditCariGrubu",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\CariGrubuTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\CariGrubu",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/doviz-kurlari/{record}/edit",
+        "uri": "admin/muhasebe/tanimlar/doviz-kurlari/2/edit",
+        "name": "filament.admin.muhasebe.resources.tanimlar.doviz-kurlari.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\DovizKuruTanimKaynagi\\Pages\\EditDovizKuru",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\DovizKuruTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\DovizKuru",
+        "record_key": "2",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/logo-turleri/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.muhasebe.resources.tanimlar.logo-turleri.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeLogoTuruTanimKaynagi\\Pages\\EditMuhasebeLogoTuru",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeLogoTuruTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\MuhasebeLogoTuru",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/malzeme-turleri/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.muhasebe.resources.tanimlar.malzeme-turleri.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeMalzemeTuruTanimKaynagi\\Pages\\EditMuhasebeMalzemeTuru",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeMalzemeTuruTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\MuhasebeMalzemeTuru",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/marka-ureticileri/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.muhasebe.resources.tanimlar.marka-ureticileri.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeMarkaUreticiTanimKaynagi\\Pages\\EditMuhasebeMarkaUretici",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeMarkaUreticiTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\MuhasebeMarkaUretici",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/markalar/{record}/edit",
+        "uri": "admin/muhasebe/tanimlar/markalar/1/edit",
+        "name": "filament.admin.muhasebe.resources.tanimlar.markalar.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeMarkaTanimKaynagi\\Pages\\EditMuhasebeMarka",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeMarkaTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\MuhasebeMarka",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/odeme-yontemleri/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.muhasebe.resources.tanimlar.odeme-yontemleri.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\OdemeYontemiTanimKaynagi\\Pages\\EditOdemeYontemi",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\OdemeYontemiTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\MuhasebeOdemeYontemi",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/para-birimleri/{record}/edit",
+        "uri": "admin/muhasebe/tanimlar/para-birimleri/1/edit",
+        "name": "filament.admin.muhasebe.resources.tanimlar.para-birimleri.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\ParaBirimiTanimKaynagi\\Pages\\EditParaBirimi",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\ParaBirimiTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\ParaBirimi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/stok-modelleri/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.muhasebe.resources.tanimlar.stok-modelleri.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeStokModeliTanimKaynagi\\Pages\\EditMuhasebeStokModeli",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeStokModeliTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\MuhasebeStokModeli",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/tasarimlar/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.muhasebe.resources.tanimlar.tasarimlar.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeTasarimTanimKaynagi\\Pages\\EditMuhasebeTasarim",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeTasarimTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\MuhasebeTasarim",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/varyantlar/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.muhasebe.resources.tanimlar.varyantlar.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeVaryantTanimKaynagi\\Pages\\EditMuhasebeVaryant",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeVaryantTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\MuhasebeVaryant",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/muhasebe/tanimlar/vergi-oranlari/{record}/edit",
+        "uri": "admin/muhasebe/tanimlar/vergi-oranlari/1/edit",
+        "name": "filament.admin.muhasebe.resources.tanimlar.vergi-oranlari.edit",
+        "action": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\VergiOraniTanimKaynagi\\Pages\\EditVergiOrani",
+        "resource": "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\VergiOraniTanimKaynagi",
+        "model": "App\\Models\\Muhasebe\\VergiOrani",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/personel-takip/avanslar/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.personel-takip.resources.avanslar.edit",
+        "action": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelAvansKaynagi\\Pages\\EditPersonelAvans",
+        "resource": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelAvansKaynagi",
+        "model": "App\\Models\\Personel\\PersonelAvansi",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/personel-takip/giris-cikis/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.personel-takip.resources.giris-cikis.edit",
+        "action": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelGirisCikisKaynagi\\Pages\\EditPersonelGirisCikis",
+        "resource": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelGirisCikisKaynagi",
+        "model": "App\\Models\\Personel\\PersonelGirisCikisi",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/personel-takip/izinler/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.personel-takip.resources.izinler.edit",
+        "action": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelIzinKaynagi\\Pages\\EditPersonelIzin",
+        "resource": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelIzinKaynagi",
+        "model": "App\\Models\\Personel\\PersonelIzni",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/personel-takip/maas-donemleri/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.personel-takip.resources.maas-donemleri.edit",
+        "action": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelMaasDonemiKaynagi\\Pages\\EditPersonelMaasDonemi",
+        "resource": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelMaasDonemiKaynagi",
+        "model": "App\\Models\\Personel\\PersonelMaasDonemi",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/personel-takip/personeller/{record}/edit",
+        "uri": "admin/personel-takip/personeller/1/edit",
+        "name": "filament.admin.personel-takip.resources.personeller.edit",
+        "action": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelKaynagi\\Pages\\EditPersonel",
+        "resource": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelKaynagi",
+        "model": "App\\Models\\Personel\\Personel",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/personel-takip/tanimlar/departmanlar/{record}/edit",
+        "uri": "admin/personel-takip/tanimlar/departmanlar/1/edit",
+        "name": "filament.admin.personel-takip.resources.tanimlar.departmanlar.edit",
+        "action": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelDepartmanKaynagi\\Pages\\EditPersonelDepartman",
+        "resource": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelDepartmanKaynagi",
+        "model": "App\\Models\\Personel\\PersonelDepartmani",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/personel-takip/tanimlar/gorevler/{record}/edit",
+        "uri": "admin/personel-takip/tanimlar/gorevler/1/edit",
+        "name": "filament.admin.personel-takip.resources.tanimlar.gorevler.edit",
+        "action": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelGorevKaynagi\\Pages\\EditPersonelGorev",
+        "resource": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelGorevKaynagi",
+        "model": "App\\Models\\Personel\\PersonelGorevi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/personel-takip/tanimlar/subeler/{record}/edit",
+        "uri": "admin/personel-takip/tanimlar/subeler/1/edit",
+        "name": "filament.admin.personel-takip.resources.tanimlar.subeler.edit",
+        "action": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\SubeKaynagi\\Pages\\EditSube",
+        "resource": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\SubeKaynagi",
+        "model": "App\\Models\\Sube",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/personel-takip/tanimlar/vardiya-sablonlari/{record}/edit",
+        "uri": "admin/personel-takip/tanimlar/vardiya-sablonlari/1/edit",
+        "name": "filament.admin.personel-takip.resources.tanimlar.vardiya-sablonlari.edit",
+        "action": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelVardiyaSablonuKaynagi\\Pages\\EditPersonelVardiyaSablonu",
+        "resource": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelVardiyaSablonuKaynagi",
+        "model": "App\\Models\\Personel\\PersonelVardiyaSablonu",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/personel-takip/vardiyalar/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.personel-takip.resources.vardiyalar.edit",
+        "action": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelVardiyaKaynagi\\Pages\\EditPersonelVardiya",
+        "resource": "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelVardiyaKaynagi",
+        "model": "App\\Models\\Personel\\PersonelVardiyasi",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/restoran/adisyon-kalemleri/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.restoran.resources.adisyon-kalemleri.edit",
+        "action": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranAdisyonKalemiKaynagi\\Pages\\EditRestoranAdisyonKalemi",
+        "resource": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranAdisyonKalemiKaynagi",
+        "model": "App\\Models\\Restoran\\RestoranAdisyonKalemi",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/restoran/adisyonlar/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.restoran.resources.adisyonlar.edit",
+        "action": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranAdisyonKaynagi\\Pages\\EditRestoranAdisyon",
+        "resource": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranAdisyonKaynagi",
+        "model": "App\\Models\\Restoran\\RestoranAdisyonu",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/restoran/masalar/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.restoran.resources.masalar.edit",
+        "action": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranMasaKaynagi\\Pages\\EditRestoranMasa",
+        "resource": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranMasaKaynagi",
+        "model": "App\\Models\\Restoran\\RestoranMasasi",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/restoran/qr-menu/kategoriler/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.restoran.resources.qr-menu.kategoriler.edit",
+        "action": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranMenuKategoriKaynagi\\Pages\\EditRestoranMenuKategori",
+        "resource": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranMenuKategoriKaynagi",
+        "model": "App\\Models\\Restoran\\RestoranMenuKategorisi",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/restoran/qr-menu/receteler/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.restoran.resources.qr-menu.receteler.edit",
+        "action": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranReceteKaynagi\\Pages\\EditRestoranRecete",
+        "resource": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranReceteKaynagi",
+        "model": "App\\Models\\Restoran\\RestoranRecetesi",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/restoran/qr-menu/urunler/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.restoran.resources.qr-menu.urunler.edit",
+        "action": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranMenuUrunKaynagi\\Pages\\EditRestoranMenuUrun",
+        "resource": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranMenuUrunKaynagi",
+        "model": "App\\Models\\Restoran\\RestoranMenuUrunu",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/restoran/tanimlar/salonlar/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.restoran.resources.tanimlar.salonlar.edit",
+        "action": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranSalonKaynagi\\Pages\\EditRestoranSalon",
+        "resource": "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranSalonKaynagi",
+        "model": "App\\Models\\Restoran\\RestoranSalonu",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/siparisler/{record}",
+        "uri": null,
+        "name": "filament.admin.resources.siparisler.view",
+        "action": "App\\Filament\\Resources\\SiparisKaynagi\\Pages\\ViewSiparis",
+        "resource": "App\\Filament\\Resources\\SiparisKaynagi",
+        "model": "App\\Models\\Ecommerce\\Siparis",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/siparisler/{record}/duzenle",
+        "uri": null,
+        "name": "filament.admin.resources.siparisler.edit",
+        "action": "App\\Filament\\Resources\\SiparisKaynagi\\Pages\\EditSiparis",
+        "resource": "App\\Filament\\Resources\\SiparisKaynagi",
+        "model": "App\\Models\\Ecommerce\\Siparis",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/sistem-firmalar/{record}/edit",
+        "uri": "admin/sistem-firmalar/1/edit",
+        "name": "filament.admin.resources.sistem-firmalar.edit",
+        "action": "App\\Filament\\Resources\\FirmaYonetimKaynagi\\Pages\\FirmaDuzenle",
+        "resource": "App\\Filament\\Resources\\FirmaYonetimKaynagi",
+        "model": "App\\Models\\Firma",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/sistem-kullanicilar/{record}",
+        "uri": "admin/sistem-kullanicilar/1",
+        "name": "filament.admin.resources.sistem-kullanicilar.view",
+        "action": "App\\Filament\\Resources\\UserResource\\Pages\\ViewUser",
+        "resource": "App\\Filament\\Resources\\UserResource",
+        "model": "App\\Models\\User",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/sistem-kullanicilar/{record}/edit",
+        "uri": "admin/sistem-kullanicilar/1/edit",
+        "name": "filament.admin.resources.sistem-kullanicilar.edit",
+        "action": "App\\Filament\\Resources\\UserResource\\Pages\\EditUser",
+        "resource": "App\\Filament\\Resources\\UserResource",
+        "model": "App\\Models\\User",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/sistem-moduller/{record}/edit",
+        "uri": "admin/sistem-moduller/1/edit",
+        "name": "filament.admin.resources.sistem-moduller.edit",
+        "action": "App\\Filament\\Resources\\ModulYonetimKaynagi\\Pages\\ModulDuzenle",
+        "resource": "App\\Filament\\Resources\\ModulYonetimKaynagi",
+        "model": "App\\Models\\Modul",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/sistem-planlar/{record}/edit",
+        "uri": "admin/sistem-planlar/1/edit",
+        "name": "filament.admin.resources.sistem-planlar.edit",
+        "action": "App\\Filament\\Resources\\PlanYonetimKaynagi\\Pages\\PlanDuzenle",
+        "resource": "App\\Filament\\Resources\\PlanYonetimKaynagi",
+        "model": "App\\Models\\Plan",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/sistem-roller/{record}",
+        "uri": "admin/sistem-roller/1",
+        "name": "filament.admin.resources.sistem-roller.view",
+        "action": "App\\Filament\\Resources\\RoleResource\\Pages\\ViewRole",
+        "resource": "App\\Filament\\Resources\\RoleResource",
+        "model": "App\\Models\\Rol",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/sistem-roller/{record}/edit",
+        "uri": "admin/sistem-roller/1/edit",
+        "name": "filament.admin.resources.sistem-roller.edit",
+        "action": "App\\Filament\\Resources\\RoleResource\\Pages\\EditRole",
+        "resource": "App\\Filament\\Resources\\RoleResource",
+        "model": "App\\Models\\Rol",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/sistem-yetkiler/{record}/edit",
+        "uri": "admin/sistem-yetkiler/1/edit",
+        "name": "filament.admin.resources.sistem-yetkiler.edit",
+        "action": "App\\Filament\\Resources\\YetkiYonetimKaynagi\\Pages\\YetkiDuzenle",
+        "resource": "App\\Filament\\Resources\\YetkiYonetimKaynagi",
+        "model": "App\\Models\\Yetki",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/teklif-yonetimi/sablonlar/{record}/edit",
+        "uri": "admin/teklif-yonetimi/sablonlar/18/edit",
+        "name": "filament.admin.teklif-yonetimi.resources.sablonlar.edit",
+        "action": "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifSablonKaynagi\\Pages\\EditTeklifSablonu",
+        "resource": "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifSablonKaynagi",
+        "model": "App\\Models\\TeklifYonetimi\\TeklifBaskiSablonu",
+        "record_key": "18",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/teklif-yonetimi/sablonlar/{record}/preview",
+        "uri": "admin/teklif-yonetimi/sablonlar/18/preview",
+        "name": "filament.admin.teklif-yonetimi.resources.sablonlar.preview",
+        "action": "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifSablonKaynagi\\Pages\\PreviewTeklifSablonu",
+        "resource": "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifSablonKaynagi",
+        "model": "App\\Models\\TeklifYonetimi\\TeklifBaskiSablonu",
+        "record_key": "18",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/teklif-yonetimi/teklifler/{record}",
+        "uri": null,
+        "name": "filament.admin.teklif-yonetimi.resources.teklifler.view",
+        "action": "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifKaynagi\\Pages\\ViewTeklif",
+        "resource": "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifKaynagi",
+        "model": "App\\Models\\Muhasebe\\Teklif",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/teklif-yonetimi/teklifler/{record}/edit",
+        "uri": null,
+        "name": "filament.admin.teklif-yonetimi.resources.teklifler.edit",
+        "action": "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifKaynagi\\Pages\\EditTeklif",
+        "resource": "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifKaynagi",
+        "model": "App\\Models\\Muhasebe\\Teklif",
+        "record_key": null,
+        "status": "no_record"
+    },
+    {
+        "uri_template": "admin/teknik-servis/servis-kayitlari/{record}",
+        "uri": "admin/teknik-servis/servis-kayitlari/1",
+        "name": "filament.admin.teknik-servis.resources.servis-kayitlari.view",
+        "action": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\TeknikServisKaydiGoruntule",
+        "resource": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi",
+        "model": "App\\Models\\TeknikServis\\TeknikServisKaydi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/teknik-servis/servis-kayitlari/{record}/duzenle",
+        "uri": "admin/teknik-servis/servis-kayitlari/1/duzenle",
+        "name": "filament.admin.teknik-servis.resources.servis-kayitlari.edit",
+        "action": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\TeknikServisKaydiDuzenle",
+        "resource": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi",
+        "model": "App\\Models\\TeknikServis\\TeknikServisKaydi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/teknik-servis/tanimlar/aksesuarlar/{record}/edit",
+        "uri": "admin/teknik-servis/tanimlar/aksesuarlar/1/edit",
+        "name": "filament.admin.teknik-servis.resources.tanimlar.aksesuarlar.edit",
+        "action": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisAksesuarKaynagi\\Pages\\EditTeknikServisAksesuar",
+        "resource": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisAksesuarKaynagi",
+        "model": "App\\Models\\TeknikServis\\TeknikServisAksesuarTanimi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/teknik-servis/tanimlar/arizalar/{record}/edit",
+        "uri": "admin/teknik-servis/tanimlar/arizalar/1/edit",
+        "name": "filament.admin.teknik-servis.resources.tanimlar.arizalar.edit",
+        "action": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisArizaKaynagi\\Pages\\EditTeknikServisArizasi",
+        "resource": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisArizaKaynagi",
+        "model": "App\\Models\\TeknikServis\\TeknikServisArizaTanimi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/teknik-servis/tanimlar/cihazlar/{record}/edit",
+        "uri": "admin/teknik-servis/tanimlar/cihazlar/1/edit",
+        "name": "filament.admin.teknik-servis.resources.tanimlar.cihazlar.edit",
+        "action": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisCihazKaynagi\\Pages\\EditTeknikServisCihazi",
+        "resource": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisCihazKaynagi",
+        "model": "App\\Models\\TeknikServis\\TeknikServisCihazTanimi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/teknik-servis/tanimlar/markalar/{record}/edit",
+        "uri": "admin/teknik-servis/tanimlar/markalar/1/edit",
+        "name": "filament.admin.teknik-servis.resources.tanimlar.markalar.edit",
+        "action": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisMarkaKaynagi\\Pages\\EditTeknikServisMarkasi",
+        "resource": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisMarkaKaynagi",
+        "model": "App\\Models\\TeknikServis\\TeknikServisMarkaTanimi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/teknik-servis/tanimlar/servis-durumlari/{record}/edit",
+        "uri": "admin/teknik-servis/tanimlar/servis-durumlari/7/edit",
+        "name": "filament.admin.teknik-servis.resources.tanimlar.servis-durumlari.edit",
+        "action": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisDurumuTanimKaynagi\\Pages\\EditTeknikServisDurumu",
+        "resource": "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisDurumuTanimKaynagi",
+        "model": "App\\Models\\TeknikServis\\TeknikServisDurumTanimi",
+        "record_key": "7",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/web/urunler/urun-kategorileri/{record}/edit",
+        "uri": "admin/web/urunler/urun-kategorileri/1/edit",
+        "name": "filament.admin.web.resources.urunler.urun-kategorileri.edit",
+        "action": "App\\Filament\\Clusters\\Web\\Resources\\UrunKategoriKaynagi\\Pages\\EditUrunKategorisi",
+        "resource": "App\\Filament\\Clusters\\Web\\Resources\\UrunKategoriKaynagi",
+        "model": "App\\Models\\Muhasebe\\StokKategorisi",
+        "record_key": "1",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/web/urunler/urun-listesi/{record}",
+        "uri": "admin/web/urunler/urun-listesi/9",
+        "name": "filament.admin.web.resources.urunler.urun-listesi.view",
+        "action": "App\\Filament\\Clusters\\Web\\Resources\\UrunKaynagi\\Pages\\ViewUrun",
+        "resource": "App\\Filament\\Clusters\\Web\\Resources\\UrunKaynagi",
+        "model": "App\\Models\\Muhasebe\\StokKarti",
+        "record_key": "9",
+        "status": "ok"
+    },
+    {
+        "uri_template": "admin/web/urunler/urun-listesi/{record}/edit",
+        "uri": "admin/web/urunler/urun-listesi/9/edit",
+        "name": "filament.admin.web.resources.urunler.urun-listesi.edit",
+        "action": "App\\Filament\\Clusters\\Web\\Resources\\UrunKaynagi\\Pages\\EditUrun",
+        "resource": "App\\Filament\\Clusters\\Web\\Resources\\UrunKaynagi",
+        "model": "App\\Models\\Muhasebe\\StokKarti",
+        "record_key": "9",
+        "status": "ok"
+    }
+]

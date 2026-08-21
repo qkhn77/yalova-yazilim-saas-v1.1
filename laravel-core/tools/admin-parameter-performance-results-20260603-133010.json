@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/tanimlar/cihazlar/1/edit",
+    "uri_template":  "admin/teknik-servis/tanimlar/cihazlar/{record}/edit",
+    "name":  "filament.admin.teknik-servis.resources.tanimlar.cihazlar.edit",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisCihazKaynagi\\Pages\\EditTeknikServisCihazi",
+    "model":  "App\\Models\\TeknikServis\\TeknikServisCihazTanimi",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  2259.86,
+    "min_ms":  2024.34,
+    "max_ms":  2495.38,
+    "runs_ms":  "2024,34|2495,38",
+    "bytes":  141569,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/cihazlar/1/edit",
+    "error":  null
+}

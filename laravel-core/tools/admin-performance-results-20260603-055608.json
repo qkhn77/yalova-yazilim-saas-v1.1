@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/web-ayarlar/mail-sablonlari",
+    "name":  "filament.admin.web.pages.web-ayarlar.mail-sablonlari",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\WebMailSablonlari",
+    "status":  200,
+    "avg_ms":  1646.38,
+    "min_ms":  1646.38,
+    "max_ms":  1646.38,
+    "runs_ms":  "1646.38",
+    "bytes":  138431,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/web-ayarlar/mail-sablonlari",
+    "error":  null
+}

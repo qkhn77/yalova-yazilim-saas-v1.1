@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/faturalar/gelen-faturalar",
+    "name":  "filament.admin.muhasebe.pages.faturalar.gelen-faturalar",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\GelenFatura",
+    "status":  200,
+    "avg_ms":  1663.18,
+    "min_ms":  1663.18,
+    "max_ms":  1663.18,
+    "runs_ms":  "1663.18",
+    "bytes":  159493,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/faturalar/gelen-faturalar",
+    "error":  null
+}

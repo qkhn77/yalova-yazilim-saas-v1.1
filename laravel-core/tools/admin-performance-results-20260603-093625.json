@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/maas-donemleri",
+    "name":  "filament.admin.personel-takip.resources.maas-donemleri.index",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelMaasDonemiKaynagi\\Pages\\ListPersonelMaasDonemleri",
+    "status":  200,
+    "avg_ms":  1700.89,
+    "min_ms":  1700.89,
+    "max_ms":  1700.89,
+    "runs_ms":  "1700.89",
+    "bytes":  160024,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/maas-donemleri",
+    "error":  null
+}

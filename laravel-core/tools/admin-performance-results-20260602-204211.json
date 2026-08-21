@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "e-ticaret",
+    "uri":  "admin/e-ticaret/bildirim-yonetimi/sablonlar",
+    "name":  "filament.admin.e-ticaret.pages.bildirim-yonetimi.sablonlar",
+    "action":  "App\\Filament\\Clusters\\ETicaret\\Pages\\BildirimSablonlariSayfasi",
+    "status":  200,
+    "avg_ms":  1700.05,
+    "min_ms":  1648.7,
+    "max_ms":  1756.43,
+    "runs_ms":  "1730,07|1693,23|1671,84|1648,7|1756,43",
+    "bytes":  138569,
+    "final_url":  "http://localhost/yalova-kamera/admin/e-ticaret/bildirim-yonetimi/sablonlar",
+    "error":  null
+}

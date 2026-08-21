@@ -1,0 +1,299 @@
+/*
+ * CORK Faz 3B - Teknik Servis özel Blade UI adapter'ı.
+ *
+ * Bu dosya yalnızca özel servis listesi, toolbar, badge, action, pagination,
+ * cihaz ve operasyon tablolarının sunum katmanını merkezi admin tokenlarına
+ * bağlar. Query, Livewire/Alpine state ve action hedefleri değiştirilmez.
+ */
+
+body.fi-panel-admin .ts-cork-screen {
+    --ts-surface: var(--saas-surface, #ffffff);
+    --ts-surface-muted: var(--saas-surface-muted, #fafafa);
+    --ts-border: var(--saas-border, #e0e6ed);
+    --ts-text: var(--saas-text, #3b3f5c);
+    --ts-text-soft: var(--saas-text-soft, #515365);
+    --ts-muted: var(--saas-text-muted, #888ea8);
+    --ts-radius: var(--saas-radius-md, 0.5rem);
+    --ts-radius-sm: var(--saas-radius-sm, 0.375rem);
+    --ts-shadow: var(--saas-shadow-sm, 0 1px 3px rgb(31 45 61 / 6%));
+    --ts-shadow-md: var(--saas-shadow-md, 0 10px 30px rgb(31 45 61 / 8%));
+    min-width: 0;
+    color: var(--ts-text-soft);
+}
+
+body.fi-panel-admin .ts-cork-table-shell,
+body.fi-panel-admin .ts-cork-card,
+body.fi-panel-admin .ts-cork-document-shell {
+    min-width: 0;
+    overflow: hidden;
+    background: var(--ts-surface) !important;
+    border: 1px solid var(--ts-border) !important;
+    border-radius: var(--ts-radius) !important;
+    box-shadow: var(--ts-shadow) !important;
+}
+
+body.fi-panel-admin .ts-cork-table-shell:focus-within,
+body.fi-panel-admin .ts-cork-card:focus-within {
+    border-color: color-mix(in srgb, var(--saas-primary) 50%, var(--ts-border)) !important;
+}
+
+body.fi-panel-admin .ts-cork-page-actions {
+    min-width: 0;
+}
+
+body.fi-panel-admin .ts-cork-action,
+body.fi-panel-admin .ts-cork-page-link,
+body.fi-panel-admin .ts-cork-icon-action {
+    border-radius: var(--ts-radius-sm) !important;
+    outline-offset: 2px;
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+body.fi-panel-admin .ts-cork-action:focus-visible,
+body.fi-panel-admin .ts-cork-page-link:focus-visible,
+body.fi-panel-admin .ts-cork-icon-action:focus-visible,
+body.fi-panel-admin .ts-cork-table a:focus-visible {
+    outline: 2px solid var(--saas-primary);
+    outline-offset: 2px;
+}
+
+body.fi-panel-admin .ts-cork-action--primary {
+    background: var(--saas-primary) !important;
+    border-color: var(--saas-primary) !important;
+    color: #ffffff !important;
+}
+
+body.fi-panel-admin .ts-cork-action--primary:hover {
+    background: var(--saas-primary-hover) !important;
+}
+
+body.fi-panel-admin .ts-cork-action--neutral,
+body.fi-panel-admin .ts-cork-page-link {
+    background: var(--ts-surface) !important;
+    border: 1px solid var(--ts-border) !important;
+    color: var(--ts-text-soft) !important;
+}
+
+body.fi-panel-admin .ts-cork-action--neutral:hover,
+body.fi-panel-admin .ts-cork-page-link:not(.pointer-events-none):hover {
+    background: var(--ts-surface-muted) !important;
+    border-color: color-mix(in srgb, var(--saas-primary) 35%, var(--ts-border)) !important;
+    color: var(--saas-primary) !important;
+}
+
+body.fi-panel-admin .ts-cork-icon-action {
+    color: var(--saas-primary) !important;
+}
+
+body.fi-panel-admin .ts-cork-icon-action:hover {
+    background: var(--saas-primary-soft) !important;
+    color: var(--saas-primary-hover) !important;
+}
+
+body.fi-panel-admin .ts-cork-toolbar {
+    border-color: var(--ts-border) !important;
+    background: var(--ts-surface) !important;
+}
+
+body.fi-panel-admin .ts-cork-toolbar input,
+body.fi-panel-admin .ts-cork-toolbar select,
+body.fi-panel-admin .ts-cork-filter-panel input,
+body.fi-panel-admin .ts-cork-filter-panel select {
+    min-width: 0;
+    background-color: var(--ts-surface) !important;
+    border-color: var(--ts-border) !important;
+    border-radius: var(--ts-radius-sm) !important;
+    color: var(--ts-text) !important;
+    box-shadow: none !important;
+}
+
+body.fi-panel-admin .ts-cork-toolbar input::placeholder {
+    color: var(--ts-muted);
+}
+
+body.fi-panel-admin .ts-cork-toolbar input:focus,
+body.fi-panel-admin .ts-cork-toolbar select:focus,
+body.fi-panel-admin .ts-cork-filter-panel input:focus,
+body.fi-panel-admin .ts-cork-filter-panel select:focus {
+    border-color: var(--saas-primary) !important;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--saas-primary) 16%, transparent) !important;
+    outline: 0;
+}
+
+body.fi-panel-admin .ts-cork-toolbar button:not(.ts-cork-action--primary),
+body.fi-panel-admin .ts-cork-toolbar .ts-cork-toggle,
+body.fi-panel-admin .ts-cork-filter-panel a {
+    border-radius: var(--ts-radius-sm) !important;
+}
+
+body.fi-panel-admin .ts-cork-toolbar button:not(.ts-cork-action--primary),
+body.fi-panel-admin .ts-cork-toggle {
+    background: var(--ts-surface) !important;
+    border: 1px solid var(--ts-border) !important;
+    color: var(--ts-text-soft) !important;
+}
+
+body.fi-panel-admin .ts-cork-toolbar button:not(.ts-cork-action--primary):hover,
+body.fi-panel-admin .ts-cork-toggle:hover {
+    background: var(--ts-surface-muted) !important;
+    border-color: color-mix(in srgb, var(--saas-primary) 35%, var(--ts-border)) !important;
+    color: var(--saas-primary) !important;
+}
+
+body.fi-panel-admin .ts-cork-filter-panel {
+    border-color: var(--ts-border) !important;
+    background: var(--ts-surface-muted) !important;
+}
+
+body.fi-panel-admin .ts-cork-menu {
+    min-width: 12rem;
+    background: var(--ts-surface) !important;
+    border-color: var(--ts-border) !important;
+    border-radius: var(--ts-radius) !important;
+    box-shadow: var(--ts-shadow-md) !important;
+}
+
+body.fi-panel-admin .ts-cork-menu label {
+    border-radius: var(--ts-radius-sm);
+}
+
+body.fi-panel-admin .ts-cork-menu label:hover {
+    background: var(--saas-primary-soft) !important;
+}
+
+body.fi-panel-admin .ts-cork-table-wrap {
+    min-width: 0;
+    overflow-x: auto;
+    background: var(--ts-surface);
+    scrollbar-color: color-mix(in srgb, var(--ts-muted) 45%, transparent) transparent;
+    scrollbar-width: thin;
+}
+
+body.fi-panel-admin .ts-cork-table {
+    color: var(--ts-text-soft);
+}
+
+body.fi-panel-admin .ts-cork-table thead {
+    background: var(--ts-surface-muted) !important;
+    color: var(--ts-muted) !important;
+    border-color: var(--ts-border) !important;
+}
+
+body.fi-panel-admin .ts-cork-table thead th {
+    border-color: var(--ts-border) !important;
+    padding-block: 0.625rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.045em;
+}
+
+body.fi-panel-admin .ts-cork-table thead a {
+    color: inherit;
+}
+
+body.fi-panel-admin .ts-cork-table thead a:hover {
+    color: var(--saas-primary) !important;
+}
+
+body.fi-panel-admin .ts-cork-table tbody {
+    border-color: var(--ts-border) !important;
+}
+
+body.fi-panel-admin .ts-cork-table tbody tr {
+    border-color: var(--ts-border) !important;
+    transition: background-color 150ms ease;
+}
+
+body.fi-panel-admin .ts-cork-table tbody tr:hover {
+    background: color-mix(in srgb, var(--saas-primary) 5%, var(--ts-surface)) !important;
+}
+
+body.fi-panel-admin .ts-cork-table td {
+    border-color: var(--ts-border) !important;
+    line-height: 1.35;
+}
+
+body.fi-panel-admin .ts-cork-status-badge {
+    min-height: 1.5rem;
+    border-radius: var(--ts-radius-sm) !important;
+    padding-inline: 0.5rem;
+    white-space: nowrap;
+}
+
+body.fi-panel-admin .ts-cork-empty {
+    background: var(--ts-surface-muted) !important;
+    color: var(--ts-muted) !important;
+}
+
+body.fi-panel-admin .ts-cork-pagination {
+    min-width: 0;
+}
+
+body.fi-panel-admin .ts-cork-pagination > div {
+    color: var(--ts-muted) !important;
+}
+
+body.fi-panel-admin .ts-cork-history-item {
+    border-color: var(--ts-border) !important;
+    background: var(--ts-surface-muted);
+}
+
+body.fi-panel-admin .ts-cork-history-item strong {
+    color: var(--ts-text);
+}
+
+@media (max-width: 767px) {
+    body.fi-panel-admin .ts-cork-toolbar,
+    body.fi-panel-admin .ts-cork-filter-panel {
+        padding: 0.875rem !important;
+    }
+
+    body.fi-panel-admin .ts-cork-search {
+        width: 100% !important;
+    }
+
+    body.fi-panel-admin .ts-cork-toolbar > div,
+    body.fi-panel-admin .ts-cork-page-actions > div {
+        width: 100%;
+    }
+
+    body.fi-panel-admin .ts-cork-toolbar > div:last-child {
+        margin-inline-start: 0;
+        justify-content: stretch;
+    }
+
+    body.fi-panel-admin .ts-cork-toolbar > div:last-child > * {
+        flex: 1 1 auto;
+    }
+
+    body.fi-panel-admin .ts-cork-toolbar > div:last-child > .ts-cork-search,
+    body.fi-panel-admin .ts-cork-toolbar > div:last-child > .relative {
+        flex-basis: 100%;
+    }
+
+    body.fi-panel-admin .ts-cork-filter-panel {
+        grid-template-columns: 1fr !important;
+    }
+
+    body.fi-panel-admin .ts-cork-table thead th,
+    body.fi-panel-admin .ts-cork-table td {
+        padding-inline: 0.625rem;
+    }
+
+    body.fi-panel-admin .ts-cork-pagination {
+        align-items: stretch;
+    }
+
+    body.fi-panel-admin .ts-cork-page-link {
+        min-width: 5.25rem;
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.fi-panel-admin .ts-cork-action,
+    body.fi-panel-admin .ts-cork-page-link,
+    body.fi-panel-admin .ts-cork-icon-action,
+    body.fi-panel-admin .ts-cork-table tbody tr {
+        transition: none;
+    }
+}

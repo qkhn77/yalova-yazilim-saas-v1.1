@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/stok-turleri",
+    "name":  "filament.admin.muhasebe.pages.tanimlar.stok-turleri",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\StokTuruTanimlariSayfasi",
+    "status":  200,
+    "avg_ms":  1633.32,
+    "min_ms":  1633.32,
+    "max_ms":  1633.32,
+    "runs_ms":  "1633.32",
+    "bytes":  112152,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/stok-turleri",
+    "error":  null
+}

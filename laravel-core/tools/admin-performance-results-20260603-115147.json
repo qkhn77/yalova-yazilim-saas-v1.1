@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/raporlar/karlilik",
+    "name":  "filament.admin.teknik-servis.pages.raporlar.karlilik",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\TeknikServisKarlilikRaporuSayfasi",
+    "status":  200,
+    "avg_ms":  1676.05,
+    "min_ms":  1676.05,
+    "max_ms":  1676.05,
+    "runs_ms":  "1676.05",
+    "bytes":  112175,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/raporlar/karlilik",
+    "error":  null
+}

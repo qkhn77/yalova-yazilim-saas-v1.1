@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "e-ticaret",
+    "uri":  "admin/e-ticaret/mesaj-yonetimi/urun-mesajlari",
+    "name":  "filament.admin.e-ticaret.pages.mesaj-yonetimi.urun-mesajlari",
+    "action":  "App\\Filament\\Clusters\\ETicaret\\Pages\\UrunMesajlariSayfasi",
+    "status":  200,
+    "avg_ms":  1782.89,
+    "min_ms":  1782.89,
+    "max_ms":  1782.89,
+    "runs_ms":  "1782.89",
+    "bytes":  132790,
+    "final_url":  "http://localhost/yalova-kamera/admin/e-ticaret/mesaj-yonetimi/urun-mesajlari",
+    "error":  null
+}

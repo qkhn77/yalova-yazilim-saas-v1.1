@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/web-ayarlar/menu-ayarlari/menu-duzenleme",
+    "name":  "filament.admin.web.pages.web-ayarlar.menu-ayarlari.menu-duzenleme",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\ModulMenu",
+    "status":  200,
+    "avg_ms":  4407.22,
+    "min_ms":  1745.46,
+    "max_ms":  7068.98,
+    "runs_ms":  "7068,98|1745,46",
+    "bytes":  170901,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/web-ayarlar/menu-ayarlari/menu-duzenleme",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-firmalar",
+    "uri":  "admin/sistem-firmalar/create",
+    "name":  "filament.admin.resources.sistem-firmalar.create",
+    "action":  "App\\Filament\\Resources\\FirmaYonetimKaynagi\\Pages\\FirmaOlustur",
+    "status":  200,
+    "avg_ms":  1744.54,
+    "min_ms":  1744.54,
+    "max_ms":  1744.54,
+    "runs_ms":  "1744.54",
+    "bytes":  158205,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-firmalar/create",
+    "error":  null
+}

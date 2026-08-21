@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/satis/barkod-etiket-yazdirma","filament.admin.muhasebe.pages.satis.barkod-etiket-yazdirma","App\Filament\Clusters\Muhasebe\Pages\BarkodEtiketYazdirmaSayfasi","200","2802,46","1795,92","6634,96","6634,96|1886,92|1849,69|1795,92|1844,82","229291","http://localhost/yalova-kamera/admin/muhasebe/satis/barkod-etiket-yazdirma",

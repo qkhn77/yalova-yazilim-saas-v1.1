@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/web-moduller/ucuncu-grup/teknik-destek",
+    "name":  "filament.admin.web.pages.web-moduller.ucuncu-grup.teknik-destek",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\ModulTeknikDestek",
+    "status":  200,
+    "avg_ms":  2369.79,
+    "min_ms":  1697.32,
+    "max_ms":  3042.26,
+    "runs_ms":  "3042,26|1697,32",
+    "bytes":  182912,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/teknik-destek",
+    "error":  null
+}

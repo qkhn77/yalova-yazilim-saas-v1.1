@@ -1,0 +1,759 @@
+/* CORK Faz 2B - Merkezi Filament Tables tasarım sistemi.
+ * MİMARİ UYARI: Yeni ortak tablo kuralından önce
+ * docs/architecture/admin-table-standard.md performans sözleşmesini okuyun.
+ * Buraya tablo başına iş mantığı, veri sorgusu veya yeni JS tablo motoru eklemeyin.
+ */
+
+body.fi-panel-admin {
+    --saas-table-surface: var(--saas-surface, #ffffff);
+    --saas-table-header: #f8f9fb;
+    --saas-table-row-hover: #fafafa;
+    --saas-table-row-selected: rgb(67 97 238 / 8%);
+    --saas-table-border: var(--saas-border, #e0e6ed);
+    --saas-table-text: var(--saas-text-soft, #515365);
+    --saas-table-muted: var(--saas-text-muted, #888ea8);
+}
+
+/* Ana tablo kartı. Özel Blade tablolarına değil, yalnızca Filament Tables'a uygulanır. */
+body.fi-panel-admin .fi-ta .fi-ta-ctn {
+    overflow: visible;
+    background: var(--saas-table-surface) !important;
+    border: 1px solid var(--saas-table-border);
+    border-radius: var(--saas-radius-md, 0.5rem) !important;
+    box-shadow: var(--saas-shadow-sm, 0 1px 3px rgb(31 45 61 / 6%)) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-ctn,
+body.fi-panel-admin .fi-ta .fi-ta-content,
+body.fi-panel-admin .fi-ta .fi-ta-pagination,
+body.fi-panel-admin .fi-ta .fi-ta-filters-below-content {
+    border-color: var(--saas-table-border) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header {
+    gap: 0.125rem;
+    padding: 0.625rem 0.75rem !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-heading {
+    color: var(--saas-text) !important;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.0125rem;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-description {
+    color: var(--saas-table-muted) !important;
+    font-size: 0.78125rem;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-toolbar {
+    min-height: 3rem;
+    gap: 0.5rem !important;
+    padding: 0.5rem 0.75rem !important;
+    background: var(--saas-table-surface);
+    border-color: var(--saas-table-border) !important;
+}
+
+/* Teknik Servis listesindeki başlık + araç çubuğu yoğunluğunu bütün
+   Filament tablo yüzeylerinde aynı satıra taşır. */
+@media (min-width: 768px) {
+    body.fi-panel-admin .fi-ta .fi-ta-header-ctn:has(> .fi-ta-header):has(> .fi-ta-header-toolbar) {
+        display: grid;
+        grid-template-columns: minmax(9rem, 1fr) auto;
+        align-items: center;
+    }
+
+    body.fi-panel-admin .fi-ta .fi-ta-header-ctn > .fi-ta-header {
+        min-width: 0;
+    }
+
+    body.fi-panel-admin .fi-ta .fi-ta-header-ctn > .fi-ta-header-toolbar {
+        min-width: min(100%, 20rem);
+        border-top: 0 !important;
+    }
+}
+
+/* Arama alanı: Faz 2A kontrol diliyle aynı yükseklik, kenarlık ve odak. */
+body.fi-panel-admin .fi-ta .fi-ta-search-field {
+    width: min(100%, 14rem);
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-search-field .fi-input-wrp {
+    min-height: 2.125rem;
+    background: var(--saas-table-surface) !important;
+    border: 1px solid var(--saas-table-border);
+    border-radius: var(--saas-radius-md, 0.5rem) !important;
+    box-shadow: none !important;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-search-field .fi-input-wrp:hover {
+    border-color: color-mix(in srgb, var(--saas-table-border) 58%, var(--saas-primary));
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-search-field .fi-input-wrp:focus-within {
+    border-color: var(--saas-primary) !important;
+    box-shadow: 0 0 0 3px rgb(67 97 238 / 14%) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-search-field .fi-input {
+    min-height: 2rem;
+    color: var(--saas-table-text) !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    font-size: 0.8125rem;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-search-field .fi-input::placeholder {
+    color: var(--saas-table-muted) !important;
+}
+
+/* Filtre tetikleyicileri, aktif filtre şeridi ve panel. */
+body.fi-panel-admin .fi-ta .fi-ta-filter-indicators,
+body.fi-panel-admin .fi-ta .fi-ta-selection-indicator {
+    color: var(--saas-table-text);
+    background: var(--saas-primary-soft) !important;
+    border-color: rgb(67 97 238 / 16%) !important;
+}
+
+body.fi-panel-admin .fi-ta-filters-dropdown .fi-dropdown-panel,
+body.fi-panel-admin .fi-ta .fi-ta-filters-above-content-ctn,
+body.fi-panel-admin .fi-ta .fi-ta-filters-below-content {
+    background: var(--saas-table-surface) !important;
+    border-color: var(--saas-table-border) !important;
+}
+
+body.fi-panel-admin .fi-ta-filters-dropdown .fi-dropdown-panel {
+    border: 1px solid var(--saas-table-border);
+    border-radius: var(--saas-radius-lg, 0.75rem) !important;
+    box-shadow: var(--saas-shadow-lg) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-filters > div:first-child {
+    color: var(--saas-text);
+}
+
+/* Kolon başlıkları ve sıralama durumları. */
+body.fi-panel-admin .fi-ta .fi-ta-table > thead {
+    background: var(--saas-table-header);
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-table > thead > tr,
+body.fi-panel-admin .fi-ta .fi-ta-table > tbody,
+body.fi-panel-admin .fi-ta .fi-ta-table > tbody > tr {
+    border-color: var(--saas-table-border) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-cell {
+    padding: 0.5rem 0.625rem !important;
+    background: var(--saas-table-header) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-cell-label {
+    color: var(--saas-table-muted) !important;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    letter-spacing: 0.035rem;
+    text-transform: none;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-cell button,
+body.fi-panel-admin .fi-ta .fi-ta-header-cell a {
+    border-radius: var(--saas-radius-sm, 0.375rem);
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-cell button:hover .fi-ta-header-cell-label,
+body.fi-panel-admin .fi-ta .fi-ta-header-cell a:hover .fi-ta-header-cell-label {
+    color: var(--saas-primary) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-cell-sort-icon {
+    width: 1rem;
+    height: 1rem;
+    color: var(--saas-table-muted) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-cell button:hover .fi-ta-header-cell-sort-icon,
+body.fi-panel-admin .fi-ta .fi-ta-header-cell a:hover .fi-ta-header-cell-sort-icon {
+    color: var(--saas-primary) !important;
+}
+
+/* Bilgi yoğunluğunu koruyan satır ve hücre ritmi. */
+body.fi-panel-admin .fi-ta .fi-ta-row {
+    color: var(--saas-table-text);
+    background: var(--saas-table-surface);
+    transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-row:hover > .fi-ta-cell {
+    background: var(--saas-table-row-hover) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-row:has(.fi-checkbox-input:checked) > .fi-ta-cell {
+    background: var(--saas-table-row-selected) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-cell {
+    color: var(--saas-table-text);
+    border-color: var(--saas-table-border) !important;
+    vertical-align: middle;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-table tbody .fi-ta-cell > div,
+body.fi-panel-admin .fi-ta .fi-ta-actions-cell > div {
+    padding-top: 0.4375rem;
+    padding-bottom: 0.4375rem;
+    padding-inline: 0.625rem !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-table tbody .fi-ta-cell:first-of-type,
+body.fi-panel-admin .fi-ta .fi-ta-table thead .fi-ta-header-cell:first-of-type {
+    padding-inline-start: 0.625rem !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-table tbody .fi-ta-cell:last-of-type,
+body.fi-panel-admin .fi-ta .fi-ta-table thead .fi-ta-header-cell:last-of-type {
+    padding-inline-end: 0.625rem !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-text {
+    row-gap: 0.125rem;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-text-item-label {
+    color: var(--saas-table-text);
+    font-size: 0.78125rem;
+    line-height: 1.125rem;
+    letter-spacing: 0.008rem;
+}
+
+body.fi-panel-admin .fi-ta .fi-checkbox-input {
+    width: 0.9375rem;
+    height: 0.9375rem;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-text > p,
+body.fi-panel-admin .fi-ta .fi-ta-text .text-gray-500,
+body.fi-panel-admin .fi-ta .fi-ta-columns-placeholder {
+    color: var(--saas-table-muted) !important;
+    font-size: 0.75rem;
+}
+
+/* Pagination ve sayfa başına kayıt seçimi. */
+body.fi-panel-admin .fi-ta .fi-ta-pagination {
+    background: var(--saas-table-surface);
+    border-top: 1px solid var(--saas-table-border);
+    min-height: 3.25rem;
+    padding-block: 0.5rem !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-cell,
+body.fi-panel-admin .fi-ta .fi-ta-cell,
+body.fi-panel-admin .fi-ta .fi-ta-actions-cell {
+    vertical-align: middle;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-actions,
+body.fi-panel-admin .fi-ta .fi-ta-actions-cell > div {
+    align-items: center;
+}
+
+body.fi-panel-admin .fi-ta .fi-badge {
+    min-height: 1.375rem;
+    padding-block: 0.125rem;
+    font-size: 0.6875rem;
+}
+
+body.fi-panel-admin .fi-ta .fi-icon-btn {
+    width: 1.875rem;
+    height: 1.875rem;
+}
+
+/* Relation manager, widget ve modal içindeki Filament tabloları da aynı
+   ölçü sözleşmesini kullanır; dropdown/tooltip taşması tablo içeriğinin
+   mevcut yatay kaydırma davranışına bırakılır. */
+body.fi-panel-admin .fi-modal .fi-ta,
+body.fi-panel-admin .fi-wi .fi-ta,
+body.fi-panel-admin .fi-resource-relation-manager .fi-ta {
+    font-size: 0.78125rem;
+}
+
+/* Filament dışındaki CORK-adaptörlü gerçek veri tabloları. Belge/print
+   yüzeyleri bu sınıfları kullanmadığından kapsam dışında kalır. */
+body.fi-panel-admin table[class*="-cork-table"] > thead > tr > th,
+body.fi-panel-admin table.ts-cork-table > thead > tr > th {
+    padding: 0.5rem 0.625rem !important;
+    font-size: 0.6875rem !important;
+    line-height: 1rem;
+    vertical-align: middle;
+}
+
+body.fi-panel-admin table[class*="-cork-table"] > tbody > tr > td,
+body.fi-panel-admin table.ts-cork-table > tbody > tr > td {
+    padding: 0.4375rem 0.625rem !important;
+    font-size: 0.78125rem;
+    line-height: 1.125rem;
+    vertical-align: middle;
+}
+
+/* Teknik servis tablosu yoğun veri içerdiği için yazılar okunabilir kalmalı. */
+body.fi-panel-admin .ts-cork-screen.ts-cork-service-list table.ts-cork-table > thead > tr > th {
+    font-size: 0.75rem !important;
+}
+
+body.fi-panel-admin .ts-cork-screen.ts-cork-service-list table.ts-cork-table > tbody > tr > td {
+    font-size: 0.875rem;
+}
+
+body.fi-panel-admin [class*="-cork-table-wrap"],
+body.fi-panel-admin .ts-cork-table-wrap {
+    min-width: 0;
+    overflow-x: auto;
+}
+
+body.fi-panel-admin .fi-ta .fi-pagination-overview {
+    color: var(--saas-table-muted) !important;
+    font-size: 0.75rem;
+}
+
+body.fi-panel-admin .fi-ta .fi-pagination-items {
+    gap: 0.25rem;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-pagination-item {
+    border: 0 !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-pagination-item-button {
+    min-width: 2.0625rem;
+    min-height: 2.0625rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.375rem;
+    color: var(--saas-table-muted);
+    background: rgb(0 23 55 / 6%);
+    border-radius: var(--saas-radius-md, 0.5rem) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-pagination-item:not(.fi-disabled) .fi-pagination-item-button:hover {
+    color: var(--saas-primary);
+    background: var(--saas-primary-soft) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-pagination-item.fi-active .fi-pagination-item-button {
+    color: #ffffff !important;
+    background: var(--saas-primary) !important;
+    box-shadow: 0 4px 10px rgb(67 97 238 / 20%);
+}
+
+body.fi-panel-admin .fi-ta .fi-pagination-item.fi-active .fi-pagination-item-label,
+body.fi-panel-admin .fi-ta .fi-pagination-item.fi-active .fi-pagination-item-icon {
+    color: #ffffff !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-pagination-item.fi-disabled {
+    opacity: 0.45;
+}
+
+body.fi-panel-admin .fi-ta .fi-pagination-records-per-page-select .fi-input-wrp {
+    min-height: 2.125rem;
+    background: var(--saas-table-surface) !important;
+    border: 1px solid var(--saas-table-border);
+    border-radius: var(--saas-radius-md, 0.5rem) !important;
+    box-shadow: none !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-pagination-records-per-page-select .fi-select-input {
+    min-height: 2rem;
+    color: var(--saas-table-text) !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    font-size: 0.75rem;
+}
+
+/* Empty state. */
+body.fi-panel-admin .fi-ta .fi-ta-empty-state {
+    color: var(--saas-table-text);
+    background: var(--saas-table-surface);
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-empty-state-icon-ctn {
+    color: var(--saas-primary);
+    background: var(--saas-primary-soft) !important;
+    box-shadow: inset 0 0 0 1px rgb(67 97 238 / 12%);
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-empty-state-icon {
+    color: var(--saas-primary) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-empty-state-heading {
+    color: var(--saas-text) !important;
+    font-size: 0.9375rem;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-empty-state-description {
+    color: var(--saas-table-muted) !important;
+    font-size: 0.78125rem;
+}
+
+/* Koyu tema CORK yüzeyleri. */
+.dark body.fi-panel-admin {
+    --saas-table-surface: var(--saas-surface, #0e1726);
+    --saas-table-header: #1b2e4b;
+    --saas-table-row-hover: rgb(255 255 255 / 4%);
+    --saas-table-row-selected: rgb(109 128 247 / 13%);
+    --saas-table-border: var(--saas-border, #25324a);
+    --saas-table-text: var(--saas-text-soft, #bfc9d4);
+    --saas-table-muted: var(--saas-text-muted, #888ea8);
+}
+
+.dark body.fi-panel-admin .fi-ta .fi-pagination-item-button {
+    background: rgb(255 255 255 / 6%);
+}
+
+/* Filament'in yatay kaydırma ve kolon görünürlüğü davranışları korunur. */
+@media (max-width: 767px) {
+    body.fi-panel-admin .fi-ta .fi-ta-header,
+    body.fi-panel-admin .fi-ta .fi-ta-header-toolbar,
+    body.fi-panel-admin .fi-ta .fi-ta-pagination {
+        padding-inline: 1rem !important;
+    }
+
+    body.fi-panel-admin .fi-ta .fi-ta-header-toolbar {
+        gap: 0.625rem;
+        min-height: auto;
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+
+    body.fi-panel-admin .fi-ta .fi-ta-header-toolbar > div,
+    body.fi-panel-admin .fi-ta .fi-ta-header-toolbar > div:last-child {
+        width: 100%;
+        margin-inline-start: 0;
+    }
+
+    body.fi-panel-admin .fi-ta .fi-ta-search-field {
+        width: 100%;
+        min-width: 0;
+    }
+
+    body.fi-panel-admin .fi-ta .fi-ta-header-cell,
+    body.fi-panel-admin .fi-ta .fi-ta-table tbody .fi-ta-cell > div,
+    body.fi-panel-admin .fi-ta .fi-ta-actions-cell > div {
+        padding-inline: 0.625rem;
+    }
+
+    body.fi-panel-admin .fi-ta .fi-pagination {
+        column-gap: 0.5rem;
+    }
+}
+
+@media (max-width: 430px) {
+    body.fi-panel-admin .fi-ta .fi-ta-header-toolbar {
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+
+    body.fi-panel-admin .fi-ta .fi-ta-pagination {
+        padding-inline: 0.75rem !important;
+    }
+
+    body.fi-panel-admin .fi-ta .fi-pagination-overview {
+        font-size: 0.6875rem;
+    }
+}
+
+/* Filament tablo yoğunluğu için son katman.
+   Özel panel body attribute'larından bağımsız olarak gerçek Filament kökünü
+   hedefler ve kolon bileşenlerindeki px-3/py-4 utility'lerini kesin biçimde
+   Teknik Servis ölçülerine indirir. */
+.fi-body .fi-ta .fi-ta-table > tbody > .fi-ta-row {
+    height: 2rem;
+}
+
+.fi-body .fi-ta,
+.fi-body .fi-ta .fi-ta-table {
+    font-family: var(--font-family), ui-sans-serif, system-ui, sans-serif !important;
+}
+
+.fi-body .fi-ta .fi-ta-table > thead > tr > .fi-ta-header-cell {
+    height: 2rem;
+    padding: 0.375rem 0.625rem !important;
+}
+
+.fi-body .fi-ta .fi-ta-table > thead > tr > .fi-ta-header-cell .fi-ta-header-cell-label {
+    font-family: inherit !important;
+    font-size: 0.6875rem !important;
+    font-weight: 600 !important;
+    line-height: 1rem !important;
+    letter-spacing: 0.045em !important;
+}
+
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > .fi-ta-text,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > .fi-ta-icon,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > .fi-ta-image,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > .fi-ta-color,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > .fi-ta-checkbox,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > .fi-ta-toggle,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > .fi-ta-select,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > .fi-ta-text-input,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > div,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > a > div,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > button > div,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell .fi-ta-text,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell .fi-ta-icon,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell .fi-ta-image,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell .fi-ta-color {
+    min-height: 0 !important;
+    padding: 0.1875rem 0.5rem !important;
+}
+
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > a,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell > button {
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell:first-child,
+.fi-body .fi-ta .fi-ta-table > thead > tr > .fi-ta-header-cell:first-child {
+    padding-inline-start: 0.625rem !important;
+}
+
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell:last-child,
+.fi-body .fi-ta .fi-ta-table > thead > tr > .fi-ta-header-cell:last-child {
+    padding-inline-end: 0.625rem !important;
+}
+
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell .fi-ta-text-item-label {
+    font-family: inherit !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    line-height: 1.125rem !important;
+    letter-spacing: normal !important;
+}
+
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell input,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell select,
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-actions-cell {
+    font-family: inherit !important;
+    font-size: 0.875rem !important;
+    font-weight: 400;
+}
+
+.fi-body .fi-ta .fi-ta-table > tbody > tr > .fi-ta-cell .fi-badge {
+    min-height: 1.25rem !important;
+    padding: 0.0625rem 0.375rem !important;
+    font-size: 0.6875rem !important;
+    line-height: 1rem !important;
+}
+
+.fi-body .fi-ta .fi-ta-table .fi-ta-actions-cell > div,
+.fi-body .fi-ta .fi-ta-table .fi-ta-selection-cell > div {
+    padding: 0.125rem 0.375rem !important;
+}
+
+.fi-body .fi-ta .fi-ta-table .fi-ta-actions-cell .fi-icon-btn,
+.fi-body .fi-ta .fi-ta-table .fi-ta-actions-cell .fi-btn {
+    min-width: 1.5rem !important;
+    min-height: 1.5rem !important;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.1875rem !important;
+}
+
+.fi-body .fi-ta .fi-ta-table .fi-ta-actions-cell svg {
+    width: 0.9375rem !important;
+    height: 0.9375rem !important;
+}
+
+.fi-body .fi-ta .fi-ta-header-ctn .fi-ta-header,
+.fi-body .fi-ta .fi-ta-header-ctn .fi-ta-header-toolbar {
+    padding-block: 0.5rem !important;
+}
+
+.fi-body .fi-ta .fi-ta-header-toolbar .fi-btn,
+.fi-body .fi-ta .fi-ta-header-toolbar .fi-icon-btn,
+.fi-body .fi-ta .fi-ta-header-toolbar .fi-input-wrp {
+    min-height: 2rem !important;
+}
+
+.fi-body .fi-ta .fi-ta-pagination {
+    min-height: 3rem !important;
+    padding-block: 0.375rem !important;
+}
+
+/* Onaylı ortak tablo standardı: bütün Filament yönetim tablolarına uygulanır. */
+body.fi-panel-admin .fi-ta .fi-ta-content {
+    max-height: none;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    box-shadow: inset -0.75rem 0 0.75rem -0.9rem rgb(15 23 42 / 28%);
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-table > thead {
+    position: sticky;
+    top: 0;
+    z-index: 12;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-actions-header-cell,
+body.fi-panel-admin .fi-ta .fi-ta-actions-cell {
+    position: sticky;
+    right: 0;
+    z-index: 10;
+    background: var(--saas-table-surface) !important;
+    box-shadow: -1px 0 0 var(--saas-table-border);
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-actions-header-cell {
+    z-index: 14;
+    background: var(--saas-table-header) !important;
+}
+
+/* Araç çubuğu açılır panelleri sticky başlık ve işlem sütununun üstünde kalır. */
+body.fi-panel-admin .fi-ta .fi-ta-header-toolbar {
+    position: relative;
+    z-index: 30;
+    overflow: visible;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-toolbar > .ms-auto {
+    column-gap: 0.875rem !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-toolbar > .ms-auto > .fi-dropdown {
+    flex: 0 0 auto;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-filters-dropdown .fi-icon-btn-badge-ctn {
+    inset-inline-start: auto;
+    inset-inline-end: -0.1875rem;
+    top: 0.125rem;
+    transform: translateY(-50%);
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-toolbar .fi-dropdown-panel {
+    z-index: 50 !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-selection-indicator {
+    position: relative;
+    z-index: 20;
+    overflow: visible;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-selection-indicator .fi-dropdown-panel,
+body.fi-panel-admin .fi-ta .fi-ta-selection-indicator .fi-dropdown-list {
+    background-color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+.dark body.fi-panel-admin .fi-ta .fi-ta-selection-indicator .fi-dropdown-panel,
+.dark body.fi-panel-admin .fi-ta .fi-ta-selection-indicator .fi-dropdown-list {
+    background-color: rgb(17 24 39) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-toolbar .fi-ta-actions .fi-dropdown-panel,
+body.fi-panel-admin .fi-ta .fi-ta-header-toolbar .fi-ta-actions .fi-dropdown-list {
+    isolation: isolate;
+    background: #ffffff !important;
+    background-image: none !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-toolbar .fi-ta-actions .fi-dropdown-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    background: #ffffff;
+    pointer-events: none;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-toolbar .fi-ta-actions .fi-dropdown-panel > * {
+    position: relative;
+    z-index: 1;
+}
+
+.dark body.fi-panel-admin .fi-ta .fi-ta-header-toolbar .fi-ta-actions .fi-dropdown-panel,
+.dark body.fi-panel-admin .fi-ta .fi-ta-header-toolbar .fi-ta-actions .fi-dropdown-list {
+    background: rgb(17 24 39) !important;
+}
+
+.dark body.fi-panel-admin .fi-ta .fi-ta-header-toolbar .fi-ta-actions .fi-dropdown-panel::before {
+    background: rgb(17 24 39);
+}
+
+body.fi-panel-admin .fi-ta .fi-dropdown-panel {
+    z-index: 60 !important;
+}
+
+/* Satır işlemleri: kompakt tabloda erişilebilir, rahat tıklanabilir hedef ölçüsü. */
+body.fi-panel-admin .fi-ta .fi-ta-actions {
+    gap: 0.25rem;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-actions .fi-link,
+body.fi-panel-admin .fi-ta .fi-ta-actions .fi-icon-btn {
+    width: 2.125rem;
+    min-width: 2.125rem;
+    height: 2.125rem;
+    min-height: 2.125rem;
+    padding: 0.4375rem;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-actions .fi-icon-btn-icon,
+body.fi-panel-admin .fi-ta .fi-ta-actions .fi-link-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+}
+
+/* Düşük maliyetli okunabilirlik katmanı (yalnız CSS). */
+body.fi-panel-admin .fi-ta .fi-ta-table > tbody > .fi-ta-row > .fi-ta-cell {
+    border-bottom: 1px solid color-mix(in srgb, var(--saas-table-border) 72%, transparent);
+    font-variant-numeric: tabular-nums;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-table > tbody > .fi-ta-row:nth-child(even) > .fi-ta-cell {
+    background: color-mix(in srgb, var(--saas-table-surface) 97%, var(--saas-table-muted)) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-table > tbody > .fi-ta-row:hover > .fi-ta-cell {
+    background: color-mix(in srgb, var(--saas-table-surface) 93%, var(--saas-primary)) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-table > tbody > .fi-ta-row:hover > .fi-ta-cell:first-child {
+    box-shadow: inset 2px 0 0 var(--saas-primary);
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-table > tbody > .fi-ta-row:has(.fi-checkbox-input:checked) > .fi-ta-cell {
+    background: var(--saas-table-row-selected) !important;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-header-cell[aria-sort="ascending"],
+body.fi-panel-admin .fi-ta .fi-ta-header-cell[aria-sort="descending"] {
+    background: color-mix(in srgb, var(--saas-table-header) 91%, var(--saas-primary)) !important;
+    box-shadow: inset 0 -2px 0 var(--saas-primary);
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-row {
+    height: 2rem;
+}
+
+body.fi-panel-admin .fi-ta .fi-ta-cell .fi-ta-text,
+body.fi-panel-admin .fi-ta .fi-ta-cell > a > div,
+body.fi-panel-admin .fi-ta .fi-ta-cell > div {
+    padding-block: 0.1875rem !important;
+}

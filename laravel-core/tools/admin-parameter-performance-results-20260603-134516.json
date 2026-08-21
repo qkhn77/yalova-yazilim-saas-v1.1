@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-kullanicilar",
+    "uri":  "admin/sistem-kullanicilar/1",
+    "uri_template":  "admin/sistem-kullanicilar/{record}",
+    "name":  "filament.admin.resources.sistem-kullanicilar.view",
+    "action":  "App\\Filament\\Resources\\UserResource\\Pages\\ViewUser",
+    "model":  "App\\Models\\User",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  1759.31,
+    "min_ms":  1759.31,
+    "max_ms":  1759.31,
+    "runs_ms":  "1759.31",
+    "bytes":  133841,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-kullanicilar/1",
+    "error":  null
+}

@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/web-moduller/ucuncu-grup/neler-yapiyoruz","filament.admin.web.pages.web-moduller.ucuncu-grup.neler-yapiyoruz","App\Filament\Clusters\Web\Pages\ModulNelerYapiyoruz","200","1698,5","1682,74","1714,27","1682,74|1714,27","184557","http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/neler-yapiyoruz",

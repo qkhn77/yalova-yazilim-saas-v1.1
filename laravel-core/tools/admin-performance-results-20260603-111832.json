@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/fatura-kaynagis/create/bekleyen-fatura",
+    "name":  "filament.admin.muhasebe.resources.fatura-kaynagis.createBekleyen",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\CreateBekleyenFatura",
+    "status":  200,
+    "avg_ms":  1783.4,
+    "min_ms":  1783.4,
+    "max_ms":  1783.4,
+    "runs_ms":  "1783.4",
+    "bytes":  192736,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/create/bekleyen-fatura",
+    "error":  null
+}

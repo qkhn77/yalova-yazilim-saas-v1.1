@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/satis/barkod-etiket-yazdirma",
+    "name":  "filament.admin.muhasebe.pages.satis.barkod-etiket-yazdirma",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\BarkodEtiketYazdirmaSayfasi",
+    "status":  200,
+    "avg_ms":  2956.33,
+    "min_ms":  2316.94,
+    "max_ms":  5037.97,
+    "runs_ms":  "5037,97|2392,64|2695,57|2316,94|2338,51",
+    "bytes":  229291,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/barkod-etiket-yazdirma",
+    "error":  null
+}

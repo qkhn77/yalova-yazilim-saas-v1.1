@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teknik-servis","admin/teknik-servis/operasyon/garantili-cihazlar","filament.admin.teknik-servis.pages.operasyon.garantili-cihazlar","App\Filament\Clusters\TeknikServis\Pages\GarantiliCihazlarSayfasi","200","1775,78","1775,78","1775,78","1775.78","141944","http://localhost/yalova-kamera/admin/teknik-servis/operasyon/garantili-cihazlar",

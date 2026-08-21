@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/web-moduller/ucuncu-grup/rakamlarla-biz",
+    "name":  "filament.admin.web.pages.web-moduller.ucuncu-grup.rakamlarla-biz",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\ModulRakamlarlaBiz",
+    "status":  200,
+    "avg_ms":  1743.47,
+    "min_ms":  1743.47,
+    "max_ms":  1743.47,
+    "runs_ms":  "1743.47",
+    "bytes":  220374,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/rakamlarla-biz",
+    "error":  null
+}

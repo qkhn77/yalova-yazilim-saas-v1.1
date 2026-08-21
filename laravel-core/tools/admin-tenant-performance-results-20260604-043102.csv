@@ -1,0 +1,5 @@
+﻿"rank","module","uri","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","firma-ayarlari","admin/firma-ayarlari","200","524,65","442,07","660,23","660,23|471,64|442,07","208293","http://localhost/yalova-kamera/admin/firma-ayarlari",
+"2","muhasebe","admin/muhasebe/satis/barkodlu-satis-fis-sablonlari","200","469,88","460,15","477,35","472,16|477,35|460,15","241770","http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-fis-sablonlari",
+"3","muhasebe","admin/muhasebe/satis/barkodlu-satis-ayarlar","200","407,96","369,89","435,03","435,03|418,95|369,89","127412","http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-ayarlar",
+"4","firma-kullanici-gruplari","admin/firma-kullanici-gruplari/9/edit","200","369,99","338,1","415,8","415,8|356,06|338,1","120381","http://localhost/yalova-kamera/admin/firma-kullanici-gruplari/9/edit",

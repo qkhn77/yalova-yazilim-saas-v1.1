@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","restoran","admin/restoran","admin.restoran.redirect","Closure","500","3483,33","3411,65","3617,83","3617,83|3439,7|3477,91|3411,65|3469,54","0","http://localhost/yalova-kamera/admin/restoran/masalar","Uzak sunucu hata döndürdü: (500) İç Sunucu Hatası."

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/tanimlar/subeler/create",
+    "name":  "filament.admin.personel-takip.resources.tanimlar.subeler.create",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\SubeKaynagi\\Pages\\CreateSube",
+    "status":  200,
+    "avg_ms":  1673.3,
+    "min_ms":  1673.3,
+    "max_ms":  1673.3,
+    "runs_ms":  "1673.3",
+    "bytes":  142447,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/tanimlar/subeler/create",
+    "error":  null
+}

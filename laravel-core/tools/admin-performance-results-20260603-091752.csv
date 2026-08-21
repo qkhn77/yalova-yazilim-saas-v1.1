@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teklif-yonetimi","admin/teklif-yonetimi/sablonlar","filament.admin.teklif-yonetimi.resources.sablonlar.index","App\Filament\Clusters\TeklifYonetimi\Resources\TeklifSablonKaynagi\Pages\ListTeklifSablonlari","200","1851,25","1727,01","1975,5","1975,5|1727,01","140691","http://localhost/yalova-kamera/admin/teklif-yonetimi/sablonlar",

@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","e-ticaret","admin/e-ticaret/mesaj-yonetimi/musteri-mesajlari","filament.admin.e-ticaret.pages.mesaj-yonetimi.musteri-mesajlari","App\Filament\Clusters\ETicaret\Pages\MusteriMesajlariSayfasi","200","3249,86","1704,82","4794,91","4794,91|1704,82","131610","http://localhost/yalova-kamera/admin/e-ticaret/mesaj-yonetimi/musteri-mesajlari",

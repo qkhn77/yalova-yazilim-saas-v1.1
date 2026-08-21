@@ -1,0 +1,271 @@
+/*
+ * CORK Faz 3H - satis ve operasyon ekranlari adapter'i.
+ *
+ * Bu dosya yalnizca presentation katmanidir. Barkod, Livewire, Alpine,
+ * klavye kisayolu, sepet, fiyat, stok ve odeme davranislarina dokunmaz.
+ * Hızlı Satış'ın mevcut quick-pos CSS/JS yuzeyi korunur; burada yalnizca
+ * CORK token'lari ve responsive surface override'lari uygulanir.
+ */
+
+body.fi-panel-admin .cork-sales-operations {
+    --sales-surface: var(--saas-surface, #ffffff);
+    --sales-surface-muted: var(--saas-surface-muted, #fafafa);
+    --sales-border: var(--saas-border, #e0e6ed);
+    --sales-text: var(--saas-text, #3b3f5c);
+    --sales-text-soft: var(--saas-text-soft, #515365);
+    --sales-muted: var(--saas-text-muted, #888ea8);
+    --sales-primary: var(--saas-primary, #4361ee);
+    --sales-primary-soft: var(--saas-primary-soft, rgb(67 97 238 / 10%));
+    --sales-success: var(--saas-success, #00ab55);
+    --sales-warning: var(--saas-warning, #e2a03f);
+    --sales-danger: var(--saas-danger, #e7515a);
+    --sales-radius: var(--saas-radius-md, 0.5rem);
+    --sales-radius-sm: var(--saas-radius-sm, 0.375rem);
+    --sales-shadow: var(--saas-shadow-sm, 0 1px 3px rgb(31 45 61 / 6%));
+    min-width: 0;
+    color: var(--sales-text-soft);
+}
+
+body.fi-panel-admin .cork-sales-operations :where(input, select, textarea):focus-visible,
+body.fi-panel-admin .cork-sales-operations :where(button, a):focus-visible {
+    outline: 2px solid var(--sales-primary);
+    outline-offset: 2px;
+}
+
+body.fi-panel-admin .cork-sales-operations .cork-sales-form {
+    width: 100%;
+    min-width: 0;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations > .space-y-6,
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations > .fi-section,
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations section {
+    min-width: 0;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations .fi-section,
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations .rounded-lg,
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations .rounded-xl {
+    border-color: var(--sales-border) !important;
+    border-radius: var(--sales-radius) !important;
+    box-shadow: var(--sales-shadow) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations .overflow-x-auto {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    border-color: var(--sales-border) !important;
+    scrollbar-color: color-mix(in srgb, var(--sales-muted) 45%, transparent) transparent;
+    scrollbar-width: thin;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations table {
+    border-color: var(--sales-border) !important;
+    color: var(--sales-text-soft);
+}
+
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations table thead,
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations table thead tr {
+    background: var(--sales-surface-muted) !important;
+    border-color: var(--sales-border) !important;
+    color: var(--sales-muted) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations table th {
+    border-color: var(--sales-border) !important;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations table tbody tr,
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations table td {
+    border-color: var(--sales-border) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations table tbody tr:hover {
+    background: color-mix(in srgb, var(--sales-primary) 5%, var(--sales-surface)) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations table input,
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations .fi-input {
+    max-width: 100%;
+    border-color: var(--sales-border) !important;
+    border-radius: var(--sales-radius-sm) !important;
+    background: var(--sales-surface) !important;
+    color: var(--sales-text) !important;
+}
+
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations .muhasebe-cork-total,
+body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations .bg-emerald-100 {
+    border: 1px solid color-mix(in srgb, var(--sales-success) 30%, var(--sales-border));
+    border-radius: var(--sales-radius) !important;
+    background: color-mix(in srgb, var(--sales-success) 10%, var(--sales-surface)) !important;
+    color: var(--sales-text) !important;
+}
+
+/* Hızlı Satış: mevcut quick-pos layout ve davranışları korunur. */
+body.fi-panel-admin .quick-pos.cork-sales-operations {
+    color: var(--sales-text-soft);
+    font-family: inherit;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-shell {
+    border-color: var(--sales-border) !important;
+    border-radius: var(--sales-radius) !important;
+    background: var(--sales-surface-muted) !important;
+    box-shadow: var(--saas-shadow-md, 0 10px 30px rgb(31 45 61 / 8%)) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-main {
+    border-color: var(--sales-border) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-side {
+    background: var(--sales-surface-muted) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-field, .quick-pos-panel, .quick-pos-operator-compact, .quick-pos-product, .quick-pos-table-wrap, .quick-pos-summary, .quick-pos-payment-grid, .quick-pos-bottom, .quick-pos-sale-controls, .quick-pos-discount-panel, .quick-pos-term-panel) {
+    border-color: var(--sales-border) !important;
+    border-radius: var(--sales-radius-sm) !important;
+    background: var(--sales-surface) !important;
+    box-shadow: var(--sales-shadow);
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-field input, .quick-pos-field select, .quick-pos-mini-select, .quick-pos-money-input, .quick-pos-operator-compact-row input, .quick-pos-operator-compact-row select) {
+    border-color: var(--sales-border) !important;
+    border-radius: var(--sales-radius-sm) !important;
+    background: var(--sales-surface) !important;
+    color: var(--sales-text) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-field label, .quick-pos-operator-compact-row label, .quick-pos-search-sort, .quick-pos-discount-title) {
+    color: var(--sales-muted) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-total {
+    border-color: color-mix(in srgb, var(--sales-primary) 55%, var(--sales-border)) !important;
+    border-radius: var(--sales-radius-sm) !important;
+    background: color-mix(in srgb, var(--sales-primary) 24%, var(--sales-surface)) !important;
+    color: var(--sales-text) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-total span {
+    color: var(--sales-muted) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-total strong {
+    color: var(--sales-success) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-button, .quick-pos-tab, .quick-pos-pay-button, .quick-pos-held-cart, .quick-pos-search-result) {
+    border-color: var(--sales-border) !important;
+    border-radius: var(--sales-radius-sm) !important;
+    background: var(--sales-surface) !important;
+    color: var(--sales-text-soft) !important;
+    box-shadow: none;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-button, .quick-pos-tab, .quick-pos-pay-button, .quick-pos-search-result):hover,
+body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-tab.is-active {
+    border-color: var(--sales-primary) !important;
+    background: var(--sales-primary-soft) !important;
+    color: var(--sales-primary) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-button.is-add-product,
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-button.is-primary, .quick-pos-pay-button.is-primary) {
+    border-color: var(--sales-primary) !important;
+    background: var(--sales-primary) !important;
+    color: #ffffff !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-button.is-danger, .quick-pos-pay-button.is-danger) {
+    border-color: var(--sales-danger) !important;
+    color: var(--sales-danger) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-search-toolbar, .quick-pos-held-carts, .quick-pos-summary, .quick-pos-payment-grid, .quick-pos-bottom) {
+    color: var(--sales-text-soft);
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-search-media, .quick-pos-product-image, .quick-pos-empty) {
+    border-color: var(--sales-border) !important;
+    background: var(--sales-surface-muted) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-search-name, .quick-pos-product-name, .quick-pos-product-info, .quick-pos-product-meta) {
+    color: var(--sales-text) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-search-meta, .quick-pos-search-stock, .quick-pos-product-meta, small) {
+    color: var(--sales-muted) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-table, .quick-pos-table thead, .quick-pos-table tbody tr, .quick-pos-table td) {
+    border-color: var(--sales-border) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-table thead {
+    background: var(--sales-surface-muted) !important;
+    color: var(--sales-muted) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-modal, .quick-pos-modal-card, .quick-pos-image-preview, .quick-pos-image-preview-bar) {
+    border-color: var(--sales-border) !important;
+    background: var(--sales-surface) !important;
+    color: var(--sales-text-soft) !important;
+}
+
+body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-modal-button, .quick-pos-modal-mini-button, .quick-pos-modal-close) {
+    border-radius: var(--sales-radius-sm) !important;
+}
+
+@media (max-width: 760px) {
+    body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-shell {
+        border-radius: var(--sales-radius-sm) !important;
+    }
+
+    body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-field input, .quick-pos-field select, .quick-pos-mini-select, .quick-pos-money-input) {
+        min-height: 42px;
+    }
+}
+
+@media (max-width: 430px) {
+    body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-table-wrap,
+    body.fi-panel-admin .muhasebe-cork-screen.cork-sales-operations .overflow-x-auto {
+        max-width: 100%;
+    }
+
+    body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-total strong {
+        font-size: 1.375rem;
+    }
+}
+
+@media (max-width: 375px) {
+    body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-main,
+    body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-side {
+        padding-inline: 5px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.fi-panel-admin .cork-sales-operations :where(a, button, input, select, textarea) {
+        transition: none !important;
+    }
+}
+
+/* Filament dark mode tokenlari zaten shell'den gelir; sabit quick-pos renklerini
+   burada surface token'lariyla esitleyerek operasyon panelini karanlik temada da
+   okunur tutar. */
+.dark body.fi-panel-admin .quick-pos.cork-sales-operations :where(.quick-pos-shell, .quick-pos-side, .quick-pos-field, .quick-pos-panel, .quick-pos-operator-compact, .quick-pos-product, .quick-pos-table-wrap, .quick-pos-summary, .quick-pos-payment-grid, .quick-pos-bottom, .quick-pos-sale-controls, .quick-pos-discount-panel, .quick-pos-term-panel, .quick-pos-button, .quick-pos-tab, .quick-pos-pay-button, .quick-pos-held-cart, .quick-pos-search-result, .quick-pos-modal-card, .quick-pos-image-preview) {
+    background: var(--sales-surface) !important;
+    color: var(--sales-text-soft) !important;
+}
+
+.dark body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-shell,
+.dark body.fi-panel-admin .quick-pos.cork-sales-operations .quick-pos-side {
+    background: var(--sales-surface-muted) !important;
+}

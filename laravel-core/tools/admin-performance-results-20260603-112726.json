@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/ayarlar/genel-ayarlar",
+    "name":  "filament.admin.teknik-servis.pages.ayarlar.genel-ayarlar",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\GenelAyarlar",
+    "status":  200,
+    "avg_ms":  1693.05,
+    "min_ms":  1693.05,
+    "max_ms":  1693.05,
+    "runs_ms":  "1693.05",
+    "bytes":  111992,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/ayarlar/genel-ayarlar",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/tanimlar/arizalar",
+    "name":  "filament.admin.teknik-servis.resources.tanimlar.arizalar.index",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisArizaKaynagi\\Pages\\ListTeknikServisArizalari",
+    "status":  200,
+    "avg_ms":  6397.86,
+    "min_ms":  2933.63,
+    "max_ms":  19194.89,
+    "runs_ms":  "19194,89|3138,46|3727,75|2994,59|2933,63",
+    "bytes":  320778,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/arizalar",
+    "error":  null
+}

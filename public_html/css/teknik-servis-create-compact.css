@@ -1,0 +1,2009 @@
+.page-teknik-servis-create-compact .fi-section {
+    margin-bottom: 0.55rem;
+}
+
+.page-teknik-servis-create-compact .fi-section-content {
+    padding: 0.65rem 0.7rem !important;
+}
+
+.page-teknik-servis-create-compact .fi-fo-field-wrp {
+    margin-bottom: 0.3rem;
+}
+
+.page-teknik-servis-create-compact .fi-fo-field-wrp-label {
+    margin-bottom: 0.18rem;
+}
+
+.page-teknik-servis-create-compact .fi-section-content [class*="grid"] {
+    gap: 0.55rem 0.8rem !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-inline-label {
+    display: inline;
+    white-space: normal;
+    line-height: 1.25;
+}
+
+.page-teknik-servis-create-compact .fi-input-wrp,
+.page-teknik-servis-create-compact .fi-select-input,
+.page-teknik-servis-create-compact .fi-textarea {
+    min-height: 2rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-single-line-select .choices__inner,
+.page-teknik-servis-create-compact .teknik-servis-single-line-select .choices__list--single,
+.page-teknik-servis-create-compact .teknik-servis-single-line-select .choices__item {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-single-line-select .choices__inner {
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-single-line-select .choices__list--single {
+    min-width: 0;
+    max-width: calc(100% - 1.25rem);
+}
+
+.page-teknik-servis-create-compact .teknik-servis-single-line-select select {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.page-teknik-servis-create-compact .fi-input,
+.page-teknik-servis-create-compact select,
+.page-teknik-servis-create-compact textarea {
+    font-size: 13px;
+}
+
+.page-teknik-servis-create-compact .fi-textarea,
+.page-teknik-servis-create-compact textarea {
+    min-height: 2.2rem !important;
+    height: auto !important;
+}
+
+.page-teknik-servis-create-compact .fi-input-wrp:focus-within,
+.page-teknik-servis-create-compact .fi-select-input:focus-within,
+.page-teknik-servis-create-compact .fi-textarea:focus-within,
+.page-teknik-servis-create-compact .fi-input-wrp-input:focus-within,
+.page-teknik-servis-create-compact .fi-input-wrp-input:focus,
+.page-teknik-servis-create-compact .fi-input-wrp-input:focus-visible,
+.page-teknik-servis-create-compact .fi-input-wrp-input > div:focus-within,
+.page-teknik-servis-create-compact .fi-input-wrp-input > div:focus,
+.page-teknik-servis-create-compact .fi-input-wrp-input > div:focus-visible,
+.page-teknik-servis-create-compact .fi-input:focus,
+.page-teknik-servis-create-compact .fi-input:focus-visible,
+.page-teknik-servis-create-compact input:focus,
+.page-teknik-servis-create-compact input:focus-visible,
+.page-teknik-servis-create-compact select:focus,
+.page-teknik-servis-create-compact select:focus-visible,
+.page-teknik-servis-create-compact textarea:focus,
+.page-teknik-servis-create-compact textarea:focus-visible,
+.page-teknik-servis-create-compact button:focus,
+.page-teknik-servis-create-compact button:focus-visible,
+.page-teknik-servis-create-compact [role="button"]:focus,
+.page-teknik-servis-create-compact [role="button"]:focus-visible,
+.page-teknik-servis-create-compact a:focus,
+.page-teknik-servis-create-compact a:focus-visible {
+    outline: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    --tw-ring-color: transparent !important;
+    --tw-shadow: var(--tw-shadow, 0 0 #0000) !important;
+    box-shadow: var(--tw-shadow) !important;
+}
+
+.page-teknik-servis-create-compact .choices,
+.page-teknik-servis-create-compact .choices:focus,
+.page-teknik-servis-create-compact .choices:focus-visible,
+.page-teknik-servis-create-compact .choices__inner,
+.page-teknik-servis-create-compact .choices__inner:focus,
+.page-teknik-servis-create-compact .choices__inner:focus-visible,
+.page-teknik-servis-create-compact .choices__input,
+.page-teknik-servis-create-compact .choices__input:focus,
+.page-teknik-servis-create-compact .choices__input:focus-visible,
+.page-teknik-servis-create-compact .choices__input--cloned,
+.page-teknik-servis-create-compact .choices__input--cloned:focus,
+.page-teknik-servis-create-compact .choices__input--cloned:focus-visible,
+.page-teknik-servis-create-compact .choices__list--single,
+.page-teknik-servis-create-compact .choices__list--single:focus,
+.page-teknik-servis-create-compact .choices__list--single:focus-visible,
+.page-teknik-servis-create-compact .choices__item,
+.page-teknik-servis-create-compact .choices__item:focus,
+.page-teknik-servis-create-compact .choices__item:focus-visible {
+    outline: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    --tw-ring-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.page-teknik-servis-create-compact .fi-input-wrp:focus-within,
+.page-teknik-servis-create-compact .fi-select-input:focus-within,
+.page-teknik-servis-create-compact .fi-textarea:focus-within,
+.page-teknik-servis-create-compact .fi-input-wrp-input:focus-within,
+.page-teknik-servis-create-compact .fi-input-wrp-input > div:focus-within {
+    border-color: rgba(203, 213, 225, 0.92) !important;
+    --tw-ring-offset-shadow: 0 0 #0000 !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    --tw-ring-color: transparent !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(203, 213, 225, 0.92) !important;
+}
+
+.page-teknik-servis-create-compact .fi-input:focus,
+.page-teknik-servis-create-compact .fi-input:focus-visible,
+.page-teknik-servis-create-compact input:focus,
+.page-teknik-servis-create-compact input:focus-visible,
+.page-teknik-servis-create-compact select:focus,
+.page-teknik-servis-create-compact select:focus-visible,
+.page-teknik-servis-create-compact textarea:focus,
+.page-teknik-servis-create-compact textarea:focus-visible {
+    border-color: rgba(203, 213, 225, 0.92) !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.page-teknik-servis-create-compact *:focus,
+.page-teknik-servis-create-compact *:focus-visible {
+    --tw-ring-shadow: 0 0 #0000 !important;
+    --tw-ring-color: transparent !important;
+}
+
+.page-teknik-servis-create-compact .fi-input-wrp-input,
+.page-teknik-servis-create-compact .fi-input-wrp-input > div,
+.page-teknik-servis-create-compact .fi-input-wrp-input > div > div {
+    box-shadow: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-ariza-secici,
+.page-teknik-servis-create-compact .teknik-servis-ariza-secici .fi-fo-field-wrp,
+.page-teknik-servis-create-compact .teknik-servis-ariza-secici .fi-input-wrp,
+.page-teknik-servis-create-compact .teknik-servis-ariza-secici .fi-input-wrp-input,
+.page-teknik-servis-create-compact .teknik-servis-ariza-secici .fi-input-wrp-input > div,
+.page-teknik-servis-create-compact .teknik-servis-ariza-secici .choices {
+    position: relative;
+    overflow: visible !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-ariza-secici:focus-within {
+    z-index: 100;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-ariza-secici .choices__list--dropdown,
+.page-teknik-servis-create-compact .teknik-servis-ariza-secici .choices__list[aria-expanded] {
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-ariza-secici .choices__list--dropdown .choices__list,
+.page-teknik-servis-create-compact .teknik-servis-ariza-secici .choices__list[aria-expanded] .choices__list {
+    pointer-events: auto !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-ariza-secici .choices__item--choice {
+    cursor: pointer;
+    pointer-events: auto !important;
+}
+
+.page-teknik-servis-create-compact textarea {
+    line-height: 1.35;
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani > .grid > div:first-child {
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.15rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .fi-fo-field-wrp-hint {
+    width: auto;
+    margin-left: auto;
+    gap: 0;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .fi-fo-field-wrp-hint-action {
+    gap: 0;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .fi-fo-field-wrp-hint-label {
+    display: none;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn {
+    min-height: 2.25rem;
+    padding-inline: 0.95rem;
+    border-radius: 0.75rem;
+    border-color: #16a34a;
+    background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+    color: #ffffff;
+    box-shadow: 0 10px 22px rgba(22, 163, 74, 0.22);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn:hover,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn:focus-visible {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+    box-shadow: 0 14px 26px rgba(22, 163, 74, 0.28);
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn .fi-btn-label {
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn .fi-btn-icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-hazirla .fi-fo-placeholder-content {
+    color: #64748b;
+    font-size: 0.82rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-hazirla-icerik {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
+    width: 100%;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-hazirla-icerik span {
+    color: #64748b;
+    font-size: 0.82rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorseli-hazirla-btn,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-hazirla-aksiyon .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-hazirla .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.25rem;
+    padding-inline: 0.95rem;
+    border-radius: 0.75rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #16a34a;
+    background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.86rem;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 10px 22px rgba(22, 163, 74, 0.22);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorseli-hazirla-btn:hover,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorseli-hazirla-btn:focus-visible,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-hazirla-aksiyon .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn:hover,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-hazirla-aksiyon .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn:focus-visible,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-hazirla .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn:hover,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-hazirla .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn:focus-visible {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+    box-shadow: 0 14px 26px rgba(22, 163, 74, 0.28);
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-hazirla .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn .fi-btn-label {
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-hazirla .teknik-servis-cihaz-gorseli-ekle-btn.fi-btn .fi-btn-icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--root[data-style-panel-layout='grid'] {
+    height: auto !important;
+    min-height: 5.35rem;
+    width: 100% !important;
+    max-width: none !important;
+    padding-bottom: 0.4rem !important;
+    overflow: hidden !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri input[type='file'] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--root[data-style-panel-layout='grid'] .filepond--item {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    flex: none !important;
+    margin: 0 !important;
+    width: 8.1rem !important;
+    max-width: 8.1rem !important;
+    min-width: 0;
+    height: 4.9rem !important;
+}
+
+@media (min-width: 768px) {
+    .page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--root[data-style-panel-layout='grid'] .filepond--item {
+        width: 8.4rem !important;
+        max-width: 8.4rem !important;
+        height: 5.05rem !important;
+    }
+}
+
+@media (min-width: 1280px) {
+    .page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--root[data-style-panel-layout='grid'] .filepond--item {
+        width: 8.7rem !important;
+        max-width: 8.7rem !important;
+        height: 5.2rem !important;
+    }
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--root[data-style-panel-layout='grid'] .filepond--drop-label {
+    display: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--root[data-style-panel-layout='grid'] .filepond--drop-label .filepond--label-action {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--root[data-style-panel-layout='grid'] .filepond--list-scroller {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    margin-top: 0 !important;
+    height: auto !important;
+    min-height: 5.1rem;
+    width: 100%;
+    overflow: hidden !important;
+    z-index: 1;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--root[data-style-panel-layout='grid'] .filepond--list {
+    position: relative !important;
+    inset: auto !important;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 0.28rem;
+    min-height: 5.1rem;
+    align-content: flex-start;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--file,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--panel-root,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--item-panel {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: 0 !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--image-preview-wrapper {
+    background: #ffffff !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    box-shadow: 0 5px 12px rgba(15, 23, 42, 0.1);
+    height: 100% !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--image-preview,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--image-preview-overlay,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--image-preview-overlay-idle,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--image-preview-overlay-success,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--image-preview-overlay-failure {
+    background: transparent !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--file-info {
+    margin-top: 0.02rem;
+    padding-inline: 0.02rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--file-action-button {
+    width: 1.55rem;
+    height: 1.55rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--file-info-main {
+    font-size: 0.58rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--file-info-sub {
+    font-size: 0.5rem;
+}
+
+.page-teknik-servis-create-compact .teklif-editor-card.teknik-servis-notes-card {
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    box-shadow: 0 12px 34px rgba(15, 23, 42, 0.05);
+}
+
+.page-teknik-servis-create-compact .teknik-servis-notes-card .fi-section-content {
+    padding: 0.8rem 0.85rem !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-notes-card .fi-section-content [class*="grid"] {
+    gap: 0.65rem 0.85rem !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-notes-card textarea,
+.page-teknik-servis-create-compact .teknik-servis-notes-card .fi-fo-textarea {
+    min-height: 2rem !important;
+    height: auto !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-notes-card textarea {
+    line-height: 1.35;
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-notes-card .teknik-servis-expandable-note {
+    overflow-y: hidden !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-onay-card textarea,
+.page-teknik-servis-create-compact .teknik-servis-onay-card .fi-fo-textarea {
+    min-height: 2.25rem !important;
+    height: auto !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-onay-card textarea {
+    line-height: 1.35;
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-teslim-card textarea,
+.page-teknik-servis-create-compact .teknik-servis-teslim-card .fi-fo-textarea {
+    min-height: 2.25rem !important;
+    height: auto !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-teslim-card textarea {
+    line-height: 1.35;
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-onay-card .teknik-servis-expandable-note,
+.page-teknik-servis-create-compact .teknik-servis-teslim-card .teknik-servis-expandable-note,
+.page-teknik-servis-create-compact .teknik-servis-single-line-note {
+    overflow-y: hidden !important;
+    resize: none !important;
+}
+
+.page-teknik-servis-create-compact textarea.teknik-servis-single-line-note {
+    height: 2.25rem;
+    min-height: 2.25rem;
+}
+
+.page-teknik-servis-create-compact .fi-section-header {
+    padding-bottom: 0.3rem;
+    margin-bottom: 0 !important;
+}
+
+.page-teknik-servis-create-compact .fi-btn {
+    min-height: 2rem;
+}
+
+.page-teknik-servis-create-compact .fi-form-actions {
+    position: fixed !important;
+    z-index: 70 !important;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex !important;
+    justify-content: flex-end;
+    padding: 0.65rem 1rem !important;
+    background: rgba(255, 255, 255, 0.96);
+    border-top: 1px solid rgba(148, 163, 184, 0.35);
+    box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(8px);
+}
+
+.page-teknik-servis-create-compact > section,
+.page-teknik-servis-create-compact .fi-page-content {
+    padding-bottom: 4.75rem !important;
+}
+
+.page-teknik-servis-create-compact .fi-section-header-heading,
+.page-teknik-servis-create-compact .fi-section-header-description {
+    line-height: 1.2;
+}
+
+.page-teknik-servis-create-compact .fi-layout,
+.page-teknik-servis-create-compact .fi-main-ctn,
+.page-teknik-servis-create-compact .fi-main,
+.page-teknik-servis-create-compact .fi-page,
+.page-teknik-servis-create-compact .fi-page-content,
+.page-teknik-servis-create-compact .fi-page-content-ctn {
+    max-width: none !important;
+    width: 100% !important;
+}
+
+.page-teknik-servis-create-compact .fi-main {
+    margin-inline: 0 !important;
+    padding-inline: clamp(0.5rem, 1vw, 1rem) !important;
+}
+
+.page-teknik-servis-create-compact .fi-page-content {
+    padding-inline: 0 !important;
+}
+
+.page-teknik-servis-create-compact .fi-page > section {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.page-teknik-servis-create-compact .teklif-editor-card.teknik-servis-line-card {
+    border: 1px solid rgba(148, 163, 184, 0.26);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    box-shadow: 0 12px 34px rgba(15, 23, 42, 0.06);
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-card .fi-section-content {
+    padding: 0.8rem 0.85rem 0.9rem !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater > .fi-fo-repeater-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    counter-reset: teknik-servis-line;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item {
+    position: relative;
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    overflow: visible;
+    counter-increment: teknik-servis-line;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header {
+    position: static !important;
+    min-height: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border-bottom: 0 !important;
+    overflow: visible !important;
+    gap: 0 !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-label {
+    display: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header > h4,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header > ul:not(.ms-auto) {
+    display: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header > ul.ms-auto {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+    position: absolute !important;
+    inset-inline-end: 0.75rem !important;
+    bottom: 0.62rem !important;
+    z-index: 2 !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    justify-content: flex-end !important;
+    margin-inline-start: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-summary > ul.ms-auto,
+.page-teknik-servis-create-compact .teknik-servis-line-summary .teknik-servis-line-summary-actions {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+    position: absolute !important;
+    inset-inline-end: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    justify-content: flex-end !important;
+    margin-inline-start: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-summary > ul.ms-auto > li,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header > ul.ms-auto > li {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-summary > ul.ms-auto .fi-btn,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header > ul.ms-auto .fi-btn {
+    min-height: 30px !important;
+    padding: 0.35rem !important;
+    border-radius: 9px !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-summary > ul.ms-auto .fi-btn-label,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header > ul.ms-auto .fi-btn-label {
+    font-size: 0.72rem !important;
+    line-height: 1.1 !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content {
+    padding: 0.5rem 0.75rem 0.7rem !important;
+}
+
+@media (min-width: 1280px) {
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid {
+        display: grid !important;
+        grid-template-columns: 3.3rem minmax(14.5rem, 2.15fr) minmax(4.3rem, 0.7fr) minmax(4.4rem, 0.7fr) minmax(6.3rem, 1fr) minmax(6.3rem, 1fr) minmax(6.3rem, 1fr) minmax(6.3rem, 1fr) minmax(6.8rem, 1fr) minmax(6.8rem, 1fr) !important;
+        grid-template-rows: auto auto;
+        gap: 0.72rem 0.82rem !important;
+        align-items: start;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-line-index) {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        align-self: stretch;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-stok-secici) {
+        grid-column: 2;
+        grid-row: 1 / 3;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim) {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-miktar) {
+        grid-column: 4;
+        grid-row: 1;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim-fiyat) {
+        grid-column: 5;
+        grid-row: 1;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-brut-fiyat) {
+        grid-column: 6;
+        grid-row: 1;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-orani) {
+        grid-column: 7;
+        grid-row: 1;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-tutari) {
+        grid-column: 8;
+        grid-row: 1;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-orani) {
+        grid-column: 9;
+        grid-row: 1;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-net-toplam) {
+        grid-column: 10 !important;
+        grid-row: 1 !important;
+        min-width: 0 !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-ozeti) {
+        grid-column: 4 / -1 !important;
+        grid-row: 2 !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-line-index) .teknik-servis-line-index {
+        padding-top: 1.95rem;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .teknik-servis-stok-secici .fi-input-wrp {
+        min-height: 4.45rem;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .teknik-servis-stok-secici .choices__inner {
+        min-height: 4.45rem;
+        align-content: flex-start;
+        padding-top: 0.58rem !important;
+        padding-bottom: 0.58rem !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .teknik-servis-stok-secici .choices__list--single .choices__item {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        white-space: normal;
+        line-height: 1.38;
+        max-width: calc(100% - 1.25rem);
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .teknik-servis-kalem-ozeti {
+        grid-column: 3 / -1;
+        grid-row: 2;
+        align-self: end;
+        justify-self: end;
+        width: 100%;
+        margin-top: -0.12rem;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-summary {
+        justify-content: flex-end;
+        gap: 1.15rem;
+        min-height: 1.5rem;
+        padding: 0.05rem 8.25rem 0 0;
+        text-align: right;
+    }
+}
+
+@media (min-width: 1280px) {
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid {
+        grid-template-columns: 3rem minmax(12rem, 2fr) minmax(3.8rem, 0.65fr) minmax(4rem, 0.65fr) minmax(5.4rem, 0.9fr) minmax(5.4rem, 0.9fr) minmax(5.4rem, 0.9fr) minmax(5.4rem, 0.9fr) minmax(5.8rem, 1fr) minmax(5.8rem, 1fr) minmax(5.8rem, 1fr) !important;
+        grid-template-rows: auto auto auto;
+    }
+
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-line-index) { grid-column: 1; grid-row: 1 / 3; }
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-stok-secici) { grid-column: 2; grid-row: 1 / 3; }
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim) { grid-column: 3; grid-row: 1; }
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-miktar) { grid-column: 4; grid-row: 1; }
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim-fiyat) { grid-column: 5; grid-row: 1; }
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-brut-fiyat) { grid-column: 6; grid-row: 1; }
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-orani) { grid-column: 7; grid-row: 1; }
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-tutari) { grid-column: 8; grid-row: 1; }
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-orani) { grid-column: 9; grid-row: 2; }
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-tutari) { grid-column: 10; grid-row: 2; }
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-net-toplam) { grid-column: 11 !important; grid-row: 2 !important; min-width: 0 !important; }
+    .page-teknik-servis-create-compact .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-ozeti) { grid-column: 3 / -1 !important; grid-row: 3 !important; }
+}
+
+/* Masraf popup'ları: masaüstünde dengeli genişlik ve kompakt stok satırı. */
+body .teknik-servis-masraf-ekle-modal .fi-modal-content > div.fi-fo-component-ctn {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: .75rem 1rem !important;
+}
+body .teknik-servis-masraf-ekle-modal .fi-modal-content > div.fi-fo-component-ctn > div:has(> section) {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+}
+
+@media (min-width: 1280px) {
+    body .masraf-ekle-modal,
+    body .teknik-servis-masraf-ekle-modal {
+        width: min(1280px, calc(100vw - 2rem)) !important;
+        min-width: 1232px !important;
+        max-width: none !important;
+    }
+
+    body .masraf-ekle-modal .fatura-kalemler-repeater .fi-fo-repeater-item-content {
+        padding: 0.55rem 0.65rem !important;
+    }
+
+    body .masraf-ekle-modal .fatura-kalemler-repeater .fi-fo-repeater-item-content > .fi-fo-component-ctn {
+        column-gap: 0.4rem !important;
+        row-gap: 0.3rem !important;
+        align-items: end;
+    }
+
+    body .masraf-ekle-modal .fatura-kalemler-repeater .fi-fo-field-wrp-label {
+        margin-bottom: 0.12rem !important;
+        font-size: 0.68rem !important;
+        line-height: 1.15 !important;
+    }
+
+    body .masraf-ekle-modal .fatura-kalemler-repeater .fi-input-wrp,
+    body .masraf-ekle-modal .fatura-kalemler-repeater .choices__inner {
+        min-height: 2rem !important;
+        border-radius: 0.3rem !important;
+    }
+
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content {
+        padding: 0.6rem 0.7rem !important;
+    }
+
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid {
+        grid-template-columns: 2.8rem minmax(12rem, 2.2fr) minmax(4rem, 0.7fr) minmax(4.5rem, 0.75fr) repeat(4, minmax(5.5rem, 1fr)) repeat(3, minmax(5.6rem, 1fr)) !important;
+        column-gap: 0.45rem !important;
+        row-gap: 0.35rem !important;
+        grid-template-rows: minmax(3.5rem, auto) minmax(2.75rem, auto) auto !important;
+        align-items: end;
+    }
+
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-field-wrp-label {
+        margin-bottom: 0.12rem !important;
+        font-size: 0.68rem !important;
+        line-height: 1.15 !important;
+    }
+
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-input-wrp,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .choices__inner {
+        min-height: 2rem !important;
+        border-radius: 0.3rem !important;
+    }
+
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-stok-secici .fi-input-wrp,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-stok-secici .choices__inner {
+        min-height: 3.5rem !important;
+    }
+
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-line-index {
+        padding-top: 1.55rem !important;
+    }
+}
+
+@media (max-width: 1279px) and (min-width: 768px) {
+    body .masraf-ekle-modal,
+    body .teknik-servis-masraf-ekle-modal {
+        width: calc(100vw - 2rem) !important;
+        max-width: calc(100vw - 2rem) !important;
+    }
+}
+
+@media (max-width: 767px) {
+    body .masraf-ekle-modal,
+    body .teknik-servis-masraf-ekle-modal {
+        width: calc(100vw - 1rem) !important;
+        max-width: calc(100vw - 1rem) !important;
+        min-width: 0 !important;
+    }
+
+    body .masraf-ekle-modal .fatura-kalemler-repeater .fi-fo-repeater-item-content,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content {
+        padding-inline: 0.25rem !important;
+    }
+}
+
+/* Stok kalemi: tek dengeli satır + ayrı özet satırı. */
+@media (min-width: 1280px) {
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid {
+        grid-template-columns: 2.8rem minmax(14rem, 2.25fr) repeat(9, minmax(5.6rem, 1fr)) !important;
+        grid-template-rows: auto auto !important;
+        column-gap: 0.7rem !important;
+        row-gap: 0.65rem !important;
+        align-items: start !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-line-index),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-line-index) {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        align-self: stretch !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-stok-secici),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-stok-secici) {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim) { grid-column: 3 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-miktar),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-miktar) { grid-column: 4 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim-fiyat),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim-fiyat) { grid-column: 5 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-brut-fiyat),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-brut-fiyat) { grid-column: 6 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-orani),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-orani) { grid-column: 7 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-tutari),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-tutari) { grid-column: 8 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-orani),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-orani) { grid-column: 9 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-tutari),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-tutari) { grid-column: 10 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-net-toplam),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-net-toplam) { grid-column: 11 !important; grid-row: 1 !important; }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .teknik-servis-kalem-ozeti,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-ozeti {
+        grid-column: 2 / -1 !important;
+        grid-row: 2 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        justify-self: stretch !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .teknik-servis-kalem-ozeti .fi-section-content,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-ozeti .fi-section-content {
+        padding: 0.55rem 0.75rem !important;
+    }
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-field-wrp {
+    margin-bottom: 0.2rem;
+    overflow: visible;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-index {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-index-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 2.8rem;
+    color: #64748b;
+    font-size: 0.76rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-index .fi-fo-placeholder {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-input-wrp,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-select-input {
+    border-radius: 12px;
+    background: #fff;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__inner,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__list,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__list--dropdown,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__list[aria-expanded] {
+    overflow: visible;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices {
+    margin-bottom: 0;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__inner {
+    min-height: 2.8rem;
+    padding: 0.36rem 2.2rem 0.36rem 0.18rem !important;
+    border: 1px solid rgba(203, 213, 225, 0.92);
+    border-radius: 14px;
+    box-shadow: none;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices.is-focused .choices__inner,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices.is-open .choices__inner {
+    border-color: rgba(245, 158, 11, 0.9);
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.12);
+    background: #fffdf8;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__list--single {
+    padding: 0 0 0 0.18rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__list--single .choices__item {
+    line-height: 1.4;
+    color: #0f172a;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__list--dropdown,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__list[aria-expanded] {
+    z-index: 40;
+    margin-top: 0.45rem;
+    min-width: 100%;
+    max-width: min(32rem, calc(100vw - 3rem));
+    border: 1px solid rgba(226, 232, 240, 0.96);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.16);
+    overflow: visible !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices[data-type*="select-one"] {
+    position: relative;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices[data-type*="select-one"].is-open .choices__inner {
+    border-color: rgba(245, 158, 11, 0.9);
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.12);
+    background: transparent;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices[data-type*="select-one"].is-open .choices__list--single,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices[data-type*="select-one"].is-open .choices__placeholder {
+    opacity: 0;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices[data-type*="select-one"].is-open .choices__list--single .choices__item {
+    display: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__list--dropdown .choices__list,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__list[aria-expanded] .choices__list {
+    max-height: 20rem;
+    padding: 0.4rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__input {
+    position: absolute;
+    top: -2.82rem;
+    left: 0.85rem;
+    right: 2.3rem;
+    z-index: 3;
+    margin: 0;
+    padding: 0.42rem 0 !important;
+    border: 0 !important;
+    border-radius: 0;
+    background: transparent !important;
+    color: #0f172a;
+    font-size: 0.94rem;
+    box-shadow: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__input:focus,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__input:focus-visible {
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__input::placeholder {
+    color: #94a3b8;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__item--choice {
+    display: block;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    color: #1e293b;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    word-break: break-word;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__item--choice + .choices__item--choice {
+    margin-top: 0.28rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__item--choice.is-highlighted,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__item--choice:hover {
+    background: #f8fafc;
+    border-color: rgba(251, 191, 36, 0.38);
+    color: #0f172a;
+    transform: translateY(-1px);
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__item--choice.is-selected {
+    background: #fff7ed;
+    border-color: rgba(245, 158, 11, 0.28);
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .choices__item--disabled {
+    padding: 0.9rem;
+    color: #64748b;
+    font-size: 0.88rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .teknik-servis-kdv-secici .choices__inner {
+    min-height: 2.25rem;
+    padding: 0.2rem 2rem 0.2rem 0.6rem !important;
+    border-radius: 12px;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .teknik-servis-kdv-secici .choices__list--single {
+    padding: 0;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .teknik-servis-kdv-secici .choices__list--single .choices__item,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .teknik-servis-kdv-secici .choices__placeholder {
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .teknik-servis-kdv-secici .choices__input {
+    top: -2.28rem;
+    left: 0.6rem;
+    right: 1.9rem;
+    padding: 0.22rem 0 !important;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-btn[data-size="sm"] {
+    min-height: 1.9rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-card .fi-fo-placeholder {
+    margin-bottom: 0;
+}
+
+.page-teknik-servis-create-compact .teklif-line-summary.teknik-servis-line-summary,
+.page-teknik-servis-create-compact .teknik-servis-line-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.85rem;
+    position: relative;
+    min-height: 2.2rem;
+    padding: 0.15rem 8.25rem 0 0;
+    color: #475569;
+    font-size: 0.76rem;
+    line-height: 1.5;
+}
+
+.page-teknik-servis-create-compact .teklif-line-summary.teknik-servis-line-summary .teknik-servis-line-summary-item,
+.page-teknik-servis-create-compact .teknik-servis-line-summary-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.2rem;
+    white-space: nowrap;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-summary-separator {
+    display: inline-block;
+    min-width: 0.6rem;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-summary-label {
+    font-weight: 500;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-summary-value {
+    font-weight: 600;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-tahsilatlar-tablosu .fi-ta-header {
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+    gap: 0.75rem !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-tahsilatlar-tablosu .fi-ta-header-toolbar {
+    display: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-tahsilatlar-tablosu .fi-ta-header > .grid {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-tahsilatlar-tablosu .fi-ta-header > .fi-ta-actions {
+    flex: 0 0 auto;
+    width: auto !important;
+    margin-inline-start: auto !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-tahsilatlar-tablosu .fi-ta-header > .fi-ta-actions .fi-btn:last-child {
+    margin-inline-start: auto !important;
+    margin-left: auto !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-muhasebe-ozet {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.5rem;
+    color: #475569;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    white-space: normal;
+    overflow: visible;
+    scrollbar-width: auto;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-muhasebe-ozet-sep {
+    color: #94a3b8;
+}
+
+@media (max-width: 1023px) {
+    .page-teknik-servis-create-compact .fi-main,
+    .page-teknik-servis-create-compact .fi-page,
+    .page-teknik-servis-create-compact .fi-section,
+    .page-teknik-servis-create-compact .fi-page-content,
+    .page-teknik-servis-create-compact [class*="grid"] {
+        max-width: 100% !important;
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .page-teknik-servis-create-compact .fi-main {
+        overflow-x: hidden !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-summary {
+        padding-right: 8.25rem;
+    }
+}
+
+@media (max-width: 1279px) {
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.65rem !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-summary {
+        padding-right: 0;
+        padding-bottom: 2.4rem;
+        font-size: 0.92rem;
+        gap: 0.35rem 0.85rem;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header > ul.ms-auto {
+        inset-inline-end: 0.75rem !important;
+        bottom: 0.55rem !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-summary > ul.ms-auto {
+        position: static !important;
+        transform: none !important;
+        width: 100%;
+        justify-content: flex-end;
+        margin-inline-start: auto !important;
+        margin-left: auto !important;
+    }
+}
+
+.page-teknik-servis-create-compact .teknik-servis-whatsapp-gonder-alani .fi-fo-field-wrp-label,
+.page-teknik-servis-create-compact .teknik-servis-whatsapp-gonder-alani label {
+    display: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--root {
+    height: auto !important;
+    min-height: 6.1rem !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--list-scroller {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    height: auto !important;
+    min-height: 5.7rem !important;
+    overflow: visible !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--list {
+    position: relative !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, 5.6rem) !important;
+    gap: 0.4rem !important;
+    align-items: start !important;
+    justify-content: start !important;
+    min-height: 5.7rem !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--item {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    width: 5.6rem !important;
+    max-width: 5.6rem !important;
+    height: 5.6rem !important;
+    margin: 0 !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--file-wrapper,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--file,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--item-panel,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--image-preview-wrapper {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri .filepond--file-info-main {
+    max-width: 4.7rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond-uploader,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--root {
+    height: auto !important;
+    min-height: 6.1rem !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--list-scroller {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    height: auto !important;
+    min-height: 5.7rem !important;
+    overflow: visible !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--list {
+    position: relative !important;
+    inset: auto !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 0.4rem !important;
+    min-height: 5.7rem !important;
+    transform: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond-uploader.three-grid .filepond--item,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--root[data-style-panel-layout='grid'] .filepond--item,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani li.filepond--item,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--item {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    flex: 0 0 5.6rem !important;
+    width: 5.6rem !important;
+    min-width: 5.6rem !important;
+    max-width: 5.6rem !important;
+    height: 5.6rem !important;
+    min-height: 5.6rem !important;
+    max-height: 5.6rem !important;
+    margin: 0 !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file-wrapper,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani fieldset.filepond--file-wrapper,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--item-panel,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--panel,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--panel-root,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--panel-top,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--panel-center,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--panel-bottom,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--image-preview-wrapper {
+    width: 5.6rem !important;
+    min-width: 5.6rem !important;
+    max-width: 5.6rem !important;
+    height: 5.6rem !important;
+    min-height: 5.6rem !important;
+    max-height: 5.6rem !important;
+    overflow: hidden !important;
+    border-radius: 0.55rem !important;
+    transform: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--image-preview {
+    height: 5.6rem !important;
+    min-height: 5.6rem !important;
+    max-height: 5.6rem !important;
+    overflow: hidden !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file {
+    background: #111827 !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--item-panel {
+    display: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--image-preview-wrapper,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--image-preview,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--image-clip {
+    position: absolute !important;
+    inset: 0 !important;
+    transform: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--image-clip,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--image-canvas-wrapper,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--image-bitmap,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani canvas {
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file-info,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file-status,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file-info-main,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file-info-sub,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file-status-main,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file-status-sub {
+    display: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file-action-button {
+    transform: scale(0.78) !important;
+    transform-origin: center !important;
+    z-index: 5 !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file-info {
+    max-width: 5.1rem !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file-info-main,
+.page-teknik-servis-create-compact .teknik-servis-cihaz-gorselleri-alani .filepond--file-info-sub {
+    max-width: 4.7rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    min-height: 2.35rem !important;
+    height: auto !important;
+    padding: 0.4rem 7.8rem 0.4rem 0.75rem !important;
+    gap: 0.65rem !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
+    overflow: visible !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-label,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header > h4 {
+    display: flex !important;
+    align-items: center !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    color: #334155 !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+    text-align: left !important;
+    white-space: normal !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header > ul:not(.ms-auto) {
+    display: none !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header > ul.ms-auto {
+    position: absolute !important;
+    inset-inline-end: 0.6rem !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    z-index: 2 !important;
+}
+
+@media (max-width: 767px) {
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header {
+        padding-right: 0.75rem !important;
+        padding-bottom: 2.45rem !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-header > ul.ms-auto {
+        top: auto !important;
+        bottom: 0.45rem !important;
+        transform: none !important;
+    }
+}
+
+/* Teknik servis gorsel alani olusturma ve duzenleme formlarinda ayni kompakt olcude kalir. */
+.teknik-servis-cihaz-gorselleri-alani .filepond-uploader,
+.teknik-servis-cihaz-gorselleri-alani .filepond--root {
+    height: auto !important;
+    min-height: 6.1rem !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.teknik-servis-cihaz-gorselleri-alani .filepond--drop-label {
+    min-height: 2.25rem !important;
+    padding: 0.35rem 0.5rem !important;
+    font-size: 0.78rem !important;
+}
+
+.teknik-servis-cihaz-gorselleri-alani .filepond--list-scroller {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    height: auto !important;
+    min-height: 5.7rem !important;
+    overflow: visible !important;
+}
+
+.teknik-servis-cihaz-gorselleri-alani .filepond--list {
+    position: relative !important;
+    inset: auto !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 0.4rem !important;
+    min-height: 5.7rem !important;
+    transform: none !important;
+}
+
+.teknik-servis-cihaz-gorselleri-alani .filepond-uploader.three-grid .filepond--item,
+.teknik-servis-cihaz-gorselleri-alani .filepond--root[data-style-panel-layout='grid'] .filepond--item,
+.teknik-servis-cihaz-gorselleri-alani li.filepond--item,
+.teknik-servis-cihaz-gorselleri-alani .filepond--item {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    flex: 0 0 5.6rem !important;
+    width: 5.6rem !important;
+    min-width: 5.6rem !important;
+    max-width: 5.6rem !important;
+    height: 5.6rem !important;
+    min-height: 5.6rem !important;
+    max-height: 5.6rem !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    border-radius: 0.55rem !important;
+}
+
+.teknik-servis-cihaz-gorselleri-alani .filepond--file-wrapper,
+.teknik-servis-cihaz-gorselleri-alani fieldset.filepond--file-wrapper,
+.teknik-servis-cihaz-gorselleri-alani .filepond--file,
+.teknik-servis-cihaz-gorselleri-alani .filepond--item-panel,
+.teknik-servis-cihaz-gorselleri-alani .filepond--panel,
+.teknik-servis-cihaz-gorselleri-alani .filepond--panel-root,
+.teknik-servis-cihaz-gorselleri-alani .filepond--panel-top,
+.teknik-servis-cihaz-gorselleri-alani .filepond--panel-center,
+.teknik-servis-cihaz-gorselleri-alani .filepond--panel-bottom,
+.teknik-servis-cihaz-gorselleri-alani .filepond--image-preview-wrapper,
+.teknik-servis-cihaz-gorselleri-alani .filepond--image-preview {
+    width: 5.6rem !important;
+    min-width: 5.6rem !important;
+    max-width: 5.6rem !important;
+    height: 5.6rem !important;
+    min-height: 5.6rem !important;
+    max-height: 5.6rem !important;
+    overflow: hidden !important;
+    border-radius: 0.55rem !important;
+    transform: none !important;
+}
+
+.teknik-servis-cihaz-gorselleri-alani .filepond--image-preview-wrapper,
+.teknik-servis-cihaz-gorselleri-alani .filepond--image-preview,
+.teknik-servis-cihaz-gorselleri-alani .filepond--image-clip {
+    position: absolute !important;
+    inset: 0 !important;
+    transform: none !important;
+}
+
+.teknik-servis-cihaz-gorselleri-alani .filepond--file-info,
+.teknik-servis-cihaz-gorselleri-alani .filepond--file-status,
+.teknik-servis-cihaz-gorselleri-alani .filepond--file-info-main,
+.teknik-servis-cihaz-gorselleri-alani .filepond--file-info-sub,
+.teknik-servis-cihaz-gorselleri-alani .filepond--file-status-main,
+.teknik-servis-cihaz-gorselleri-alani .filepond--file-status-sub {
+    display: none !important;
+}
+
+.teknik-servis-cihaz-gorselleri-alani .filepond--file-action-button {
+    transform: scale(0.78) !important;
+    transform-origin: center !important;
+    z-index: 5 !important;
+}
+
+.teknik-servis-cihaz-gorselleri-hazirla .fi-fo-placeholder-content {
+    display: flex;
+    width: 100%;
+}
+
+.teknik-servis-cihaz-gorselleri-hazirla-icerik {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.teknik-servis-cihaz-gorseli-hazirla-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.25rem;
+    padding-inline: 0.95rem;
+    border: 1px solid #16a34a;
+    border-radius: 0.75rem;
+    background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.86rem;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 10px 22px rgba(22, 163, 74, 0.22);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+
+.teknik-servis-cihaz-gorseli-hazirla-btn:hover,
+.teknik-servis-cihaz-gorseli-hazirla-btn:focus-visible {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+    box-shadow: 0 14px 26px rgba(22, 163, 74, 0.28);
+}
+
+.teknik-servis-cihaz-gorselleri-hazirla-checkbox {
+    display: inline-flex !important;
+    width: auto !important;
+}
+
+.teknik-servis-cihaz-gorselleri-hazirla-checkbox .fi-checkbox-input,
+.teknik-servis-cihaz-gorselleri-hazirla-checkbox input[type='checkbox'] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.teknik-servis-cihaz-gorselleri-hazirla-checkbox label,
+.teknik-servis-cihaz-gorselleri-hazirla-checkbox .fi-fo-field-wrp-label,
+.teknik-servis-cihaz-gorselleri-hazirla-checkbox .fi-fo-field-wrp-label span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 2.25rem !important;
+    padding: 0 0.95rem !important;
+    border: 1px solid #16a34a !important;
+    border-radius: 0.75rem !important;
+    background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%) !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+    font-size: 0.86rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    box-shadow: 0 10px 22px rgba(22, 163, 74, 0.22) !important;
+}
+
+input.teknik-servis-cihaz-gorselleri-hazirla-checkbox {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+label[for="data.cihaz_gorselleri_yukle"] {
+    position: relative !important;
+    display: inline-flex !important;
+    width: auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 2.25rem !important;
+    padding: 0 0.95rem !important;
+    border: 1px solid #16a34a !important;
+    border-radius: 0.75rem !important;
+    background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%) !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+    box-shadow: 0 10px 22px rgba(22, 163, 74, 0.22) !important;
+}
+
+label[for="data.cihaz_gorselleri_yukle"] span {
+    position: relative !important;
+    z-index: 1 !important;
+    color: #ffffff !important;
+    font-size: 0.86rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    pointer-events: none !important;
+}
+
+label[for="data.cihaz_gorselleri_yukle"] input.teknik-servis-cihaz-gorselleri-hazirla-checkbox {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 2 !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 0 !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+@media (min-width:1024px) {
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid { grid-template-columns:2.5rem minmax(15rem,2.4fr) repeat(9,minmax(5.8rem,1fr)) !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-tutari),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-tutari) { grid-column:10 !important; grid-row:1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-net-toplam),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-net-toplam) { grid-column:11 !important; grid-row:1 !important; }
+}
+
+/* Stok kalemleri - sade, dengeli ve mobil uyumlu son düzen */
+.page-teknik-servis-create-compact .teknik-servis-line-card,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater {
+    --stok-border: #e2e8f0;
+    --stok-muted: #64748b;
+    --stok-accent: #0f766e;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-card,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater {
+    border-color: var(--stok-border) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .045) !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater > .fi-fo-repeater-items,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater > .fi-fo-repeater-items {
+    gap: .65rem !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item {
+    border: 1px solid var(--stok-border) !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content {
+    padding: .85rem !important;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-field-wrp-label,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-field-wrp-label {
+    color: var(--stok-muted) !important;
+    font-size: .7rem !important;
+    font-weight: 600 !important;
+    letter-spacing: .01em;
+}
+
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-input-wrp,
+.page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-select-input,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-input-wrp,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-select-input {
+    min-height: 2.55rem !important;
+    border-radius: 9px !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: none !important;
+}
+
+/* Dar KDV seçiminde seçili oran ile kaldırma oku aynı alana binmesin. */
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-kdv-orani .choices__inner {
+    padding-right: 2.2rem !important;
+}
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-kdv-orani {
+    min-width: 6.5rem !important;
+}
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-stok-secici .fi-input-wrp,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-stok-secici .choices__inner,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-birim .fi-input-wrp,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-birim .choices__inner,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kdv-secici .fi-input-wrp,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kdv-secici .choices__inner {
+    min-height: 2.55rem !important;
+    height: 2.55rem !important;
+    border-radius: 9px !important;
+}
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-stok-secici .choices__inner,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-birim .choices__inner,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kdv-secici .choices__inner {
+    padding-top: .55rem !important;
+    padding-bottom: .55rem !important;
+}
+/* Birim seçicisindeki kaldırma ikonuna metinden ayrı, sabit bir alan bırak. */
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-birim .choices__inner {
+    position: relative !important;
+    padding-right: 2.35rem !important;
+}
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-birim .choices__list--single {
+    min-width: 0 !important;
+    max-width: calc(100% - 1.35rem) !important;
+    overflow: hidden !important;
+}
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-birim .choices__list--single .choices__item {
+    display: block !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-birim .choices__button {
+    flex: 0 0 auto !important;
+    margin-left: .25rem !important;
+}
+/* Masraf modalında stok seçicisi KDV seçicisiyle aynı etiket + alan düzeninde olsun. */
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-stok {
+    grid-row: 1 !important;
+    align-self: end !important;
+}
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-stok .fi-input-wrp,
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-stok .choices__inner {
+    min-height: 2.55rem !important;
+    height: 2.55rem !important;
+    align-items: center !important;
+    padding-top: .55rem !important;
+    padding-bottom: .55rem !important;
+}
+body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-kdv-orani .choices__list--single .choices__item {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+@media (min-width: 1024px) {
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid {
+        grid-template-columns: 2.5rem minmax(12rem, 2fr) repeat(9, minmax(4.4rem, 1fr)) !important;
+        grid-template-rows: auto auto !important;
+        gap: .75rem !important;
+        align-items: end !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-line-index),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-line-index) {
+        grid-column: 1 !important; grid-row: 1 !important; align-self: stretch !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-stok-secici),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-stok-secici) {
+        grid-column: 2 !important; grid-row: 1 / 3 !important;
+    }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim) { grid-column: 3 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-miktar),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-miktar) { grid-column: 4 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim-fiyat),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim-fiyat) { grid-column: 5 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-brut-fiyat),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-brut-fiyat) { grid-column: 6 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-orani),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-orani) { grid-column: 7 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-tutari),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-tutari) { grid-column: 8 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-orani),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-orani) { grid-column: 9 !important; grid-row: 1 !important; }
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-net-toplam),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-net-toplam) { grid-column: 11 !important; grid-row: 1 !important; }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .teknik-servis-kalem-ozeti,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .teknik-servis-kalem-ozeti { grid-column: 3 / -1 !important; grid-row: 2 !important; width: 100% !important; }
+
+    /* Masraf Ekle popup'ında vergi ve net alanlarını ayrı alt satıra al. */
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-orani) { grid-column: 9 !important; grid-row: 2 !important; }
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-tutari) { grid-column: 10 !important; grid-row: 2 !important; }
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-net-toplam) { grid-column: 11 !important; grid-row: 2 !important; }
+}
+
+/* Masraf modalı 2xl breakpoint'inde erken dört kolona bölünmesin.
+   1306px gibi tablet/dar masaüstü genişliklerinde stok satırı tam genişlikte
+   kalmalı; aksi halde 11 alan birkaç yüz piksele sıkışıp üst üste biner. */
+@media (min-width: 1024px) and (max-width: 1535px) {
+    body .teknik-servis-masraf-ekle-modal .fi-modal-content > .fi-fo-component-ctn {
+        --cols-2xl: repeat(1, minmax(0, 1fr)) !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+    body .teknik-servis-masraf-ekle-modal .fi-modal-content > div.fi-fo-component-ctn {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: .75rem 1rem !important;
+    }
+    body .teknik-servis-masraf-ekle-modal .fi-modal-content > .fi-fo-component-ctn > div:has(> section) {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+    }
+
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div {
+        grid-column: auto !important;
+        grid-row: auto !important;
+    }
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-line-index),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-stok-secici),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-miktar),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-birim-fiyat),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-brut-fiyat),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-orani),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-iskonto-tutari),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-orani),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-kdv-tutari),
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div:has(.teknik-servis-kalem-net-toplam) {
+        grid-column: auto !important;
+        grid-row: auto !important;
+    }
+}
+
+@media (max-width: 767px) {
+    body .teknik-servis-masraf-ekle-modal .fi-modal-content > div.fi-fo-component-ctn {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: .65rem !important;
+    }
+    body .teknik-servis-masraf-ekle-modal .fi-modal-content > div.fi-fo-component-ctn > div:has(> section) {
+        grid-column: 1 !important;
+    }
+}
+
+@media (max-width: 1023px) {
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: .7rem !important;
+    }
+}
+
+@media (max-width: 639px) {
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content { padding: .7rem !important; }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid { grid-template-columns: minmax(0, 1fr) !important; }
+
+    .page-teknik-servis-create-compact .teknik-servis-line-repeater .fi-fo-repeater-item-content > .grid > div,
+    body .teknik-servis-masraf-ekle-modal .masraf-fatura-line-repeater .fi-fo-repeater-item-content > .grid > div { grid-column: auto !important; grid-row: auto !important; }
+}

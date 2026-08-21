@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "product-categories",
+    "uri":  "admin/product-categories/create",
+    "name":  "filament.admin.resources.product-categories.create",
+    "action":  "App\\Filament\\Resources\\ProductCategoryResource\\Pages\\CreateProductCategory",
+    "status":  200,
+    "avg_ms":  1684.94,
+    "min_ms":  1684.94,
+    "max_ms":  1684.94,
+    "runs_ms":  "1684.94",
+    "bytes":  154895,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/urunler/urun-kategorileri/create",
+    "error":  null
+}

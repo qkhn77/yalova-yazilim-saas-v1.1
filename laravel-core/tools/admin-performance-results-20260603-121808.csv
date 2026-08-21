@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/satis/barkodlu-satis-ayarlar","filament.admin.muhasebe.pages.satis.barkodlu-satis-ayarlar","App\Filament\Clusters\Muhasebe\Pages\BarkodluSatisAyarlarSayfasi","403","1808,12","1808,12","1808,12","1808.12","0","http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-ayarlar","Uzak sunucu hata döndürdü: (403) Yasak."

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-roller",
+    "uri":  "admin/sistem-roller/create",
+    "name":  "filament.admin.resources.sistem-roller.create",
+    "action":  "App\\Filament\\Resources\\RoleResource\\Pages\\CreateRole",
+    "status":  200,
+    "avg_ms":  1661.44,
+    "min_ms":  1661.44,
+    "max_ms":  1661.44,
+    "runs_ms":  "1661.44",
+    "bytes":  137559,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-roller/create",
+    "error":  null
+}

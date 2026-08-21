@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "firma-ici-kullanicilar",
+    "uri":  "admin/firma-ici-kullanicilar/1/edit",
+    "uri_template":  "admin/firma-ici-kullanicilar/{record}/edit",
+    "name":  "filament.admin.resources.firma-ici-kullanicilar.edit",
+    "action":  "App\\Filament\\Resources\\FirmaIciKullaniciKaynagi\\Pages\\FirmaIciKullaniciDuzenle",
+    "model":  "App\\Models\\FirmaKullanici",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  1763.22,
+    "min_ms":  1752.51,
+    "max_ms":  1773.94,
+    "runs_ms":  "1773,94|1752,51",
+    "bytes":  165132,
+    "final_url":  "http://localhost/yalova-kamera/admin/firma-ici-kullanicilar/1/edit",
+    "error":  null
+}

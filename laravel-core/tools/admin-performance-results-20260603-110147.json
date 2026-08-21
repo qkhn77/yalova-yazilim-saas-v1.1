@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/tanimlar/salonlar/create",
+    "name":  "filament.admin.restoran.resources.tanimlar.salonlar.create",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranSalonKaynagi\\Pages\\CreateRestoranSalon",
+    "status":  200,
+    "avg_ms":  1682.67,
+    "min_ms":  1682.67,
+    "max_ms":  1682.67,
+    "runs_ms":  "1682.67",
+    "bytes":  144709,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/tanimlar/salonlar/create",
+    "error":  null
+}

@@ -1,0 +1,38 @@
+﻿[
+    {
+        "rank":  1,
+        "module":  "muhasebe",
+        "uri":  "admin/muhasebe/fatura-kaynagis/1",
+        "uri_template":  "admin/muhasebe/fatura-kaynagis/{record}",
+        "name":  "filament.admin.muhasebe.resources.fatura-kaynagis.view",
+        "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\ViewFatura",
+        "model":  "App\\Models\\Muhasebe\\Fatura",
+        "record_key":  "1",
+        "status":  200,
+        "avg_ms":  2728.08,
+        "min_ms":  655.3,
+        "max_ms":  10579.24,
+        "runs_ms":  "10579,24|655,3|904,86|708,5|792,51",
+        "bytes":  228848,
+        "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/1",
+        "error":  null
+    },
+    {
+        "rank":  2,
+        "module":  "muhasebe",
+        "uri":  "admin/muhasebe/fatura-kaynagis/1/edit",
+        "uri_template":  "admin/muhasebe/fatura-kaynagis/{record}/edit",
+        "name":  "filament.admin.muhasebe.resources.fatura-kaynagis.edit",
+        "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\EditFatura",
+        "model":  "App\\Models\\Muhasebe\\Fatura",
+        "record_key":  "1",
+        "status":  200,
+        "avg_ms":  1908.73,
+        "min_ms":  718.96,
+        "max_ms":  6429.22,
+        "runs_ms":  "6429,22|718,96|735,32|859,56|800,57",
+        "bytes":  337087,
+        "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/1/edit",
+        "error":  null
+    }
+]

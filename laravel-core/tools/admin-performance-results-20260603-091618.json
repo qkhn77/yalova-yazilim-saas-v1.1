@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/faturalar/bekleyen-faturalar",
+    "name":  "filament.admin.muhasebe.pages.faturalar.bekleyen-faturalar",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\BekleyenFatura",
+    "status":  200,
+    "avg_ms":  3514.64,
+    "min_ms":  1658.74,
+    "max_ms":  5370.54,
+    "runs_ms":  "5370,54|1658,74",
+    "bytes":  145721,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/faturalar/bekleyen-faturalar",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/qr-menu/receteler",
+    "name":  "filament.admin.restoran.resources.qr-menu.receteler.index",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranReceteKaynagi\\Pages\\ListRestoranReceteleri",
+    "status":  200,
+    "avg_ms":  1735.72,
+    "min_ms":  1735.72,
+    "max_ms":  1735.72,
+    "runs_ms":  "1735.72",
+    "bytes":  162370,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/qr-menu/receteler",
+    "error":  null
+}

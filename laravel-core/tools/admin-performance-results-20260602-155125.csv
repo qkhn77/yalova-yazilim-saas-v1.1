@@ -1,0 +1,4 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","restoran","admin/restoran","filament.admin.restoran","App\Filament\Clusters\Restoran","200","3745,46","3702,84","3829,85","3829,85|3702,84|3703,69","166948","http://localhost/yalova-kamera/admin/restoran/qr-menu/receteler",
+"2","teknik-servis","admin/teknik-servis","filament.admin.teknik-servis","App\Filament\Clusters\TeknikServis","200","1883,78","1797,42","1985,24","1985,24|1797,42|1868,68","110847","http://localhost/yalova-kamera/admin/teknik-servis",
+"3","e-ticaret","admin/e-ticaret","filament.admin.e-ticaret","App\Filament\Clusters\ETicaret","200","1848,9","1817,47","1903,16","1903,16|1817,47|1826,06","110823","http://localhost/yalova-kamera/admin/e-ticaret",

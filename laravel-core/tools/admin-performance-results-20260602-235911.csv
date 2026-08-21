@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","personel-takip","admin/personel-takip/tanimlar/subeler","filament.admin.personel-takip.resources.tanimlar.subeler.index","App\Filament\Clusters\PersonelTakip\Resources\SubeKaynagi\Pages\ListSubeler","200","2829,27","1694,18","7228,7","7228,7|1760,18|1753,53|1709,77|1694,18","160743","http://localhost/yalova-kamera/admin/personel-takip/tanimlar/subeler",

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "profil",
+    "uri":  "admin/profil",
+    "name":  "filament.admin.auth.profile",
+    "action":  "App\\Filament\\Pages\\Auth\\ProfilDuzenle",
+    "status":  200,
+    "avg_ms":  1970.47,
+    "min_ms":  1688.73,
+    "max_ms":  2902.81,
+    "runs_ms":  "2902,81|1720,14|1688,73|1781,15|1759,55",
+    "bytes":  232128,
+    "final_url":  "http://localhost/yalova-kamera/admin/profil",
+    "error":  null
+}

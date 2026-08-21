@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/urunler/urun-listesi",
+    "name":  "filament.admin.web.resources.urunler.urun-listesi.index",
+    "action":  "App\\Filament\\Clusters\\Web\\Resources\\UrunKaynagi\\Pages\\ListUrunler",
+    "status":  200,
+    "avg_ms":  1809.04,
+    "min_ms":  1742.36,
+    "max_ms":  1875.71,
+    "runs_ms":  "1742,36|1875,71",
+    "bytes":  185228,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/urunler/urun-listesi",
+    "error":  null
+}

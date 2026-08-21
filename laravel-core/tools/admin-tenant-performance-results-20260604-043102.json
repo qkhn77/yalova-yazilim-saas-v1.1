@@ -1,0 +1,54 @@
+﻿[
+    {
+        "rank":  1,
+        "module":  "firma-ayarlari",
+        "uri":  "admin/firma-ayarlari",
+        "status":  200,
+        "avg_ms":  524.65,
+        "min_ms":  442.07,
+        "max_ms":  660.23,
+        "runs_ms":  "660,23|471,64|442,07",
+        "bytes":  208293,
+        "final_url":  "http://localhost/yalova-kamera/admin/firma-ayarlari",
+        "error":  null
+    },
+    {
+        "rank":  2,
+        "module":  "muhasebe",
+        "uri":  "admin/muhasebe/satis/barkodlu-satis-fis-sablonlari",
+        "status":  200,
+        "avg_ms":  469.88,
+        "min_ms":  460.15,
+        "max_ms":  477.35,
+        "runs_ms":  "472,16|477,35|460,15",
+        "bytes":  241770,
+        "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-fis-sablonlari",
+        "error":  null
+    },
+    {
+        "rank":  3,
+        "module":  "muhasebe",
+        "uri":  "admin/muhasebe/satis/barkodlu-satis-ayarlar",
+        "status":  200,
+        "avg_ms":  407.96,
+        "min_ms":  369.89,
+        "max_ms":  435.03,
+        "runs_ms":  "435,03|418,95|369,89",
+        "bytes":  127412,
+        "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-ayarlar",
+        "error":  null
+    },
+    {
+        "rank":  4,
+        "module":  "firma-kullanici-gruplari",
+        "uri":  "admin/firma-kullanici-gruplari/9/edit",
+        "status":  200,
+        "avg_ms":  369.99,
+        "min_ms":  338.1,
+        "max_ms":  415.8,
+        "runs_ms":  "415,8|356,06|338,1",
+        "bytes":  120381,
+        "final_url":  "http://localhost/yalova-kamera/admin/firma-kullanici-gruplari/9/edit",
+        "error":  null
+    }
+]

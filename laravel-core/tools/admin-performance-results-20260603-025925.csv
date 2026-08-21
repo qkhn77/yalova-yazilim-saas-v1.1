@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/cari-yonetimi/cari-yaslandirma","filament.admin.muhasebe.pages.cari-yonetimi.cari-yaslandirma","App\Filament\Clusters\Muhasebe\Pages\CariYaslandirmaSayfasi","200","1828,89","1828,89","1828,89","1828.89","118922","http://localhost/yalova-kamera/admin/muhasebe/cari-yonetimi/cari-yaslandirma",

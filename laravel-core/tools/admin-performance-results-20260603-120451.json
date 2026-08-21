@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web",
+    "name":  "filament.admin.web",
+    "action":  "App\\Filament\\Clusters\\Web",
+    "status":  200,
+    "avg_ms":  1605.8,
+    "min_ms":  1605.8,
+    "max_ms":  1605.8,
+    "runs_ms":  "1605.8",
+    "bytes":  110788,
+    "final_url":  "http://localhost/yalova-kamera/admin/web",
+    "error":  null
+}

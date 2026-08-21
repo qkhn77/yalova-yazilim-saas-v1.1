@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/ayarlar/teslim-fisi",
+    "name":  "filament.admin.teknik-servis.pages.ayarlar.teslim-fisi",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\TeslimFisi",
+    "status":  200,
+    "avg_ms":  1704.24,
+    "min_ms":  1630.99,
+    "max_ms":  1777.5,
+    "runs_ms":  "1777,5|1630,99",
+    "bytes":  116659,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/ayarlar/teslim-fisi",
+    "error":  null
+}

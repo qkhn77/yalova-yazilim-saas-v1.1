@@ -1,0 +1,2 @@
+﻿"rank","module","uri","uri_template","name","action","model","record_key","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/finans/poslar/1/edit","admin/muhasebe/finans/poslar/{record}/edit","filament.admin.muhasebe.resources.finans.poslar.edit","App\Filament\Clusters\Muhasebe\Resources\PosHesabiKaynagi\Pages\EditPosHesabi","App\Models\Muhasebe\PosHesabi","1","200","1821,14","1762,55","1879,73","1879,73|1762,55","220961","http://localhost/yalova-kamera/admin/muhasebe/finans/poslar/1/edit",

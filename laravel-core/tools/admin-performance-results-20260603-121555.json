@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "dashboard",
+    "uri":  "admin",
+    "name":  "filament.admin.pages.dashboard",
+    "action":  "App\\Filament\\Pages\\Dashboard",
+    "status":  200,
+    "avg_ms":  1572.12,
+    "min_ms":  1572.12,
+    "max_ms":  1572.12,
+    "runs_ms":  "1572.12",
+    "bytes":  112866,
+    "final_url":  "http://localhost/yalova-kamera/admin",
+    "error":  null
+}

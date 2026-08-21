@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-planlar",
+    "uri":  "admin/sistem-planlar/create",
+    "name":  "filament.admin.resources.sistem-planlar.create",
+    "action":  "App\\Filament\\Resources\\PlanYonetimKaynagi\\Pages\\PlanOlustur",
+    "status":  200,
+    "avg_ms":  1668.99,
+    "min_ms":  1668.99,
+    "max_ms":  1668.99,
+    "runs_ms":  "1668.99",
+    "bytes":  140797,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-planlar/create",
+    "error":  null
+}

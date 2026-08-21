@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","sistem-planlar","admin/sistem-planlar/create","filament.admin.resources.sistem-planlar.create","App\Filament\Resources\PlanYonetimKaynagi\Pages\PlanOlustur","200","1668,99","1668,99","1668,99","1668.99","140797","http://localhost/yalova-kamera/admin/sistem-planlar/create",

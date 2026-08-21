@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teknik-servis","admin/teknik-servis/tanimlar/cihazlar","filament.admin.teknik-servis.resources.tanimlar.cihazlar.index","App\Filament\Clusters\TeknikServis\Resources\TeknikServisCihazKaynagi\Pages\ListTeknikServisCihazlari","200","2783,41","2351,89","3053,97","3053,97|2976,48|2795,21|2351,89|2739,49","295606","http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/cihazlar",

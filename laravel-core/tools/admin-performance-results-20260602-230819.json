@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayitlari/olustur/dis-servis",
+    "name":  "filament.admin.teknik-servis.resources.servis-kayitlari.create_dis_servis",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\DisServisKaydiOlusturSayfasi",
+    "status":  200,
+    "avg_ms":  2036.41,
+    "min_ms":  1738.54,
+    "max_ms":  2961.26,
+    "runs_ms":  "2961,26|1863,05|1785,52|1833,69|1738,54",
+    "bytes":  263855,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/olustur/dis-servis",
+    "error":  null
+}

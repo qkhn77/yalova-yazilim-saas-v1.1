@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "firma-kullanici-gruplari",
+    "uri":  "admin/firma-kullanici-gruplari/1/edit",
+    "uri_template":  "admin/firma-kullanici-gruplari/{record}/edit",
+    "name":  "filament.admin.resources.firma-kullanici-gruplari.edit",
+    "action":  "App\\Filament\\Resources\\FirmaKullaniciGrubuKaynagi\\Pages\\EditFirmaKullaniciGrubu",
+    "model":  "App\\Models\\Rol",
+    "record_key":  "1",
+    "status":  404,
+    "avg_ms":  2925.23,
+    "min_ms":  2925.23,
+    "max_ms":  2925.23,
+    "runs_ms":  "2925.23",
+    "bytes":  0,
+    "final_url":  "http://localhost/yalova-kamera/admin/firma-kullanici-gruplari/1/edit",
+    "error":  "Uzak sunucu hata döndürdü: (404) Bulunamadı."
+}

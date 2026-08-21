@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","sistem-firmalar","admin/sistem-firmalar","filament.admin.resources.sistem-firmalar.index","App\Filament\Resources\FirmaYonetimKaynagi\Pages\FirmaListesi","200","4080,71","2046,3","11894,99","11894,99|2046,3|2094,81|2168,77|2198,71","178343","http://localhost/yalova-kamera/admin/sistem-firmalar",

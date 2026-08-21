@@ -1,0 +1,3 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/finans/vade-takibi","filament.admin.muhasebe.pages.finans.vade-takibi","App\Filament\Clusters\Muhasebe\Pages\VadeTakipSayfasi","200","1937,48","1802,54","2090,49","1919,43|2090,49|1802,54","261977","http://localhost/yalova-kamera/admin/muhasebe/finans/vade-takibi",
+"2","muhasebe","admin/muhasebe/satis/barkodlu-satis","filament.admin.muhasebe.pages.satis.barkodlu-satis","App\Filament\Clusters\Muhasebe\Pages\BarkodluSatisSayfasi","200","1827,85","1700,37","2029,7","1753,48|2029,7|1700,37","220573","http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis",

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayitlari/liste/iade",
+    "name":  "filament.admin.teknik-servis.resources.servis-kayitlari.iade",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\TeknikServisKayitlariIadeSayfasi",
+    "status":  200,
+    "avg_ms":  1691.52,
+    "min_ms":  1669.33,
+    "max_ms":  1713.72,
+    "runs_ms":  "1713,72|1669,33",
+    "bytes":  145906,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/iade",
+    "error":  null
+}

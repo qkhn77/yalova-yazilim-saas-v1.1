@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/tanimlar/servis-durumlari/7/edit",
+    "uri_template":  "admin/teknik-servis/tanimlar/servis-durumlari/{record}/edit",
+    "name":  "filament.admin.teknik-servis.resources.tanimlar.servis-durumlari.edit",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisDurumuTanimKaynagi\\Pages\\EditTeknikServisDurumu",
+    "model":  "App\\Models\\TeknikServis\\TeknikServisDurumTanimi",
+    "record_key":  "7",
+    "status":  200,
+    "avg_ms":  3568.8,
+    "min_ms":  3568.8,
+    "max_ms":  3568.8,
+    "runs_ms":  "3568.8",
+    "bytes":  156515,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/servis-durumlari/7/edit",
+    "error":  null
+}

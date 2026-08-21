@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-planlar",
+    "uri":  "admin/sistem-planlar/1/edit",
+    "uri_template":  "admin/sistem-planlar/{record}/edit",
+    "name":  "filament.admin.resources.sistem-planlar.edit",
+    "action":  "App\\Filament\\Resources\\PlanYonetimKaynagi\\Pages\\PlanDuzenle",
+    "model":  "App\\Models\\Plan",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  1704.2,
+    "min_ms":  1704.2,
+    "max_ms":  1704.2,
+    "runs_ms":  "1704.2",
+    "bytes":  144776,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-planlar/1/edit",
+    "error":  null
+}

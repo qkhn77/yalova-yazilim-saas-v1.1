@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/tanimlar/salonlar",
+    "name":  "filament.admin.restoran.resources.tanimlar.salonlar.index",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranSalonKaynagi\\Pages\\ListRestoranSalonlari",
+    "status":  200,
+    "avg_ms":  1924.54,
+    "min_ms":  1811.24,
+    "max_ms":  1994.09,
+    "runs_ms":  "1915,73|1994,09|1932,07|1969,59|1811,24",
+    "bytes":  170434,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/tanimlar/salonlar",
+    "error":  null
+}

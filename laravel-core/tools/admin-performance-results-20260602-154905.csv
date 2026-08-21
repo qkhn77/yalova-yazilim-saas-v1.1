@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","bytes","final_url","error"
+"1","restoran","admin/restoran","filament.admin.restoran","App\Filament\Clusters\Restoran","200","3883,57","3721,57","4301,86","166948","http://localhost/yalova-kamera/admin/restoran/qr-menu/receteler",

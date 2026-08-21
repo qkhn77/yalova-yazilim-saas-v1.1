@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/raporlar/kar-zarar",
+    "name":  "filament.admin.muhasebe.pages.raporlar.kar-zarar",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\KarZararRaporuTaslakSayfasi",
+    "status":  200,
+    "avg_ms":  1647.89,
+    "min_ms":  1647.89,
+    "max_ms":  1647.89,
+    "runs_ms":  "1647.89",
+    "bytes":  112156,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/raporlar/kar-zarar",
+    "error":  null
+}

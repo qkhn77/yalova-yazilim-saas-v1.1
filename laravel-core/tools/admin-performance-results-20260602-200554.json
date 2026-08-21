@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/birimler",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.birimler.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\BirimTanimKaynagi\\Pages\\ListBirimler",
+    "status":  200,
+    "avg_ms":  2604.71,
+    "min_ms":  1784.43,
+    "max_ms":  5831.36,
+    "runs_ms":  "5831,36|1784,43|1784,46|1790,12|1833,17",
+    "bytes":  228574,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/birimler",
+    "error":  null
+}

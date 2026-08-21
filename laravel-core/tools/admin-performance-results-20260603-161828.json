@@ -1,0 +1,32 @@
+﻿[
+    {
+        "rank":  1,
+        "module":  "muhasebe",
+        "uri":  "admin/muhasebe/finans/vade-takibi",
+        "name":  "filament.admin.muhasebe.pages.finans.vade-takibi",
+        "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\VadeTakipSayfasi",
+        "status":  200,
+        "avg_ms":  1937.48,
+        "min_ms":  1802.54,
+        "max_ms":  2090.49,
+        "runs_ms":  "1919,43|2090,49|1802,54",
+        "bytes":  261977,
+        "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/vade-takibi",
+        "error":  null
+    },
+    {
+        "rank":  2,
+        "module":  "muhasebe",
+        "uri":  "admin/muhasebe/satis/barkodlu-satis",
+        "name":  "filament.admin.muhasebe.pages.satis.barkodlu-satis",
+        "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\BarkodluSatisSayfasi",
+        "status":  200,
+        "avg_ms":  1827.85,
+        "min_ms":  1700.37,
+        "max_ms":  2029.7,
+        "runs_ms":  "1753,48|2029,7|1700,37",
+        "bytes":  220573,
+        "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis",
+        "error":  null
+    }
+]

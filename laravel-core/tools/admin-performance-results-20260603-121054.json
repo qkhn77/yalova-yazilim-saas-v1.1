@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/cihaz-kayit/teslim-edilen-cihazlar",
+    "name":  "filament.admin.teknik-servis.pages.cihaz-kayit.teslim-edilen-cihazlar",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\TeslimEdilenCihazlar",
+    "status":  200,
+    "avg_ms":  1698.86,
+    "min_ms":  1698.86,
+    "max_ms":  1698.86,
+    "runs_ms":  "1698.86",
+    "bytes":  112067,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/cihaz-kayit/teslim-edilen-cihazlar",
+    "error":  null
+}

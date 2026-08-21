@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/web-ayarlar/menu-ayarlari/utility-menu","filament.admin.web.pages.web-ayarlar.menu-ayarlari.utility-menu","App\Filament\Clusters\Web\Pages\UtilityMenuAyarlari","200","1637,79","1637,03","1638,55","1638,55|1637,03","161048","http://localhost/yalova-kamera/admin/web/web-ayarlar/menu-ayarlari/utility-menu",

@@ -1,0 +1,117 @@
+[
+  {
+    "id": "server_rack",
+    "commons_file": "Servers_in_a_Rack.jpg",
+    "target_path": "services/stock/server-rack.jpg",
+    "alt_tr": "Sunucu odası ve rack kabin"
+  },
+  {
+    "id": "network_patch_panel",
+    "commons_file": "19-inch_rackmount_Ethernet_switches_and_patch_panels.jpg",
+    "target_path": "services/stock/network-switches-patch-panels.jpg",
+    "alt_tr": "Switch ve patch panel bağlantıları"
+  },
+  {
+    "id": "fiber_patch_panel",
+    "commons_file": "Fiber-Panel-Rack.jpg",
+    "target_path": "services/stock/fiber-patch-panel-rack.jpg",
+    "alt_tr": "Fiber patch panel ve rack kabin"
+  },
+  {
+    "id": "wireless_router",
+    "commons_file": "Wireless_Router_(50841204223).jpg",
+    "target_path": "services/stock/wireless-router.jpg",
+    "alt_tr": "Kablosuz router ve ağ ekipmanı"
+  },
+  {
+    "id": "mesh_wifi",
+    "commons_file": "Mesh_WiFi_System_Router_(50551414866).jpg",
+    "target_path": "services/stock/mesh-wifi-router.jpg",
+    "alt_tr": "Mesh WiFi cihazı"
+  },
+  {
+    "id": "cybersecurity",
+    "commons_file": "Cybersecurity.png",
+    "target_path": "services/stock/cybersecurity.png",
+    "alt_tr": "Siber güvenlik ve veri koruma"
+  },
+  {
+    "id": "firewall",
+    "commons_file": "Firewall_(50383592156).jpg",
+    "target_path": "services/stock/firewall.jpg",
+    "alt_tr": "Firewall ve ağ güvenliği"
+  },
+  {
+    "id": "vpn_diagram",
+    "commons_file": "IPSec_VPN-en.svg",
+    "target_path": "services/stock/vpn-ipsec-diagram.svg",
+    "alt_tr": "VPN tüneli ve uzaktan erişim"
+  },
+  {
+    "id": "nas_open",
+    "commons_file": "Synology_nas_413j_front_open.jpg",
+    "target_path": "services/stock/nas-open.jpg",
+    "alt_tr": "NAS cihazı ve disk yuvası"
+  },
+  {
+    "id": "raid_array",
+    "commons_file": "Raid_array.jpg",
+    "target_path": "services/stock/raid-array.jpg",
+    "alt_tr": "RAID disk dizisi"
+  },
+  {
+    "id": "ups",
+    "commons_file": "UPS_-_uninterruptible_power_supply.JPG",
+    "target_path": "services/stock/ups.jpg",
+    "alt_tr": "UPS kesintisiz güç kaynağı"
+  },
+  {
+    "id": "fingerprint_reader",
+    "commons_file": "Fingerprint_reader.jpg",
+    "target_path": "services/stock/fingerprint-reader.jpg",
+    "alt_tr": "Parmak izi okuyucu"
+  },
+  {
+    "id": "ip_phone",
+    "commons_file": "AVAYA_9611G_IP_Phone.jpg",
+    "target_path": "services/stock/ip-phone.jpg",
+    "alt_tr": "IP telefon ve VoIP sistemi"
+  },
+  {
+    "id": "laptop_repair",
+    "commons_file": "A_technical_laptop_repairer.jpg",
+    "target_path": "services/stock/laptop-repair.jpg",
+    "alt_tr": "Laptop tamiri ve teknik servis"
+  },
+  {
+    "id": "cctv_installation",
+    "commons_file": "Video_Surveillance_System_installation.JPG",
+    "target_path": "services/stock/cctv-installation.jpg",
+    "alt_tr": "Güvenlik kamera montajı"
+  },
+  {
+    "id": "barcode_scanner",
+    "commons_file": "Package_tracking_barcode_scanner.jpg",
+    "target_path": "services/stock/barcode-scanner.jpg",
+    "alt_tr": "Barkod okuyucu ve otomasyon"
+  },
+  {
+    "id": "smart_lock",
+    "commons_file": "Nuki_Smart_Lock.jpg",
+    "target_path": "services/stock/smart-lock.jpg",
+    "alt_tr": "Akıllı kapı kilidi"
+  },
+  {
+    "id": "smart_thermostat",
+    "commons_file": "Ecobee4.jpg",
+    "target_path": "services/stock/smart-thermostat.jpg",
+    "alt_tr": "Akıllı termostat"
+  },
+  {
+    "id": "cloud_computing",
+    "commons_file": "Cloud-Computing.jpg",
+    "target_path": "services/stock/cloud-computing.jpg",
+    "alt_tr": "Bulut bilişim ve hosting"
+  }
+]
+

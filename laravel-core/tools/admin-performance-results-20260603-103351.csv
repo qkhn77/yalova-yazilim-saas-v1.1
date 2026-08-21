@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/faturalar/gider-faturasi","filament.admin.muhasebe.pages.faturalar.gider-faturasi","App\Filament\Clusters\Muhasebe\Pages\GiderFaturasiSayfasi","200","1838,69","1838,69","1838,69","1838.69","159502","http://localhost/yalova-kamera/admin/muhasebe/faturalar/gider-faturasi",

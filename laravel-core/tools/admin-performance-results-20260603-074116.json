@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/bloglar/ayarlar",
+    "name":  "filament.admin.web.pages.bloglar.ayarlar",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\BlogAyarlar",
+    "status":  200,
+    "avg_ms":  1666.9,
+    "min_ms":  1637.66,
+    "max_ms":  1696.15,
+    "runs_ms":  "1696,15|1637,66",
+    "bytes":  142665,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/bloglar/ayarlar",
+    "error":  null
+}

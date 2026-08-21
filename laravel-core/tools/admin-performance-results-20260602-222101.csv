@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","sistem-moduller","admin/sistem-moduller/create","filament.admin.resources.sistem-moduller.create","App\Filament\Resources\ModulYonetimKaynagi\Pages\ModulOlustur","200","1999,73","1624,47","2729,01","2729,01|1645,7|1624,47","135610","http://localhost/yalova-kamera/admin/sistem-moduller/create",

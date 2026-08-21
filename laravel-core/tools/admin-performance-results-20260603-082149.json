@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/satis/barkodlu-satis-fisi",
+    "name":  "filament.admin.muhasebe.pages.satis.barkodlu-satis-fisi",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\BarkodluSatisFisiSayfasi",
+    "status":  200,
+    "avg_ms":  1792.23,
+    "min_ms":  1682.52,
+    "max_ms":  1901.94,
+    "runs_ms":  "1682,52|1901,94",
+    "bytes":  113252,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-fisi",
+    "error":  null
+}

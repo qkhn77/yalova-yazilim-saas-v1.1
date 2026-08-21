@@ -1,0 +1,263 @@
+/*
+ * CORK Faz 2E - merkezi modal, tabs, dropdown/popover ve notification sunum katmanı.
+ *
+ * Kaynaklar:
+ * - CORK html/scss/light/assets/components/modal.scss
+ * - CORK html/scss/light/assets/components/tabs.scss
+ * - CORK html/scss/light/assets/elements/popover.scss
+ * - CORK html/scss/light/plugins/notification/snackbar/custom-snackbar.scss
+ *
+ * Bootstrap, CORK JavaScript'i veya yeni bir state katmanı yüklenmez. Filament,
+ * Alpine ve Livewire davranışları yalnızca mevcut merkezi sınıflar üzerinden
+ * görsel olarak temalandırılır.
+ */
+
+body.fi-panel-admin {
+    --saas-overlay-surface: var(--saas-surface, #ffffff);
+    --saas-overlay-surface-muted: var(--saas-surface-muted, #fafafa);
+    --saas-overlay-border: var(--saas-border, #e0e6ed);
+    --saas-overlay-text: var(--saas-text, #3b3f5c);
+    --saas-overlay-text-soft: var(--saas-text-soft, #515365);
+    --saas-overlay-text-muted: var(--saas-text-muted, #888ea8);
+    --saas-overlay-radius: var(--saas-radius-lg, 0.75rem);
+    --saas-overlay-radius-sm: var(--saas-radius-sm, 0.375rem);
+    --saas-overlay-shadow: var(--saas-shadow-lg, 0 18px 36px rgb(31 45 61 / 12%));
+    --saas-overlay-focus-ring: var(--saas-action-focus-ring, rgb(67 97 238 / 18%));
+}
+
+/* CORK modal surface: Filament'in overlay, trap, escape ve transition DOM'u korunur. */
+body.fi-panel-admin .fi-modal-close-overlay {
+    background: linear-gradient(75deg, rgb(22 28 36 / 48%), rgb(22 28 36)) !important;
+    opacity: 0.8;
+}
+
+body.fi-panel-admin .fi-modal-window {
+    overflow: hidden;
+    border: 1px solid var(--saas-overlay-border) !important;
+    border-radius: var(--saas-overlay-radius) !important;
+    background: var(--saas-overlay-surface) !important;
+    box-shadow: var(--saas-overlay-shadow) !important;
+}
+
+body.fi-panel-admin .fi-modal-slide-over-window {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    border-right: 0 !important;
+    border-radius: 0 !important;
+}
+
+body.fi-panel-admin .fi-modal-header {
+    border-color: var(--saas-overlay-border) !important;
+    background: var(--saas-overlay-surface) !important;
+}
+
+body.fi-panel-admin .fi-modal-heading {
+    color: var(--saas-overlay-text) !important;
+    font-weight: 600;
+}
+
+body.fi-panel-admin .fi-modal-description,
+body.fi-panel-admin .fi-modal-content {
+    color: var(--saas-overlay-text-soft);
+}
+
+body.fi-panel-admin .fi-modal-content,
+body.fi-panel-admin .fi-modal-footer {
+    border-color: var(--saas-overlay-border) !important;
+}
+
+body.fi-panel-admin .fi-modal-footer {
+    background: var(--saas-overlay-surface) !important;
+}
+
+body.fi-panel-admin .fi-modal-close-btn {
+    border-radius: var(--saas-overlay-radius-sm);
+}
+
+body.fi-panel-admin .fi-modal-close-btn:focus-visible,
+body.fi-panel-admin .fi-modal-trigger:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 3px var(--saas-overlay-focus-ring) !important;
+}
+
+body.fi-panel-admin .fi-modal-icon {
+    flex: 0 0 auto;
+}
+
+/* CORK sekme yüzeyi: aktif renk ve yumuşak aktif zemin, Filament aria durumunu korur. */
+body.fi-panel-admin .fi-tabs {
+    border-color: var(--saas-overlay-border) !important;
+    color: var(--saas-overlay-text-soft);
+}
+
+body.fi-panel-admin .fi-tabs:not(.fi-contained) {
+    border: 1px solid var(--saas-overlay-border);
+    border-radius: var(--saas-overlay-radius);
+    background: var(--saas-overlay-surface) !important;
+    box-shadow: var(--saas-shadow-sm, 0 1px 3px rgb(31 45 61 / 6%)) !important;
+}
+
+body.fi-panel-admin .fi-tabs-item {
+    min-height: 2.375rem;
+    border-radius: var(--saas-overlay-radius-sm) !important;
+}
+
+body.fi-panel-admin .fi-tabs-item:hover,
+body.fi-panel-admin .fi-tabs-item:focus-visible {
+    background: var(--saas-primary-soft, rgb(67 97 238 / 8%)) !important;
+}
+
+body.fi-panel-admin .fi-tabs-item:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 3px var(--saas-overlay-focus-ring);
+}
+
+body.fi-panel-admin .fi-tabs-item.fi-active,
+body.fi-panel-admin .fi-tabs-item.fi-tabs-item-active {
+    color: var(--saas-primary) !important;
+    background: var(--saas-primary-soft, rgb(67 97 238 / 10%)) !important;
+    box-shadow: inset 0 0 0 1px rgb(67 97 238 / 14%);
+}
+
+body.fi-panel-admin .fi-tabs-item.fi-active .fi-tabs-item-label,
+body.fi-panel-admin .fi-tabs-item.fi-active .fi-tabs-item-icon,
+body.fi-panel-admin .fi-tabs-item.fi-tabs-item-active .fi-tabs-item-label,
+body.fi-panel-admin .fi-tabs-item.fi-tabs-item-active .fi-tabs-item-icon {
+    color: var(--saas-primary) !important;
+}
+
+/* Dropdown, ActionGroup ve popover benzeri yüzeylerde 2D panel sistemiyle uyum. */
+body.fi-panel-admin .fi-dropdown-panel {
+    color: var(--saas-overlay-text);
+    border-color: var(--saas-overlay-border) !important;
+    background: var(--saas-overlay-surface) !important;
+    box-shadow: var(--saas-overlay-shadow) !important;
+}
+
+body.fi-panel-admin .fi-dropdown-list-item:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 3px var(--saas-overlay-focus-ring);
+}
+
+body.fi-panel-admin [data-popper-arrow],
+body.fi-panel-admin .fi-dropdown-panel[data-placement]::before {
+    border-color: var(--saas-overlay-border);
+}
+
+/* Filament notification toast/container: pointer-events, Alpine transition ve role korunur. */
+body.fi-panel-admin .fi-no {
+    gap: 0.75rem;
+    /* Bildirimler içerik altında kaybolmasın; tüm admin bildirimleri ekranın
+       üst sağında, sayfa akışından bağımsız görünür. */
+    top: 1rem !important;
+    right: 1rem !important;
+    bottom: auto !important;
+    left: 1rem !important;
+    z-index: 9999 !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-end !important;
+}
+
+body.fi-panel-admin .fi-no-notification {
+    border: 1px solid var(--saas-overlay-border);
+    border-radius: var(--saas-overlay-radius) !important;
+    background: var(--saas-overlay-surface) !important;
+    box-shadow: var(--saas-overlay-shadow) !important;
+}
+
+body.fi-panel-admin .fi-no-notification > .flex {
+    padding: 1rem;
+}
+
+body.fi-panel-admin .fi-no-notification-title {
+    color: var(--saas-overlay-text) !important;
+    font-weight: 600;
+}
+
+body.fi-panel-admin .fi-no-notification-body,
+body.fi-panel-admin .fi-no-notification-date {
+    color: var(--saas-overlay-text-muted) !important;
+}
+
+body.fi-panel-admin .fi-no-notification-icon {
+    flex: 0 0 auto;
+    margin-top: 0.125rem;
+}
+
+body.fi-panel-admin .fi-no-notification-close-btn {
+    flex: 0 0 auto;
+    border-radius: var(--saas-overlay-radius-sm);
+}
+
+body.fi-panel-admin .fi-no-notification-close-btn:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 3px var(--saas-overlay-focus-ring) !important;
+}
+
+body.fi-panel-admin .fi-no-notification-actions {
+    flex-wrap: wrap;
+}
+
+/* Database notification slide-over da aynı CORK modal yüzeyini kullanır. */
+body.fi-panel-admin .fi-modal-slide-over-window .fi-modal-header,
+body.fi-panel-admin .fi-modal-slide-over-window .fi-modal-footer {
+    background: var(--saas-overlay-surface) !important;
+}
+
+/* Koyu tema tokenları; Filament'in dark sınıfları ve renk değişkenleriyle uyumlu. */
+.dark body.fi-panel-admin {
+    --saas-overlay-surface: var(--saas-surface, #0e1726);
+    --saas-overlay-surface-muted: var(--saas-surface-muted, #172033);
+    --saas-overlay-border: var(--saas-border, #25324a);
+    --saas-overlay-text: var(--saas-text, #e0e6ed);
+    --saas-overlay-text-soft: var(--saas-text-soft, #bfc9d4);
+    --saas-overlay-text-muted: var(--saas-text-muted, #888ea8);
+    --saas-overlay-focus-ring: var(--saas-action-focus-ring, rgb(109 128 247 / 24%));
+}
+
+@media (max-width: 767px) {
+    body.fi-panel-admin .fi-modal-window {
+        max-height: calc(100dvh - 1rem);
+    }
+
+    body.fi-panel-admin .fi-modal-header,
+    body.fi-panel-admin .fi-modal-content,
+    body.fi-panel-admin .fi-modal-footer {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    body.fi-panel-admin .fi-modal-footer-actions {
+        flex-wrap: wrap;
+    }
+
+    body.fi-panel-admin .fi-tabs {
+        max-width: 100%;
+    }
+
+    body.fi-panel-admin .fi-no {
+        inset: 1rem;
+    }
+}
+
+@media (max-width: 430px) {
+    body.fi-panel-admin .fi-modal-header,
+    body.fi-panel-admin .fi-modal-content,
+    body.fi-panel-admin .fi-modal-footer {
+        padding-left: 0.875rem;
+        padding-right: 0.875rem;
+    }
+
+    body.fi-panel-admin .fi-no-notification {
+        max-width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.fi-panel-admin .fi-modal-window,
+    body.fi-panel-admin .fi-tabs-item,
+    body.fi-panel-admin .fi-no-notification {
+        transition: none;
+    }
+}

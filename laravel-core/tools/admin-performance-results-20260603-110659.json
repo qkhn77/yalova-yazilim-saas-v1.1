@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/tanimlar/markalar",
+    "name":  "filament.admin.teknik-servis.resources.tanimlar.markalar.index",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisMarkaKaynagi\\Pages\\ListTeknikServisMarkalari",
+    "status":  200,
+    "avg_ms":  1732.86,
+    "min_ms":  1732.86,
+    "max_ms":  1732.86,
+    "runs_ms":  "1732.86",
+    "bytes":  141956,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/markalar",
+    "error":  null
+}

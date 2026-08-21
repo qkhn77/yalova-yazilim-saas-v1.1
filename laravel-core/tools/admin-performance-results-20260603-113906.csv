@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","personel-takip","admin/personel-takip/tanimlar/gorevler/create","filament.admin.personel-takip.resources.tanimlar.gorevler.create","App\Filament\Clusters\PersonelTakip\Resources\PersonelGorevKaynagi\Pages\CreatePersonelGorev","200","1682,58","1682,58","1682,58","1682.58","153081","http://localhost/yalova-kamera/admin/personel-takip/tanimlar/gorevler/create",

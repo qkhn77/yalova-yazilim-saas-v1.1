@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/tanimlar/cari-gruplari","filament.admin.muhasebe.resources.tanimlar.cari-gruplari.index","App\Filament\Clusters\Muhasebe\Resources\Tanimlar\CariGrubuTanimKaynagi\Pages\ListCariGruplari","200","1805,02","1805,02","1805,02","1805.02","160783","http://localhost/yalova-kamera/admin/muhasebe/tanimlar/cari-gruplari",

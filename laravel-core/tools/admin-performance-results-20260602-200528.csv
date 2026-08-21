@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","restoran","admin/restoran/raporlar/gun-sonu","filament.admin.restoran.pages.raporlar.gun-sonu","App\Filament\Clusters\Restoran\Pages\RestoranGunSonuMutabakatSayfasi","200","1977,28","1613,75","3364,01","3364,01|1632,81|1629,51|1613,75|1646,32","128370","http://localhost/yalova-kamera/admin/restoran/raporlar/gun-sonu",

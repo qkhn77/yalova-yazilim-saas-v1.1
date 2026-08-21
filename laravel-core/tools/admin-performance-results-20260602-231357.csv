@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/tanimlar/stok-modelleri","filament.admin.muhasebe.resources.tanimlar.stok-modelleri.index","App\Filament\Clusters\Muhasebe\Resources\Tanimlar\MuhasebeStokModeliTanimKaynagi\Pages\ListMuhasebeStokModelleri","200","1891,05","1699,83","2404,54","2404,54|1824,1|1724,59|1802,19|1699,83","160813","http://localhost/yalova-kamera/admin/muhasebe/tanimlar/stok-modelleri",

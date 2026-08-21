@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/tanimlar/markalar/create",
+    "name":  "filament.admin.teknik-servis.resources.tanimlar.markalar.create",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisMarkaKaynagi\\Pages\\CreateTeknikServisMarkasi",
+    "status":  200,
+    "avg_ms":  2048.55,
+    "min_ms":  1644.95,
+    "max_ms":  2761.28,
+    "runs_ms":  "2761,28|1739,42|1644,95",
+    "bytes":  140792,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/markalar/create",
+    "error":  null
+}

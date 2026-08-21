@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/web-ayarlar/mail-gonderim",
+    "name":  "filament.admin.web.pages.web-ayarlar.mail-gonderim",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\WebMailGonderim",
+    "status":  200,
+    "avg_ms":  2254.36,
+    "min_ms":  1660.94,
+    "max_ms":  4505.97,
+    "runs_ms":  "4505,97|1695,72|1660,94|1696,52|1712,67",
+    "bytes":  177793,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/web-ayarlar/mail-gonderim",
+    "error":  null
+}

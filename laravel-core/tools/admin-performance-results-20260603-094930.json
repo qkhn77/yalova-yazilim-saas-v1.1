@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/markalar",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.markalar.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeMarkaTanimKaynagi\\Pages\\ListMuhasebeMarkalari",
+    "status":  200,
+    "avg_ms":  1739.33,
+    "min_ms":  1739.33,
+    "max_ms":  1739.33,
+    "runs_ms":  "1739.33",
+    "bytes":  160767,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/markalar",
+    "error":  null
+}

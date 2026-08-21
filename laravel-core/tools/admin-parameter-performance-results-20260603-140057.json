@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "teklif-yonetimi",
+    "uri":  "admin/teklif-yonetimi/sablonlar/1/edit",
+    "uri_template":  "admin/teklif-yonetimi/sablonlar/{record}/edit",
+    "name":  "filament.admin.teklif-yonetimi.resources.sablonlar.edit",
+    "action":  "App\\Filament\\Clusters\\TeklifYonetimi\\Resources\\TeklifSablonKaynagi\\Pages\\EditTeklifSablonu",
+    "model":  "App\\Models\\TeklifYonetimi\\TeklifBaskiSablonu",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  1742.95,
+    "min_ms":  1742.95,
+    "max_ms":  1742.95,
+    "runs_ms":  "1742.95",
+    "bytes":  184422,
+    "final_url":  "http://localhost/yalova-kamera/admin/teklif-yonetimi/sablonlar/1/edit",
+    "error":  null
+}

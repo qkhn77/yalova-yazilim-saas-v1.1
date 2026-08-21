@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-planlar",
+    "uri":  "admin/sistem-planlar",
+    "name":  "filament.admin.resources.sistem-planlar.index",
+    "action":  "App\\Filament\\Resources\\PlanYonetimKaynagi\\Pages\\PlanListesi",
+    "status":  200,
+    "avg_ms":  2750.76,
+    "min_ms":  1628.2,
+    "max_ms":  6993.3,
+    "runs_ms":  "6993,3|1673,54|1740,37|1628,2|1718,38",
+    "bytes":  145113,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-planlar",
+    "error":  null
+}

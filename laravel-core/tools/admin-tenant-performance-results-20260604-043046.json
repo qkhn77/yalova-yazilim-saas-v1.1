@@ -1,0 +1,13 @@
+﻿{
+    "rank":  1,
+    "module":  "firma-kullanici-gruplari",
+    "uri":  "admin/firma-kullanici-gruplari/9/edit",
+    "status":  200,
+    "avg_ms":  463.38,
+    "min_ms":  344.55,
+    "max_ms":  577.79,
+    "runs_ms":  "577,79|467,78|344,55",
+    "bytes":  120381,
+    "final_url":  "http://localhost/yalova-kamera/admin/firma-kullanici-gruplari/9/edit",
+    "error":  null
+}

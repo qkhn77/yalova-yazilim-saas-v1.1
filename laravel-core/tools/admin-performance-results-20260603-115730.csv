@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/tanimlar/cari-gruplari/create","filament.admin.muhasebe.resources.tanimlar.cari-gruplari.create","App\Filament\Clusters\Muhasebe\Resources\Tanimlar\CariGrubuTanimKaynagi\Pages\CreateCariGrubu","200","1978,86","1978,86","1978,86","1978.86","144851","http://localhost/yalova-kamera/admin/muhasebe/tanimlar/cari-gruplari/create",

@@ -1,0 +1,770 @@
+/*
+ * CORK Faz 2C - Merkezi Filament card, stats ve widget tasarım sistemi.
+ *
+ * Kaynaklar:
+ * - CORK light/dark assets/dashboard/analytics.scss
+ * - CORK light/dark assets/widgets/_widgets/_reset-analytics.scss
+ * - CORK light/dark assets/widgets/_widgets/_widget-hybrid-one.scss
+ * - CORK light/dark assets/widgets/_widgets/_widget-chart-two.scss
+ *
+ * Bootstrap/CORK JavaScript yüklenmez. Kurallar yalnızca Filament admin paneli
+ * altında çalışır; özel Blade kart sınıfları ve widget veri davranışı değişmez.
+ */
+
+body.fi-panel-admin {
+    --saas-widget-surface: var(--saas-surface, #ffffff);
+    --saas-widget-surface-muted: var(--saas-surface-muted, #fafafa);
+    --saas-widget-border: var(--saas-border, #e0e6ed);
+    --saas-widget-text: var(--saas-text, #3b3f5c);
+    --saas-widget-text-soft: var(--saas-text-soft, #515365);
+    --saas-widget-muted: var(--saas-text-muted, #888ea8);
+    --saas-widget-radius: var(--saas-radius-md, 0.5rem);
+    --saas-widget-shadow: var(--saas-shadow-sm, 0 1px 3px rgb(31 45 61 / 6%));
+}
+
+/* Proje bilgi kartı standardı: yeni KPI/özet kartları bu sınıfı kullanır. */
+body.fi-panel-admin .yk-info-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--saas-widget-border) !important;
+    border-radius: var(--saas-widget-radius) !important;
+    background: var(--saas-widget-surface) !important;
+    box-shadow: var(--saas-widget-shadow) !important;
+    transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+body.fi-panel-admin .yk-info-card:hover {
+    border-color: color-mix(in srgb, var(--saas-widget-border) 58%, var(--saas-primary)) !important;
+    box-shadow: var(--saas-shadow-md) !important;
+    transform: translateY(-1px);
+}
+
+body.fi-panel-admin .yk-account-kpi-card {
+    position: relative;
+}
+
+body.fi-panel-admin .yk-account-kpi-card .yk-info-card-icon {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    padding: 0.25rem;
+    color: var(--saas-primary);
+    background: var(--saas-primary-soft);
+    border-radius: 0.375rem;
+}
+
+body.fi-panel-admin .yk-info-card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    align-items: stretch;
+}
+
+/* Banka, kasa ve POS detaylarında CORK'un kompakt bilgi yoğunluğu. */
+body.fi-panel-admin .yk-account-detail-page {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+body.fi-panel-admin .yk-compact-account-details {
+    margin-top: 0.25rem;
+}
+
+body.fi-panel-admin .yk-compact-account-details .fi-section {
+    margin: 0 !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details .fi-section > .fi-section-header {
+    padding: 0.625rem 0.75rem !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details .fi-section > .fi-section-content-ctn > .fi-section-content {
+    padding: 0.75rem !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details .fi-section-header-heading {
+    font-size: 0.8125rem !important;
+    line-height: 1.125rem !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details .fi-in-entry {
+    gap: 0.125rem !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details .fi-section-content .grid {
+    row-gap: 0.5rem !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details .fi-in-entry-wrp,
+body.fi-panel-admin .yk-compact-account-details .fi-in-entry-wrp > div {
+    row-gap: 0.125rem !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details [class*="gap-y-"] {
+    row-gap: 0.5rem !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details dl {
+    row-gap: 0.375rem !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details .fi-in-entry-wrp {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details .fi-section,
+body.fi-panel-admin .yk-compact-account-details .fi-section-content,
+body.fi-panel-admin .yk-compact-account-details .fi-section-content-ctn {
+    min-height: 0 !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details dl > div.grid.fi-fo-component-ctn {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 22rem)) !important;
+    justify-content: start !important;
+    column-gap: 1.25rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    row-gap: 0.25rem !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details > dl > div.grid.fi-fo-component-ctn {
+    width: 100% !important;
+    max-width: none !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    justify-content: stretch !important;
+}
+
+body.fi-panel-admin .yk-account-details-toggle {
+    width: 100%;
+    margin-top: 0.25rem;
+    border: 1px solid var(--saas-widget-border);
+    border-radius: var(--saas-widget-radius);
+    background: var(--saas-widget-surface);
+    box-shadow: var(--saas-widget-shadow);
+}
+
+body.fi-panel-admin .yk-account-details-toggle > summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 0.625rem 0.75rem;
+    color: var(--saas-widget-text);
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+body.fi-panel-admin .yk-account-details-toggle > summary::-webkit-details-marker {
+    display: none;
+}
+
+body.fi-panel-admin .yk-account-details-toggle > summary::after {
+    content: '⌄';
+    float: right;
+    color: var(--saas-widget-muted);
+}
+
+body.fi-panel-admin .yk-account-details-toggle:not([open]) > summary::after {
+    content: '›';
+}
+
+body.fi-panel-admin .yk-account-details-toggle > .yk-compact-account-details {
+    margin: 0;
+    padding: 0 0.75rem 0.75rem;
+}
+
+body.fi-panel-admin .yk-compact-account-details .fi-section-content .fi-fo-component-ctn {
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)) !important;
+    column-gap: 0.75rem !important;
+    row-gap: 0.375rem !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details > .fi-section + .fi-section {
+    margin-top: 0.375rem !important;
+}
+
+@media (max-width: 767px) {
+    body.fi-panel-admin .yk-compact-account-details > dl > div.grid.fi-fo-component-ctn,
+    body.fi-panel-admin .yk-compact-account-details dl > div.grid.fi-fo-component-ctn {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+}
+
+body.fi-panel-admin .yk-compact-account-details .fi-in-entry-label {
+    font-size: 0.6875rem !important;
+    line-height: 1rem !important;
+}
+
+body.fi-panel-admin .yk-compact-account-details .fi-in-entry-content {
+    font-size: 0.75rem !important;
+    line-height: 1.125rem !important;
+}
+
+body.fi-panel-admin .yk-account-detail-page .fi-ta {
+    margin-top: 0.25rem;
+}
+
+body.fi-panel-admin .yk-account-detail-page .fi-ta .fi-ta-header,
+body.fi-panel-admin .yk-account-detail-page .fi-ta .fi-ta-header-toolbar {
+    padding-top: 0.375rem !important;
+    padding-bottom: 0.375rem !important;
+}
+
+body.fi-panel-admin .yk-account-detail-page .fi-ta .fi-ta-empty-state {
+    min-height: 7rem;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+/* Eski modül sınıfları da aynı standarda bağlanır; yeni ekranlarda yk-info-card tercih edilir. */
+body.fi-panel-admin .yk-dashboard-summary-card,
+body.fi-panel-admin .yk-dashboard-module-kpi-card,
+body.fi-panel-admin .yk-dashboard-quick-card,
+body.fi-panel-admin .muhasebe-cork-kpi-card,
+body.fi-panel-admin .restoran-cork-kpi-card,
+body.fi-panel-admin .personel-cork-kpi-card {
+    min-width: 0;
+    min-height: 7.5rem;
+    border-radius: var(--saas-widget-radius) !important;
+    box-shadow: var(--saas-widget-shadow) !important;
+}
+
+body.fi-panel-admin .yk-info-card .text-gray-500,
+body.fi-panel-admin .yk-info-card .text-gray-400 {
+    color: var(--saas-widget-muted) !important;
+}
+
+body.fi-panel-admin .yk-info-card .text-2xl,
+body.fi-panel-admin .yk-info-card .text-xl,
+body.fi-panel-admin .yk-info-card .text-lg {
+    color: var(--saas-widget-text) !important;
+    font-variant-numeric: tabular-nums;
+}
+
+/*
+ * Merkezi Section/Card yüzeyi. Faz 2A kapsamındaki form ve modal section'ları
+ * özellikle dışarıda bırakılır; özel Blade div kartları bu seçiciden etkilenmez.
+ */
+body.fi-panel-admin .fi-page .fi-section:not(.fi-form .fi-section, .fi-modal .fi-section, .fi-aside) {
+    background: var(--saas-widget-surface) !important;
+    border: 1px solid var(--saas-widget-border);
+    border-radius: var(--saas-widget-radius) !important;
+    box-shadow: var(--saas-widget-shadow) !important;
+}
+
+body.fi-panel-admin .fi-page .fi-section:not(.fi-form .fi-section, .fi-modal .fi-section, .fi-aside) > .fi-section-header {
+    padding: 1.25rem !important;
+}
+
+body.fi-panel-admin .fi-page .fi-section:not(.fi-form .fi-section, .fi-modal .fi-section, .fi-aside) > .fi-section-content-ctn,
+body.fi-panel-admin .fi-page .fi-section:not(.fi-form .fi-section, .fi-modal .fi-section, .fi-aside) > .fi-section-footer {
+    border-color: var(--saas-widget-border) !important;
+}
+
+body.fi-panel-admin .fi-page .fi-section:not(.fi-form .fi-section, .fi-modal .fi-section, .fi-aside) > .fi-section-content-ctn > .fi-section-content {
+    padding: 1.25rem !important;
+}
+
+body.fi-panel-admin .fi-page .fi-section:not(.fi-form .fi-section, .fi-modal .fi-section, .fi-aside) > .fi-section-footer {
+    padding: 0.875rem 1.25rem !important;
+}
+
+body.fi-panel-admin .fi-page .fi-section:not(.fi-form .fi-section, .fi-modal .fi-section) .fi-section-header-heading {
+    color: var(--saas-widget-text) !important;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.00625rem;
+}
+
+body.fi-panel-admin .fi-page .fi-section:not(.fi-form .fi-section, .fi-modal .fi-section) .fi-section-header-description {
+    color: var(--saas-widget-muted) !important;
+    font-size: 0.8125rem;
+}
+
+/* StatsOverview başlığı ve Filament'in mevcut responsive kolon sistemi. */
+body.fi-panel-admin .fi-wi-stats-overview {
+    min-width: 0;
+}
+
+body.fi-panel-admin .fi-wi-stats-overview-header {
+    gap: 0.25rem;
+}
+
+body.fi-panel-admin .fi-wi-stats-overview-header-heading {
+    color: var(--saas-widget-text) !important;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+body.fi-panel-admin .fi-wi-stats-overview-header-description {
+    color: var(--saas-widget-muted) !important;
+    font-size: 0.8125rem;
+}
+
+body.fi-panel-admin .fi-wi-stats-overview-stats-ctn {
+    min-width: 0;
+    gap: 1rem !important;
+}
+
+/* Stat kartı: CORK yüzey, 8px radius ve 20px iç boşluk. */
+body.fi-panel-admin .fi-wi-stats-overview-stat {
+    min-width: 0;
+    min-height: 8.25rem;
+    padding: 1.25rem !important;
+    overflow: hidden;
+    background: var(--saas-widget-surface) !important;
+    border: 1px solid var(--saas-widget-border);
+    border-radius: var(--saas-widget-radius) !important;
+    box-shadow: var(--saas-widget-shadow) !important;
+    transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+body.fi-panel-admin a.fi-wi-stats-overview-stat:hover {
+    border-color: color-mix(in srgb, var(--saas-widget-border) 58%, var(--saas-primary));
+    box-shadow: var(--saas-shadow-md, 0 10px 30px rgb(31 45 61 / 8%)) !important;
+    transform: translateY(-1px);
+}
+
+body.fi-panel-admin a.fi-wi-stats-overview-stat:focus-visible {
+    outline: 2px solid var(--saas-primary);
+    outline-offset: 2px;
+}
+
+body.fi-panel-admin .fi-wi-stats-overview-stat > .grid {
+    min-width: 0;
+    gap: 0.5rem;
+}
+
+body.fi-panel-admin .fi-wi-stats-overview-stat-label {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: var(--saas-widget-muted) !important;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.0125rem;
+}
+
+body.fi-panel-admin .fi-wi-stats-overview-stat-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: var(--saas-widget-text) !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.015rem;
+}
+
+body.fi-panel-admin .fi-wi-stats-overview-stat-description {
+    overflow-wrap: anywhere;
+    font-size: 0.78125rem;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+body.fi-panel-admin .fi-wi-stats-overview-stat-description:not(.fi-color-custom) {
+    color: var(--saas-widget-muted) !important;
+}
+
+/* Ana stat ikonları için CORK icon-tile dili; trend ikonlarının rengi korunur. */
+body.fi-panel-admin .fi-wi-stats-overview-stat-icon {
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    padding: 0.5rem;
+    flex: 0 0 2.25rem;
+    color: var(--saas-primary) !important;
+    background: var(--saas-primary-soft);
+    border: 1px solid color-mix(in srgb, var(--saas-primary) 18%, transparent);
+    border-radius: var(--saas-widget-radius);
+}
+
+body.fi-panel-admin .fi-wi-stats-overview-stat-description-icon {
+    width: 1.625rem !important;
+    height: 1.625rem !important;
+    padding: 0.3rem;
+    flex: 0 0 1.625rem;
+    background: color-mix(in srgb, currentColor 10%, transparent);
+    border-radius: var(--saas-widget-radius);
+}
+
+body.fi-panel-admin .fi-wi-stats-overview-stat-chart {
+    border-radius: 0 0 var(--saas-widget-radius) var(--saas-widget-radius) !important;
+    opacity: 0.9;
+}
+
+/* Standart Filament chart widget kabı; chart ayarları ve verisi değişmez. */
+body.fi-panel-admin .fi-wi-chart {
+    min-width: 0;
+}
+
+body.fi-panel-admin .fi-wi-chart > .fi-section {
+    overflow: hidden;
+}
+
+body.fi-panel-admin .fi-wi-chart .fi-section-header-end,
+body.fi-panel-admin .fi-wi-chart .fi-section-header .fi-input-wrp {
+    max-width: 100%;
+}
+
+body.fi-panel-admin .fi-wi-chart canvas {
+    max-width: 100%;
+}
+
+body.fi-panel-admin .fi-wi-chart .fi-empty-state,
+body.fi-panel-admin .fi-wi-widget .fi-empty-state {
+    color: var(--saas-widget-muted);
+    background: var(--saas-widget-surface-muted);
+    border-color: var(--saas-widget-border);
+    border-radius: var(--saas-widget-radius);
+}
+
+/* Lazy Livewire widget placeholder'ı gerçek kart yüzeyiyle aynı görünür. */
+body.fi-panel-admin .fi-loading-section > .fi-section {
+    position: relative;
+    overflow: hidden;
+    background: var(--saas-widget-surface) !important;
+    border: 1px solid var(--saas-widget-border);
+    border-radius: var(--saas-widget-radius) !important;
+    box-shadow: var(--saas-widget-shadow) !important;
+}
+
+body.fi-panel-admin .fi-loading-section > .fi-section::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background: linear-gradient(100deg, transparent 20%, rgb(136 142 168 / 8%) 45%, transparent 70%);
+    transform: translateX(-100%);
+    animation: saas-widget-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes saas-widget-shimmer {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* Filament widget grid'i korunur; yalnızca dar ekranlarda boşluk/padding sıkılaşır. */
+@media (max-width: 767px) {
+    body.fi-panel-admin .fi-wi-stats-overview-stats-ctn {
+        gap: 0.875rem !important;
+    }
+
+    body.fi-panel-admin .fi-page .fi-section:not(.fi-form .fi-section, .fi-modal .fi-section, .fi-aside) > .fi-section-header,
+    body.fi-panel-admin .fi-page .fi-section:not(.fi-form .fi-section, .fi-modal .fi-section, .fi-aside) > .fi-section-content-ctn > .fi-section-content {
+        padding: 1rem !important;
+    }
+
+    body.fi-panel-admin .fi-wi-stats-overview-stat {
+        min-height: 7.5rem;
+        padding: 1rem !important;
+    }
+}
+
+@media (max-width: 430px) {
+    body.fi-panel-admin .fi-wi-stats-overview-stats-ctn {
+        gap: 0.75rem !important;
+    }
+
+    body.fi-panel-admin .fi-wi-stats-overview-stat-value {
+        font-size: 1.375rem;
+    }
+}
+
+@media (max-width: 359px) {
+    body.fi-panel-admin .fi-page .fi-section:not(.fi-form .fi-section, .fi-modal .fi-section, .fi-aside) > .fi-section-header,
+    body.fi-panel-admin .fi-page .fi-section:not(.fi-form .fi-section, .fi-modal .fi-section, .fi-aside) > .fi-section-content-ctn > .fi-section-content,
+    body.fi-panel-admin .fi-wi-stats-overview-stat {
+        padding: 0.875rem !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.fi-panel-admin a.fi-wi-stats-overview-stat {
+        transition: none;
+    }
+
+    body.fi-panel-admin .fi-loading-section > .fi-section::after {
+        animation: none;
+    }
+}
+
+/*
+ * Faz 3A - merkezi Filament widget'ı kullanmayan özel dashboard kartları.
+ *
+ * KiraciOzetWidget, yk-dashboard-* sınıflarını ve finans KPI Blade görünümü
+ * kendi markup/binding yapısını korur. Bu katman yalnızca mevcut CORK widget
+ * tokenlarını yüzey, tipografi, durum, hover ve focus görünümüne bağlar.
+ */
+body.fi-panel-admin .yk-dashboard-shell {
+    --yk-card-border: var(--saas-widget-border);
+    --yk-card-soft: var(--saas-widget-surface-muted);
+    --yk-card-hover: var(--saas-primary-soft);
+    --yk-card-accent: var(--saas-primary);
+    --yk-card-radius: var(--saas-radius-md);
+    color: var(--saas-widget-text);
+    min-width: 0;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-summary {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-panel,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-summary-card,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-module-kpi-card,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-quick-card,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-list-card,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-kpi-card {
+    min-width: 0;
+    border-color: var(--saas-widget-border) !important;
+    border-radius: var(--saas-widget-radius) !important;
+    background: var(--saas-widget-surface) !important;
+    box-shadow: var(--saas-widget-shadow) !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-panel {
+    padding: 1rem !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-summary-card {
+    position: relative;
+    overflow: hidden;
+    padding: 1rem !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-summary-card {
+    position: relative;
+    overflow: hidden;
+    color: var(--saas-widget-text);
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-summary-card::before {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 0.1875rem;
+    content: '';
+    background: var(--yk-card-accent);
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-summary-card > div:first-child {
+    color: var(--saas-widget-muted) !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-summary-card > div:nth-child(2) {
+    color: var(--saas-widget-text) !important;
+    font-weight: 700;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-summary-card > div:nth-child(3) {
+    color: var(--saas-widget-muted) !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell h3 {
+    color: var(--saas-widget-text);
+}
+
+body.fi-panel-admin .yk-dashboard-shell p,
+body.fi-panel-admin .yk-dashboard-shell .text-gray-500,
+body.fi-panel-admin .yk-dashboard-shell .text-gray-400 {
+    color: var(--saas-widget-muted) !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-module-kpi-card,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-quick-card,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-list-card {
+    transition:
+        border-color 150ms ease,
+        box-shadow 150ms ease,
+        transform 150ms ease;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-kpi-card {
+    transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-kpi-card:hover {
+    border-color: color-mix(in srgb, var(--saas-widget-border) 58%, var(--saas-primary)) !important;
+    box-shadow: var(--saas-shadow-md) !important;
+    transform: translateY(-1px);
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-kpi-card p:first-child,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-kpi-card p:last-child {
+    color: var(--saas-widget-muted) !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-kpi-card p:nth-child(2) {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: var(--saas-widget-text) !important;
+    font-weight: 700;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-muhasebe-kpi-grid > div,
+body.fi-panel-admin .yk-dashboard-shell .yk-finans-kpi-grid > div {
+    min-width: 0;
+    border-color: var(--saas-widget-border) !important;
+    border-radius: var(--saas-widget-radius) !important;
+    background: var(--saas-widget-surface) !important;
+    box-shadow: var(--saas-widget-shadow) !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-muhasebe-dashboard .overflow-x-auto,
+body.fi-panel-admin .yk-dashboard-shell .yk-finans-dashboard .overflow-x-auto {
+    border-color: var(--saas-widget-border) !important;
+    background: var(--saas-widget-surface);
+}
+
+body.fi-panel-admin .yk-dashboard-shell .overflow-x-auto thead tr {
+    color: var(--saas-widget-text) !important;
+    background: var(--saas-widget-surface-muted) !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .overflow-x-auto tbody tr {
+    border-color: var(--saas-widget-border) !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .overflow-x-auto td,
+body.fi-panel-admin .yk-dashboard-shell .overflow-x-auto th {
+    border-color: var(--saas-widget-border);
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-panel > .grid > a,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-panel > .grid > div,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-module-kpi-card .grid > a,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-quick-card .grid > a {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    border-radius: var(--saas-radius-sm) !important;
+    border-color: color-mix(in srgb, var(--saas-widget-border) 82%, transparent) !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-panel > .grid > a:hover,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-panel > .grid > div:hover,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-module-kpi-card .grid > a:hover,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-quick-card .grid > a:hover {
+    border-color: color-mix(in srgb, var(--saas-widget-border) 58%, var(--saas-primary)) !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-module-kpi-card:hover,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-quick-card:hover,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-list-card:hover,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-panel:hover {
+    border-color: color-mix(in srgb, var(--saas-widget-border) 58%, var(--saas-primary)) !important;
+    box-shadow: var(--saas-shadow-md) !important;
+    transform: translateY(-1px);
+}
+
+body.fi-panel-admin .yk-dashboard-shell a {
+    outline-offset: 2px;
+}
+
+body.fi-panel-admin .yk-dashboard-shell a:focus-visible {
+    outline: 2px solid var(--saas-primary);
+    outline-offset: 2px;
+    border-radius: var(--saas-widget-radius-sm, var(--saas-radius-sm)) !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-module-kpi-card a.min-w-0,
+body.fi-panel-admin .yk-dashboard-shell [style*='grid-template-columns'] > a,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-quick-card .grid a {
+    color: var(--saas-widget-text);
+    border-color: var(--saas-widget-border) !important;
+    background: var(--saas-widget-surface-muted) !important;
+}
+
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-module-kpi-card a.min-w-0:hover,
+body.fi-panel-admin .yk-dashboard-shell [style*='grid-template-columns'] > a:hover,
+body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-quick-card .grid a:hover {
+    background: var(--saas-primary-soft) !important;
+}
+
+/* Finans dashboard'ındaki özel KPI kartları, StatsOverview hiyerarşisini izler. */
+body.fi-panel-admin .yk-finans-kpi-grid > div {
+    min-width: 0;
+    border-color: var(--saas-widget-border) !important;
+    border-radius: var(--saas-widget-radius) !important;
+    background: var(--saas-widget-surface) !important;
+    box-shadow: var(--saas-widget-shadow) !important;
+    transition:
+        border-color 150ms ease,
+        box-shadow 150ms ease,
+        transform 150ms ease;
+}
+
+body.fi-panel-admin .yk-finans-kpi-grid > div:hover {
+    border-color: color-mix(in srgb, var(--saas-widget-border) 58%, var(--saas-primary)) !important;
+    box-shadow: var(--saas-shadow-md) !important;
+    transform: translateY(-1px);
+}
+
+body.fi-panel-admin .yk-finans-kpi-grid > .yk-dashboard-kpi-card > div:first-child svg {
+    width: 2rem;
+    height: 2rem;
+    padding: 0.375rem;
+    border-radius: var(--saas-radius-sm);
+    background: var(--saas-primary-soft);
+}
+
+body.fi-panel-admin .yk-finans-kpi-grid > div > div:first-child p {
+    color: var(--saas-widget-muted) !important;
+}
+
+body.fi-panel-admin .yk-finans-kpi-grid > div > p {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: var(--saas-widget-text) !important;
+    font-weight: 700;
+}
+
+body.fi-panel-admin .yk-finans-kpi-grid > div > div:last-child {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 767px) {
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-panel,
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-summary-card,
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-module-kpi-card,
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-quick-card,
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-list-card {
+        border-radius: var(--saas-widget-radius-sm, var(--saas-radius-sm)) !important;
+    }
+
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-module-kpi-card:hover,
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-quick-card:hover,
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-list-card:hover,
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-panel:hover,
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-kpi-card:hover,
+    body.fi-panel-admin .yk-finans-kpi-grid > div:hover {
+        transform: none;
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 768px) {
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 430px) {
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-module-kpi-card,
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-quick-card,
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-list-card,
+    body.fi-panel-admin .yk-dashboard-shell .yk-dashboard-kpi-card,
+    body.fi-panel-admin .yk-finans-kpi-grid > div {
+        transition: none;
+    }
+}

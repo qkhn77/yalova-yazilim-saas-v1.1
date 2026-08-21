@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/stok","filament.admin.muhasebe.pages.stok","App\Filament\Clusters\Muhasebe\Pages\Stok","200","1646,4","1598,64","1694,17","1694,17|1598,64","111724","http://localhost/yalova-kamera/admin/muhasebe/stok",

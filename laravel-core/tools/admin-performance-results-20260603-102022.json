@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/tahsilat-olustur",
+    "name":  "filament.admin.muhasebe.pages.finans.tahsilat-olustur",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\TahsilatOlusturSayfasi",
+    "status":  200,
+    "avg_ms":  3103.23,
+    "min_ms":  3103.23,
+    "max_ms":  3103.23,
+    "runs_ms":  "3103.23",
+    "bytes":  175958,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/tahsilat-olustur",
+    "error":  null
+}

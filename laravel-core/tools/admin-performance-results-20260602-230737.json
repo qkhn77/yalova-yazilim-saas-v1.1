@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/odeme-olustur",
+    "name":  "filament.admin.muhasebe.pages.finans.odeme-olustur",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\OdemeOlusturSayfasi",
+    "status":  200,
+    "avg_ms":  1917.59,
+    "min_ms":  1652.1,
+    "max_ms":  2892.32,
+    "runs_ms":  "2892,32|1689,92|1679,16|1652,1|1674,46",
+    "bytes":  173969,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/odeme-olustur",
+    "error":  null
+}

@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/finans/finans-hareketleri","filament.admin.muhasebe.pages.finans.finans-hareketleri","App\Filament\Clusters\Muhasebe\Pages\FinansHareketleriListesiSayfasi","200","2287,58","2268,99","2324,68","2324,68|2268,99|2269,07","165097","http://localhost/yalova-kamera/admin/muhasebe/finans/finans-hareketleri",

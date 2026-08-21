@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/stok/kritik-stoklar",
+    "name":  "filament.admin.muhasebe.pages.stok.kritik-stoklar",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\KritikStoklarSayfasi",
+    "status":  200,
+    "avg_ms":  6095.06,
+    "min_ms":  6095.06,
+    "max_ms":  6095.06,
+    "runs_ms":  "6095.06",
+    "bytes":  145476,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/stok/kritik-stoklar",
+    "error":  null
+}

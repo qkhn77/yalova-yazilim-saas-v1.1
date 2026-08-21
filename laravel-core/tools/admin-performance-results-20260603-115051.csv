@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/faturalar/proforma-fatura","filament.admin.muhasebe.pages.faturalar.proforma-fatura","App\Filament\Clusters\Muhasebe\Pages\ProformaFaturaSayfasi","200","1860,43","1860,43","1860,43","1860.43","159510","http://localhost/yalova-kamera/admin/muhasebe/faturalar/proforma-fatura",

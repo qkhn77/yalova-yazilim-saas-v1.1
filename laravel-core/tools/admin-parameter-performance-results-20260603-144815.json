@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/personeller/1/edit",
+    "uri_template":  "admin/personel-takip/personeller/{record}/edit",
+    "name":  "filament.admin.personel-takip.resources.personeller.edit",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelKaynagi\\Pages\\EditPersonel",
+    "model":  "App\\Models\\Personel\\Personel",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  2125.27,
+    "min_ms":  2125.27,
+    "max_ms":  2125.27,
+    "runs_ms":  "2125.27",
+    "bytes":  222755,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/personeller/1/edit",
+    "error":  null
+}

@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/tanimlar/doviz-kurlari","filament.admin.muhasebe.resources.tanimlar.doviz-kurlari.index","App\Filament\Clusters\Muhasebe\Resources\Tanimlar\DovizKuruTanimKaynagi\Pages\ListDovizKurlari","200","1896,14","1756,19","2366,49","2366,49|1786,88|1776,55|1756,19|1794,6","238530","http://localhost/yalova-kamera/admin/muhasebe/tanimlar/doviz-kurlari",

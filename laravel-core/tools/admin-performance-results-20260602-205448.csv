@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/bloglar/blog-listesi","filament.admin.web.pages.bloglar.blog-listesi","App\Filament\Clusters\Web\Pages\BlogListesi","200","1905,51","1770,08","2070,06","1872,49|2070,06|1946,29|1770,08|1868,62","181628","http://localhost/yalova-kamera/admin/web/bloglar/blog-listesi",

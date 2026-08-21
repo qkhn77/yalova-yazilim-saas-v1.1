@@ -1,0 +1,706 @@
+﻿.yk-message-center {
+    display: grid;
+    gap: 1rem;
+    color: #0f172a;
+}
+
+.yk-message-hero,
+.yk-message-card,
+.yk-message-tab {
+    border: 1px solid rgba(203, 213, 225, 0.86);
+    background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
+}
+
+.yk-message-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    overflow: hidden;
+    border-radius: 18px;
+    padding: 1.1rem 1.25rem;
+    position: relative;
+}
+
+.yk-message-hero::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    content: "";
+    background: linear-gradient(90deg, #2563eb, #0ea5e9);
+}
+
+.yk-message-eyebrow {
+    color: #2563eb;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.yk-message-hero h2,
+.yk-message-card h3 {
+    margin: 0;
+    color: #0f172a;
+    font-weight: 850;
+    letter-spacing: 0;
+}
+
+.yk-message-hero h2 {
+    margin-top: 0.15rem;
+    font-size: 1.25rem;
+}
+
+.yk-message-hero p,
+.yk-message-card__header p {
+    margin: 0.25rem 0 0;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.yk-message-hero__stats {
+    display: flex;
+    gap: 0.65rem;
+}
+
+.yk-message-hero__stats div {
+    min-width: 8rem;
+    border-radius: 14px;
+    border: 1px solid rgba(37, 99, 235, 0.12);
+    background: rgba(37, 99, 235, 0.06);
+    padding: 0.7rem 0.85rem;
+}
+
+.yk-message-hero__stats span {
+    display: block;
+    color: #1d4ed8;
+    font-size: 1.35rem;
+    font-weight: 850;
+}
+
+.yk-message-hero__stats small {
+    color: #64748b;
+    font-size: 0.78rem;
+}
+
+.yk-message-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.yk-message-tab {
+    min-width: 0;
+    border-radius: 14px;
+    padding: 0.85rem 1rem;
+    text-align: left;
+    transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+}
+
+.yk-message-tab:hover,
+.yk-message-tab.is-active {
+    border-color: rgba(37, 99, 235, 0.52);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1), 0 12px 28px rgba(15, 23, 42, 0.05);
+}
+
+.yk-message-tab span,
+.yk-message-tab small {
+    display: block;
+    color: #64748b;
+    font-size: 0.78rem;
+}
+
+.yk-message-tab strong {
+    display: block;
+    margin-top: 0.2rem;
+    color: #0f172a;
+    font-size: 1rem;
+}
+
+.yk-message-card {
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+.yk-message-card__header,
+.yk-message-card__footer {
+    padding: 1rem 1.15rem;
+}
+
+.yk-message-card__header {
+    border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.yk-message-card__header--split,
+.yk-message-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.yk-message-card__footer {
+    border-top: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.yk-message-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 1.15rem;
+}
+
+.yk-message-field,
+.yk-message-toolbar label,
+.yk-message-reply label {
+    display: grid;
+    min-width: 0;
+    gap: 0.35rem;
+}
+
+.yk-message-field--wide {
+    grid-column: 1 / -1;
+}
+
+.yk-message-field span,
+.yk-message-toolbar label > span,
+.yk-message-reply label > span {
+    color: #334155;
+    font-size: 0.86rem;
+    font-weight: 750;
+}
+
+.yk-message-field input,
+.yk-message-field select,
+.yk-message-field textarea,
+.yk-message-toolbar input:not([type="checkbox"]),
+.yk-message-toolbar select,
+.yk-message-reply textarea {
+    width: 100%;
+    min-width: 0;
+    border-radius: 12px;
+    border: 1px solid rgba(203, 213, 225, 0.86);
+    background: #ffffff;
+    color: #0f172a;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.yk-message-field input:focus,
+.yk-message-field select:focus,
+.yk-message-field textarea:focus,
+.yk-message-toolbar input:not([type="checkbox"]):focus,
+.yk-message-toolbar select:focus,
+.yk-message-reply textarea:focus {
+    border-color: rgba(37, 99, 235, 0.52);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.11), 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.yk-message-field small,
+.yk-message-reply small {
+    color: #64748b;
+    font-size: 0.76rem;
+}
+
+.yk-message-field em,
+.yk-message-reply em {
+    color: #dc2626;
+    font-size: 0.8rem;
+    font-style: normal;
+}
+
+.yk-message-recipient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 0.5rem;
+    border-radius: 14px;
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    background: #f8fafc;
+    padding: 0.65rem;
+}
+
+.yk-message-recipient-search {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.5rem;
+}
+
+.yk-message-recipient-search input {
+    width: 100%;
+    min-width: 0;
+}
+
+.yk-message-recipient-search button {
+    border-radius: 10px;
+    border: 1px solid rgba(203, 213, 225, 0.86);
+    background: #ffffff;
+    color: #334155;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.48rem 0.65rem;
+}
+
+.yk-message-recipient-grid label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 0.55rem 0.65rem;
+    color: #334155;
+    font-size: 0.84rem;
+    box-shadow: inset 0 0 0 1px rgba(226, 232, 240, 0.95);
+}
+
+.yk-message-recipient-grid span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.yk-message-recipient-hint {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.65rem;
+    line-height: 1.45;
+}
+
+.yk-message-inbox {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.95fr) minmax(0, 2fr);
+    gap: 1rem;
+    align-items: start;
+}
+
+.yk-message-toolbar {
+    display: grid;
+    grid-template-columns: minmax(12rem, 1fr) auto auto;
+    gap: 0.65rem;
+    align-items: end;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+    padding: 0.85rem 1rem;
+}
+
+.yk-message-toolbar--stack {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.yk-message-toolbar__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.65rem;
+    align-items: end;
+}
+
+.yk-message-toolbar__actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.yk-message-segment {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem;
+    border-radius: 12px;
+    border: 1px solid rgba(203, 213, 225, 0.86);
+    background: #f8fafc;
+    padding: 0.3rem;
+}
+
+.yk-message-segment button {
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: #64748b;
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 0.48rem 0.55rem;
+}
+
+.yk-message-segment button.is-active {
+    background: #ffffff;
+    color: #1d4ed8;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.yk-message-toolbar button,
+.yk-message-thread__actions button,
+.yk-message-notification__actions button,
+.yk-message-empty button {
+    border-radius: 10px;
+    border: 1px solid rgba(203, 213, 225, 0.86);
+    background: #ffffff;
+    color: #334155;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.48rem 0.65rem;
+}
+
+.yk-message-toolbar .yk-message-segment button {
+    border: 0;
+    background: transparent;
+    color: #64748b;
+    box-shadow: none;
+}
+
+.yk-message-toolbar .yk-message-segment button.is-active {
+    background: #ffffff;
+    color: #1d4ed8;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.yk-message-toggle {
+    display: flex !important;
+    align-items: center;
+    gap: 0.45rem !important;
+    border-radius: 12px;
+    border: 1px solid rgba(203, 213, 225, 0.86);
+    background: #ffffff;
+    padding: 0.55rem 0.7rem;
+    color: #334155;
+    font-size: 0.84rem;
+    font-weight: 700;
+}
+
+.yk-message-toggle input[type="checkbox"],
+.yk-message-recipient-grid input[type="checkbox"] {
+    width: 1rem;
+    min-width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+}
+
+.yk-message-thread-items,
+.yk-message-notification-list {
+    display: grid;
+}
+
+.yk-message-loading-list {
+    display: grid;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+}
+
+.yk-message-loading-list span {
+    height: 5.4rem;
+    border-radius: 14px;
+    background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 42%, #f8fafc 72%);
+    background-size: 220% 100%;
+    animation: yk-message-loading 1.15s ease-in-out infinite;
+}
+
+@keyframes yk-message-loading {
+    0% {
+        background-position: 100% 0;
+    }
+
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+.yk-message-load-more {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid rgba(226, 232, 240, 0.9);
+    padding: 0.85rem 1rem;
+}
+
+.yk-message-load-more--inside {
+    border: 0;
+    padding: 0 0 0.25rem;
+}
+
+.yk-message-load-more button {
+    border-radius: 999px;
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 0.48rem 0.85rem;
+}
+
+.yk-message-load-more button:hover {
+    border-color: rgba(37, 99, 235, 0.4);
+    background: #dbeafe;
+}
+
+.yk-message-thread {
+    border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.yk-message-thread.is-selected {
+    background: rgba(37, 99, 235, 0.07);
+}
+
+.yk-message-thread > button {
+    display: grid;
+    width: 100%;
+    gap: 0.35rem;
+    padding: 0.9rem 1rem 0.55rem;
+    text-align: left;
+}
+
+.yk-message-thread__top,
+.yk-message-thread__meta,
+.yk-message-notification__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
+}
+
+.yk-message-thread__title {
+    min-width: 0;
+    overflow: hidden;
+    color: #0f172a;
+    font-weight: 780;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.yk-message-thread.is-unread .yk-message-thread__title {
+    font-weight: 880;
+}
+
+.yk-message-thread__top i {
+    width: 0.55rem;
+    height: 0.55rem;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: #2563eb;
+}
+
+.yk-message-thread p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.84rem;
+    line-height: 1.35;
+}
+
+.yk-message-thread__meta {
+    color: #64748b;
+    font-size: 0.76rem;
+}
+
+.yk-message-thread__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    min-width: 0;
+}
+
+.yk-message-thread__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0 1rem 0.9rem;
+}
+
+.yk-message-priority {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.18rem 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.yk-message-priority--low {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.yk-message-priority--normal {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.yk-message-priority--high {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.yk-message-priority--urgent {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.yk-message-mini-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    background: #f8fafc;
+    color: #475569;
+    padding: 0.18rem 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.yk-message-bubbles {
+    display: grid;
+    gap: 0.8rem;
+    max-height: 34rem;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.yk-message-bubble-row {
+    display: flex;
+}
+
+.yk-message-bubble-row.is-mine {
+    justify-content: flex-end;
+}
+
+.yk-message-bubble {
+    max-width: min(44rem, 88%);
+    border-radius: 14px;
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    background: #f8fafc;
+    padding: 0.75rem 0.9rem;
+}
+
+.yk-message-bubble-row.is-mine .yk-message-bubble {
+    border-color: rgba(37, 99, 235, 0.14);
+    background: #eff6ff;
+}
+
+.yk-message-bubble div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    color: #64748b;
+    font-size: 0.75rem;
+}
+
+.yk-message-bubble strong {
+    color: #334155;
+}
+
+.yk-message-bubble p {
+    margin: 0.35rem 0 0;
+    white-space: pre-line;
+    color: #0f172a;
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.yk-message-reply {
+    display: grid;
+    gap: 0.75rem;
+    border-top: 1px solid rgba(226, 232, 240, 0.9);
+    padding: 1rem;
+}
+
+.yk-message-reply .fi-btn {
+    justify-self: end;
+}
+
+.yk-message-notification {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.75rem;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+    padding: 0.95rem 1rem;
+}
+
+.yk-message-notification.is-read {
+    opacity: 0.72;
+}
+
+.yk-message-notification__dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    margin-top: 0.45rem;
+    border-radius: 999px;
+    background: #cbd5e1;
+}
+
+.yk-message-notification.is-unread .yk-message-notification__dot {
+    background: #2563eb;
+}
+
+.yk-message-notification__title strong {
+    color: #0f172a;
+}
+
+.yk-message-notification__title span {
+    color: #64748b;
+    font-size: 0.76rem;
+}
+
+.yk-message-notification p {
+    margin: 0.25rem 0 0;
+    color: #475569;
+    font-size: 0.88rem;
+}
+
+.yk-message-notification__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.55rem;
+}
+
+.yk-message-notification__actions a {
+    color: #2563eb;
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.yk-message-empty,
+.yk-message-empty-inline {
+    display: grid;
+    gap: 0.25rem;
+    justify-items: center;
+    padding: 2rem 1rem;
+    color: #64748b;
+    text-align: center;
+}
+
+.yk-message-empty strong {
+    color: #0f172a;
+    font-size: 0.98rem;
+}
+
+.yk-message-empty--large {
+    min-height: 24rem;
+    align-content: center;
+}
+
+@media (max-width: 1180px) {
+    .yk-message-inbox {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .yk-message-hero,
+    .yk-message-card__header--split,
+    .yk-message-card__footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .yk-message-hero__stats,
+    .yk-message-tabs,
+    .yk-message-form-grid,
+    .yk-message-toolbar {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .yk-message-hero__stats {
+        display: grid;
+        width: 100%;
+    }
+
+    .yk-message-toolbar__row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

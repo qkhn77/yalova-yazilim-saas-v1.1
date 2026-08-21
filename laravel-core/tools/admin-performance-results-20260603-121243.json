@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/raporlar/tahsilat-servis",
+    "name":  "filament.admin.teknik-servis.pages.raporlar.tahsilat-servis",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\TeknikServisTahsilatServisRaporuSayfasi",
+    "status":  200,
+    "avg_ms":  1626.94,
+    "min_ms":  1626.94,
+    "max_ms":  1626.94,
+    "runs_ms":  "1626.94",
+    "bytes":  112230,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/raporlar/tahsilat-servis",
+    "error":  null
+}

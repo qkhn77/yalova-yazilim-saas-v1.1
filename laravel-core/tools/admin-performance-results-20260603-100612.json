@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/fatura-kaynagis/create/gider-faturasi",
+    "name":  "filament.admin.muhasebe.resources.fatura-kaynagis.createGider",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\CreateGiderFaturasi",
+    "status":  200,
+    "avg_ms":  1946.63,
+    "min_ms":  1813.33,
+    "max_ms":  2079.94,
+    "runs_ms":  "1813,33|2079,94",
+    "bytes":  192832,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/create/gider-faturasi",
+    "error":  null
+}

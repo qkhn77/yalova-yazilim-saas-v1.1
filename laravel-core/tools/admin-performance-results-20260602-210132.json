@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/tanimlar/servis-durumlari",
+    "name":  "filament.admin.teknik-servis.resources.tanimlar.servis-durumlari.index",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisDurumuTanimKaynagi\\Pages\\ListTeknikServisDurumlari",
+    "status":  200,
+    "avg_ms":  1680.26,
+    "min_ms":  1654.3,
+    "max_ms":  1698.81,
+    "runs_ms":  "1677,4|1685,15|1654,3|1685,62|1698,81",
+    "bytes":  142021,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/servis-durumlari",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-dashboard",
+    "name":  "filament.admin.teknik-servis.pages.servis-dashboard",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\ServisDashboard",
+    "status":  200,
+    "avg_ms":  1550.08,
+    "min_ms":  1550.08,
+    "max_ms":  1550.08,
+    "runs_ms":  "1550.08",
+    "bytes":  111986,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-dashboard",
+    "error":  null
+}

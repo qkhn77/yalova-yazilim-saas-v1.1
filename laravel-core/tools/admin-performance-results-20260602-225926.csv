@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","personel-takip","admin/personel-takip/raporlar/personel-ozeti","filament.admin.personel-takip.pages.raporlar.personel-ozeti","App\Filament\Clusters\PersonelTakip\Pages\PersonelRaporlariSayfasi","200","1650,31","1598,72","1732,18","1677,14|1598,72|1732,18|1640,93|1602,6","130841","http://localhost/yalova-kamera/admin/personel-takip/raporlar/personel-ozeti",

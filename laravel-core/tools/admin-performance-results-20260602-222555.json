@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/stok/stok-hareketleri",
+    "name":  "filament.admin.muhasebe.pages.stok.stok-hareketleri",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\StokHareketleriSayfasi",
+    "status":  200,
+    "avg_ms":  1704.71,
+    "min_ms":  1678.34,
+    "max_ms":  1722.48,
+    "runs_ms":  "1722,48|1712,72|1722,32|1678,34|1687,69",
+    "bytes":  161820,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/stok/stok-hareketleri",
+    "error":  null
+}

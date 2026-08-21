@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teklif-yonetimi",
+    "uri":  "admin/teklif-yonetimi",
+    "name":  "filament.admin.teklif-yonetimi",
+    "action":  "App\\Filament\\Clusters\\TeklifYonetimi",
+    "status":  200,
+    "avg_ms":  1796.04,
+    "min_ms":  1796.04,
+    "max_ms":  1796.04,
+    "runs_ms":  "1796.04",
+    "bytes":  110961,
+    "final_url":  "http://localhost/yalova-kamera/admin/teklif-yonetimi",
+    "error":  null
+}

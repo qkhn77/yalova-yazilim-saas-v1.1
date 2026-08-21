@@ -1,0 +1,2 @@
+﻿"rank","module","uri","uri_template","name","action","model","record_key","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/cari-yonetimi/cariler/1","admin/muhasebe/cari-yonetimi/cariler/{record}","filament.admin.muhasebe.resources.cari-yonetimi.cariler.view","App\Filament\Clusters\Muhasebe\Resources\CariKartiKaynagi\Pages\ViewCari","App\Models\Muhasebe\Cari","1","200","2308,72","2308,72","2308,72","2308.72","282401","http://localhost/yalova-kamera/admin/muhasebe/cari-yonetimi/cariler/1",

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/marka-ureticileri/create",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.marka-ureticileri.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeMarkaUreticiTanimKaynagi\\Pages\\CreateMuhasebeMarkaUretici",
+    "status":  200,
+    "avg_ms":  1696.06,
+    "min_ms":  1696.06,
+    "max_ms":  1696.06,
+    "runs_ms":  "1696.06",
+    "bytes":  144905,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/marka-ureticileri/create",
+    "error":  null
+}

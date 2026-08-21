@@ -1,0 +1,2 @@
+﻿"rank","module","uri","uri_template","name","action","model","record_key","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/urunler/urun-listesi/1","admin/web/urunler/urun-listesi/{record}","filament.admin.web.resources.urunler.urun-listesi.view","App\Filament\Clusters\Web\Resources\UrunKaynagi\Pages\ViewUrun","App\Models\Muhasebe\StokKarti","1","404","1811,82","1811,82","1811,82","1811.82","0","http://localhost/yalova-kamera/admin/web/urunler/urun-listesi/1","Uzak sunucu hata döndürdü: (404) Bulunamadı."

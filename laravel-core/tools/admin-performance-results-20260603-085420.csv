@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/web-ayarlar/aboneler","filament.admin.web.pages.web-ayarlar.aboneler","App\Filament\Clusters\Web\Pages\WebAboneler","200","1734,02","1719,68","1748,36","1748,36|1719,68","179764","http://localhost/yalova-kamera/admin/web/web-ayarlar/aboneler",

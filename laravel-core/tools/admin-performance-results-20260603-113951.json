@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/faturalar/tum-faturalar",
+    "name":  "filament.admin.muhasebe.pages.faturalar.tum-faturalar",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\TumFaturalarSayfasi",
+    "status":  200,
+    "avg_ms":  3135.81,
+    "min_ms":  3135.81,
+    "max_ms":  3135.81,
+    "runs_ms":  "3135.81",
+    "bytes":  166568,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/faturalar/tum-faturalar",
+    "error":  null
+}

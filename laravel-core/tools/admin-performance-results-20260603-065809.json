@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/ozet",
+    "name":  "filament.admin.teknik-servis.pages.ozet",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\TeknikServisDashboardSayfasi",
+    "status":  200,
+    "avg_ms":  3065.07,
+    "min_ms":  1664.29,
+    "max_ms":  4465.84,
+    "runs_ms":  "4465,84|1664,29",
+    "bytes":  143300,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/ozet",
+    "error":  null
+}

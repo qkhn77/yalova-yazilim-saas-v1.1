@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/mutfak",
+    "name":  "filament.admin.restoran.pages.mutfak",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Pages\\RestoranMutfakEkraniSayfasi",
+    "status":  200,
+    "avg_ms":  1719.19,
+    "min_ms":  1584.52,
+    "max_ms":  2096.59,
+    "runs_ms":  "2096,59|1584,52|1607,96|1606,2|1700,7",
+    "bytes":  124185,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/mutfak",
+    "error":  null
+}

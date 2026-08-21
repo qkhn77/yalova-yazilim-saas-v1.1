@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/qr-menu/urunler/create",
+    "name":  "filament.admin.restoran.resources.qr-menu.urunler.create",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranMenuUrunKaynagi\\Pages\\CreateRestoranMenuUrun",
+    "status":  200,
+    "avg_ms":  1709.99,
+    "min_ms":  1680.88,
+    "max_ms":  1739.09,
+    "runs_ms":  "1680,88|1739,09",
+    "bytes":  166488,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/qr-menu/urunler/create",
+    "error":  null
+}

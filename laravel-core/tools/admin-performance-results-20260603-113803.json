@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayitlari/liste/parca-bekleyen",
+    "name":  "filament.admin.teknik-servis.resources.servis-kayitlari.parca_bekleyen",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\TeknikServisKayitlariParcaBekleyenSayfasi",
+    "status":  200,
+    "avg_ms":  1673.06,
+    "min_ms":  1673.06,
+    "max_ms":  1673.06,
+    "runs_ms":  "1673.06",
+    "bytes":  145964,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/parca-bekleyen",
+    "error":  null
+}

@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/web-moduller/ucuncu-grup/faqs","filament.admin.web.pages.web-moduller.ucuncu-grup.faqs","App\Filament\Clusters\Web\Pages\ModulFaqs","200","1694,67","1692,31","1697,04","1697,04|1692,31","178735","http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/faqs",

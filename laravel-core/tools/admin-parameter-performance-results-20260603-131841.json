@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/vergi-oranlari/1/edit",
+    "uri_template":  "admin/muhasebe/tanimlar/vergi-oranlari/{record}/edit",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.vergi-oranlari.edit",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\VergiOraniTanimKaynagi\\Pages\\EditVergiOrani",
+    "model":  "App\\Models\\Muhasebe\\VergiOrani",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  2195.01,
+    "min_ms":  1949.34,
+    "max_ms":  2440.68,
+    "runs_ms":  "2440,68|1949,34",
+    "bytes":  141226,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/vergi-oranlari/1/edit",
+    "error":  null
+}

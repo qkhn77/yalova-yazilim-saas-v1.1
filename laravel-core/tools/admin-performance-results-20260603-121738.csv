@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teknik-servis","admin/teknik-servis/servis-kayit/tamamlanan-servisler","filament.admin.teknik-servis.pages.servis-kayit.tamamlanan-servisler","App\Filament\Clusters\TeknikServis\Pages\TamamlananServisler","200","1692,99","1692,99","1692,99","1692.99","112073","http://localhost/yalova-kamera/admin/teknik-servis/servis-kayit/tamamlanan-servisler",

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "products",
+    "uri":  "admin/products/create",
+    "name":  "filament.admin.resources.products.create",
+    "action":  "App\\Filament\\Resources\\ProductResource\\Pages\\CreateProduct",
+    "status":  200,
+    "avg_ms":  2436.92,
+    "min_ms":  1744.98,
+    "max_ms":  3128.85,
+    "runs_ms":  "3128,85|1744,98",
+    "bytes":  241455,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/urunler/urun-listesi/create",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/sayfalar/iletisim",
+    "name":  "filament.admin.web.pages.sayfalar.iletisim",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\Iletisim",
+    "status":  200,
+    "avg_ms":  1646.69,
+    "min_ms":  1625.7,
+    "max_ms":  1667.67,
+    "runs_ms":  "1667,67|1625,7",
+    "bytes":  141569,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/sayfalar/iletisim",
+    "error":  null
+}

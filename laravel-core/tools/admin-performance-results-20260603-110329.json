@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/cari",
+    "name":  "filament.admin.muhasebe.pages.cari",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\Cari",
+    "status":  200,
+    "avg_ms":  1635.83,
+    "min_ms":  1635.83,
+    "max_ms":  1635.83,
+    "runs_ms":  "1635.83",
+    "bytes":  113262,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/cari",
+    "error":  null
+}

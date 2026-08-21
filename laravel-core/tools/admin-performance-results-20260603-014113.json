@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "firma-kullanici-gruplari",
+    "uri":  "admin/firma-kullanici-gruplari",
+    "name":  "filament.admin.resources.firma-kullanici-gruplari.index",
+    "action":  "App\\Filament\\Resources\\FirmaKullaniciGrubuKaynagi\\Pages\\ListFirmaKullaniciGruplari",
+    "status":  200,
+    "avg_ms":  5043.9,
+    "min_ms":  5043.9,
+    "max_ms":  5043.9,
+    "runs_ms":  "5043.9",
+    "bytes":  140298,
+    "final_url":  "http://localhost/yalova-kamera/admin/firma-kullanici-gruplari",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/masalar/create",
+    "name":  "filament.admin.restoran.resources.masalar.create",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranMasaKaynagi\\Pages\\CreateRestoranMasa",
+    "status":  200,
+    "avg_ms":  1700.68,
+    "min_ms":  1695.38,
+    "max_ms":  1705.98,
+    "runs_ms":  "1695,38|1705,98",
+    "bytes":  160786,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/masalar/create",
+    "error":  null
+}

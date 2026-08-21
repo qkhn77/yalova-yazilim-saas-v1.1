@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/qr-menu/kategoriler/create",
+    "name":  "filament.admin.restoran.resources.qr-menu.kategoriler.create",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranMenuKategoriKaynagi\\Pages\\CreateRestoranMenuKategori",
+    "status":  200,
+    "avg_ms":  1713.59,
+    "min_ms":  1713.59,
+    "max_ms":  1713.59,
+    "runs_ms":  "1713.59",
+    "bytes":  144780,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/qr-menu/kategoriler/create",
+    "error":  null
+}

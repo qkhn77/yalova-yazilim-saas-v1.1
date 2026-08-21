@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/raporlar/gelir-gider","filament.admin.muhasebe.pages.raporlar.gelir-gider","App\Filament\Clusters\Muhasebe\Pages\GelirGiderRaporuSayfasi","200","1855,03","1711,38","2086,48","1864,12|2086,48|1740,04|1873,15|1711,38","112140","http://localhost/yalova-kamera/admin/muhasebe/raporlar/gelir-gider",

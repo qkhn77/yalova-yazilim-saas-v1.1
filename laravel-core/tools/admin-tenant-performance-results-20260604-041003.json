@@ -1,0 +1,41 @@
+﻿[
+    {
+        "rank":  1,
+        "module":  "firma-ayarlari",
+        "uri":  "admin/firma-ayarlari",
+        "status":  200,
+        "avg_ms":  564.46,
+        "min_ms":  445.04,
+        "max_ms":  719.59,
+        "runs_ms":  "719,59|528,75|445,04",
+        "bytes":  208293,
+        "final_url":  "http://localhost/yalova-kamera/admin/firma-ayarlari",
+        "error":  null
+    },
+    {
+        "rank":  2,
+        "module":  "muhasebe",
+        "uri":  "admin/muhasebe/satis/barkodlu-satis-fis-sablonlari",
+        "status":  200,
+        "avg_ms":  496.37,
+        "min_ms":  477.2,
+        "max_ms":  526,
+        "runs_ms":  "526|477,2|485,9",
+        "bytes":  241770,
+        "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-fis-sablonlari",
+        "error":  null
+    },
+    {
+        "rank":  3,
+        "module":  "muhasebe",
+        "uri":  "admin/muhasebe/satis/barkodlu-satis-ayarlar",
+        "status":  200,
+        "avg_ms":  419.78,
+        "min_ms":  393.4,
+        "max_ms":  457.44,
+        "runs_ms":  "457,44|408,5|393,4",
+        "bytes":  127412,
+        "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/satis/barkodlu-satis-ayarlar",
+        "error":  null
+    }
+]

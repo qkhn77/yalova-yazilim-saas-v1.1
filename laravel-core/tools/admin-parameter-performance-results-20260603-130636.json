@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/tanimlar/departmanlar/1/edit",
+    "uri_template":  "admin/personel-takip/tanimlar/departmanlar/{record}/edit",
+    "name":  "filament.admin.personel-takip.resources.tanimlar.departmanlar.edit",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelDepartmanKaynagi\\Pages\\EditPersonelDepartman",
+    "model":  "App\\Models\\Personel\\PersonelDepartmani",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  5462.4,
+    "min_ms":  5462.4,
+    "max_ms":  5462.4,
+    "runs_ms":  "5462.4",
+    "bytes":  145723,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/tanimlar/departmanlar/1/edit",
+    "error":  null
+}

@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/stok/stok-kategorileri","filament.admin.muhasebe.resources.stok.stok-kategorileri.index","App\Filament\Clusters\Muhasebe\Resources\StokKategoriKaynagi\Pages\ListStokKategorileri","200","1995,54","1826,81","2242,41","2165,49|2242,41|1880,76|1862,21|1826,81","165234","http://localhost/yalova-kamera/admin/muhasebe/stok/stok-kategorileri",

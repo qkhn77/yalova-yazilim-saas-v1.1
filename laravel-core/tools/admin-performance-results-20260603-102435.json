@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/ayarlar/ariza-ekleme",
+    "name":  "filament.admin.teknik-servis.pages.ayarlar.ariza-ekleme",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\ArizaEkleme",
+    "status":  200,
+    "avg_ms":  1752.5,
+    "min_ms":  1752.5,
+    "max_ms":  1752.5,
+    "runs_ms":  "1752.5",
+    "bytes":  111985,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/ayarlar/ariza-ekleme",
+    "error":  null
+}

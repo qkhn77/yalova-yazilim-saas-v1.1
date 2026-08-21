@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayit/servis-ekle",
+    "name":  "filament.admin.teknik-servis.pages.servis-kayit.servis-ekle",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\ServisEkle",
+    "status":  200,
+    "avg_ms":  1644.17,
+    "min_ms":  1644.17,
+    "max_ms":  1644.17,
+    "runs_ms":  "1644.17",
+    "bytes":  112010,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayit/servis-ekle",
+    "error":  null
+}

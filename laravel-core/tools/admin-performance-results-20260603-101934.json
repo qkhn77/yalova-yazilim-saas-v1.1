@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/vardiyalar/create",
+    "name":  "filament.admin.personel-takip.resources.vardiyalar.create",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelVardiyaKaynagi\\Pages\\CreatePersonelVardiya",
+    "status":  200,
+    "avg_ms":  1729.78,
+    "min_ms":  1729.78,
+    "max_ms":  1729.78,
+    "runs_ms":  "1729.78",
+    "bytes":  164889,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/vardiyalar/create",
+    "error":  null
+}

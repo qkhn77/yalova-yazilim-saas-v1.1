@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","restoran","admin/restoran/tanimlar/salonlar","filament.admin.restoran.resources.tanimlar.salonlar.index","App\Filament\Clusters\Restoran\Resources\RestoranSalonKaynagi\Pages\ListRestoranSalonlari","200","1924,54","1811,24","1994,09","1915,73|1994,09|1932,07|1969,59|1811,24","170434","http://localhost/yalova-kamera/admin/restoran/tanimlar/salonlar",

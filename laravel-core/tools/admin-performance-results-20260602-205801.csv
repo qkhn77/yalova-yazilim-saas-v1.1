@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teknik-servis","admin/teknik-servis/tanimlar/aksesuarlar","filament.admin.teknik-servis.resources.tanimlar.aksesuarlar.index","App\Filament\Clusters\TeknikServis\Resources\TeknikServisAksesuarKaynagi\Pages\ListTeknikServisAksesuarlari","200","2349,81","1643,14","5003,06","5003,06|1643,14|1783,58|1649,03|1670,24","141991","http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/aksesuarlar",

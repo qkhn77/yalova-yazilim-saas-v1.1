@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/projeler/liste","filament.admin.web.pages.projeler.liste","App\Filament\Clusters\Web\Pages\WebProje","200","1848,57","1799,29","1874,33","1874,33|1799,29|1848,31|1851,69|1869,22","307094","http://localhost/yalova-kamera/admin/web/projeler/liste",

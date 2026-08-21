@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayitlari/liste/iptal",
+    "name":  "filament.admin.teknik-servis.resources.servis-kayitlari.iptal",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\TeknikServisKayitlariIptalSayfasi",
+    "status":  200,
+    "avg_ms":  1695.47,
+    "min_ms":  1695.47,
+    "max_ms":  1695.47,
+    "runs_ms":  "1695.47",
+    "bytes":  145924,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/iptal",
+    "error":  null
+}

@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayitlari/1",
+    "uri_template":  "admin/teknik-servis/servis-kayitlari/{record}",
+    "name":  "filament.admin.teknik-servis.resources.servis-kayitlari.view",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\TeknikServisKaydiGoruntule",
+    "model":  "App\\Models\\TeknikServis\\TeknikServisKaydi",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  1776.96,
+    "min_ms":  1750.24,
+    "max_ms":  1805.47,
+    "runs_ms":  "1805,47|1775,16|1750,24",
+    "bytes":  205232,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/1",
+    "error":  null
+}

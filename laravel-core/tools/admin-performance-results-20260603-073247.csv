@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","personel-takip","admin/personel-takip/ayarlar","filament.admin.personel-takip.pages.ayarlar","App\Filament\Clusters\PersonelTakip\Pages\PersonelAyarlariSayfasi","200","1617,44","1613,89","1620,98","1620,98|1613,89","138201","http://localhost/yalova-kamera/admin/personel-takip/ayarlar",

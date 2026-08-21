@@ -1,0 +1,479 @@
+.urun-shell {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 38px 16px 64px;
+        }
+
+        .urun-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .urun-sidebar {
+            background: #fff;
+            border: 1px solid #e7ecf3;
+            border-radius: 16px;
+            padding: 20px;
+            position: sticky;
+            top: 52px;
+        }
+
+        .urun-sidebar h4 {
+            margin-bottom: 16px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #122033;
+        }
+
+        .urun-content {
+            background: #fff;
+            border: 1px solid #e7ecf3;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .urun-content-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .urun-content-head h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #102642;
+        }
+
+        .urun-count {
+            font-size: 13px;
+            font-weight: 600;
+            color: #53637a;
+            border: 1px solid #dce5ef;
+            border-radius: 999px;
+            padding: 8px 12px;
+            background: #f8fbff;
+        }
+
+        .kategori-aciklama {
+            color: #607188;
+            margin-bottom: 20px;
+        }
+
+        .urun-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            transition: all .2s ease;
+            align-items: start;
+        }
+
+        .urun-grid[data-cols='2'] {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .urun-grid[data-cols='3'] {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .urun-grid[data-cols='4'] {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .urun-filters-form {
+            border: 1px solid #e7ecf3;
+            background: #f9fbff;
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+        }
+
+        .urun-filters-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(170px, 1fr));
+            gap: 10px;
+            align-items: center;
+        }
+
+        .urun-filter-item .form-label {
+            margin-bottom: 2px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #506178;
+            line-height: 1.2;
+        }
+
+        .urun-filter-item .form-control,
+        .urun-filter-item .form-select {
+            border-color: #d7e1ed;
+            min-height: 38px;
+        }
+
+        .urun-filter-toggle {
+            display: flex;
+            align-items: center;
+            min-height: 56px;
+            padding-bottom: 0;
+        }
+
+        .urun-filter-toggle .form-check {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+            min-height: 38px;
+        }
+
+        .urun-filter-toggle .form-check-input {
+            margin-top: 0;
+        }
+
+        .urun-view-switch-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            min-height: 56px;
+        }
+
+        .urun-view-switch-wrap .form-label {
+            margin: 0;
+        }
+
+        .urun-filters-actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .urun-view-switch {
+            display: inline-flex;
+            border: 1px solid #d7e1ed;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .urun-view-switch .btn {
+            border-radius: 0;
+            border: none;
+            min-width: 52px;
+            padding: 6px 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            color: #30465f;
+        }
+
+        .urun-view-switch .btn + .btn {
+            border-left: 1px solid #d7e1ed;
+        }
+
+        .urun-view-switch .btn.is-active {
+            background: #0f4c81;
+            color: #fff;
+        }
+
+        .view-btn-icon {
+            width: 17px;
+            height: 17px;
+            display: inline-flex;
+        }
+
+        .view-btn-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        .view-btn-label {
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .urun-content.is-loading .urun-grid {
+            opacity: 0;
+            transform: translateY(5px);
+        }
+
+        .urun-skeleton-grid {
+            display: none;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .urun-content.is-loading .urun-skeleton-grid {
+            display: grid;
+        }
+
+        .urun-skeleton-item {
+            height: 270px;
+            border-radius: 14px;
+            border: 1px solid #e5ebf3;
+            background: linear-gradient(90deg, #f3f6fb 25%, #eaf0f8 37%, #f3f6fb 63%);
+            background-size: 400% 100%;
+            animation: urunSkeleton 1.2s ease infinite;
+        }
+
+        @keyframes urunSkeleton {
+            0% { background-position: 100% 50%; }
+            100% { background-position: 0 50%; }
+        }
+
+        .urun-grid .urun-card {
+            animation: urunFadeIn .25s ease both;
+        }
+
+        .urun-grid .urun-card:nth-child(2n) { animation-delay: .03s; }
+        .urun-grid .urun-card:nth-child(3n) { animation-delay: .06s; }
+
+        @keyframes urunFadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .urun-card {
+            border: 1px solid #e5ebf3;
+            border-radius: 14px;
+            background: #fff;
+            overflow: hidden;
+            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .urun-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 34px rgba(8, 22, 45, .08);
+            border-color: #cfdae8;
+        }
+
+        .urun-card-media {
+            display: block;
+            border-bottom: 1px solid #edf2f8;
+            position: relative;
+            overflow: visible;
+        }
+
+        .urun-card-media-frame {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-height: 240px;
+            background: #fff;
+            padding: 10px;
+        }
+
+        .urun-card-thumb {
+            width: 100%;
+            height: auto !important;
+            max-height: 280px;
+            object-fit: contain !important;
+            object-position: center center;
+            display: block;
+            background: #fff;
+            padding: 0;
+            transition: opacity .28s ease, transform .45s ease;
+        }
+
+        .urun-card-thumb-primary {
+            opacity: 1;
+        }
+
+        .urun-card-thumb-secondary {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+        }
+
+        .urun-card.has-secondary-image:hover .urun-card-thumb-primary,
+        .urun-card.has-secondary-image:focus-within .urun-card-thumb-primary {
+            opacity: 0;
+            transform: scale(1.02);
+        }
+
+        .urun-card.has-secondary-image:hover .urun-card-thumb-secondary,
+        .urun-card.has-secondary-image:focus-within .urun-card-thumb-secondary {
+            opacity: 1;
+            transform: scale(1.02);
+        }
+
+        .urun-card-gallery-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(16, 38, 66, .86);
+            color: #fff;
+            border-radius: 999px;
+            padding: 3px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1;
+            border: 1px solid rgba(255, 255, 255, .22);
+            backdrop-filter: blur(2px);
+        }
+
+        .urun-card-body {
+            padding: 14px;
+            display: grid;
+            align-content: start;
+            gap: 9px;
+            height: auto;
+        }
+
+        .urun-card-cat {
+            font-size: 12px;
+            font-weight: 600;
+            color: #5c6e87;
+            display: inline-block;
+        }
+
+        .urun-card-title {
+            font-size: 15px;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .urun-card-title a {
+            color: #132844;
+            text-decoration: none;
+        }
+
+        .urun-card-price {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .urun-card-price .old {
+            text-decoration: line-through;
+            color: #8a97aa;
+            font-size: 13px;
+        }
+
+        .urun-card-price strong {
+            font-size: 20px;
+            color: #0f4c81;
+            line-height: 1.1;
+        }
+
+        .urun-card-link {
+            margin-top: 4px;
+            display: inline-block;
+            color: #0f4c81;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .urun-card-link:hover {
+            text-decoration: underline;
+        }
+
+        .product-category-tree {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .product-category-tree li + li {
+            margin-top: 9px;
+        }
+
+        .product-category-tree ul {
+            margin-top: 9px;
+            padding-left: 14px;
+            border-left: 1px dashed #d9e3ef;
+        }
+
+        .product-category-tree a {
+            color: #1d334d;
+            text-decoration: none;
+            transition: color .2s ease;
+            line-height: 1.45;
+        }
+
+        .product-category-tree a.active,
+        .product-category-tree a:hover {
+            color: #0f4c81;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1199.98px) {
+            .urun-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .urun-grid[data-cols='4'] {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .urun-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .urun-filters-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .urun-skeleton-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .urun-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .urun-grid[data-cols='2'],
+            .urun-grid[data-cols='3'],
+            .urun-grid[data-cols='4'] {
+                grid-template-columns: 1fr;
+            }
+
+            .urun-filters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .urun-skeleton-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .urun-card-media-frame {
+                height: auto;
+                min-height: 0;
+                padding: 8px 8px 0;
+            }
+
+            .urun-card-thumb {
+                height: auto;
+                max-height: none;
+                padding: 0;
+            }
+
+            .urun-card-thumb-secondary {
+                display: none;
+            }
+
+            .urun-card.has-secondary-image:hover .urun-card-thumb-primary,
+            .urun-card.has-secondary-image:focus-within .urun-card-thumb-primary {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+.urun-content.urun-content--category .urun-content-head {
+    margin-bottom: 14px;
+}

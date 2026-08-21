@@ -1,0 +1,2 @@
+﻿"rank","module","uri","uri_template","name","action","model","record_key","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","personel-takip","admin/personel-takip/tanimlar/subeler/1/edit","admin/personel-takip/tanimlar/subeler/{record}/edit","filament.admin.personel-takip.resources.tanimlar.subeler.edit","App\Filament\Clusters\PersonelTakip\Resources\SubeKaynagi\Pages\EditSube","App\Models\Sube","1","200","3759,21","3759,21","3759,21","3759.21","143190","http://localhost/yalova-kamera/admin/personel-takip/tanimlar/subeler/1/edit",

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/doviz-kurlari",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.doviz-kurlari.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\DovizKuruTanimKaynagi\\Pages\\ListDovizKurlari",
+    "status":  200,
+    "avg_ms":  2844.15,
+    "min_ms":  1667.77,
+    "max_ms":  7294.68,
+    "runs_ms":  "7294,68|1810,3|1667,77|1712,59|1735,43",
+    "bytes":  163464,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/doviz-kurlari",
+    "error":  null
+}

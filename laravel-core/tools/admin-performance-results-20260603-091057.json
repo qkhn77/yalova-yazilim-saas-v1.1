@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/fatura-kaynagis/create/iptal-fatura",
+    "name":  "filament.admin.muhasebe.resources.fatura-kaynagis.createIptal",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\CreateIptalFatura",
+    "status":  200,
+    "avg_ms":  1924.98,
+    "min_ms":  1761.84,
+    "max_ms":  2088.11,
+    "runs_ms":  "1761,84|2088,11",
+    "bytes":  192816,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/create/iptal-fatura",
+    "error":  null
+}

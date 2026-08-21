@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/ayarlar/cihaz-marka-model-ekleme",
+    "name":  "filament.admin.teknik-servis.pages.ayarlar.cihaz-marka-model-ekleme",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\CihazMarkaModelEkleme",
+    "status":  200,
+    "avg_ms":  1796.84,
+    "min_ms":  1796.84,
+    "max_ms":  1796.84,
+    "runs_ms":  "1796.84",
+    "bytes":  112081,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/ayarlar/cihaz-marka-model-ekleme",
+    "error":  null
+}

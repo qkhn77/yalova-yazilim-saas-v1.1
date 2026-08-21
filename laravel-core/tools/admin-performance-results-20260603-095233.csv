@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teknik-servis","admin/teknik-servis/ayarlar/aksesuar-ekleme","filament.admin.teknik-servis.pages.ayarlar.aksesuar-ekleme","App\Filament\Clusters\TeknikServis\Pages\AksesuarEkleme","200","1649,51","1602,09","1696,94","1696,94|1602,09","112006","http://localhost/yalova-kamera/admin/teknik-servis/ayarlar/aksesuar-ekleme",

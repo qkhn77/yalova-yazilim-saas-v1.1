@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","personel-takip","admin/personel-takip/giris-cikis/create","filament.admin.personel-takip.resources.giris-cikis.create","App\Filament\Clusters\PersonelTakip\Resources\PersonelGirisCikisKaynagi\Pages\CreatePersonelGirisCikis","200","1700,79","1700,79","1700,79","1700.79","179971","http://localhost/yalova-kamera/admin/personel-takip/giris-cikis/create",

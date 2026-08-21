@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","siparisler","admin/siparisler/basarisiz","filament.admin.resources.siparisler.failed","App\Filament\Resources\SiparisKaynagi\Pages\ListBasarisizSiparisler","200","4622,76","1742,57","7502,95","7502,95|1742,57","200599","http://localhost/yalova-kamera/admin/siparisler/basarisiz",

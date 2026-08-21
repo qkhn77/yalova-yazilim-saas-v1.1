@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/projeler/kategoriler",
+    "name":  "filament.admin.web.pages.projeler.kategoriler",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\WebProjeKategori",
+    "status":  200,
+    "avg_ms":  1710.2,
+    "min_ms":  1708.92,
+    "max_ms":  1711.48,
+    "runs_ms":  "1708,92|1711,48",
+    "bytes":  168330,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/projeler/kategoriler",
+    "error":  null
+}

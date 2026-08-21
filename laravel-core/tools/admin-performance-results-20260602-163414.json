@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/raporlar/gun-sonu",
+    "name":  "filament.admin.restoran.pages.raporlar.gun-sonu",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Pages\\RestoranGunSonuMutabakatSayfasi",
+    "status":  200,
+    "avg_ms":  1853.94,
+    "min_ms":  1702.66,
+    "max_ms":  2041.71,
+    "runs_ms":  "2041,71|2005,99|1702,66|1732,67|1786,68",
+    "bytes":  128370,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/raporlar/gun-sonu",
+    "error":  null
+}

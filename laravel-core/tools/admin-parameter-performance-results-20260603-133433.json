@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-roller",
+    "uri":  "admin/sistem-roller/1",
+    "uri_template":  "admin/sistem-roller/{record}",
+    "name":  "filament.admin.resources.sistem-roller.view",
+    "action":  "App\\Filament\\Resources\\RoleResource\\Pages\\ViewRole",
+    "model":  "App\\Models\\Rol",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  1961.88,
+    "min_ms":  1961.88,
+    "max_ms":  1961.88,
+    "runs_ms":  "1961.88",
+    "bytes":  138382,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-roller/1",
+    "error":  null
+}

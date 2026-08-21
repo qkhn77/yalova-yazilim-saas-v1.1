@@ -1,0 +1,32 @@
+﻿[
+    {
+        "rank":  1,
+        "module":  "restoran",
+        "uri":  "admin/restoran",
+        "name":  "filament.admin.restoran",
+        "action":  "Closure",
+        "status":  200,
+        "avg_ms":  4726.31,
+        "min_ms":  3712.5,
+        "max_ms":  6207.54,
+        "runs_ms":  "3812,18|3712,5|5105,47|6207,54|4793,86",
+        "bytes":  181749,
+        "final_url":  "http://localhost/yalova-kamera/admin/restoran/masalar",
+        "error":  null
+    },
+    {
+        "rank":  2,
+        "module":  "restoran",
+        "uri":  "admin/restoran/masalar",
+        "name":  "filament.admin.restoran.resources.masalar.index",
+        "action":  "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranMasaKaynagi\\Pages\\ListRestoranMasalari",
+        "status":  200,
+        "avg_ms":  2151.82,
+        "min_ms":  1849.47,
+        "max_ms":  2392.67,
+        "runs_ms":  "2392,67|2081,05|2344,03|2091,88|1849,47",
+        "bytes":  181749,
+        "final_url":  "http://localhost/yalova-kamera/admin/restoran/masalar",
+        "error":  null
+    }
+]

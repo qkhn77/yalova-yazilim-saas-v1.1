@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/vardiyalar",
+    "name":  "filament.admin.personel-takip.resources.vardiyalar.index",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelVardiyaKaynagi\\Pages\\ListPersonelVardiyalari",
+    "status":  200,
+    "avg_ms":  7306.32,
+    "min_ms":  7306.32,
+    "max_ms":  7306.32,
+    "runs_ms":  "7306.32",
+    "bytes":  162355,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/vardiyalar",
+    "error":  null
+}

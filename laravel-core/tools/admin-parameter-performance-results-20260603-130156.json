@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/tanimlar/aksesuarlar/1/edit",
+    "uri_template":  "admin/teknik-servis/tanimlar/aksesuarlar/{record}/edit",
+    "name":  "filament.admin.teknik-servis.resources.tanimlar.aksesuarlar.edit",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisAksesuarKaynagi\\Pages\\EditTeknikServisAksesuar",
+    "model":  "App\\Models\\TeknikServis\\TeknikServisAksesuarTanimi",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  1708.9,
+    "min_ms":  1700.39,
+    "max_ms":  1717.41,
+    "runs_ms":  "1717,41|1700,39",
+    "bytes":  141748,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/aksesuarlar/1/edit",
+    "error":  null
+}

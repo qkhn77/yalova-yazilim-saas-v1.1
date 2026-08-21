@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        if (! Schema::hasColumn('users', 'telefon')) {
+            Schema::table('users', function (Blueprint $table): void {
+                $table->string('telefon', 32)->nullable()->after('ad_soyad');
+            });
+        }
+    }
+
+    public function down(): void
+    {
+        if (Schema::hasColumn('users', 'telefon')) {
+            Schema::table('users', function (Blueprint $table): void {
+                $table->dropColumn('telefon');
+            });
+        }
+    }
+};
+

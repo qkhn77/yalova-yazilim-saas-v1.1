@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/cari-gruplari",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.cari-gruplari.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\CariGrubuTanimKaynagi\\Pages\\ListCariGruplari",
+    "status":  200,
+    "avg_ms":  1755.98,
+    "min_ms":  1755.98,
+    "max_ms":  1755.98,
+    "runs_ms":  "1755.98",
+    "bytes":  160783,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/cari-gruplari",
+    "error":  null
+}

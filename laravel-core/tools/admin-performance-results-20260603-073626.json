@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/giris-cikis",
+    "name":  "filament.admin.personel-takip.resources.giris-cikis.index",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelGirisCikisKaynagi\\Pages\\ListPersonelGirisCikislari",
+    "status":  200,
+    "avg_ms":  1668.97,
+    "min_ms":  1655.56,
+    "max_ms":  1682.39,
+    "runs_ms":  "1655,56|1682,39",
+    "bytes":  158656,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/giris-cikis",
+    "error":  null
+}

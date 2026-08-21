@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip",
+    "name":  "filament.admin.personel-takip",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip",
+    "status":  200,
+    "avg_ms":  1692.61,
+    "min_ms":  1692.61,
+    "max_ms":  1692.61,
+    "runs_ms":  "1692.61",
+    "bytes":  110854,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip",
+    "error":  null
+}

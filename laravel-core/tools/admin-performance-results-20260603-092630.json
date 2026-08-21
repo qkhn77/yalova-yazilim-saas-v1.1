@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/personeller/create",
+    "name":  "filament.admin.personel-takip.resources.personeller.create",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelKaynagi\\Pages\\CreatePersonel",
+    "status":  200,
+    "avg_ms":  2947.61,
+    "min_ms":  1763.12,
+    "max_ms":  4132.1,
+    "runs_ms":  "4132,1|1763,12",
+    "bytes":  215893,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/personeller/create",
+    "error":  null
+}

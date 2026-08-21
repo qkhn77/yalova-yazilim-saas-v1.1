@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/vergi-oranlari",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.vergi-oranlari.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\VergiOraniTanimKaynagi\\Pages\\ListVergiOranlari",
+    "status":  200,
+    "avg_ms":  1678.94,
+    "min_ms":  1678.94,
+    "max_ms":  1678.94,
+    "runs_ms":  "1678.94",
+    "bytes":  160795,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/vergi-oranlari",
+    "error":  null
+}

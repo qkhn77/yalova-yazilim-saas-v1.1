@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","profil","admin/profil","filament.admin.auth.profile","App\Filament\Pages\Auth\ProfilDuzenle","200","2608,36","2329,07","3248","3248|2448,99|2645,56|2329,07|2370,15","232126","http://localhost/yalova-kamera/admin/profil",

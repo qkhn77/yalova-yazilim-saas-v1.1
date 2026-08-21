@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/faturalar/giden-faturalar",
+    "name":  "filament.admin.muhasebe.pages.faturalar.giden-faturalar",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\GidenFatura",
+    "status":  200,
+    "avg_ms":  5602.29,
+    "min_ms":  5602.29,
+    "max_ms":  5602.29,
+    "runs_ms":  "5602.29",
+    "bytes":  159493,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/faturalar/giden-faturalar",
+    "error":  null
+}

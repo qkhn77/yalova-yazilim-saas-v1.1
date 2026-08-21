@@ -1,0 +1,101 @@
+name: Laravel CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: laravel-ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend-tests:
+    name: backend-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    defaults:
+      run:
+        working-directory: laravel-core
+
+    env:
+      APP_ENV: testing
+      APP_DEBUG: "false"
+      APP_URL: http://localhost
+      BCRYPT_ROUNDS: "4"
+      CACHE_STORE: array
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ":memory:"
+      MAIL_MAILER: array
+      PULSE_ENABLED: "false"
+      QUEUE_CONNECTION: sync
+      SESSION_DRIVER: array
+      TELESCOPE_ENABLED: "false"
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: bcmath, curl, dom, fileinfo, intl, mbstring, pdo_sqlite, xml, xmlreader, xmlwriter, zip
+          coverage: none
+          tools: composer:v2
+
+      - name: Generate ephemeral application key
+        shell: bash
+        run: echo "APP_KEY=base64:$(php -r 'echo base64_encode(random_bytes(32));')" >> "$GITHUB_ENV"
+
+      - name: Prepare Laravel runtime directories
+        run: mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs bootstrap/cache ../public_html/build
+
+      - name: Resolve Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Composer downloads
+        uses: actions/cache@v6
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-php-8.2-composer-${{ hashFiles('laravel-core/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-8.2-composer-
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: laravel-core/package-lock.json
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Clean generated Vite output
+        run: rm -rf ../public_html/build && mkdir -p ../public_html/build
+
+      - name: Build Vite assets
+        run: npm run build
+
+      - name: Compile Blade views
+        run: php artisan view:cache
+
+      - name: Run backend regression suite
+        run: php artisan test
+
+      - name: Upload Laravel test log on failure
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: laravel-test-log-${{ github.run_id }}
+          path: laravel-core/storage/logs/laravel.log
+          if-no-files-found: ignore
+          retention-days: 7

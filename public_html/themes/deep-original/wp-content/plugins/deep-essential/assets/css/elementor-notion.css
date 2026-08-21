@@ -1,0 +1,170 @@
+.deep-notion-target {
+  position: relative;
+  display: inline-block;
+  overflow: visible;
+  --deep-notion-color: #ff4fd8;
+  --deep-notion-stroke-width: 3px;
+  --deep-notion-duration: 800ms;
+}
+
+/* Keep decorations visible when GSAP SplitText wraps chars (Animated Heading). */
+.animated--heading.deep-notion-target,
+.wcf--animated-heading .deep-notion-target {
+  overflow: visible;
+}
+
+.deep-notion-target .deep-notion-circle-ring {
+  z-index: 2 !important;
+}
+
+/* Theme master.css sets z-index:-1 on these; override so lines stay visible. */
+.deep-notion-style-underline.deep-notion-target::after,
+.deep-notion-style-overline.deep-notion-target::after,
+.deep-notion-style-double.deep-notion-target::after,
+.deep-notion-style-double.deep-notion-target::before,
+.deep-notion-style-highlight.deep-notion-target::after,
+.deep-notion-style-mark-decoration.deep-notion-target::after {
+  z-index: 1 !important;
+}
+
+.deep-notion-target::after,
+.deep-notion-target::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+}
+
+.deep-notion-style-underline::after {
+  bottom: -0.1em;
+  border-bottom: var(--deep-notion-stroke-width) solid var(--deep-notion-color);
+}
+
+.deep-notion-style-overline::after {
+  top: -0.1em;
+  border-top: var(--deep-notion-stroke-width) solid var(--deep-notion-color);
+}
+
+.deep-notion-style-mark-decoration::after {
+  top: 100%;
+  left: 0;
+  width: 100%;
+  /* Match SVG viewBox aspect (~491:15) so stroke scales with height, not squashed by width. */
+  height: clamp(12px, calc(var(--deep-notion-stroke-width) * 5), 72px);
+  transform: translateY(-50%) scaleX(0);
+  transform-origin: left center;
+  border: none;
+  background-color: var(--deep-notion-color);
+  -webkit-mask-image: url("../images/mark-decoration-5.svg");
+  mask-image: url("../images/mark-decoration-5.svg");
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  /* auto width keeps aspect ratio; 100% height = stroke thickness tracks slider (vs 100% 100% hairline on wide headings). */
+  -webkit-mask-size: auto 100%;
+  mask-size: auto 100%;
+  -webkit-mask-position: left center;
+  mask-position: left center;
+  z-index: -1;
+}
+
+.deep-notion-style-double::after,
+.deep-notion-style-double::before {
+  bottom: -0.1em;
+  border-bottom: var(--deep-notion-stroke-width) solid var(--deep-notion-color);
+}
+
+.deep-notion-style-double::before {
+  bottom: calc(-0.1em - var(--deep-notion-stroke-width) - 2px);
+}
+
+.deep-notion-style-highlight::after {
+  top: 0.1em;
+  bottom: 0.1em;
+  width: 100%;
+  height: auto;
+  background: color-mix(in srgb, var(--deep-notion-color) 35%, transparent);
+  z-index: -1;
+}
+
+.deep-notion-style-circle::after {
+  display: none;
+}
+
+.deep-notion-style-circle::before {
+  display: none;
+}
+
+.deep-notion-circle-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% + 0.3em);
+  height: calc(100% + 0.3em);
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, -50%) rotate(var(--deep-notion-circle-rotation, -9deg));
+  overflow: visible;
+}
+
+.deep-notion-circle-path {
+  fill: none;
+  stroke: var(--deep-notion-color);
+  stroke-width: max(1px, var(--deep-notion-stroke-width));
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--deep-notion-circle-length, 320);
+  stroke-dashoffset: var(--deep-notion-circle-length, 320);
+}
+
+.deep-notion-style-circle.deep-notion-active .deep-notion-circle-path {
+  animation: deep-notion-circle-draw var(--deep-notion-duration) cubic-bezier(0.35, 0.05, 0.15, 1) forwards;
+}
+
+.deep-notion-target:not(.deep-notion-style-circle):not(.deep-notion-style-mark-decoration).deep-notion-active::after,
+.deep-notion-target:not(.deep-notion-style-circle):not(.deep-notion-style-mark-decoration).deep-notion-active::before {
+  animation: deep-notion-draw var(--deep-notion-duration) ease-out forwards;
+}
+
+.deep-notion-target.deep-notion-style-mark-decoration.deep-notion-active::after {
+  animation: deep-notion-draw-centered var(--deep-notion-duration) ease-out forwards;
+}
+
+.deep-notion-target:not(.deep-notion-style-circle).deep-notion-loop.deep-notion-active::after,
+.deep-notion-target:not(.deep-notion-style-circle).deep-notion-loop.deep-notion-active::before {
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes deep-notion-draw {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes deep-notion-draw-centered {
+  0% {
+    transform: translateY(-50%) scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-50%) scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes deep-notion-circle-draw {
+  0% {
+    stroke-dashoffset: var(--deep-notion-circle-length, 320);
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

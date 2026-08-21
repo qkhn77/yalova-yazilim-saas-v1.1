@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayitlari/1/duzenle",
+    "uri_template":  "admin/teknik-servis/servis-kayitlari/{record}/duzenle",
+    "name":  "filament.admin.teknik-servis.resources.servis-kayitlari.edit",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\TeknikServisKaydiDuzenle",
+    "model":  "App\\Models\\TeknikServis\\TeknikServisKaydi",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  2321.67,
+    "min_ms":  2267.34,
+    "max_ms":  2376,
+    "runs_ms":  "2376|2267,34",
+    "bytes":  437563,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/1/duzenle",
+    "error":  null
+}

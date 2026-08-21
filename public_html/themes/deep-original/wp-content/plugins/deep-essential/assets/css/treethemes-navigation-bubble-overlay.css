@@ -1,0 +1,460 @@
+/**
+ * Bubble overlay
+ */
+
+.tt-bubble-overlay-layer {
+	--tt-bubble-menu-bg: #000;
+	--tt-bubble-tiles-opacity: 0.5;
+	--tt-bubble-tiles-overlay-color: rgba(0, 0, 0, 0.45);
+	--tt-bubble-tiles-rotate: 22.5deg;
+	--tt-bubble-runner-1: 10s;
+	--tt-bubble-runner-2: 16s;
+	--tt-bubble-runner-3: 22s;
+}
+
+.treethemes-nav-menu-bubble {
+	position: relative;
+	z-index: 100;
+}
+
+.treethemes-nav-menu-bubble.is-open {
+	position: relative;
+	z-index: 100050;
+}
+
+body.tt-bubble-menu-open .elementor-widget-treethemes--navigation {
+	position: relative;
+	z-index: 100040;
+}
+
+/* Open menu: hide Style 6 hamburger — close is only .tt-bubble-menu-close (top-right X) */
+.treethemes-nav-menu-bubble.is-open .cd-nav-trigger,
+.treethemes-nav-menu-bubble.is-animating .cd-nav-trigger {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+/* Portaled to body on frontend (keeps Elementor {{WRAPPER}} class on host) */
+body > .tt-bubble-portal-host[data-tt-bubble-widget] {
+	position: fixed;
+	inset: 0;
+	z-index: 99990;
+	pointer-events: none;
+}
+
+body > .tt-bubble-portal-host[data-tt-bubble-widget] .tt-bubble-portal {
+	width: 100%;
+	height: 100%;
+}
+
+/* Portal: menu + SVG share one grid cell (Theodore main layout) */
+.tt-bubble-portal[data-tt-bubble-widget] {
+	position: fixed;
+	inset: 0;
+	z-index: 99990;
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 100%;
+	pointer-events: none;
+	visibility: hidden;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget].is-portal-visible {
+	visibility: visible;
+	pointer-events: auto;
+}
+
+/* Menu layer (under SVG during reveal) */
+.tt-bubble-portal[data-tt-bubble-widget] .tt-bubble-menu-wrap {
+	grid-area: 1 / 1;
+	position: relative;
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 100%;
+	background: var(--tt-bubble-menu-bg, #000);
+	opacity: 0;
+	pointer-events: none;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .tt-bubble-menu-wrap.menu-wrap--open {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* SVG overlay on top during animation (Theodore .overlay z-index: 1000) */
+.tt-bubble-portal[data-tt-bubble-widget] .tt-bubble-overlay-svg {
+	grid-area: 1 / 1;
+	position: relative;
+	z-index: 1000;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .tt-bubble-overlay__path {
+	fill: var(--tt-bubble-menu-bg, #000);
+}
+
+/* Close control — top-right X (matches Style 6 close icon) */
+.tt-bubble-menu-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 20;
+	margin: 2rem;
+	padding: 0.5rem;
+	width: 44px;
+	height: 44px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: none;
+	border: 0;
+	cursor: pointer;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.tt-bubble-menu-wrap.menu-wrap--open .tt-bubble-menu-close {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.tt-bubble-close-icon {
+	position: relative;
+	display: block;
+	width: 25px;
+	height: 25px;
+}
+
+.tt-bubble-close-icon::before,
+.tt-bubble-close-icon::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	height: 2px;
+	margin-top: -1px;
+	background-color: var(--tt-nav6-close-icon-color, #fff);
+	transition: background-color 0.35s ease;
+}
+
+.tt-bubble-close-icon::before {
+	transform: rotate(45deg);
+}
+
+.tt-bubble-close-icon::after {
+	transform: rotate(-45deg);
+}
+
+.tt-bubble-menu-close:hover .tt-bubble-close-icon::before,
+.tt-bubble-menu-close:hover .tt-bubble-close-icon::after,
+.tt-bubble-menu-close:focus-visible .tt-bubble-close-icon::before,
+.tt-bubble-menu-close:focus-visible .tt-bubble-close-icon::after {
+	background-color: var(--tt-nav6-menu-hover-color, #79a18a);
+}
+
+.tt-bubble-menu-close:focus-visible {
+	outline: none;
+}
+
+.tt-bubble-tiles {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 160vw;
+	height: 150vh;
+	display: flex;
+	opacity: var(--tt-bubble-tiles-opacity);
+	flex-direction: column;
+	justify-content: center;
+	gap: 0;
+	transform: translate3d(-50%, -50%, 0) rotate(var(--tt-bubble-tiles-rotate));
+	pointer-events: none;
+	z-index: 1;
+	overflow: hidden;
+}
+
+/* Color wash over tiles (menu panel stays above) */
+.tt-bubble-tiles-overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	pointer-events: none;
+	background: var(--tt-bubble-tiles-overlay-color, rgba(0, 0, 0, 0.45));
+	opacity: 0;
+}
+
+.tt-bubble-menu-wrap.tt-bubble-has-tiles-overlay .tt-bubble-tiles-overlay {
+	opacity: 1;
+}
+
+.tt-bubble-tiles__line {
+	flex: none;
+	width: 100%;
+	overflow: hidden;
+}
+
+.tt-bubble-tiles__track {
+	display: flex;
+	flex: none;
+	width: max-content;
+	will-change: transform;
+	backface-visibility: hidden;
+	animation: tt-bubble-marquee var(--tt-bubble-runner-1) linear infinite;
+}
+
+.tt-bubble-tiles__line:nth-child(2) .tt-bubble-tiles__track {
+	animation-duration: var(--tt-bubble-runner-2);
+}
+
+.tt-bubble-tiles__line:nth-child(3) .tt-bubble-tiles__track {
+	animation-duration: var(--tt-bubble-runner-3);
+}
+
+.tt-bubble-tiles__set {
+	display: flex;
+	flex: none;
+}
+
+@keyframes tt-bubble-marquee {
+	from {
+		transform: translate3d(0, 0, 0);
+	}
+
+	to {
+		transform: translate3d(-50%, 0, 0);
+	}
+}
+
+.tt-bubble-tiles__img {
+	--tt-bubble-tile-margin: 3vw;
+	flex: none;
+	width: 30vh;
+	height: 30vh;
+	margin: var(--tt-bubble-tile-margin);
+	background-size: cover;
+	background-position: 50% 50%;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.12);
+}
+
+.tt-bubble-tiles__img--large {
+	width: 100vh;
+	border-radius: 20vh;
+}
+
+.tt-bubble-menu-panel {
+	grid-area: 1 / 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: 3;
+	height: 100%;
+	padding: 2rem;
+	overflow: auto;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: min(100%, 52rem);
+	text-align: var(--tt-nav6-menu-align, center);
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav > li {
+	display: none;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav > .menu_items_wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	width: 100%;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .menu_items_wrapper > li {
+	display: list-item;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav:not(:has(.menu_items_wrapper)) > li {
+	display: list-item;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .menu-item > a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 100%;
+	color: var(--tt-nav6-menu-color, #ccc);
+	text-decoration: none;
+	transition: color 0.35s ease;
+	pointer-events: auto;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .menu-item > a:hover,
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .menu-item > a:focus-visible {
+	color: var(--tt-nav6-menu-hover-color, #fff);
+	outline: none;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav li.tt-nav6-submenu-open > a {
+	color: var(--tt-nav6-menu-hover-color, #fff);
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .sub-menu {
+	list-style: none;
+	margin: 0.25em 0 0;
+	padding: 0;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height var(--tt-nav6-submenu-duration, 0.4s) ease;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .sub-menu > li {
+	display: list-item;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .treethemes-mega-menu-panel {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height var(--tt-nav6-submenu-duration, 0.4s) ease;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .sub-menu > li,
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .treethemes-mega-menu-panel .menu-item {
+	margin: var(--tt-nav6-submenu-item-gap, 0.35em) 0;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .sub-menu .menu-item > a,
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .treethemes-mega-menu-panel .menu-item > a {
+	padding: var(--tt-nav6-submenu-link-padding, 0.15em 0);
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .treethemes-submenu-indicator.tt-nav6-hidden-indicator {
+	display: none !important;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav .tt-nav6-chevron {
+	margin-left: var(--tt-nav6-chevron-gap, 10px);
+	font-size: var(--tt-nav6-chevron-size, 0.7em);
+	color: var(--tt-nav6-chevron-color, var(--tt-nav6-menu-color, #ccc));
+	display: inline-flex;
+	align-items: center;
+	transition: transform 0.35s ease, color 0.35s ease;
+}
+
+.tt-bubble-portal[data-tt-bubble-widget] .cd-primary-nav li.tt-nav6-submenu-open > a .tt-nav6-chevron {
+	transform: rotate(180deg);
+	color: var(--tt-nav6-chevron-color-open, var(--tt-nav6-menu-hover-color, #fff));
+}
+
+body.tt-bubble-menu-open:not(.elementor-editor-active) {
+	overflow: hidden;
+}
+
+/* Elementor editor: portal stays inside the widget; keep preview usable */
+.elementor-editor-active .tt-bubble-portal[data-tt-bubble-widget] {
+	z-index: 10;
+}
+
+.elementor-editor-active .treethemes-nav-menu-bubble.is-open {
+	z-index: 20;
+}
+
+.elementor-editor-active .tt-bubble-portal[data-tt-bubble-widget].is-portal-visible {
+	pointer-events: auto;
+}
+
+.elementor-editor-active body.tt-bubble-menu-open {
+	overflow: visible;
+}
+
+/* Menu slide hover (portal may be body > host > portal on frontend) */
+.tt-bubble-portal.treethemes-menu-slide-active[data-tt-bubble-widget] .treethemes-nav-item .menu-text::before,
+.tt-bubble-menu-panel.treethemes-menu-slide-active .treethemes-nav-item .menu-text::before {
+	content: none !important;
+	display: none !important;
+}
+
+.tt-bubble-portal.treethemes-menu-slide-active[data-tt-bubble-widget]:not([class*='hover-pointer-']) .treethemes-nav-item .menu-text::after,
+.tt-bubble-menu-panel.treethemes-menu-slide-active:not([class*='hover-pointer-']) .treethemes-nav-item .menu-text::after {
+	content: none !important;
+	display: none !important;
+}
+
+.tt-bubble-portal.treethemes-menu-slide-active[data-tt-bubble-widget] .treethemes-nav-item .menu-text,
+.tt-bubble-menu-panel.treethemes-menu-slide-active .treethemes-nav-item .menu-text {
+	display: inline-block;
+	pointer-events: none;
+}
+
+.tt-bubble-portal.treethemes-menu-slide-active[data-tt-bubble-widget] .treethemes-nav-inner,
+.tt-bubble-menu-panel.treethemes-menu-slide-active .treethemes-nav-inner {
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: top;
+	pointer-events: none;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+.tt-bubble-portal.treethemes-menu-slide-active[data-tt-bubble-widget] .treethemes-nav-text,
+.tt-bubble-portal.treethemes-menu-slide-active[data-tt-bubble-widget] .treethemes-nav-text-hover,
+.tt-bubble-menu-panel.treethemes-menu-slide-active .treethemes-nav-text,
+.tt-bubble-menu-panel.treethemes-menu-slide-active .treethemes-nav-text-hover {
+	display: block;
+	will-change: transform;
+	transition: transform 0.45s cubic-bezier(0.8, 0, 0.2, 1);
+	pointer-events: none;
+}
+
+.tt-bubble-portal.treethemes-menu-slide-active[data-tt-bubble-widget] .treethemes-nav-text-hover,
+.tt-bubble-menu-panel.treethemes-menu-slide-active .treethemes-nav-text-hover {
+	position: absolute;
+	left: 0;
+	top: 100%;
+	width: 100%;
+}
+
+.tt-bubble-portal.treethemes-menu-slide-active[data-tt-bubble-widget] .treethemes-nav-item:hover .treethemes-nav-text,
+.tt-bubble-portal.treethemes-menu-slide-active[data-tt-bubble-widget] .treethemes-nav-item:focus-within .treethemes-nav-text,
+.tt-bubble-menu-panel.treethemes-menu-slide-active .treethemes-nav-item:hover .treethemes-nav-text,
+.tt-bubble-menu-panel.treethemes-menu-slide-active .treethemes-nav-item:focus-within .treethemes-nav-text {
+	transform: translateY(-100%);
+}
+
+.tt-bubble-portal.treethemes-menu-slide-active[data-tt-bubble-widget] .treethemes-nav-item:hover .treethemes-nav-text-hover,
+.tt-bubble-portal.treethemes-menu-slide-active[data-tt-bubble-widget] .treethemes-nav-item:focus-within .treethemes-nav-text-hover,
+.tt-bubble-menu-panel.treethemes-menu-slide-active .treethemes-nav-item:hover .treethemes-nav-text-hover,
+.tt-bubble-menu-panel.treethemes-menu-slide-active .treethemes-nav-item:focus-within .treethemes-nav-text-hover {
+	transform: translateY(-100%);
+}
+
+.tt-bubble-portal[data-tt-bubble-widget]:not(.treethemes-menu-slide-active) .treethemes-nav-text-hover,
+.tt-bubble-menu-panel:not(.treethemes-menu-slide-active) .treethemes-nav-text-hover {
+	display: none !important;
+}
+
+body.tt-bubble-menu-open header.treethemes-nav6-hideitall .elementor-element:not(.elementor-widget-treethemes--navigation),
+body.tt-bubble-menu-open .elementor-location-header.treethemes-nav6-hideitall .elementor-element:not(.elementor-widget-treethemes--navigation) {
+	opacity: 0 !important;
+	pointer-events: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tt-bubble-tiles__track {
+		animation: none;
+	}
+}

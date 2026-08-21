@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayitlari/liste/tamamlanan-dis-servis",
+    "name":  "filament.admin.teknik-servis.resources.servis-kayitlari.tamamlanan_dis_servis",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\TeknikServisKayitlariTamamlananDisServisSayfasi",
+    "status":  200,
+    "avg_ms":  1700.94,
+    "min_ms":  1700.94,
+    "max_ms":  1700.94,
+    "runs_ms":  "1700.94",
+    "bytes":  146008,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/tamamlanan-dis-servis",
+    "error":  null
+}

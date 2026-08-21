@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/izinler",
+    "name":  "filament.admin.personel-takip.resources.izinler.index",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelIzinKaynagi\\Pages\\ListPersonelIzinleri",
+    "status":  200,
+    "avg_ms":  1715.25,
+    "min_ms":  1715.25,
+    "max_ms":  1715.25,
+    "runs_ms":  "1715.25",
+    "bytes":  159088,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/izinler",
+    "error":  null
+}

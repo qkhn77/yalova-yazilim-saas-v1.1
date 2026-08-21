@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/stok/stok-kategorileri/create","filament.admin.muhasebe.resources.stok.stok-kategorileri.create","App\Filament\Clusters\Muhasebe\Resources\StokKategoriKaynagi\Pages\CreateStokKategorisi","200","1800,31","1652,65","1947,98","1947,98|1652,65","154961","http://localhost/yalova-kamera/admin/muhasebe/stok/stok-kategorileri/create",

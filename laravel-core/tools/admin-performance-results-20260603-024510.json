@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/sayfalar/bilgi-sayfalari",
+    "name":  "filament.admin.web.pages.sayfalar.bilgi-sayfalari",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\BilgiSayfalari",
+    "status":  200,
+    "avg_ms":  5894.62,
+    "min_ms":  5894.62,
+    "max_ms":  5894.62,
+    "runs_ms":  "5894.62",
+    "bytes":  167841,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/sayfalar/bilgi-sayfalari",
+    "error":  null
+}

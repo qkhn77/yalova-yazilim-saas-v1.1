@@ -1,0 +1,775 @@
+/**
+ * Treethemes Navigation — Overlay Style 6 (Deep WP Bakery header style 6 port).
+ * Scoped to .treethemes-nav-menu-style-6 inside the Elementor widget.
+ */
+
+.treethemes-nav-menu-style-6 {
+	--tt-nav6-overlay-nav-color: #101010;
+	--tt-nav6-overlay-content-color: #ffb441;
+	--tt-nav6-trigger-before: #091d23;
+	--tt-nav6-trigger-after: #ffb441;
+	--tt-nav6-icon-color: #ffffff;
+	--tt-nav6-menu-color: #cccccc;
+	--tt-nav6-menu-hover-color: #ffffff;
+	--tt-nav6-menu-item-gap: 1.6em;
+	--tt-nav6-menu-link-padding: 0.2em 0;
+	--tt-nav6-menu-align: center;
+	--tt-nav6-submenu-duration: 0.4s;
+	--tt-nav6-submenu-item-gap: 0.35em;
+	--tt-nav6-submenu-link-padding: 0.15em 0;
+	--tt-nav6-chevron-color: var(--tt-nav6-menu-color);
+	--tt-nav6-chevron-color-open: var(--tt-nav6-menu-hover-color);
+	--tt-nav6-chevron-size: 0.7em;
+	--tt-nav6-chevron-gap: 10px;
+}
+
+/* Style 6 is the only navigation UI at every breakpoint (not a mobile drawer). */
+.treethemes-nav-menu-style-6,
+.deep__nav-menu.overlay-menu-style-6 {
+	display: block;
+	width: auto;
+}
+
+.treethemes-nav-menu-style-6 .treethemes-menu-hamburger,
+.treethemes-nav-menu-style-6 .treethemes-nav-menu-container,
+.treethemes-nav-menu-style-6 .deep-nav-menu-container {
+	display: none !important;
+}
+
+.treethemes-nav-menu-style-6 .treethemes-menu-overlay {
+	display: none !important;
+}
+
+/* Trigger (Style 6 + Bubble overlay) */
+.treethemes-nav-menu-style-6 .cd-nav-trigger,
+.treethemes-nav-menu-bubble .cd-nav-trigger {
+	position: relative;
+	display: block;
+	width: 44px;
+	height: 44px;
+	z-index: 100010;
+	margin-left: auto;
+	cursor: pointer;
+	text-decoration: none;
+	color: inherit;
+	touch-action: manipulation;
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* Open: hide hamburger trigger; dedicated close X is positioned over it via JS */
+body.treethemes-nav-style6-panel-open .elementor-widget-treethemes--navigation,
+.treethemes-nav-menu-style-6.treethemes-nav-style6-open {
+	position: relative;
+	z-index: 100060 !important;
+}
+
+body.treethemes-nav-style6-panel-open .treethemes-nav-menu-style-6 .cd-nav-trigger,
+.treethemes-nav-menu-style-6.treethemes-nav-style6-open .cd-nav-trigger {
+	display: none !important;
+}
+
+/* Close X — portaled to body, fixed top-right (single close control) */
+.tt-nav6-menu-close,
+body > .tt-nav6-menu-close[data-tt-nav6-widget] {
+	--tt-nav6-close-top: 2rem;
+	--tt-nav6-close-right: 2rem;
+	--tt-nav6-close-size: 44px;
+	--tt-nav6-close-icon-size: 25px;
+	--tt-nav6-close-icon-weight: 2px;
+	--tt-nav6-close-bg: transparent;
+	--tt-nav6-close-radius: 0;
+	position: fixed;
+	top: var(--tt-nav6-close-top);
+	right: var(--tt-nav6-close-right);
+	left: auto;
+	z-index: 100061;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	width: var(--tt-nav6-close-size);
+	height: var(--tt-nav6-close-size);
+	min-width: var(--tt-nav6-close-size);
+	min-height: var(--tt-nav6-close-size);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	cursor: pointer;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
+}
+
+.tt-nav6-close-bg {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	border-radius: var(--tt-nav6-close-radius);
+	background-color: var(--tt-nav6-close-bg, var(--tt-nav6-trigger-after, #ffb441));
+	border: var(--tt-nav6-close-border-width, 0) var(--tt-nav6-close-border-style, solid) var(--tt-nav6-close-border-color, transparent);
+	transform: scale(0);
+	transform-origin: center center;
+	transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.tt-nav6-menu-close.tt-nav6-close-anim-in .tt-nav6-close-bg {
+	animation: tt-nav6-close-bg-scale-in 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) 0.4s forwards;
+}
+
+@keyframes tt-nav6-close-bg-scale-in {
+	from {
+		transform: scale(0);
+	}
+	to {
+		transform: scale(1);
+	}
+}
+
+/* Only the portaled body-level close is used */
+nav.nav-style-6 > .tt-nav6-menu-close {
+	display: none !important;
+}
+
+body.treethemes-nav-style6-panel-open > .tt-nav6-menu-close[data-tt-nav6-widget] {
+	opacity: 1 !important;
+	visibility: visible !important;
+	pointer-events: auto !important;
+	display: flex !important;
+}
+
+/* Closed state — hide panel UI even if JS classes lag after resize / breakpoint change */
+body:not(.treethemes-nav-style6-panel-open) > .tt-nav6-menu-close[data-tt-nav6-widget] {
+	opacity: 0 !important;
+	visibility: hidden !important;
+	pointer-events: none !important;
+	display: none !important;
+}
+
+body:not(.treethemes-nav-style6-panel-open) > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav,
+body:not(.treethemes-nav-style6-panel-open) > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav.fade-in {
+	visibility: hidden !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+}
+
+.tt-nav6-close-icon {
+	position: relative;
+	z-index: 1;
+	display: block;
+	width: var(--tt-nav6-close-icon-size, 25px);
+	height: var(--tt-nav6-close-icon-size, 25px);
+	opacity: 0;
+}
+
+body.treethemes-nav-style6-panel-open > .tt-nav6-menu-close[data-tt-nav6-widget].tt-nav6-close-anim-in .tt-nav6-close-icon {
+	animation: tt-nav6-close-icon-in 0.25s ease 0.55s forwards;
+}
+
+@keyframes tt-nav6-close-icon-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.tt-nav6-close-icon::before,
+.tt-nav6-close-icon::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	height: var(--tt-nav6-close-icon-weight, 2px);
+	margin-top: calc(var(--tt-nav6-close-icon-weight, 2px) / -2);
+	background-color: var(--tt-nav6-close-icon-color, #fff);
+	transition: background-color 0.35s ease;
+}
+
+.tt-nav6-close-icon::before {
+	transform: rotate(45deg);
+}
+
+.tt-nav6-close-icon::after {
+	transform: rotate(-45deg);
+}
+
+.tt-nav6-menu-close:hover .tt-nav6-close-bg,
+.tt-nav6-menu-close:focus-visible .tt-nav6-close-bg {
+	background-color: var(--tt-nav6-close-bg-hover, var(--tt-nav6-close-bg, var(--tt-nav6-trigger-after, #ffb441)));
+	border-color: var(--tt-nav6-close-border-color-hover, var(--tt-nav6-close-border-color, transparent));
+}
+
+.tt-nav6-menu-close:hover .tt-nav6-close-icon::before,
+.tt-nav6-menu-close:hover .tt-nav6-close-icon::after,
+.tt-nav6-menu-close:focus-visible .tt-nav6-close-icon::before,
+.tt-nav6-menu-close:focus-visible .tt-nav6-close-icon::after {
+	background-color: var(--tt-nav6-close-icon-color-hover, var(--tt-nav6-menu-hover-color, #fff));
+}
+
+.tt-nav6-menu-close:focus-visible {
+	outline: none;
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger .cd-nav-bg,
+.treethemes-nav-menu-bubble .cd-nav-trigger .cd-nav-bg {
+	display: inline-block;
+	position: relative;
+	float: left;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	left: -10px;
+	transform-origin: center;
+	transform: scale(1);
+	transition: transform 0.3s;
+	pointer-events: none;
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger .cd-nav-bg.active,
+.treethemes-nav-menu-bubble .cd-nav-trigger .cd-nav-bg.active {
+	transform: scale(0);
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger .cd-nav-bg-fake,
+.treethemes-nav-menu-bubble .cd-nav-trigger .cd-nav-bg-fake {
+	position: relative;
+	opacity: 1 !important;
+	visibility: visible !important;
+	left: -18px;
+	top: -10px;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	transition: transform 0.3s;
+	transform-origin: center;
+	transform: scale(0);
+	pointer-events: none;
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger .cd-nav-bg-fake.active,
+.treethemes-nav-menu-bubble .cd-nav-trigger .cd-nav-bg-fake.active {
+	transform: scale(1);
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger .cd-icon,
+.treethemes-nav-menu-bubble .cd-nav-trigger .cd-icon {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: inline-block;
+	pointer-events: none;
+	width: 25px;
+	height: 2px;
+	background-color: var(--tt-nav6-icon-color);
+	z-index: 10;
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger .cd-icon::before,
+.treethemes-nav-menu-style-6 .cd-nav-trigger .cd-icon::after,
+.treethemes-nav-menu-bubble .cd-nav-trigger .cd-icon::before,
+.treethemes-nav-menu-bubble .cd-nav-trigger .cd-icon::after {
+	content: " ";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--tt-nav6-icon-color);
+	transition: transform 0.3s;
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger .cd-icon::before,
+.treethemes-nav-menu-bubble .cd-nav-trigger .cd-icon::before {
+	transform: translateY(-6px) rotate(0);
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger .cd-icon::after,
+.treethemes-nav-menu-bubble .cd-nav-trigger .cd-icon::after {
+	transform: translateY(6px) rotate(0);
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger::before,
+.treethemes-nav-menu-style-6 .cd-nav-trigger::after,
+.treethemes-nav-menu-bubble .cd-nav-trigger::before,
+.treethemes-nav-menu-bubble .cd-nav-trigger::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-radius: 50%;
+	height: 100%;
+	width: 100%;
+	transition-property: transform;
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger::before,
+.treethemes-nav-menu-bubble .cd-nav-trigger::before {
+	background-color: var(--tt-nav6-trigger-before);
+	transform: scale(1);
+	transition-duration: 0.3s;
+	transition-delay: 0.4s;
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger::after,
+.treethemes-nav-menu-bubble .cd-nav-trigger::after {
+	background-color: var(--tt-nav6-trigger-after);
+	transform: scale(0);
+	transition-duration: 0s;
+	transition-delay: 0s;
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger.close-nav::before,
+.treethemes-nav-menu-bubble .cd-nav-trigger.close-nav::before {
+	transform: scale(0);
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger.close-nav::after,
+.treethemes-nav-menu-bubble .cd-nav-trigger.close-nav::after {
+	transform: scale(1);
+	transition-duration: 0.3s;
+	transition-delay: 0.4s;
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger.close-nav .cd-icon,
+.treethemes-nav-menu-bubble .cd-nav-trigger.close-nav .cd-icon {
+	background-color: transparent !important;
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger.close-nav .cd-icon::before,
+.treethemes-nav-menu-style-6 .cd-nav-trigger.close-nav .cd-icon::after,
+.treethemes-nav-menu-bubble .cd-nav-trigger.close-nav .cd-icon::before,
+.treethemes-nav-menu-bubble .cd-nav-trigger.close-nav .cd-icon::after {
+	background-color: var(--tt-nav6-close-icon-color, var(--tt-nav6-icon-color, #ffffff));
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger.close-nav .cd-icon::before,
+.treethemes-nav-menu-bubble .cd-nav-trigger.close-nav .cd-icon::before {
+	transform: translateY(0) rotate(45deg);
+}
+
+.treethemes-nav-menu-style-6 .cd-nav-trigger.close-nav .cd-icon::after,
+.treethemes-nav-menu-bubble .cd-nav-trigger.close-nav .cd-icon::after {
+	transform: translateY(0) rotate(-45deg);
+}
+
+/* Fullscreen menu panel */
+.treethemes-nav-menu-style-6 .nav-style-6 {
+	display: block;
+}
+
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 90%;
+	max-width: 100%;
+	padding: 90px 0;
+	z-index: 10001;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s 0.3s, opacity 0.3s;
+	margin-left: 5%;
+	margin-right: 5%;
+	list-style: none;
+	text-align: var(--tt-nav6-menu-align);
+}
+
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav.fade-in {
+	visibility: visible;
+	opacity: 1;
+	transition: visibility 0s, opacity 0.3s;
+}
+
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav > li,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav > li {
+	display: block;
+	width: 100%;
+	margin: var(--tt-nav6-menu-item-gap) 0;
+	padding: 0;
+}
+
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav a,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav a {
+	padding: var(--tt-nav6-menu-link-padding);
+	color: var(--tt-nav6-menu-color);
+	transition: color 0.2s;
+	text-decoration: none;
+}
+
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav a:hover,
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav a:focus {
+	color: var(--tt-nav6-menu-hover-color);
+}
+
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav .sub-menu,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav .sub-menu {
+	overflow: hidden;
+	transition: max-height var(--tt-nav6-submenu-duration) ease;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	max-height: 0;
+	display: block;
+}
+
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav .sub-menu > li,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav .sub-menu > li,
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav .treethemes-mega-menu-panel .menu-item,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav .treethemes-mega-menu-panel .menu-item {
+	margin: var(--tt-nav6-submenu-item-gap) 0;
+}
+
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav .sub-menu a,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav .sub-menu a,
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav .treethemes-mega-menu-panel .menu-item > a,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav .treethemes-mega-menu-panel .menu-item > a {
+	padding: var(--tt-nav6-submenu-link-padding);
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav .treethemes-mega-menu-panel {
+	overflow: hidden;
+	max-height: 0;
+	transition: max-height var(--tt-nav6-submenu-duration) ease;
+	display: block;
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav .treethemes-submenu-indicator.tt-nav6-hidden-indicator,
+.treethemes-nav-menu-style-6 .treethemes-submenu-indicator.tt-nav6-hidden-indicator {
+	display: none !important;
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav li.menu-item-has-children > a,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav li.treethemes-mega-menu > a {
+	cursor: pointer;
+	pointer-events: auto;
+}
+
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .cd-primary-nav a .menu-text,
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .cd-primary-nav a .treethemes-nav-inner {
+	pointer-events: auto;
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav li.tt-nav6-submenu-open > a {
+	color: var(--tt-nav6-menu-hover-color);
+}
+
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav .menu-item-has-children > a .tt-nav6-chevron,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav .tt-nav6-chevron {
+	margin-left: var(--tt-nav6-chevron-gap, 10px);
+	font-size: var(--tt-nav6-chevron-size, 0.7em);
+	color: var(--tt-nav6-chevron-color, var(--tt-nav6-menu-color, #cccccc));
+	transition: transform 0.4s ease, color 0.2s ease;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+	vertical-align: middle;
+	flex-shrink: 0;
+}
+
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav .tt-nav6-chevron svg,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav .tt-nav6-chevron svg {
+	width: 1em;
+	height: 1em;
+	fill: currentColor;
+}
+
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav .tt-nav6-chevron i,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav .tt-nav6-chevron i {
+	color: inherit;
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav li.tt-nav6-submenu-open > a .tt-nav6-chevron,
+.treethemes-nav-menu-style-6 .nav-style-6 .cd-primary-nav li.tt-nav6-submenu-open > a .tt-nav6-chevron {
+	transform: scaleY(-1);
+	color: var(--tt-nav6-chevron-color-open, var(--tt-nav6-menu-hover-color, #ffffff));
+}
+
+.treethemes-nav-menu-style-6 div.nav-style-6 .cd-primary-nav {
+	display: table;
+	height: 100vh;
+	margin-top: 90px !important;
+	overflow-y: auto !important;
+	max-height: 80vh;
+	pointer-events: auto;
+}
+
+.treethemes-nav-menu-style-6 div.nav-style-6 .cd-primary-nav .menu_items_wrapper {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+/* Circle overlays (often portaled to body for full-viewport coverage) */
+body > .cd-overlay-content[data-tt-nav6-widget],
+body > .cd-overlay-nav[data-tt-nav6-widget],
+.treethemes-nav-menu-style-6 .cd-overlay-content,
+.treethemes-nav-menu-style-6 .cd-overlay-nav {
+	position: fixed;
+	height: 4px;
+	width: 4px;
+	top: 40px;
+	right: 10%;
+	transform: translate(-20px, 20px);
+	pointer-events: none;
+}
+
+body > .cd-overlay-content[data-tt-nav6-widget] span,
+body > .cd-overlay-nav[data-tt-nav6-widget] span,
+.treethemes-nav-menu-style-6 .cd-overlay-content span,
+.treethemes-nav-menu-style-6 .cd-overlay-nav span {
+	display: inline-block;
+	position: absolute;
+	border-radius: 50%;
+	transform-origin: 50% 50%;
+	transform: scale(0);
+}
+
+.treethemes-nav-menu-style-6.tt-nav6-css-motion .cd-overlay-content span,
+.treethemes-nav-menu-style-6.tt-nav6-css-motion .cd-overlay-nav span,
+body > .cd-overlay-content[data-tt-nav6-widget].tt-nav6-css-motion span,
+body > .cd-overlay-nav[data-tt-nav6-widget].tt-nav6-css-motion span {
+	transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.3s ease;
+}
+
+body > .cd-overlay-nav[data-tt-nav6-widget],
+.treethemes-nav-menu-style-6 .cd-overlay-nav {
+	z-index: 99998;
+}
+
+body > .cd-overlay-nav[data-tt-nav6-widget] span,
+.treethemes-nav-menu-style-6 .cd-overlay-nav span {
+	background-color: var(--tt-nav6-overlay-nav-color);
+}
+
+body > .cd-overlay-content[data-tt-nav6-widget],
+.treethemes-nav-menu-style-6 .cd-overlay-content {
+	z-index: 99999;
+}
+
+body > .cd-overlay-content[data-tt-nav6-widget] span,
+.treethemes-nav-menu-style-6 .cd-overlay-content span {
+	background-color: var(--tt-nav6-overlay-content-color);
+}
+
+/* Fullscreen menu panel when portaled to body */
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 90%;
+	max-width: 100%;
+	padding: 90px 0;
+	z-index: 100000;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s 0.3s, opacity 0.3s;
+	margin-left: 5%;
+	margin-right: 5%;
+	list-style: none;
+	text-align: var(--tt-nav6-menu-align);
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav.fade-in {
+	visibility: visible;
+	opacity: 1;
+	transition: visibility 0s, opacity 0.3s;
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav a {
+	padding: var(--tt-nav6-menu-link-padding);
+	color: var(--tt-nav6-menu-color);
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav a:hover,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav a:focus {
+	color: var(--tt-nav6-menu-hover-color);
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] div.nav-style-6 .cd-primary-nav {
+	display: table;
+	height: 100vh;
+	margin-top: 70px !important;
+	overflow-y: auto !important;
+	max-height: 80vh;
+	pointer-events: auto;
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] div.nav-style-6 .cd-primary-nav .menu_items_wrapper {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+/* Dim header chrome while menu is open — keep nav widget + close trigger visible */
+header.treethemes-nav6-hideitall,
+.elementor-location-header.treethemes-nav6-hideitall {
+	background: transparent !important;
+	box-shadow: none !important;
+	border: none !important;
+}
+
+body.treethemes-nav-style6-panel-open header.treethemes-nav6-hideitall .elementor-element:not(.elementor-widget-treethemes--navigation),
+body.treethemes-nav-style6-panel-open .elementor-location-header.treethemes-nav6-hideitall .elementor-element:not(.elementor-widget-treethemes--navigation) {
+	opacity: 0 !important;
+	visibility: hidden !important;
+	pointer-events: none !important;
+	transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+body.treethemes-nav-style6-panel-open .elementor-widget-treethemes--navigation,
+body.treethemes-nav-style6-panel-open .elementor-widget-treethemes--navigation .treethemes-nav-menu-style-6 {
+	opacity: 1 !important;
+	visibility: visible !important;
+	pointer-events: auto !important;
+}
+
+body.treethemes-nav-style6-panel-open {
+	overflow: hidden;
+}
+
+.elementor-editor-active nav.nav-style-6 .cd-primary-nav a {
+	cursor: default;
+}
+
+
+/* Menu slide on hover (Style 6 — uses treethemes-nav-* markup from walker) */
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-item .menu-text::before,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-item .menu-text::before {
+	content: none !important;
+	display: none !important;
+}
+
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget]:not([class*='hover-pointer-']) .treethemes-nav-item .menu-text::after,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active:not([class*='hover-pointer-']) .treethemes-nav-item .menu-text::after {
+	content: none !important;
+	display: none !important;
+}
+
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-item .menu-text,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-item .menu-text {
+	display: inline-block;
+}
+
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-inner,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-inner {
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: top;
+}
+
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-text,
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-text-hover,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-text,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-text-hover {
+	display: block;
+	will-change: transform;
+	transition: transform 0.45s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-text-hover,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-text-hover {
+	position: absolute;
+	left: 0;
+	top: 100%;
+}
+
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-item:hover .treethemes-nav-text,
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-item:focus .treethemes-nav-text,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-item:hover .treethemes-nav-text,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-item:focus .treethemes-nav-text {
+	transform: translateY(-100%);
+}
+
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-item:hover .treethemes-nav-text-hover,
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-item:focus .treethemes-nav-text-hover,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-item:hover .treethemes-nav-text-hover,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-item:focus .treethemes-nav-text-hover {
+	transform: translateY(-100%);
+}
+
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .menu-text,
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-inner,
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-text,
+body > nav.nav-style-6.treethemes-menu-slide-active[data-tt-nav6-widget] .treethemes-nav-text-hover,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .menu-text,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-inner,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-text,
+.treethemes-nav-menu-style-6.treethemes-menu-slide-active .treethemes-nav-text-hover {
+	pointer-events: none;
+}
+
+/* Staggered item entrance (CSS fallback when GSAP is unavailable) */
+@keyframes tt-nav6-item-slide-top {
+	from {
+		opacity: 0;
+		transform: translateY(-28px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes tt-nav6-item-fade-top {
+	from {
+		opacity: 0;
+		transform: translateY(-14px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes tt-nav6-item-fade-bottom {
+	from {
+		opacity: 0;
+		transform: translateY(40px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav.tt-nav6-items-animating .menu_items_wrapper > li,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav.tt-nav6-items-animating > li.menu-item {
+	opacity: 0;
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav.tt-nav6-items-animating.tt-nav6-entrance-slide_top .menu_items_wrapper > li,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav.tt-nav6-items-animating.tt-nav6-entrance-slide_top > li.menu-item {
+	animation-name: tt-nav6-item-slide-top;
+	animation-duration: 0.55s;
+	animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+	animation-fill-mode: forwards;
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav.tt-nav6-items-animating.tt-nav6-entrance-fade_top .menu_items_wrapper > li,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav.tt-nav6-items-animating.tt-nav6-entrance-fade_top > li.menu-item {
+	animation-name: tt-nav6-item-fade-top;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+}
+
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav.tt-nav6-items-animating.tt-nav6-entrance-fade_bottom .menu_items_wrapper > li,
+body > nav.nav-style-6[data-tt-nav6-widget] .cd-primary-nav.tt-nav6-items-animating.tt-nav6-entrance-fade_bottom > li.menu-item {
+	animation-name: tt-nav6-item-fade-bottom;
+	animation-duration: 0.6s;
+	animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+	animation-fill-mode: forwards;
+}

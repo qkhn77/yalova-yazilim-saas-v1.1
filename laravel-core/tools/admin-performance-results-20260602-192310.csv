@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/is-analitigi","filament.admin.muhasebe.pages.is-analitigi","App\Filament\Clusters\Muhasebe\Pages\IsAnalitigiSayfasi","200","1950,73","1817,9","2340,87","1853,13|1855,38|1886,35|2340,87|1817,9","113709","http://localhost/yalova-kamera/admin/muhasebe/is-analitigi",

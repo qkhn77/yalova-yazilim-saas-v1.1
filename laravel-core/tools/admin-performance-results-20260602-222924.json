@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/kasa-hesaplari",
+    "name":  "filament.admin.muhasebe.resources.finans.kasa-hesaplari.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\KasaHesabiKaynagi\\Pages\\ListKasaHesaplari",
+    "status":  200,
+    "avg_ms":  2244.7,
+    "min_ms":  1820.26,
+    "max_ms":  3640.94,
+    "runs_ms":  "3640,94|1901,24|2036,72|1820,26|1824,32",
+    "bytes":  267969,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/kasa-hesaplari",
+    "error":  null
+}

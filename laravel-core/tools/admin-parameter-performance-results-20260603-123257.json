@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/fatura-kaynagis/1/edit",
+    "uri_template":  "admin/muhasebe/fatura-kaynagis/{record}/edit",
+    "name":  "filament.admin.muhasebe.resources.fatura-kaynagis.edit",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\EditFatura",
+    "model":  "App\\Models\\Muhasebe\\Fatura",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  1879.31,
+    "min_ms":  1806.91,
+    "max_ms":  1951.72,
+    "runs_ms":  "1951,72|1806,91",
+    "bytes":  349011,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis/1/edit",
+    "error":  null
+}

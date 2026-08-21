@@ -1,0 +1,3 @@
+<div class="rounded-xl border border-gray-200 p-4 text-sm text-gray-500 dark:border-white/10">
+    Detay yükleniyor...
+</div>

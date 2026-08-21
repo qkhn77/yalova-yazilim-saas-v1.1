@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/sablonlar/servis-formu",
+    "name":  "filament.admin.teknik-servis.pages.sablonlar.servis-formu",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\ServisFormuSablonuSayfasi",
+    "status":  200,
+    "avg_ms":  1813.58,
+    "min_ms":  1648.43,
+    "max_ms":  1978.73,
+    "runs_ms":  "1648,43|1978,73",
+    "bytes":  146006,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/sablonlar/servis-formu",
+    "error":  null
+}

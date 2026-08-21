@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/varyantlar/create",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.varyantlar.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeVaryantTanimKaynagi\\Pages\\CreateMuhasebeVaryant",
+    "status":  200,
+    "avg_ms":  2624.17,
+    "min_ms":  2507.37,
+    "max_ms":  2688.68,
+    "runs_ms":  "2688,68|2666,36|2507,37|2604,04|2654,39",
+    "bytes":  144918,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/varyantlar/create",
+    "error":  null
+}

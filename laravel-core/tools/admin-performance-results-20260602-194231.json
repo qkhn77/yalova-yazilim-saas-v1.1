@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/raporlar/gelir-gider",
+    "name":  "filament.admin.muhasebe.pages.raporlar.gelir-gider",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\GelirGiderRaporuSayfasi",
+    "status":  200,
+    "avg_ms":  1855.03,
+    "min_ms":  1711.38,
+    "max_ms":  2086.48,
+    "runs_ms":  "1864,12|2086,48|1740,04|1873,15|1711,38",
+    "bytes":  112140,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/raporlar/gelir-gider",
+    "error":  null
+}

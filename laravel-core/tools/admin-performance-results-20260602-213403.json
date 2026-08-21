@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-denetim-kayitlari",
+    "uri":  "admin/sistem-denetim-kayitlari",
+    "name":  "filament.admin.resources.sistem-denetim-kayitlari.index",
+    "action":  "App\\Filament\\Resources\\DenetimKayidiKaynagi\\Pages\\DenetimKayitlariListesi",
+    "status":  200,
+    "avg_ms":  1892.99,
+    "min_ms":  1840.76,
+    "max_ms":  1936.45,
+    "runs_ms":  "1936,45|1910,92|1854,77|1840,76|1922,06",
+    "bytes":  382356,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-denetim-kayitlari",
+    "error":  null
+}

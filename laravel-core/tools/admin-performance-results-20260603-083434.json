@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/sistem-olaylari",
+    "name":  "filament.admin.muhasebe.pages.sistem-olaylari",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\SistemOlaylariSayfasi",
+    "status":  200,
+    "avg_ms":  4259.71,
+    "min_ms":  1695.87,
+    "max_ms":  6823.55,
+    "runs_ms":  "6823,55|1695,87",
+    "bytes":  170330,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/sistem-olaylari",
+    "error":  null
+}

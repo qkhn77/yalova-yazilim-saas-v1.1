@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/urunler/urun-listesi/create","filament.admin.web.resources.urunler.urun-listesi.create","App\Filament\Clusters\Web\Resources\UrunKaynagi\Pages\CreateUrun","500","3714,91","2238,78","6615,23","6615,23|2238,78|2290,72","0","http://localhost/yalova-kamera/admin/web/urunler/urun-listesi/create","Uzak sunucu hata döndürdü: (500) İç Sunucu Hatası."

@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","teknik-servis","admin/teknik-servis/servis-kayitlari/liste/yeni","filament.admin.teknik-servis.resources.servis-kayitlari.yeni","App\Filament\Clusters\TeknikServis\Resources\TeknikServisKaydiKaynagi\Pages\TeknikServisKayitlariYeniSayfasi","200","1753,41","1753,41","1753,41","1753.41","145920","http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/liste/yeni",

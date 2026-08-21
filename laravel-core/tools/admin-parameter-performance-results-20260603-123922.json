@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/banka-hesaplari/1",
+    "uri_template":  "admin/muhasebe/finans/banka-hesaplari/{record}",
+    "name":  "filament.admin.muhasebe.resources.finans.banka-hesaplari.view",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\BankaHesabiKaynagi\\Pages\\ViewBankaHesabi",
+    "model":  "App\\Models\\Muhasebe\\BankaHesabi",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  2392.09,
+    "min_ms":  1974.38,
+    "max_ms":  2809.79,
+    "runs_ms":  "2809,79|1974,38",
+    "bytes":  165297,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/banka-hesaplari/1",
+    "error":  null
+}

@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/tanimlar/markalar/1/edit",
+    "uri_template":  "admin/teknik-servis/tanimlar/markalar/{record}/edit",
+    "name":  "filament.admin.teknik-servis.resources.tanimlar.markalar.edit",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisMarkaKaynagi\\Pages\\EditTeknikServisMarkasi",
+    "model":  "App\\Models\\TeknikServis\\TeknikServisMarkaTanimi",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  1750.07,
+    "min_ms":  1750.07,
+    "max_ms":  1750.07,
+    "runs_ms":  "1750.07",
+    "bytes":  141608,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/tanimlar/markalar/1/edit",
+    "error":  null
+}

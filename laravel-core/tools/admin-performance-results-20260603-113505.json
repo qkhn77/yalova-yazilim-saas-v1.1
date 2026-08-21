@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/adisyonlar",
+    "name":  "filament.admin.restoran.resources.adisyonlar.index",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Resources\\RestoranAdisyonKaynagi\\Pages\\ListRestoranAdisyonlari",
+    "status":  200,
+    "avg_ms":  1665.68,
+    "min_ms":  1665.68,
+    "max_ms":  1665.68,
+    "runs_ms":  "1665.68",
+    "bytes":  162048,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/adisyonlar",
+    "error":  null
+}

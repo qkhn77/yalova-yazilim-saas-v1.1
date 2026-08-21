@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/tasarimlar",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.tasarimlar.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeTasarimTanimKaynagi\\Pages\\ListMuhasebeTasarimlari",
+    "status":  200,
+    "avg_ms":  2055.23,
+    "min_ms":  2055.23,
+    "max_ms":  2055.23,
+    "runs_ms":  "2055.23",
+    "bytes":  160766,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/tasarimlar",
+    "error":  null
+}

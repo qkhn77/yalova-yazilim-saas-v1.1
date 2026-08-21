@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/cari-yonetimi/cariler/create",
+    "name":  "filament.admin.muhasebe.resources.cari-yonetimi.cariler.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\CariKartiKaynagi\\Pages\\CreateCari",
+    "status":  200,
+    "avg_ms":  1758.85,
+    "min_ms":  1758.85,
+    "max_ms":  1758.85,
+    "runs_ms":  "1758.85",
+    "bytes":  211134,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/cari-yonetimi/cariler/create",
+    "error":  null
+}

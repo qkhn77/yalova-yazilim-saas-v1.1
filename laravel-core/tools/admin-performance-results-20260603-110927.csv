@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","muhasebe","admin/muhasebe/tanimlar/birimler/create","filament.admin.muhasebe.resources.tanimlar.birimler.create","App\Filament\Clusters\Muhasebe\Resources\Tanimlar\BirimTanimKaynagi\Pages\CreateBirim","200","1986,4","1986,4","1986,4","1986.4","144801","http://localhost/yalova-kamera/admin/muhasebe/tanimlar/birimler/create",

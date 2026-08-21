@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-08-16T06:26:54.8033710Z",
+  "baseline": "C:\\xampp\\htdocs\\yalova-yazilim-saas\\laravel-core\\qa\\ui-baseline\\report.json",
+  "candidate": "C:\\xampp\\htdocs\\yalova-yazilim-saas\\laravel-core\\qa\\ui-baseline\\report.json",
+  "snapshotCountBaseline": 34,
+  "snapshotCountCandidate": 34,
+  "technicalDifferenceCount": 0,
+  "visualDifferenceCount": 0,
+  "technicalPassed": true,
+  "strictImagePassed": true,
+  "technicalDifferences": [],
+  "visualDifferences": []
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "restoran",
+    "uri":  "admin/restoran/paket-servis",
+    "name":  "filament.admin.restoran.pages.paket-servis",
+    "action":  "App\\Filament\\Clusters\\Restoran\\Pages\\RestoranPaketServisSayfasi",
+    "status":  200,
+    "avg_ms":  1704.53,
+    "min_ms":  1593.93,
+    "max_ms":  2049.87,
+    "runs_ms":  "2049,87|1607,53|1666,05|1605,26|1593,93",
+    "bytes":  122123,
+    "final_url":  "http://localhost/yalova-kamera/admin/restoran/paket-servis",
+    "error":  null
+}

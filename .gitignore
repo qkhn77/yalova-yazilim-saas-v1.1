@@ -1,0 +1,36 @@
+# Laravel / local environment
+laravel-core/.env
+laravel-core/.env.*
+!laravel-core/.env*.example
+laravel-core/auth.json
+
+# Dependencies
+laravel-core/vendor/
+laravel-core/node_modules/
+
+# Runtime data and generated files
+laravel-core/storage/app/*
+laravel-core/storage/framework/cache/*
+laravel-core/storage/framework/sessions/*
+laravel-core/storage/framework/testing/*
+laravel-core/storage/framework/views/*
+laravel-core/storage/logs/*
+laravel-core/bootstrap/cache/*.php
+laravel-core/.phpunit.result.cache
+laravel-core/public/hot
+
+# Local/generated frontend output
+public_html/build/
+public_html/tmp/
+
+# Local backups and database dumps
+backups/
+yedek_gkhn/
+*.sql
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

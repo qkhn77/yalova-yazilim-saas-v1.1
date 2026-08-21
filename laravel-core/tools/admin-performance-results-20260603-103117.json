@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "web",
+    "uri":  "admin/web/web-moduller/ucuncu-grup/referanslar",
+    "name":  "filament.admin.web.pages.web-moduller.ucuncu-grup.referanslar",
+    "action":  "App\\Filament\\Clusters\\Web\\Pages\\ModulReferanslar",
+    "status":  200,
+    "avg_ms":  1876.94,
+    "min_ms":  1876.94,
+    "max_ms":  1876.94,
+    "runs_ms":  "1876.94",
+    "bytes":  228369,
+    "final_url":  "http://localhost/yalova-kamera/admin/web/web-moduller/ucuncu-grup/referanslar",
+    "error":  null
+}

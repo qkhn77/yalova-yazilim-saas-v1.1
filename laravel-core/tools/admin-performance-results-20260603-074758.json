@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/avanslar",
+    "name":  "filament.admin.personel-takip.resources.avanslar.index",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelAvansKaynagi\\Pages\\ListPersonelAvanslari",
+    "status":  200,
+    "avg_ms":  1684.68,
+    "min_ms":  1679.51,
+    "max_ms":  1689.85,
+    "runs_ms":  "1679,51|1689,85",
+    "bytes":  155378,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/avanslar",
+    "error":  null
+}

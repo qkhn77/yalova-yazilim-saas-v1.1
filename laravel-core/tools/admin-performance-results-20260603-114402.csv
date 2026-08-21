@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","restoran","admin/restoran/adisyon-kalemleri/create","filament.admin.restoran.resources.adisyon-kalemleri.create","App\Filament\Clusters\Restoran\Resources\RestoranAdisyonKalemiKaynagi\Pages\CreateRestoranAdisyonKalemi","200","1752,77","1752,77","1752,77","1752.77","167103","http://localhost/yalova-kamera/admin/restoran/adisyon-kalemleri/create",

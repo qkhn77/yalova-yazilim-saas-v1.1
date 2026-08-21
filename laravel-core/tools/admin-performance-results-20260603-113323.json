@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/varyantlar",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.varyantlar.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\MuhasebeVaryantTanimKaynagi\\Pages\\ListMuhasebeVaryantlari",
+    "status":  200,
+    "avg_ms":  1670.48,
+    "min_ms":  1670.48,
+    "max_ms":  1670.48,
+    "runs_ms":  "1670.48",
+    "bytes":  160766,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/varyantlar",
+    "error":  null
+}

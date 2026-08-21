@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "personel-takip",
+    "uri":  "admin/personel-takip/personeller",
+    "name":  "filament.admin.personel-takip.resources.personeller.index",
+    "action":  "App\\Filament\\Clusters\\PersonelTakip\\Resources\\PersonelKaynagi\\Pages\\ListPersoneller",
+    "status":  200,
+    "avg_ms":  1857.03,
+    "min_ms":  1857.03,
+    "max_ms":  1857.03,
+    "runs_ms":  "1857.03",
+    "bytes":  159540,
+    "final_url":  "http://localhost/yalova-kamera/admin/personel-takip/personeller",
+    "error":  null
+}

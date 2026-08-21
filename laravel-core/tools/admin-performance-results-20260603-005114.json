@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/finans-panel",
+    "name":  "filament.admin.muhasebe.pages.finans.finans-panel",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Pages\\FinansDashboardSayfasi",
+    "status":  200,
+    "avg_ms":  1716.17,
+    "min_ms":  1716.17,
+    "max_ms":  1716.17,
+    "runs_ms":  "1716.17",
+    "bytes":  121492,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/finans-panel",
+    "error":  null
+}

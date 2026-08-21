@@ -1,0 +1,233 @@
+/*
+ * CORK Faz 3F - E-ticaret ve Web Yönetimi özel admin UI adapter'ı.
+ * Public frontend varlıklarına uygulanmaz. Livewire, Alpine, editor, medya,
+ * sipariş, ödeme, kargo, SEO ve menü state davranışları bu katmanda değişmez.
+ */
+
+body.fi-panel-admin .ecommerce-web-cork-screen {
+    --ew-surface: var(--saas-surface, #ffffff);
+    --ew-surface-muted: var(--saas-surface-muted, #fafafa);
+    --ew-border: var(--saas-border, #e0e6ed);
+    --ew-text: var(--saas-text, #3b3f5c);
+    --ew-text-soft: var(--saas-text-soft, #515365);
+    --ew-muted: var(--saas-text-muted, #888ea8);
+    --ew-radius: var(--saas-radius-md, 0.5rem);
+    --ew-radius-sm: var(--saas-radius-sm, 0.375rem);
+    --ew-shadow: var(--saas-shadow-sm, 0 1px 3px rgb(31 45 61 / 6%));
+    min-width: 0;
+    color: var(--ew-text-soft);
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen > *,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-form-screen > * {
+    min-width: 0;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-screen,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-screen {
+    min-width: 0;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-card,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-card,
+body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-order > dl,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-form-screen > form {
+    min-width: 0;
+    border: 1px solid var(--ew-border);
+    border-radius: var(--ew-radius) !important;
+    background: var(--ew-surface) !important;
+    box-shadow: var(--ew-shadow);
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-toolbar,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    padding: 0.75rem;
+    border: 1px solid var(--ew-border);
+    border-radius: var(--ew-radius);
+    background: var(--ew-surface-muted);
+    box-shadow: var(--ew-shadow);
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-card,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-card {
+    transition: box-shadow 150ms ease, transform 150ms ease;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-card:hover,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-card:hover {
+    box-shadow: var(--saas-shadow-md, 0 10px 30px rgb(31 45 61 / 8%));
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .rounded-xl.border.bg-white,
+body.fi-panel-admin .ecommerce-web-cork-screen .rounded-lg.border,
+body.fi-panel-admin .ecommerce-web-cork-screen .rounded-xl.bg-white {
+    border-color: var(--ew-border) !important;
+    border-radius: var(--ew-radius) !important;
+    background: var(--ew-surface) !important;
+    box-shadow: var(--ew-shadow);
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .rounded-lg.bg-gray-50 {
+    background: var(--ew-surface-muted) !important;
+    color: var(--ew-text-soft) !important;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .fi-ta {
+    min-width: 0;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .fi-ta .fi-ta-ctn,
+body.fi-panel-admin .ecommerce-web-cork-screen .blog-listesi-table-card,
+body.fi-panel-admin .ecommerce-web-cork-screen .bilgi-sayfalari-table-card,
+body.fi-panel-admin .ecommerce-web-cork-screen .modul-menu-table-card,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-aboneler-table-card,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-mail-sablonlari-table-card {
+    overflow: hidden;
+    border: 1px solid var(--ew-border);
+    border-radius: var(--ew-radius) !important;
+    background: var(--ew-surface) !important;
+    box-shadow: var(--ew-shadow) !important;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .fi-ta .fi-ta-header,
+body.fi-panel-admin .ecommerce-web-cork-screen .blog-listesi-table-card .fi-ta-header,
+body.fi-panel-admin .ecommerce-web-cork-screen .bilgi-sayfalari-table-card .fi-ta-header,
+body.fi-panel-admin .ecommerce-web-cork-screen .modul-menu-table-card .fi-ta-header,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-aboneler-table-card .fi-ta-header,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-mail-sablonlari-table-card .fi-ta-header {
+    background: transparent !important;
+    border-bottom: 1px solid var(--ew-border) !important;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .blog-listesi-table-card .fi-ta-row,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-image-table .fi-ta-row {
+    min-height: 3rem;
+    height: 3rem;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .blog-listesi-table-card .fi-ta-row > td,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-image-table .fi-ta-row > td {
+    vertical-align: middle;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .blog-listesi-cell-image {
+    width: 3rem;
+    max-width: 3rem;
+    height: 3rem;
+    max-height: 3rem;
+    overflow: hidden;
+    border: 1px solid var(--ew-border);
+    border-radius: var(--ew-radius-sm);
+    background: var(--ew-surface-muted);
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .blog-listesi-cell-image img {
+    width: 3rem !important;
+    height: 3rem !important;
+    max-width: 3rem !important;
+    max-height: 3rem !important;
+    object-fit: cover;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-order > dl {
+    width: 100%;
+    max-width: none;
+    padding: 1.25rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-order dt {
+    color: var(--ew-muted) !important;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-order dd {
+    color: var(--ew-text) !important;
+    font-weight: 600;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-status,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
+    padding-inline: 0.5rem;
+    border: 1px solid color-mix(in srgb, var(--saas-primary, #4361ee) 22%, var(--ew-border));
+    border-radius: 999px;
+    color: var(--saas-primary, #4361ee);
+    background: color-mix(in srgb, var(--saas-primary, #4361ee) 8%, var(--ew-surface));
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-form-screen {
+    max-width: 72rem;
+    min-width: 0;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-form-screen > form {
+    padding: 1.25rem;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-menu-page,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-media-page {
+    min-width: 0;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-menu-page .fi-ta-row,
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-menu-page .fi-ta-row > td {
+    vertical-align: middle;
+}
+
+body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-media-page img {
+    border: 1px solid var(--ew-border);
+    border-radius: var(--ew-radius-sm);
+    background: var(--ew-surface-muted);
+}
+
+body.fi-panel-admin #image-preview-overlay {
+    background: rgb(15 23 42 / 72%) !important;
+    backdrop-filter: blur(2px);
+}
+
+body.fi-panel-admin #image-preview-overlay > div {
+    border: 1px solid var(--saas-border, #e0e6ed);
+    background: var(--saas-surface, #ffffff) !important;
+}
+
+@media (max-width: 767px) {
+    body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-order > dl {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-toolbar,
+    body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-toolbar {
+        align-items: stretch;
+    }
+
+    body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-toolbar > *,
+    body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-toolbar > * {
+        min-width: min(100%, 18rem);
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 479px) {
+    body.fi-panel-admin .ecommerce-web-cork-screen .ecommerce-cork-order > dl,
+    body.fi-panel-admin .ecommerce-web-cork-screen .web-cork-form-screen > form {
+        padding: 0.875rem;
+    }
+
+    body.fi-panel-admin .ecommerce-web-cork-screen .fi-ta-content,
+    body.fi-panel-admin .ecommerce-web-cork-screen .fi-ta-table {
+        min-width: 36rem;
+    }
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/tanimlar/odeme-yontemleri/create",
+    "name":  "filament.admin.muhasebe.resources.tanimlar.odeme-yontemleri.create",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\Tanimlar\\OdemeYontemiTanimKaynagi\\Pages\\CreateOdemeYontemi",
+    "status":  200,
+    "avg_ms":  1730.05,
+    "min_ms":  1730.05,
+    "max_ms":  1730.05,
+    "runs_ms":  "1730.05",
+    "bytes":  144881,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/tanimlar/odeme-yontemleri/create",
+    "error":  null
+}

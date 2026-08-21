@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "sistem-kullanicilar",
+    "uri":  "admin/sistem-kullanicilar/create",
+    "name":  "filament.admin.resources.sistem-kullanicilar.create",
+    "action":  "App\\Filament\\Resources\\UserResource\\Pages\\CreateUser",
+    "status":  200,
+    "avg_ms":  1679.96,
+    "min_ms":  1679.96,
+    "max_ms":  1679.96,
+    "runs_ms":  "1679.96",
+    "bytes":  140797,
+    "final_url":  "http://localhost/yalova-kamera/admin/sistem-kullanicilar/create",
+    "error":  null
+}

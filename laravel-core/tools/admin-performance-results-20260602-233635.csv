@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","siparisler","admin/siparisler","filament.admin.resources.siparisler.index","App\Filament\Resources\SiparisKaynagi\Pages\ListSiparisler","200","1889,57","1698,64","2496,64","2496,64|1774|1720,4|1758,15|1698,64","201343","http://localhost/yalova-kamera/admin/siparisler",

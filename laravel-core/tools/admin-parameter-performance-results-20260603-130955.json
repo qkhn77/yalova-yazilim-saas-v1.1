@@ -1,0 +1,18 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/finans/kasa-hesaplari/1",
+    "uri_template":  "admin/muhasebe/finans/kasa-hesaplari/{record}",
+    "name":  "filament.admin.muhasebe.resources.finans.kasa-hesaplari.view",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\KasaHesabiKaynagi\\Pages\\ViewKasaHesabi",
+    "model":  "App\\Models\\Muhasebe\\KasaHesabi",
+    "record_key":  "1",
+    "status":  200,
+    "avg_ms":  1986.24,
+    "min_ms":  1976.47,
+    "max_ms":  1996.02,
+    "runs_ms":  "1996,02|1976,47",
+    "bytes":  156353,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/finans/kasa-hesaplari/1",
+    "error":  null
+}

@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "muhasebe",
+    "uri":  "admin/muhasebe/fatura-kaynagis",
+    "name":  "filament.admin.muhasebe.resources.fatura-kaynagis.index",
+    "action":  "App\\Filament\\Clusters\\Muhasebe\\Resources\\FaturaKaynagi\\Pages\\ListFaturalar",
+    "status":  200,
+    "avg_ms":  5343.63,
+    "min_ms":  5343.63,
+    "max_ms":  5343.63,
+    "runs_ms":  "5343.63",
+    "bytes":  159657,
+    "final_url":  "http://localhost/yalova-kamera/admin/muhasebe/fatura-kaynagis",
+    "error":  null
+}

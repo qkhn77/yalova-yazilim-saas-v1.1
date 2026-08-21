@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/cihaz-kayit/cihaz-ekle",
+    "name":  "filament.admin.teknik-servis.pages.cihaz-kayit.cihaz-ekle",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Pages\\CihazEkle",
+    "status":  200,
+    "avg_ms":  2085.3,
+    "min_ms":  2085.3,
+    "max_ms":  2085.3,
+    "runs_ms":  "2085.3",
+    "bytes":  114823,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/cihaz-kayit/cihaz-ekle",
+    "error":  null
+}

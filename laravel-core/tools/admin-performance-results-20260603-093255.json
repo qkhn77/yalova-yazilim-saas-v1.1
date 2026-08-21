@@ -1,0 +1,15 @@
+﻿{
+    "rank":  1,
+    "module":  "teknik-servis",
+    "uri":  "admin/teknik-servis/servis-kayitlari/olustur/bakim",
+    "name":  "filament.admin.teknik-servis.resources.servis-kayitlari.create_bakim",
+    "action":  "App\\Filament\\Clusters\\TeknikServis\\Resources\\TeknikServisKaydiKaynagi\\Pages\\BakimKaydiOlusturSayfasi",
+    "status":  200,
+    "avg_ms":  2161.68,
+    "min_ms":  2161.68,
+    "max_ms":  2161.68,
+    "runs_ms":  "2161.68",
+    "bytes":  264090,
+    "final_url":  "http://localhost/yalova-kamera/admin/teknik-servis/servis-kayitlari/olustur/bakim",
+    "error":  null
+}

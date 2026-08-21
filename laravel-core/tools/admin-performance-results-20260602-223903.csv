@@ -1,0 +1,2 @@
+﻿"rank","module","uri","name","action","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","web","admin/web/servisler/web-servis-kategori","filament.admin.web.pages.servisler.web-servis-kategori","App\Filament\Clusters\Web\Pages\WebServisKategori","200","1687,84","1655,71","1713,34","1692,65|1713,34|1655,71|1677,98|1699,52","168361","http://localhost/yalova-kamera/admin/web/servisler/web-servis-kategori",

@@ -1,0 +1,2 @@
+﻿"rank","module","uri","uri_template","name","action","model","record_key","status","avg_ms","min_ms","max_ms","runs_ms","bytes","final_url","error"
+"1","personel-takip","admin/personel-takip/personeller/1/edit","admin/personel-takip/personeller/{record}/edit","filament.admin.personel-takip.resources.personeller.edit","App\Filament\Clusters\PersonelTakip\Resources\PersonelKaynagi\Pages\EditPersonel","App\Models\Personel\Personel","1","200","2125,27","2125,27","2125,27","2125.27","222755","http://localhost/yalova-kamera/admin/personel-takip/personeller/1/edit",
