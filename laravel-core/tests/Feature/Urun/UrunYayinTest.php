@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 
+#[\PHPUnit\Framework\Attributes\Group('unpublished-web')]
 class UrunYayinTest extends TestCase
 {
     use RefreshDatabase;

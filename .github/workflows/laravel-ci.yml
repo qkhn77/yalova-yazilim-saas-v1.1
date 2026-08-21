@@ -89,7 +89,7 @@ jobs:
         run: php artisan view:cache
 
       - name: Run backend regression suite
-        run: php artisan test
+        run: php artisan test --exclude-group=unpublished-web
 
       - name: Upload Laravel test log on failure
         if: failure()

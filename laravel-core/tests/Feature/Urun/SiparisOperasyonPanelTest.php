@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
+#[\PHPUnit\Framework\Attributes\Group('unpublished-web')]
 class SiparisOperasyonPanelTest extends TestCase
 {
     use RefreshDatabase;

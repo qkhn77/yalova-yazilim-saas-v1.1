@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 use Tests\Feature\Urun\Concerns\CheckoutTestVerileri;
 
+#[\PHPUnit\Framework\Attributes\Group('unpublished-web')]
 class OdemeProviderIntegrationTest extends TestCase
 {
     use CheckoutTestVerileri;

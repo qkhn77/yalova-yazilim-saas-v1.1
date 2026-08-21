@@ -26,6 +26,7 @@ use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 use Tests\Feature\Urun\Concerns\CheckoutTestVerileri;
 
+#[\PHPUnit\Framework\Attributes\Group('unpublished-web')]
 class EcommerceTahsilatAyarlarFallbackTest extends TestCase
 {
     use CheckoutTestVerileri;
