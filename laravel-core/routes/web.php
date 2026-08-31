@@ -19,6 +19,8 @@ use App\Http\Controllers\SistemHealthController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\TeklifPdfController;
 use App\Http\Controllers\UrunController;
+use App\Filament\Pages\SistemYedekleriSayfasi;
+use App\Services\SistemYedekleriServisi;
 use App\Support\UygulamaUrl;
 use App\Models\BilgiSayfa;
 use App\Models\Page;
@@ -212,6 +214,19 @@ Route::middleware('auth')->prefix('admin-tools/newsletter-subscribers')->group(f
     Route::get('/export-csv', [NewsletterSubscriberExportController::class, 'csv'])->name('newsletter-subscribers.export-csv');
     Route::get('/export-excel', [NewsletterSubscriberExportController::class, 'excel'])->name('newsletter-subscribers.export-excel');
 });
+
+// SQL yedekleri yalnızca sistem yöneticilerine sunulur; dosya adı güvenli
+// servis katmanında doğrulanır ve yedek dizini web kökünün dışındadır.
+Route::middleware([
+    \Filament\Http\Middleware\SetUpPanel::class.':admin',
+    \App\Http\Middleware\FilamentAuthenticate::class,
+    \Filament\Http\Middleware\AuthenticateSession::class,
+    \App\Http\Middleware\FilamentTenantContextMiddleware::class,
+])->get('/'.\App\Providers\Filament\AdminPanelProvider::adminPath().'/sistem-yedekleri/{yedek}/download', function (string $yedek, SistemYedekleriServisi $yedekServisi) {
+    abort_unless(SistemYedekleriSayfasi::canAccess(), 403);
+
+    return $yedekServisi->indir($yedek);
+})->where('yedek', '[A-Za-z0-9._-]+')->name('admin.sistem-yedekleri.download');
 
 Route::get('/', function () {
     $html = file_get_contents(public_path('themes/deep-original/index.htm'));

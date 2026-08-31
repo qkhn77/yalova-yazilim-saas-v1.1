@@ -95,6 +95,7 @@ use App\Filament\Pages\FirmaAyarlariSayfasi;
 use App\Filament\Pages\ModulAktifDegilSayfasi;
 use App\Services\AdminLogoServisi;
 use App\Filament\Pages\SistemBakimModuSayfasi;
+use App\Filament\Pages\SistemYedekleriSayfasi;
 use App\Filament\Pages\SistemYonetimiAyarlariSayfasi;
 use App\Filament\Clusters\Sekreter\Pages\AjandaSayfasi;
 use App\Filament\Clusters\Sekreter\Pages\GenelBakisSayfasi;
@@ -191,7 +192,7 @@ class AdminPanelProvider extends PanelProvider
             // Yönetici ve firma panelleri aynı menü şablonunu kullanır. Menü
             // görünümü değiştiğinde eski HTML önbelleği servis edilmemesi için
             // sürümü artırıyoruz.
-            'filament-custom-sidebar-v20',
+            'filament-custom-sidebar-v21',
             (int) $kullanici->id,
             (int) ($tenantContext->aktifFirmaId() ?? 0),
             (int) ($tenantContext->aktifRolId() ?? 0),
@@ -320,6 +321,7 @@ class AdminPanelProvider extends PanelProvider
             'sistem-planlar' => 'sistem.planlar',
             'sistem-roller' => 'sistem.roller',
             'sistem-yetkiler' => 'sistem.yetkiler',
+            'sistem-yedekleri' => 'sistem.yedekler',
             'profil' => 'profil',
         ];
 
@@ -428,6 +430,7 @@ class AdminPanelProvider extends PanelProvider
                 FirmaAyarlariSayfasi::class,
                 ModulAktifDegilSayfasi::class,
                 SistemBakimModuSayfasi::class,
+                SistemYedekleriSayfasi::class,
                 SistemYonetimiAyarlariSayfasi::class,
                 MesajMerkeziSayfasi::class,
                 TeknikServisDashboardSayfasi::class,

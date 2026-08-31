@@ -154,6 +154,7 @@
 
     use App\Filament\Pages\FirmaAyarlariSayfasi;
     use App\Filament\Pages\SistemBakimModuSayfasi;
+    use App\Filament\Pages\SistemYedekleriSayfasi;
     use App\Filament\Pages\SistemYonetimiAyarlariSayfasi;
     use App\Filament\Clusters\Ayarlar\Pages\MesajMerkeziSayfasi;
     use App\Filament\Resources\FirmaKullaniciGrubuKaynagi;
@@ -653,6 +654,10 @@
                 href="{{ SistemBakimModuSayfasi::getUrl() }}"
                 class="nav-item {{ request()->is($adminPrefix.'/sistem-bakim-modu') ? 'is-active' : '' }}"
             ><span>Bakım modu</span></a>
+            <a
+                href="{{ SistemYedekleriSayfasi::getUrl() }}"
+                class="nav-item {{ request()->is($adminPrefix.'/sistem-yedekleri') ? 'is-active' : '' }}"
+            ><span>Veritabanı yedekleri</span></a>
             <a
                 href="{{ SistemYonetimiAyarlariSayfasi::getUrl() }}"
                 class="nav-item {{ request()->is($adminPrefix.'/sistem-ayarlari') ? 'is-active' : '' }}"
