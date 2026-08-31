@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/yalovaya
+    - /bin/mkdir -p $DEPLOYPATH/public_html
+    - /bin/mkdir -p $DEPLOYPATH/laravel-core
+    - /bin/cp -R public_html/. $DEPLOYPATH/public_html/
+    - /bin/cp -R laravel-core/. $DEPLOYPATH/laravel-core/
