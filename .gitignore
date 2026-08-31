@@ -34,3 +34,11 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+
+production-backups/
+
+# One-time production maintenance runner; never commit or ship in release packages
+output/phase5/phase54-production-recaptcha-disable-runner.php
+output/phase5/generate-bcrypt-hash.php
+public_html/_local-bcrypt-hash.php

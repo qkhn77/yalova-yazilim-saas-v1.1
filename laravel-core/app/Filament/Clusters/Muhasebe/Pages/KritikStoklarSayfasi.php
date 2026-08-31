@@ -73,6 +73,7 @@ class KritikStoklarSayfasi extends Page implements HasTable
     {
         return $table
             ->query(static::kritikStokSorgusu())
+            ->heading('Stok Kartları')
             ->columns([
                 Tables\Columns\TextColumn::make('ad')
                     ->label('Stok adı')

@@ -143,8 +143,10 @@ body.fi-panel-admin .fi-sidebar-nav {
     height: calc(100vh - var(--saas-shell-gap));
     max-height: calc(100vh - var(--saas-shell-gap));
     min-height: 0 !important;
-    overflow-y: scroll !important;
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
     overflow-x: hidden !important;
+    scrollbar-gutter: stable both-edges !important;
     scrollbar-color: rgb(136 142 168 / 45%) transparent;
     scrollbar-width: auto;
 }
@@ -170,7 +172,8 @@ body.fi-panel-admin .custom-sidebar {
     --sidebar-muted: var(--saas-text-muted);
     --sidebar-border: var(--saas-border);
     display: flex;
-    min-height: 100%;
+    flex: 0 0 auto;
+    min-height: max-content;
     flex-direction: column;
 }
 
@@ -180,8 +183,34 @@ body.fi-panel-admin .custom-sidebar {
 
 body.fi-panel-admin .custom-sidebar > nav {
     gap: 0.0625rem;
-    min-height: 0;
-    flex: 1 1 auto;
+    min-height: max-content;
+    flex: 0 0 auto;
+}
+
+/* Açık iç gruplar kendi içerik yüksekliğini korumalı; aksi hâlde üst
+   flex kolonunda sıkışıp x-collapse içeriğini overflow:hidden ile keser. */
+body.fi-panel-admin .custom-sidebar .nav-group {
+    flex: 0 0 auto;
+}
+
+/* Footer scroll alanının dışında kalır; böylece açık menüler footer'ı
+   sıkıştırmaz ve footer menüyle birlikte kaybolmaz. */
+body.fi-panel-admin .saas-sidebar-footer {
+    flex: 0 0 auto;
+    min-height: 2.75rem;
+    padding: 0.75rem 0.75rem 0.875rem;
+    border-top: 1px solid var(--saas-border);
+    background: var(--saas-surface);
+    color: var(--saas-text-muted);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+body.fi-panel-admin .saas-sidebar-footer__short {
+    display: none;
 }
 
 body.fi-panel-admin .custom-sidebar .nav-item {

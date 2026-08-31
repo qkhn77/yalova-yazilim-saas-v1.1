@@ -26,6 +26,7 @@ class SiparisOperasyonPanelTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->withoutMiddleware(\App\Http\Middleware\OnePagePublicSiteMiddleware::class);
         config()->set('app.url', 'http://localhost');
         URL::forceRootUrl('http://localhost');
     }

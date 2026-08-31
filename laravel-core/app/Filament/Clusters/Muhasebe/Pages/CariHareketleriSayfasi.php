@@ -86,6 +86,7 @@ class CariHareketleriSayfasi extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
+            ->heading('Cari Hareketleri')
             ->query(
                 CariHareketi::query()
                     ->select([
@@ -96,8 +97,12 @@ class CariHareketleriSayfasi extends Page implements HasTable
                         'belge_id',
                         'islem_tarihi',
                         'borc',
+                        'baz_borc',
                         'alacak',
+                        'baz_alacak',
                         'para_birimi',
+                        'baz_para_birimi',
+                        'kur',
                         'vade_tarihi',
                         'aciklama',
                         'durum',
@@ -207,6 +212,28 @@ class CariHareketleriSayfasi extends Page implements HasTable
                     ->label('Alacak')
                     ->formatStateUsing(fn ($state, CariHareketi $r) => number_format((float) $state, 2, ',', '.').' '.$r->para_birimi)
                     ->sortable()
+                    ->alignEnd(),
+                Tables\Columns\TextColumn::make('baz_borc')
+                    ->label('Baz borç')
+                    ->formatStateUsing(fn ($state, CariHareketi $r): string => $state === null
+                        ? '—'
+                        : number_format((float) $state, 2, ',', '.').' '.strtoupper((string) ($r->baz_para_birimi ?: config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY'))))
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->alignEnd(),
+                Tables\Columns\TextColumn::make('baz_alacak')
+                    ->label('Baz alacak')
+                    ->formatStateUsing(fn ($state, CariHareketi $r): string => $state === null
+                        ? '—'
+                        : number_format((float) $state, 2, ',', '.').' '.strtoupper((string) ($r->baz_para_birimi ?: config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY'))))
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->alignEnd(),
+                Tables\Columns\TextColumn::make('kur')
+                    ->label('Kur')
+                    ->formatStateUsing(fn ($state): string => $state === null ? '—' : number_format((float) $state, 8, ',', '.'))
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->alignEnd(),
                 Tables\Columns\TextColumn::make('net')
                     ->label('Net (B-A)')

@@ -106,8 +106,6 @@ class FirmaAyarlariSayfasi extends Page implements HasForms
             'stok_deposuz_izinli_mi' => (bool) $depo->oku($fid, 'stok_deposuz_izinli_mi', true),
             'stok_depo_bildirimleri_aktif_mi' => (bool) $depo->oku($fid, 'stok_depo_bildirimleri_aktif_mi', true),
             'stok_son_kullanma_tarihi_kurali' => (string) $depo->oku($fid, 'stok_son_kullanma_tarihi_kurali', 'uyar'),
-            'stok_parti_telegram_aktif_mi' => (bool) $depo->oku($fid, 'stok_parti_telegram_aktif_mi', false),
-            'stok_parti_telegram_uyari_gun' => (int) $depo->oku($fid, 'stok_parti_telegram_uyari_gun', 30),
             'stok_son_kullanma_tarihi_kurali' => (string) $depo->oku($fid, 'stok_son_kullanma_tarihi_kurali', 'uyar'),
             'telegram_bot_token' => (string) $depo->oku($fid, 'telegram_bot_token', ''),
             'telegram_chat_id' => (string) $depo->oku($fid, 'telegram_chat_id', ''),
@@ -263,14 +261,7 @@ class FirmaAyarlariSayfasi extends Page implements HasForms
                             ->label('Son kullanma tarihi davranışı')
                             ->options(['uyar' => 'Sadece uyar', 'engelle' => 'Süresi geçmiş satışı engelle'])
                             ->default('uyar')
-                            ->helperText('Tarihi girilmiş parti ürünlerinde uygulanır.'),
-                        Forms\Components\Toggle::make('stok_parti_telegram_aktif_mi')
-                            ->label('Parti son kullanma Telegram uyarısı')
-                            ->helperText('Aktif edilirse günlük tek bir özet mesaj gönderilir.'),
-                        Forms\Components\Select::make('stok_parti_telegram_uyari_gun')
-                            ->label('Kaç gün önce uyarı verilsin')
-                            ->options([7 => '7 gün', 15 => '15 gün', 30 => '30 gün'])
-                            ->default(30),
+                            ->helperText('Tarihi girilmiş stoklarda uygulanır.'),
                     ])->columns(2),
 
                 Forms\Components\Section::make('Telegram')
@@ -553,8 +544,6 @@ class FirmaAyarlariSayfasi extends Page implements HasForms
         $depo->yaz($fid, 'stok_deposuz_izinli_mi', (bool) ($s['stok_deposuz_izinli_mi'] ?? true));
         $depo->yaz($fid, 'stok_depo_bildirimleri_aktif_mi', (bool) ($s['stok_depo_bildirimleri_aktif_mi'] ?? true));
         $depo->yaz($fid, 'stok_son_kullanma_tarihi_kurali', in_array(($s['stok_son_kullanma_tarihi_kurali'] ?? 'uyar'), ['uyar', 'engelle'], true) ? $s['stok_son_kullanma_tarihi_kurali'] : 'uyar');
-        $depo->yaz($fid, 'stok_parti_telegram_aktif_mi', (bool) ($s['stok_parti_telegram_aktif_mi'] ?? false));
-        $depo->yaz($fid, 'stok_parti_telegram_uyari_gun', in_array((int) ($s['stok_parti_telegram_uyari_gun'] ?? 30), [7, 15, 30], true) ? (int) $s['stok_parti_telegram_uyari_gun'] : 30);
         $depo->yaz($fid, 'telegram_bot_token', trim((string) ($s['telegram_bot_token'] ?? '')));
         $depo->yaz($fid, 'telegram_chat_id', trim((string) ($s['telegram_chat_id'] ?? '')));
 

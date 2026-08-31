@@ -10,6 +10,7 @@ use App\Models\Proje\IsletmeProjesi;
 use App\Muhasebe\Enumlar\CariHareketBelgeTuru;
 use App\Muhasebe\Enumlar\CariHareketDurumu;
 use App\Muhasebe\Enumlar\FaturaDurumu;
+use App\Muhasebe\Enumlar\FaturaSinifi;
 use App\Muhasebe\Enumlar\FaturaTuru;
 use App\Muhasebe\Enumlar\FinansHareketDurumu;
 use App\Muhasebe\Enumlar\OlculuStokTakipTuru;
@@ -125,10 +126,14 @@ class FaturaIslemServisi
             if ($fatura->cari_id === null) {
                 throw new IsKuraliIstisnasi('Proforma dışındaki faturalarda cari zorunludur.');
             }
-            if (! $fatura->cari()->where('firma_id', $fatura->firma_id)->exists()) {
-                throw new IsKuraliIstisnasi('Fatura carisi aktif firmaya ait olmalıdır.');
-            }
+            app(FaturaParaBirimiDogrulamaServisi::class)->dogrula(
+                (int) $fatura->firma_id,
+                (int) $fatura->cari_id,
+                (string) $fatura->para_birimi,
+            );
             $this->faturaToplamDogrulamaServisi->dogrula($fatura);
+            $this->olculuKalemleriDogrula($fatura, $tur);
+            $this->olculuIadeKaynaklariniDogrula($fatura, $tur);
 
 
             $aktifCariVar = $fatura->cariHareketleri()->where('durum', CariHareketDurumu::Aktif)->exists();
@@ -180,7 +185,7 @@ class FaturaIslemServisi
                 if (! $stok) {
                     throw new IsKuraliIstisnasi('Fatura kalemindeki stok kartı aktif firmaya ait olmalıdır.');
                 }
-                $stokIslem = $this->stokIslemTuruFaturadan($tur);
+                $stokIslem = $this->stokIslemTuruFaturadan($fatura, $tur);
                 if ($stokIslem === null) {
                     continue;
                 }
@@ -195,10 +200,18 @@ class FaturaIslemServisi
                     ? (string) $kalem->ana_miktar
                     : $this->stokAnaMiktariniHesapla($stok, (string) $kalem->miktar);
                 if ($anaMiktar !== (string) $kalem->miktar) {
-                    $kalem->update([
-                        'ana_miktar' => $anaMiktar,
-                        'olcu_donusum_snapshot' => json_encode(['ana_miktar' => $anaMiktar, 'girilen_miktar' => (string) $kalem->miktar]),
-                    ]);
+                    $guncelleme = ['ana_miktar' => $anaMiktar];
+                    $mevcutSnapshot = json_decode((string) $kalem->olcu_donusum_snapshot, true);
+                    $fiyatSnapshotiVar = is_array($mevcutSnapshot)
+                        && array_key_exists('fiyat_miktari', $mevcutSnapshot)
+                        && array_key_exists('birim_fiyat', $mevcutSnapshot);
+                    if (! $fiyatSnapshotiVar) {
+                        $guncelleme['olcu_donusum_snapshot'] = json_encode([
+                            'ana_miktar' => $anaMiktar,
+                            'girilen_miktar' => (string) $kalem->miktar,
+                        ]);
+                    }
+                    $kalem->update($guncelleme);
                 }
                 $hareket = $this->stokHareketServisi->kayitOlustur((int) $fatura->firma_id, [
                     'stok_id' => (int) $kalem->stok_id,
@@ -341,8 +354,13 @@ class FaturaIslemServisi
         };
     }
 
-    private function stokIslemTuruFaturadan(FaturaTuru $tur): ?StokHareketIslemTuru
+    private function stokIslemTuruFaturadan(Fatura $fatura, FaturaTuru $tur): ?StokHareketIslemTuru
     {
+        if ($tur->kanonik() === FaturaTuru::Gelen
+            && $fatura->fatura_sinifi === FaturaSinifi::Gider) {
+            return null;
+        }
+
         return match ($tur->kanonik()) {
             FaturaTuru::Giden => StokHareketIslemTuru::Satis,
             FaturaTuru::Gelen => StokHareketIslemTuru::Alis,
@@ -484,9 +502,9 @@ class FaturaIslemServisi
                     throw new IsKuraliIstisnasi('İade ölçü dağılımı kaynak ölçü dağılımına bağlı olmalıdır.');
                 }
                 $kullanilanKaynaklar[$kaynakDagilimId] = true;
-                foreach (['stok_id', 'stok_olcusu_id', 'stok_olcu_bakiyesi_id', 'depo_id', 'stok_parcasi_id', 'islem_birimi_id'] as $alan) {
+                foreach (['stok_id', 'stok_olcusu_id', 'stok_olcu_bakiyesi_id', 'depo_id', 'islem_birimi_id'] as $alan) {
                     if ((int) ($dagilim->{$alan} ?? 0) !== (int) ($kaynakDagilim->{$alan} ?? 0)) {
-                        throw new IsKuraliIstisnasi('İade ölçü dağılımı kaynak stok, depo, parti veya ölçüyle aynı olmalıdır.');
+                        throw new IsKuraliIstisnasi('İade ölçü dağılımı kaynak stok, depo veya ölçüyle aynı olmalıdır.');
                     }
                 }
                 foreach (['girilen_miktar', 'ana_miktar', 'adet_esdegeri'] as $alan) {

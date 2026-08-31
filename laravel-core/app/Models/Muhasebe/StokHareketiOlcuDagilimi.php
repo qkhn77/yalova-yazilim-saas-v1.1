@@ -19,7 +19,6 @@ class StokHareketiOlcuDagilimi extends Model
     public function stokKarti(): BelongsTo { return $this->belongsTo(StokKarti::class, 'stok_id'); }
     public function olcu(): BelongsTo { return $this->belongsTo(StokOlcusu::class, 'stok_olcusu_id'); }
     public function bakiye(): BelongsTo { return $this->belongsTo(StokOlcuBakiyesi::class, 'stok_olcu_bakiyesi_id'); }
-    public function parca(): BelongsTo { return $this->belongsTo(StokParcasi::class, 'stok_parcasi_id'); }
     public function depo(): BelongsTo { return $this->belongsTo(Depo::class); }
     public function islemBirimi(): BelongsTo { return $this->belongsTo(Birim::class, 'islem_birimi_id'); }
 }

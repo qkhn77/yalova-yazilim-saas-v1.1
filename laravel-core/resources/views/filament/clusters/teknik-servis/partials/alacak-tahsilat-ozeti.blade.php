@@ -2,7 +2,11 @@
     use App\Filament\Clusters\Muhasebe\Pages\TahsilatOlusturSayfasi;
 
     $paraBirimi = (string) ($ozet['para_birimi'] ?? 'TRY');
-    $formatPara = static fn ($tutar): string => number_format((float) $tutar, 2, ',', '.') . ' ' . $paraBirimi;
+    $formatPara = static fn ($tutar, ?string $birim = null): string => number_format((float) $tutar, 2, ',', '.') . ' ' . strtoupper((string) ($birim ?: $paraBirimi));
+    $tahsilatDagilimi = (array) ($ozet['teknik_tahsilat_dagilimi'] ?? []);
+    $tahsilatEtiketi = collect($tahsilatDagilimi)
+        ->map(fn ($tutar, $birim): string => $formatPara($tutar, (string) $birim))
+        ->implode(' · ');
     $plan = $ozet['plan'] ?? null;
     $taksitler = collect($ozet['taksitler'] ?? []);
     $planTahsilatlari = collect($ozet['plan_tahsilatlari'] ?? []);
@@ -17,7 +21,7 @@
         </div>
         <div class="rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-700 dark:bg-gray-900">
             <div class="text-xs font-medium text-gray-500 dark:text-gray-400">Tahsil Edilen</div>
-            <div class="mt-1 text-lg font-semibold text-emerald-700 dark:text-emerald-300">{{ $formatPara($ozet['tahsilat_toplami'] ?? 0) }}</div>
+            <div class="mt-1 text-lg font-semibold text-emerald-700 dark:text-emerald-300">{{ $tahsilatEtiketi !== '' ? $tahsilatEtiketi : $formatPara($ozet['tahsilat_toplami'] ?? 0) }}</div>
         </div>
         <div class="rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-700 dark:bg-gray-900">
             <div class="text-xs font-medium text-gray-500 dark:text-gray-400">Plan Bakiyesi</div>
@@ -105,7 +109,7 @@
                 @forelse ($teknikTahsilatlar as $tahsilat)
                     <div class="flex items-center justify-between gap-3 rounded-md bg-gray-50 px-3 py-2 text-sm dark:bg-gray-800">
                         <div class="text-gray-600 dark:text-gray-300">{{ optional($tahsilat->tarih)->format('d.m.Y H:i') ?? '-' }} · {{ strtoupper((string) $tahsilat->kanal) }}</div>
-                        <div class="font-semibold text-gray-950 dark:text-white">{{ $formatPara($tahsilat->tutar) }}</div>
+                        <div class="font-semibold text-gray-950 dark:text-white">{{ $formatPara($tahsilat->tutar, (string) ($tahsilat->kaynak_para_birimi ?: $paraBirimi)) }}</div>
                     </div>
                 @empty
                     <div class="text-sm text-gray-500 dark:text-gray-400">Kayıtlı teknik servis tahsilatı yok.</div>

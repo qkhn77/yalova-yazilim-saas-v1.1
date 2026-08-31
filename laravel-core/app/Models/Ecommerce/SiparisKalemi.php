@@ -14,8 +14,6 @@ class SiparisKalemi extends Model
         'siparis_id',
         'stok_karti_id',
         'depo_id',
-        'parca_kodu',
-        'parca_dagilimi',
         'urun_adi_snapshot',
         'urun_kodu_snapshot',
         'miktar',
@@ -32,7 +30,6 @@ class SiparisKalemi extends Model
         return [
             'miktar' => 'decimal:8',
             'depo_id' => 'integer',
-            'parca_dagilimi' => 'array',
             'stok_rezerv_miktari' => 'decimal:8',
             'seri_nolari' => 'array',
             'birim_fiyat' => 'decimal:2',

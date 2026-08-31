@@ -216,6 +216,8 @@ class MuhasebeDashboardSayfasi extends Page
      */
     private function finansToplamlari(int $firmaId, Carbon $bugunBas, Carbon $bugunSon, Carbon $ayBas, Carbon $aySon): array
     {
+        $bazParaBirimi = strtoupper((string) config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY'));
+        $bazTutar = "COALESCE(baz_tutar, CASE WHEN UPPER(COALESCE(para_birimi, 'TRY')) = ? THEN tutar ELSE 0 END)";
         $toplamlar = FinansHareketi::query()
             ->where('firma_id', $firmaId)
             ->where('durum', FinansHareketDurumu::Aktif)
@@ -223,9 +225,9 @@ class MuhasebeDashboardSayfasi extends Page
             ->whereBetween('tarih', [$ayBas, $aySon])
             ->selectRaw(
                 'tur,
-                SUM(CASE WHEN tarih BETWEEN ? AND ? THEN tutar ELSE 0 END) AS bugun,
-                SUM(tutar) AS ay',
-                [$bugunBas, $bugunSon]
+                SUM(CASE WHEN tarih BETWEEN ? AND ? THEN '.$bazTutar.' ELSE 0 END) AS bugun,
+                SUM('.$bazTutar.') AS ay',
+                [$bugunBas, $bugunSon, $bazParaBirimi, $bazParaBirimi]
             )
             ->groupBy('tur')
             ->get()
@@ -246,12 +248,15 @@ class MuhasebeDashboardSayfasi extends Page
      */
     private function acikFaturaOzeti(int $firmaId): array
     {
+        $bazParaBirimi = strtoupper((string) config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY'));
+        $bazTutar = "COALESCE(baz_acik_tutar, CASE WHEN UPPER(COALESCE(para_birimi, 'TRY')) = ? THEN acik_tutar ELSE 0 END)";
         $satirlar = Fatura::query()
             ->where('firma_id', $firmaId)
             ->where('durum', FaturaDurumu::Onayli)
             ->whereRaw('CAST(acik_tutar AS DECIMAL(18,4)) > 0')
-            ->selectRaw('para_birimi, COUNT(*) AS sayisi, COALESCE(SUM(acik_tutar), 0) AS toplam')
+            ->selectRaw('para_birimi, COUNT(*) AS sayisi, COALESCE(SUM(acik_tutar), 0) AS toplam, COALESCE(SUM('.$bazTutar.'), 0) AS baz_toplam', [$bazParaBirimi])
             ->selectRaw('COALESCE(SUM(CASE WHEN vade_tarihi IS NOT NULL AND DATE(vade_tarihi) < ? THEN acik_tutar ELSE 0 END), 0) AS vadesi_gecmis_toplam', [Carbon::today()->toDateString()])
+            ->selectRaw('COALESCE(SUM(CASE WHEN vade_tarihi IS NOT NULL AND DATE(vade_tarihi) < ? THEN '.$bazTutar.' ELSE 0 END), 0) AS vadesi_gecmis_baz_toplam', [Carbon::today()->toDateString(), $bazParaBirimi])
             ->selectRaw('SUM(CASE WHEN vade_tarihi IS NOT NULL AND DATE(vade_tarihi) < ? THEN 1 ELSE 0 END) AS vadesi_gecmis_sayisi', [Carbon::today()->toDateString()])
             ->groupBy('para_birimi')
             ->get();
@@ -265,12 +270,14 @@ class MuhasebeDashboardSayfasi extends Page
         foreach ($satirlar as $satir) {
             $paraBirimi = strtoupper((string) ($satir->para_birimi ?: 'TRY'));
             $tutar = $this->normalizeDecimal((string) ($satir->toplam ?? '0'));
+            $bazTutarSatiri = $this->normalizeDecimal((string) ($satir->baz_toplam ?? '0'));
             $vadesiGecmisTutar = $this->normalizeDecimal((string) ($satir->vadesi_gecmis_toplam ?? '0'));
+            $vadesiGecmisBazTutar = $this->normalizeDecimal((string) ($satir->vadesi_gecmis_baz_toplam ?? '0'));
             $dagilim[] = ['para_birimi' => $paraBirimi, 'tutar' => $tutar];
             $vadesiGecmisDagilim[] = ['para_birimi' => $paraBirimi, 'tutar' => $vadesiGecmisTutar];
             $sayisi += (int) ($satir->sayisi ?? 0);
-            $toplam = bcadd($toplam, $tutar, 2);
-            $vadesiGecmisToplam = bcadd($vadesiGecmisToplam, $vadesiGecmisTutar, 2);
+            $toplam = bcadd($toplam, $bazTutarSatiri, 2);
+            $vadesiGecmisToplam = bcadd($vadesiGecmisToplam, $vadesiGecmisBazTutar, 2);
             $vadesiGecmisSayisi += (int) ($satir->vadesi_gecmis_sayisi ?? 0);
         }
 

@@ -13,13 +13,13 @@ use App\Services\SekreterKayitKuraliServisi;
 use App\Services\SekreterHatirlatmaServisi;
 use App\Services\TenantContextService;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class SekreterModuluTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     private function firmaOlustur(string $kod): Firma
     {

@@ -23,6 +23,7 @@ class FaturaFinansKapamaServisi
     public function __construct(
         private readonly FaturaKapamaDogrulamaServisi $faturaKapamaDogrulamaServisi,
         private readonly SistemOlayServisi $sistemOlayServisi,
+        private readonly KurFarkiHareketServisi $kurFarkiHareketServisi,
     ) {}
 
     public function finansHareketiniFaturayaUygula(FinansHareketi $finans): void
@@ -123,16 +124,19 @@ class FaturaFinansKapamaServisi
                     throw new IsKuraliIstisnasi('Aynı finans-fatura için duplicate kapama engellendi.');
                 }
 
-                FaturaFinansKapama::query()->create([
+                $kapama = FaturaFinansKapama::query()->create([
                     'firma_id' => $fatura->firma_id,
                     'fatura_id' => $fatura->id,
                     'finans_hareket_id' => $finans->id,
                     'uygulanan_tutar' => (string) $d['tutar'],
                     'para_birimi' => (string) $finans->para_birimi,
                     'baz_uygulanan_tutar' => $this->bazUygulananTutarHesapla($finans, (string) $d['tutar']),
+                    'baz_fatura_tutari' => $this->bazFaturaTutariHesapla($fatura, (string) $d['tutar']),
+                    'kur_farki_tutari' => $this->kurFarkiTutariHesapla($fatura, $finans, (string) $d['tutar']),
                     'baz_para_birimi' => (string) ($finans->baz_para_birimi ?: $finans->para_birimi),
                     'kur' => (string) ($finans->kur ?: '1.00000000'),
                 ]);
+                $this->kurFarkiHareketServisi->kapamadanOlustur($kapama);
 
                 $this->faturaOdemeDurumunuYenile($fatura->id);
                 $this->faturaKapamaDogrulamaServisi->faturaKapamaDurumuDogrula($fatura->id);
@@ -458,6 +462,7 @@ class FaturaFinansKapamaServisi
 
         $finansIdler = $kapamalar->pluck('finans_hareket_id')->unique()->values()->all();
         $coklu = count($finansIdler) > 1;
+        $kurFarki = (string) $kapamalar->sum(fn (FaturaFinansKapama $kapama): string => (string) ($kapama->kur_farki_tutari ?? '0'));
 
         $satirlar = [];
         foreach ($kapamalar as $k) {
@@ -476,8 +481,12 @@ class FaturaFinansKapamaServisi
             ? 'Otomasyon şu an yapılandırmada açık olabilir; kapama satırları manuel veya otomatik oluşmuş olabilir.'
             : 'Otomasyon kapalı; kapamalar manuel akışla oluşturulmuştur.';
 
+        $kurNotu = bccomp($kurFarki, '0', self::PARA_BASAMAK) !== 0
+            ? "\nKur farkı snapshot toplamı: {$kurFarki} ".(string) ($fatura->baz_para_birimi ?: 'TRY')
+            : '';
+
         return ($coklu ? 'Bu fatura birden fazla finans hareketinden kapandı.' : 'Tek finans hareketinden kapama var.')."\n"
-            .implode("\n", $satirlar)."\n".$not;
+            .implode("\n", $satirlar)."\n".$not.$kurNotu;
     }
 
     private function faturaFinansTurUyumu(Fatura $fatura, FinansHareketi $finans): bool
@@ -489,6 +498,22 @@ class FaturaFinansKapamaServisi
             FinansHareketTuru::Odeme => $yon === 'borc',
             default => false,
         };
+    }
+
+    private function bazFaturaTutariHesapla(Fatura $fatura, string $uygulananTutar): string
+    {
+        $kur = (string) ($fatura->doviz_kuru ?: '1');
+
+        return bcmul($uygulananTutar, $kur, self::PARA_BASAMAK);
+    }
+
+    private function kurFarkiTutariHesapla(Fatura $fatura, FinansHareketi $finans, string $uygulananTutar): string
+    {
+        return bcsub(
+            $this->bazUygulananTutarHesapla($finans, $uygulananTutar),
+            $this->bazFaturaTutariHesapla($fatura, $uygulananTutar),
+            self::PARA_BASAMAK
+        );
     }
 
     /**
@@ -541,6 +566,8 @@ class FaturaFinansKapamaServisi
 
     public function finansTersleninceFaturaDurumunuYenile(FinansHareketi $finans): void
     {
+        $this->kurFarkiHareketServisi->finansKurFarklariniIptalEt((int) $finans->id);
+
         $faturaIdler = FaturaFinansKapama::query()
             ->where('finans_hareket_id', $finans->id)
             ->pluck('fatura_id')
@@ -599,6 +626,8 @@ class FaturaFinansKapamaServisi
                     [
                         'uygulanan_tutar' => $kapama->uygulanan_tutar,
                         'baz_uygulanan_tutar' => $kapama->baz_uygulanan_tutar,
+                        'baz_fatura_tutari' => $kapama->baz_fatura_tutari,
+                        'kur_farki_tutari' => $kapama->kur_farki_tutari,
                         'para_birimi' => $kapama->para_birimi,
                         'baz_para_birimi' => $kapama->baz_para_birimi,
                         'kur' => $kapama->kur,

@@ -12,7 +12,7 @@ class GelenFatura extends FaturaListesiFiltreliSayfasi
 
     public static function faturaTurleri(): array
     {
-        return [FaturaTuru::Gelen->value, FaturaTuru::GelenFatura->value];
+        return [FaturaTuru::Gelen->value, FaturaTuru::GelenFatura->value, FaturaTuru::Gider->value, FaturaTuru::GiderFaturasi->value];
     }
 
     protected static function olusturmaSayfasiAnahtari(): string

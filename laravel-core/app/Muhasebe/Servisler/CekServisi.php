@@ -66,7 +66,7 @@ class CekServisi
             }
 
             $kullaniciId = Auth::id();
-            $cek = Cek::query()->create([
+            $cek = new Cek([
                 'firma_id' => $firmaId,
                 'turu' => CekTuru::Alinan,
                 'durum' => CekDurumu::Portfoyde,
@@ -83,6 +83,8 @@ class CekServisi
                 'on_gorsel_yolu' => $onGorselYolu,
                 'arka_gorsel_yolu' => $arkaGorselYolu,
             ]);
+            $cek->setAttribute('para_birimi_snapshot_tarihi', $islemTarihi);
+            $cek->save();
 
             $hareket = CekHareketi::query()->create([
                 'firma_id' => $firmaId,
@@ -177,7 +179,7 @@ class CekServisi
                 if ($cekNo === '') {
                     throw new IsKuraliIstisnasi('Çek numarası zorunludur.');
                 }
-                $cek = Cek::query()->create([
+                $cek = new Cek([
                     'firma_id' => $firmaId,
                     'turu' => CekTuru::Verilen,
                     'durum' => CekDurumu::Verildi,
@@ -194,6 +196,8 @@ class CekServisi
                     'on_gorsel_yolu' => $this->gorselYolunuDogrula($firmaId, $veri['on_gorsel_yolu'] ?? null),
                     'arka_gorsel_yolu' => $this->gorselYolunuDogrula($firmaId, $veri['arka_gorsel_yolu'] ?? null),
                 ]);
+                $cek->setAttribute('para_birimi_snapshot_tarihi', $islemTarihi);
+                $cek->save();
                 $vadeTarihi = $cek->vade_tarihi;
             }
 
@@ -392,10 +396,6 @@ class CekServisi
     private function cariyiDogrula(int $firmaId, int $cariId, string $paraBirimi): Cari
     {
         $cari = Cari::query()->whereKey($cariId)->where('firma_id', $firmaId)->firstOrFail();
-        if (strtoupper((string) ($cari->para_birimi ?: 'TRY')) !== strtoupper($paraBirimi)) {
-            throw new IsKuraliIstisnasi('Cari para birimi ile çek para birimi uyuşmuyor.');
-        }
-
         return $cari;
     }
 }

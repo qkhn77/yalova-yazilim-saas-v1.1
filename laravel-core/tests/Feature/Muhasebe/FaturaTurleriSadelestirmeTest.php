@@ -79,7 +79,7 @@ class FaturaTurleriSadelestirmeTest extends TestCase
         $this->assertSame(FaturaTuru::SatisIadesi, $this->createPageTur(CreateGidenIadeFaturasi::class));
         $this->assertSame(FaturaTuru::AlisIadesi, $this->createPageTur(CreateGelenIadeFaturasi::class));
         $this->assertSame(FaturaTuru::Proforma, $this->createPageTur(CreateProformaFatura::class));
-        $this->assertSame(FaturaTuru::Gider, $this->createPageTur(CreateGiderFaturasi::class));
+        $this->assertSame(FaturaTuru::Gelen, $this->createPageTur(CreateGiderFaturasi::class));
     }
 
     public function test_giden_fatura_olusturmada_tur_bos_gelse_de_varsayilanla_doldurulur(): void

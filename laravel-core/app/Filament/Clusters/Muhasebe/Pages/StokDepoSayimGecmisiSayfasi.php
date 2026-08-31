@@ -29,7 +29,7 @@ class StokDepoSayimGecmisiSayfasi extends Page implements HasTable
 
     protected static string $view = 'filament.clusters.muhasebe.pages.stok-depo-sayim-gecmisi';
 
-    protected static ?string $title = 'Depo sayım geçmişi';
+    protected static ?string $title = 'Depo Sayım Geçmişi';
 
     protected static ?string $slug = 'stok/depo-sayim-gecmisi';
 
@@ -61,6 +61,8 @@ class StokDepoSayimGecmisiSayfasi extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
+            ->heading('Sayım Düzeltmeleri')
+            ->emptyStateHeading('Sayım Kaydı Yok')
             ->query(static::sayimSorgusu())
             ->columns([
                 Tables\Columns\TextColumn::make('islem_tarihi')

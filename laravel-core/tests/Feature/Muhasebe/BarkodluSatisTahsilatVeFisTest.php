@@ -19,7 +19,6 @@ use App\Models\Muhasebe\StokBarkodu;
 use App\Models\Muhasebe\StokHareketi;
 use App\Models\Muhasebe\StokKategorisi;
 use App\Models\Muhasebe\StokKarti;
-use App\Models\Muhasebe\StokParcasi;
 use App\Models\Muhasebe\VergiOrani;
 use App\Models\User;
 use App\Muhasebe\Enumlar\CariDurumu;
@@ -29,6 +28,7 @@ use App\Muhasebe\Enumlar\HesapDurumu;
 use App\Muhasebe\Enumlar\StokBelgeTuru;
 use App\Muhasebe\Enumlar\StokHareketIslemTuru;
 use App\Muhasebe\Enumlar\StokKartiTuru;
+use App\Muhasebe\Servisler\BarkodluSatisAlacakOzetServisi;
 use App\Muhasebe\Servisler\BarkodluSatisServisi;
 use App\Services\FirmaAyarDeposu;
 use App\Services\TenantContextService;
@@ -334,6 +334,109 @@ class BarkodluSatisTahsilatVeFisTest extends TestCase
             'kasa_hesap_id' => (int) $kasa->id,
             'durum' => 'iptal',
         ]);
+    }
+
+    public function test_iade_edilmis_satis_iptali_hareketleri_degistirmez(): void
+    {
+        [$user, $firma] = $this->superAdminVeFirmaSession('IADE-IPTAL');
+        $stok = $this->stokOlustur($firma, ['stok_miktari' => '10.0000']);
+        $cari = $this->cariOlustur($firma);
+        $kasa = $this->kasaOlustur($firma);
+
+        $satis = app(BarkodluSatisServisi::class)->satisTamamla((int) $firma->id, (int) $user->id, [
+            'satis_tarihi' => now()->toDateTimeString(),
+            'cari_id' => (int) $cari->id,
+            'odeme_tipi' => 'nakit',
+            'kasa_hesap_id' => (int) $kasa->id,
+            'para_birimi' => 'TRY',
+            'kalemler' => [[
+                'stok_id' => (int) $stok->id,
+                'miktar' => 1,
+                'birim_fiyat' => 100,
+                'kdv_orani' => 20,
+            ]],
+        ]);
+
+        $kalemId = (int) $satis->kalemler()->value('id');
+        $iade = app(BarkodluSatisServisi::class)->satisKalemiIadeEt(
+            (int) $firma->id,
+            (int) $satis->id,
+            $kalemId,
+            1.0,
+            (int) $user->id,
+            'iptal kural testi'
+        );
+
+        $stokMiktari = (string) $stok->fresh()->stok_miktari;
+        $stokHareketSayisi = StokHareketi::query()
+            ->where('firma_id', (int) $firma->id)
+            ->where('stok_id', (int) $stok->id)
+            ->count();
+
+        try {
+            app(BarkodluSatisServisi::class)->satisIptalEt(
+                (int) $firma->id,
+                (int) $satis->id,
+                (int) $user->id,
+                'iade sonrasi iptal'
+            );
+            $this->fail('Iade kaydi bulunan satis iptal edilmemelidir.');
+        } catch (\InvalidArgumentException $e) {
+            $this->assertStringContainsString('Iade kaydi bulunan satis iptal edilemez', $e->getMessage());
+        }
+
+        $this->assertSame('tamamlandi', (string) $satis->fresh()->durum);
+        $this->assertSame($stokMiktari, (string) $stok->fresh()->stok_miktari);
+        $this->assertSame($stokHareketSayisi, StokHareketi::query()
+            ->where('firma_id', (int) $firma->id)
+            ->where('stok_id', (int) $stok->id)
+            ->count());
+        $this->assertDatabaseHas('muhasebe_barkodlu_satis_iadeler', [
+            'id' => (int) $iade->id,
+            'satis_id' => (int) $satis->id,
+        ]);
+        $this->assertDatabaseHas('finans_hareketleri', [
+            'firma_id' => (int) $firma->id,
+            'referans_turu' => 'barkodlu_satis',
+            'referans_id' => (int) $satis->id,
+            'durum' => FinansHareketDurumu::Aktif->value,
+        ]);
+    }
+
+    public function test_iptal_edilen_satis_alacak_ozetinde_acik_tutar_uretmez(): void
+    {
+        [$user, $firma] = $this->superAdminVeFirmaSession('IPTAL-OZET');
+        $stok = $this->stokOlustur($firma, ['stok_miktari' => '10.0000']);
+        $cari = $this->cariOlustur($firma);
+        $kasa = $this->kasaOlustur($firma);
+
+        $satis = app(BarkodluSatisServisi::class)->satisTamamla((int) $firma->id, (int) $user->id, [
+            'satis_tarihi' => now()->toDateTimeString(),
+            'cari_id' => (int) $cari->id,
+            'odeme_tipi' => 'nakit',
+            'kasa_hesap_id' => (int) $kasa->id,
+            'para_birimi' => 'TRY',
+            'kalemler' => [[
+                'stok_id' => (int) $stok->id,
+                'miktar' => 1,
+                'birim_fiyat' => 100,
+                'kdv_orani' => 20,
+            ]],
+        ]);
+
+        app(BarkodluSatisServisi::class)->satisIptalEt(
+            (int) $firma->id,
+            (int) $satis->id,
+            (int) $user->id,
+            'ozet testi'
+        );
+
+        $ozet = app(BarkodluSatisAlacakOzetServisi::class)->ozet($satis->fresh());
+
+        $this->assertSame('kapali', $ozet['durum']);
+        $this->assertSame('Tam', $ozet['durum_etiketi']);
+        $this->assertSame(0.0, (float) $ozet['finansal_acik_tutar']);
+        $this->assertSame(0.0, (float) $ozet['plansiz_kalan_tutar']);
     }
 
     public function test_satis_iadesinde_iade_odeme_finansi_olusturulur(): void
@@ -1167,96 +1270,6 @@ class BarkodluSatisTahsilatVeFisTest extends TestCase
         $sayfa->mount();
 
         $this->assertCount(2, $sayfa->etiketler);
-    }
-
-    public function test_stok_parcasi_url_parametresi_code128_etiketi_olusturur(): void
-    {
-        [, $firma] = $this->superAdminVeFirmaSession('ETIKET-PARCA');
-        $stok = $this->stokOlustur($firma, ['stok_miktari' => '4.0000']);
-        $parca = StokParcasi::query()->create([
-            'firma_id' => $firma->id,
-            'stok_id' => $stok->id,
-            'parca_kodu' => 'ETIKET-PARCA-STK-PLK-0001',
-            'parca_kodu' => 'ETIKET-PARCA-STK-PLK-0001',
-            'barkod' => 'ETIKET-PARCA-STK-PLK-0001',
-            'parca_mi' => true,
-            'parca_durumu' => 'aktif',
-            'giren_miktar' => '4',
-            'kalan_miktar' => '4',
-        ]);
-
-        app()->instance('request', Request::create('/test', 'GET', [
-            'stok_parcasi_id' => (int) $parca->id,
-            'adet' => 2,
-        ]));
-
-        $sayfa = app(BarkodEtiketYazdirmaSayfasi::class);
-        $sayfa->mount();
-
-        $this->assertCount(2, $sayfa->etiketler);
-        $this->assertSame($parca->barkod, $sayfa->etiketler[0]['barkod']);
-        $this->assertStringContainsString('<svg', (string) $sayfa->etiketler[0]['svg']);
-    }
-
-    public function test_stok_parcasi_barkodu_okutulunca_pos_kalemi_parcaya_baglanir(): void
-    {
-        [, $firma] = $this->superAdminVeFirmaSession('POS-PARCA');
-        $stok = $this->stokOlustur($firma, [
-            'stok_miktari' => '4.0000',
-            'stok_takip_tipi' => StokKarti::STOK_TAKIP_TIPI_PARTI,
-        ]);
-        $parca = StokParcasi::query()->create([
-            'firma_id' => $firma->id,
-            'stok_id' => $stok->id,
-            'parca_kodu' => 'POS-PARCA-PLK-0001',
-            'parca_kodu' => 'POS-PARCA-PLK-0001',
-            'barkod' => 'POS-PARCA-PLK-0001',
-            'parca_mi' => true,
-            'parca_durumu' => 'aktif',
-            'giren_miktar' => '4',
-            'kalan_miktar' => '4',
-        ]);
-
-        $sayfa = app(BarkodluSatisSayfasi::class);
-        $sayfa->mount();
-        $sayfa->data['barkod'] = $parca->barkod;
-        $sayfa->barkodEkle();
-
-        $this->assertCount(1, $sayfa->kalemler);
-        $this->assertSame($parca->id, $sayfa->kalemler[0]['stok_parcasi_id']);
-        $this->assertSame(4.0, $sayfa->kalemler[0]['miktar']);
-        $this->assertSame($parca->parca_kodu, $sayfa->kalemler[0]['parca_dagilimi'][0]['parca_kodu']);
-    }
-
-    public function test_stok_parcasi_seciminden_kismi_miktar_sepete_eklenir_ve_bakiye_asimi_reddedilir(): void
-    {
-        [, $firma] = $this->superAdminVeFirmaSession('POS-PARCA-SECIM');
-        $stok = $this->stokOlustur($firma, [
-            'stok_miktari' => '4.0000',
-            'stok_takip_tipi' => StokKarti::STOK_TAKIP_TIPI_PARTI,
-        ]);
-        $parca = StokParcasi::query()->create([
-            'firma_id' => $firma->id,
-            'stok_id' => $stok->id,
-            'parca_kodu' => 'POS-PARCA-SECIM-PLK-0001',
-            'parca_kodu' => 'POS-PARCA-SECIM-PLK-0001',
-            'barkod' => 'POS-PARCA-SECIM-PLK-0001',
-            'parca_mi' => true,
-            'parca_durumu' => 'aktif',
-            'giren_miktar' => '4',
-            'kalan_miktar' => '4',
-        ]);
-
-        $sayfa = app(BarkodluSatisSayfasi::class);
-        $sayfa->mount();
-
-        $this->assertTrue($sayfa->stokParcasiniSecerekEkle((int) $parca->id, '2'));
-        $this->assertCount(1, $sayfa->kalemler);
-        $this->assertSame(2.0, $sayfa->kalemler[0]['miktar']);
-        $this->assertSame(2.0, $sayfa->kalemler[0]['parca_dagilimi'][0]['miktar']);
-
-        $this->assertFalse($sayfa->stokParcasiniSecerekEkle((int) $parca->id, '3'));
-        $this->assertSame(2.0, $sayfa->kalemler[0]['miktar']);
     }
 
     public function test_pos_secili_urun_etiket_url_adet_parametresi_tasir(): void

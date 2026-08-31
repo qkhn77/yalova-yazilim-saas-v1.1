@@ -159,6 +159,7 @@ class SenetYonetimiSayfasi extends Page implements HasForms, HasTable
         $yazmaYetkisi = fn (): bool => MuhasebeFilamentErisimYardimcisi::muhasebeYetkisiVarMi(MuhasebeYetkiSablonlari::FINANS_OLUSTUR);
 
         return $table
+            ->heading('Senet')
             ->query(fn (): Builder => Senet::query()->with([
                 'girisHareketi.cari:id,ad,kod',
                 'cikisHareketi.cari:id,ad,kod',
@@ -185,6 +186,18 @@ class SenetYonetimiSayfasi extends Page implements HasForms, HasTable
                     ->label('Tutar')
                     ->formatStateUsing(fn ($state, Senet $record): string => number_format((float) $state, 2, ',', '.').' '.strtoupper((string) ($record->para_birimi ?: 'TRY')))
                     ->sortable(),
+                Tables\Columns\TextColumn::make('kur')
+                    ->label('Kur')
+                    ->formatStateUsing(fn ($state): string => $state === null ? '—' : number_format((float) $state, 8, ',', '.'))
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('baz_tutar')
+                    ->label('Baz tutar')
+                    ->formatStateUsing(fn ($state, Senet $record): string => $state === null
+                        ? '—'
+                        : number_format((float) $state, 2, ',', '.').' '.strtoupper((string) ($record->baz_para_birimi ?: config('muhasebe.baz_para_birimi', 'TRY'))))
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('islem_tarihi')
                     ->label('Kayıt tarihi')
                     ->state(fn (Senet $record) => ($record->turu === SenetTuru::Alinan ? $record->girisHareketi?->islem_tarihi : $record->cikisHareketi?->islem_tarihi))
@@ -447,6 +460,8 @@ class SenetYonetimiSayfasi extends Page implements HasForms, HasTable
                 ->label('Senedi veren cari')
                 ->required()
                 ->searchable()
+                ->options(fn (): array => $this->cariAramaSonuclari(''))
+                ->optionsLimit(50)
                 ->getSearchResultsUsing(fn (string $search): array => $this->cariAramaSonuclari($search))
                 ->getOptionLabelUsing(fn ($value): ?string => $this->cariEtiketi($value))
                 ->createOptionForm($this->hizliCariFormu())
@@ -491,6 +506,8 @@ class SenetYonetimiSayfasi extends Page implements HasForms, HasTable
                 ->label('Senedin verildiği cari')
                 ->required()
                 ->searchable()
+                ->options(fn (): array => $this->cariAramaSonuclari(''))
+                ->optionsLimit(50)
                 ->getSearchResultsUsing(fn (string $search): array => $this->cariAramaSonuclari($search))
                 ->getOptionLabelUsing(fn ($value): ?string => $this->cariEtiketi($value))
                 ->createOptionForm($this->hizliCariFormu())

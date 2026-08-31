@@ -124,6 +124,7 @@ use App\Services\TenantContextService;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\FontProviders\LocalFontProvider;
 use Filament\Navigation\NavigationBuilder;
 use Filament\Navigation\MenuItem;
 use Filament\Panel;
@@ -190,7 +191,7 @@ class AdminPanelProvider extends PanelProvider
             // Yönetici ve firma panelleri aynı menü şablonunu kullanır. Menü
             // görünümü değiştiğinde eski HTML önbelleği servis edilmemesi için
             // sürümü artırıyoruz.
-            'filament-custom-sidebar-v19',
+            'filament-custom-sidebar-v20',
             (int) $kullanici->id,
             (int) ($tenantContext->aktifFirmaId() ?? 0),
             (int) ($tenantContext->aktifRolId() ?? 0),
@@ -343,12 +344,17 @@ class AdminPanelProvider extends PanelProvider
             ->login(null)
             ->brandLogo(fn (): string => app(AdminLogoServisi::class)->url())
             ->brandLogoHeight('2.25rem')
+            // Yönetim paneli yerelde ya da kısıtlı ağlarda uzaktaki Bunny Fonts
+            // çağrısına bağlı kalmamalı; aksi halde sayfa render'ı zaman aşımına
+            // düşerek 500 hatası üretebiliyor.
+            ->font('Inter', provider: LocalFontProvider::class)
             ->defaultAvatarProvider(LocalAvatarProvider::class)
             ->maxContentWidth(MaxWidth::Full)
             ->spa()
             ->spaUrlExceptions(fn (): array => [
                 self::adminUrl().'/muhasebe/satis/barkodlu-satis-fisi*',
                 self::adminUrl().'/muhasebe/satis/barkodlu-satis-iade-fisi*',
+                self::adminUrl().'/muhasebe/stok/stok-listesi/create',
             ])
             ->navigation(fn (NavigationBuilder $builder): NavigationBuilder => $builder->items([]))
             ->profile(ProfilDuzenle::class, isSimple: false)
@@ -500,12 +506,20 @@ class AdminPanelProvider extends PanelProvider
                 ),
             )
             ->renderHook(
-                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+                PanelsRenderHook::SIDEBAR_FOOTER,
+                fn () => view('filament.components.admin-sidebar-footer'),
+            )
+            ->renderHook(
+                PanelsRenderHook::GLOBAL_SEARCH_AFTER,
                 fn () => view('filament.components.admin-context-badge'),
             )
             ->renderHook(
-                PanelsRenderHook::USER_MENU_PROFILE_AFTER,
+                PanelsRenderHook::GLOBAL_SEARCH_AFTER,
                 fn () => view('filament.components.admin-layout-switcher'),
+            )
+            ->renderHook(
+                PanelsRenderHook::GLOBAL_SEARCH_AFTER,
+                fn () => view('filament.components.admin-message-center'),
             )
             ->renderHook(
                 PanelsRenderHook::STYLES_AFTER,

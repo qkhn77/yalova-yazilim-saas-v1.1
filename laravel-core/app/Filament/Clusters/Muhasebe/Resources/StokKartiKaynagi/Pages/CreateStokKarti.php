@@ -38,7 +38,6 @@ class CreateStokKarti extends CreateRecord
     protected static ?string $title = 'Stok ekle';
 
     private string $acilisStokMiktari = '0';
-    private string $acilisPartiNo = '';
     private mixed $acilisUretimTarihi = null;
     private mixed $acilisSonKullanmaTarihi = null;
     /** @var array<string, mixed> */
@@ -97,12 +96,11 @@ class CreateStokKarti extends CreateRecord
             ? $acilisMiktari
             : '0';
         $data['stok_miktari'] = '0';
-        $this->acilisPartiNo = trim((string) ($data['parca_kodu'] ?? ''));
         $this->acilisUretimTarihi = $data['uretim_tarihi'] ?? null;
         $this->acilisSonKullanmaTarihi = $data['son_kullanma_tarihi'] ?? null;
         $this->acilisMermerAlanlari = array_intersect_key($data, array_flip([
             'blok_no', 'ocak_tedarikci', 'kalite_sinifi', 'renk_desen',
-            'kalinlik_cm', 'metrekare', 'plaka_no', 'parca_no',
+            'kalinlik_cm', 'metrekare', 'plaka_no',
         ]));
         unset($data['kalinlik_cm'], $data['metrekare']);
         $this->acilisSeriNolari = array_values(array_filter(array_map(
@@ -174,7 +172,7 @@ class CreateStokKarti extends CreateRecord
             $data['varsayilan_fiyat_birimi_id'] = $birimler[$anaBirimKodu];
             $data['birim'] = 'AD';
         }
-        unset($data['parca_kodu'], $data['uretim_tarihi'], $data['son_kullanma_tarihi'], $data['seri_nolari'], $data['garanti_baslangic_tarihi'], $data['garanti_bitis_tarihi'], $data['blok_no'], $data['ocak_tedarikci'], $data['kalite_sinifi'], $data['renk_desen'], $data['metrekare'], $data['plaka_no'], $data['parca_no'], $data['olcu_giris_birimi'], $data['agirlik_birimi'], $data['olcu_en'], $data['olcu_boy'], $data['olcu_yukseklik'], $data['olcu_bir_adet_agirlik'], $data['olcu_acilis_adet'], $data['olcu_satirlari']);
+        unset($data['uretim_tarihi'], $data['son_kullanma_tarihi'], $data['seri_nolari'], $data['garanti_baslangic_tarihi'], $data['garanti_bitis_tarihi'], $data['blok_no'], $data['ocak_tedarikci'], $data['kalite_sinifi'], $data['renk_desen'], $data['metrekare'], $data['plaka_no'], $data['olcu_giris_birimi'], $data['agirlik_birimi'], $data['olcu_en'], $data['olcu_boy'], $data['olcu_yukseklik'], $data['olcu_bir_adet_agirlik'], $data['olcu_acilis_adet'], $data['olcu_satirlari']);
 
         $kullanici = Auth::user();
         $super = $kullanici && StokKarti::kullaniciSuperAdminMi($kullanici);
@@ -327,7 +325,6 @@ class CreateStokKarti extends CreateRecord
             'miktar' => $this->acilisStokMiktari,
             'birim_fiyat' => $birimMaliyet,
             'birim_maliyet' => $birimMaliyet,
-            'parca_kodu' => $this->acilisPartiNo,
             'uretim_tarihi' => $this->acilisUretimTarihi,
             'son_kullanma_tarihi' => $this->acilisSonKullanmaTarihi,
             ...$this->acilisMermerAlanlari,

@@ -11,12 +11,12 @@ use App\Muhasebe\Enumlar\HesapDurumu;
 use App\Muhasebe\Enumlar\StokKartiTuru;
 use App\Muhasebe\Servisler\StokOlcuBakiyeServisi;
 use Database\Seeders\MuhasebeOlcuBirimleriSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class FaturaOlcuKartlariTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     public function test_sabit_ve_coklu_olculer_fatura_kartlari_olarak_baslatilir(): void
     {

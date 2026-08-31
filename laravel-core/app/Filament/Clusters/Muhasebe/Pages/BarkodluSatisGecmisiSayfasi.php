@@ -6,6 +6,7 @@ use App\BarkodluSatis\Guvenlik\BarkodluSatisFilamentErisimYardimcisi;
 use App\Filament\Clusters\Muhasebe as MuhasebeCluster;
 use App\Models\Muhasebe\BankaHesabi;
 use App\Models\Muhasebe\BarkodluSatis;
+use App\Models\Muhasebe\BarkodluSatisKalemi;
 use App\Models\Muhasebe\BarkodluSatisIade;
 use App\Models\Muhasebe\KasaHesabi;
 use App\Models\Muhasebe\PosHesabi;
@@ -93,117 +94,114 @@ class BarkodluSatisGecmisiSayfasi extends Page implements HasTable
                     ->withCount('kalemler')
                     ->withSum('iadeler as iade_toplami', 'toplam_iade_tutari')
                     ->with([
-                        'kalemler:id,satis_id,stok_adi,parca_kodu,parca_dagilimi,seri_nolari',
+                        'kalemler:id,satis_id,stok_adi,miktar,seri_nolari',
                         'cari:id,firma_id,kod,ad,para_birimi',
                         'olusturan:id,name',
                         'iptalEden:id,name',
                     ])
             )
             ->headerActions([
-                Tables\Actions\Action::make('hizli_perakende')
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\Action::make('hizli_perakende')
+                        ->label('Tüm Perakende')
+                        ->icon('heroicon-o-funnel')
+                        ->url(fn (): string => $this->filtreUrlOlustur(musteriTipi: 'perakende')),
+                    Tables\Actions\Action::make('perakende_bu_ay')
+                        ->label('Bu Ay')
+                        ->url(fn (): string => $this->filtreUrlOlustur(
+                            baslangic: now()->startOfMonth()->toDateString(),
+                            bitis: now()->endOfMonth()->toDateString(),
+                            musteriTipi: 'perakende'
+                        )),
+                    Tables\Actions\Action::make('perakende_bugun')
+                        ->label('Bugün')
+                        ->url(fn (): string => $this->filtreUrlOlustur(
+                            baslangic: now()->toDateString(),
+                            bitis: now()->toDateString(),
+                            musteriTipi: 'perakende'
+                        )),
+                    Tables\Actions\Action::make('perakende_son_30_gun')
+                        ->label('Son 30 Gün')
+                        ->url(fn (): string => $this->filtreUrlOlustur(
+                            baslangic: now()->subDays(29)->toDateString(),
+                            bitis: now()->toDateString(),
+                            musteriTipi: 'perakende'
+                        )),
+                    Tables\Actions\Action::make('perakende_gecen_ay')
+                        ->label('Geçen Ay')
+                        ->url(fn (): string => $this->filtreUrlOlustur(
+                            baslangic: now()->subMonthNoOverflow()->startOfMonth()->toDateString(),
+                            bitis: now()->subMonthNoOverflow()->endOfMonth()->toDateString(),
+                            musteriTipi: 'perakende'
+                        )),
+                ])
                     ->label('Perakende')
-                    ->icon('heroicon-o-funnel')
+                    ->icon('heroicon-o-user-group')
                     ->color('warning')
-                    ->url(fn (): string => $this->filtreUrlOlustur(musteriTipi: 'perakende')),
-                Tables\Actions\Action::make('perakende_bu_ay')
-                    ->label('Perakende / Bu Ay')
-                    ->icon('heroicon-o-funnel')
-                    ->color('warning')
-                    ->url(fn (): string => $this->filtreUrlOlustur(
-                        baslangic: now()->startOfMonth()->toDateString(),
-                        bitis: now()->endOfMonth()->toDateString(),
-                        musteriTipi: 'perakende'
-                    )),
-                Tables\Actions\Action::make('perakende_bugun')
-                    ->label('Perakende / Bugun')
-                    ->icon('heroicon-o-funnel')
-                    ->color('warning')
-                    ->url(fn (): string => $this->filtreUrlOlustur(
-                        baslangic: now()->toDateString(),
-                        bitis: now()->toDateString(),
-                        musteriTipi: 'perakende'
-                    )),
-                Tables\Actions\Action::make('perakende_son_30_gun')
-                    ->label('Perakende / Son 30 Gun')
-                    ->icon('heroicon-o-funnel')
-                    ->color('warning')
-                    ->url(fn (): string => $this->filtreUrlOlustur(
-                        baslangic: now()->subDays(29)->toDateString(),
-                        bitis: now()->toDateString(),
-                        musteriTipi: 'perakende'
-                    )),
-                Tables\Actions\Action::make('perakende_gecen_ay')
-                    ->label('Perakende / Gecen Ay')
-                    ->icon('heroicon-o-funnel')
-                    ->color('warning')
-                    ->url(fn (): string => $this->filtreUrlOlustur(
-                        baslangic: now()->subMonthNoOverflow()->startOfMonth()->toDateString(),
-                        bitis: now()->subMonthNoOverflow()->endOfMonth()->toDateString(),
-                        musteriTipi: 'perakende'
-                    )),
-                Tables\Actions\Action::make('bugun')
-                    ->label('Bugun')
+                    ->button(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\Action::make('bugun')
+                        ->label('Bugün')
+                        ->icon('heroicon-o-calendar-days')
+                        ->url(fn (): string => $this->filtreUrlOlustur(
+                            baslangic: now()->toDateString(),
+                            bitis: now()->toDateString()
+                        )),
+                    Tables\Actions\Action::make('son_7_gun')
+                        ->label('Son 7 Gün')
+                        ->url(fn (): string => $this->filtreUrlOlustur(
+                            baslangic: now()->subDays(6)->toDateString(),
+                            bitis: now()->toDateString()
+                        )),
+                    Tables\Actions\Action::make('son_30_gun')
+                        ->label('Son 30 Gün')
+                        ->url(fn (): string => $this->filtreUrlOlustur(
+                            baslangic: now()->subDays(29)->toDateString(),
+                            bitis: now()->toDateString()
+                        )),
+                    Tables\Actions\Action::make('bu_ay')
+                        ->label('Bu Ay')
+                        ->url(fn (): string => $this->filtreUrlOlustur(
+                            baslangic: now()->startOfMonth()->toDateString(),
+                            bitis: now()->endOfMonth()->toDateString()
+                        )),
+                    Tables\Actions\Action::make('gecen_ay')
+                        ->label('Geçen Ay')
+                        ->url(fn (): string => $this->filtreUrlOlustur(
+                            baslangic: now()->subMonthNoOverflow()->startOfMonth()->toDateString(),
+                            bitis: now()->subMonthNoOverflow()->endOfMonth()->toDateString()
+                        )),
+                    Tables\Actions\Action::make('bu_yil')
+                        ->label('Bu Yıl')
+                        ->url(fn (): string => $this->filtreUrlOlustur(
+                            baslangic: now()->startOfYear()->toDateString(),
+                            bitis: now()->endOfYear()->toDateString()
+                        )),
+                ])
+                    ->label('Tarih')
                     ->icon('heroicon-o-calendar-days')
                     ->color('info')
-                    ->url(fn (): string => $this->filtreUrlOlustur(
-                        baslangic: now()->toDateString(),
-                        bitis: now()->toDateString()
-                    )),
-                Tables\Actions\Action::make('son_7_gun')
-                    ->label('Son 7 Gun')
-                    ->icon('heroicon-o-calendar')
-                    ->color('info')
-                    ->url(fn (): string => $this->filtreUrlOlustur(
-                        baslangic: now()->subDays(6)->toDateString(),
-                        bitis: now()->toDateString()
-                    )),
-                Tables\Actions\Action::make('son_30_gun')
-                    ->label('Son 30 Gun')
-                    ->icon('heroicon-o-calendar')
-                    ->color('info')
-                    ->url(fn (): string => $this->filtreUrlOlustur(
-                        baslangic: now()->subDays(29)->toDateString(),
-                        bitis: now()->toDateString()
-                    )),
-                Tables\Actions\Action::make('bu_ay')
-                    ->label('Bu Ay')
-                    ->icon('heroicon-o-calendar')
-                    ->color('gray')
-                    ->url(fn (): string => $this->filtreUrlOlustur(
-                        baslangic: now()->startOfMonth()->toDateString(),
-                        bitis: now()->endOfMonth()->toDateString()
-                    )),
-                Tables\Actions\Action::make('gecen_ay')
-                    ->label('Gecen Ay')
-                    ->icon('heroicon-o-calendar')
-                    ->color('gray')
-                    ->url(fn (): string => $this->filtreUrlOlustur(
-                        baslangic: now()->subMonthNoOverflow()->startOfMonth()->toDateString(),
-                        bitis: now()->subMonthNoOverflow()->endOfMonth()->toDateString()
-                    )),
-                Tables\Actions\Action::make('bu_yil')
-                    ->label('Bu Yil')
-                    ->icon('heroicon-o-calendar')
-                    ->color('gray')
-                    ->url(fn (): string => $this->filtreUrlOlustur(
-                        baslangic: now()->startOfYear()->toDateString(),
-                        bitis: now()->endOfYear()->toDateString()
-                    )),
+                    ->button(),
                 Tables\Actions\Action::make('filtre_temizle')
-                    ->label('Filtreyi Temizle')
-                    ->icon('heroicon-o-funnel')
+                    ->label('Filtreleri Temizle')
+                    ->icon('heroicon-o-x-mark')
                     ->color('gray')
                     ->url(fn (): string => static::getUrl()),
-                Tables\Actions\Action::make('export_csv')
-                    ->label('CSV Disa Aktar')
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\Action::make('export_csv')
+                        ->label('CSV Dışa Aktar')
+                        ->icon('heroicon-o-arrow-down-tray')
+                        ->action(fn (): StreamedResponse => $this->satisGecmisiCsvIndir(false)),
+                    Tables\Actions\Action::make('export_excel_csv')
+                        ->label('Excel Uyumlu CSV')
+                        ->icon('heroicon-o-document-chart-bar')
+                        ->color('success')
+                        ->action(fn (): StreamedResponse => $this->satisGecmisiCsvIndir(true)),
+                ])
+                    ->label('Dışa Aktar')
                     ->icon('heroicon-o-arrow-down-tray')
                     ->color('gray')
-                    ->action(fn (): StreamedResponse => $this->satisGecmisiCsvIndir(false)),
-                Tables\Actions\Action::make('export_excel_csv')
-                    ->label('Excel Uyumlu CSV')
-                    ->icon('heroicon-o-document-chart-bar')
-                    ->color('success')
-                    ->action(fn (): StreamedResponse => $this->satisGecmisiCsvIndir(true)),
+                    ->button(),
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('satis_no')
@@ -227,8 +225,8 @@ class BarkodluSatisGecmisiSayfasi extends Page implements HasTable
                 Tables\Columns\TextColumn::make('kalem_sayisi')
                     ->label('Kalem')
                     ->state(fn (BarkodluSatis $record): int => (int) ($record->kalemler_count ?? 0)),
-                Tables\Columns\TextColumn::make('parti_seri_izleme')
-                    ->label('Parti / Seri No Barkodu')
+                Tables\Columns\TextColumn::make('seri_izleme')
+                    ->label('Seri No Barkodu')
                     ->state(fn (BarkodluSatis $record): string => $this->satisIzlemeEtiketi($record))
                     ->wrap()
                     ->placeholder('-')
@@ -313,24 +311,6 @@ class BarkodluSatisGecmisiSayfasi extends Page implements HasTable
                         return $query
                             ->when($baslangic !== null, fn (Builder $q): Builder => $q->where('satis_tarihi', '>=', $baslangic.' 00:00:00'))
                             ->when($bitis !== null, fn (Builder $q): Builder => $q->where('satis_tarihi', '<=', $bitis.' 23:59:59'));
-                    }),
-                Tables\Filters\Filter::make('parti_lot')
-                    ->label('Parti / Lot')
-                    ->form([
-                        Forms\Components\TextInput::make('deger')
-                            ->label('Parti / Lot no')
-                            ->placeholder('Örn. LOT-2026-01'),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        $deger = trim((string) ($data['deger'] ?? ''));
-                        if ($deger === '') {
-                            return $query;
-                        }
-
-                        return $query->whereHas('kalemler', function (Builder $kalemQuery) use ($deger): void {
-                            $kalemQuery->where('parca_kodu', 'like', '%'.$deger.'%')
-                                ->orWhere('parca_dagilimi', 'like', '%'.$deger.'%');
-                        });
                     }),
                 Tables\Filters\Filter::make('seri_no_barkodu')
                     ->label('Seri No Barkodu')
@@ -512,7 +492,8 @@ class BarkodluSatisGecmisiSayfasi extends Page implements HasTable
                             ->label('Satis kalemi')
                             ->options($this->iadeEdilebilirKalemSecenekleri($record))
                             ->required()
-                            ->searchable(),
+                            ->searchable()
+                            ->preload(),
                         Forms\Components\TextInput::make('iade_miktari')
                             ->label('Iade miktari')
                             ->numeric()
@@ -579,7 +560,7 @@ class BarkodluSatisGecmisiSayfasi extends Page implements HasTable
                 fputcsv($out, $satir, $delimiter);
             }
             fputcsv($out, [], $delimiter);
-            fputcsv($out, ['Satis No', 'Tarih', 'Cari', 'Musteri Tipi', 'Kalem', 'Parti / Lot', 'Seri No Barkodu', 'Toplam', 'Tahsilat Durumu', 'Plan Durumu', 'Plan Bakiyesi', 'Finansal Acik', 'Iade', 'Durum', 'Kaynak Hesap', 'Olusturan'], $delimiter);
+            fputcsv($out, ['Satis No', 'Tarih', 'Cari', 'Musteri Tipi', 'Kalem', 'Seri No Barkodu', 'Toplam', 'Tahsilat Durumu', 'Plan Durumu', 'Plan Bakiyesi', 'Finansal Acik', 'Iade', 'Durum', 'Kaynak Hesap', 'Olusturan'], $delimiter);
 
             /** @var BarkodluSatis $kayit */
             foreach ($sorgu->cursor() as $kayit) {
@@ -590,7 +571,6 @@ class BarkodluSatisGecmisiSayfasi extends Page implements HasTable
                     (string) ($kayit->cari?->ad ?? ''),
                     $this->musteriTipiEtiketi($kayit),
                     (string) $kayit->kalemler->count(),
-                    $this->satisPartiEtiketi($kayit),
                     $this->satisSeriEtiketi($kayit),
                     number_format((float) $kayit->genel_toplam, 2, ',', '.'),
                     $this->tahsilatDurumuEtiketi($kayit),
@@ -651,8 +631,6 @@ class BarkodluSatisGecmisiSayfasi extends Page implements HasTable
         $hesap = is_array($hesapHam) ? Arr::get($hesapHam, 'value') : $hesapHam;
         $tahsilatDurumuHam = $this->getTableFilterState('tahsilat_durumu');
         $tahsilatDurumu = is_array($tahsilatDurumuHam) ? Arr::get($tahsilatDurumuHam, 'value') : $tahsilatDurumuHam;
-        $partiHam = $this->getTableFilterState('parti_lot');
-        $partiDegeri = is_array($partiHam) ? Arr::get($partiHam, 'deger') : $partiHam;
         $seriHam = $this->getTableFilterState('seri_no_barkodu');
         $seriDegeri = is_array($seriHam) ? Arr::get($seriHam, 'deger') : $seriHam;
         [$tarihBaslangic, $tarihBitis] = $this->aktifTarihAraligi();
@@ -662,7 +640,6 @@ class BarkodluSatisGecmisiSayfasi extends Page implements HasTable
         $satirlar[] = ['Filtre Kaynak Hesap', $this->kaynakHesapFiltreEtiketi($kaynakHesap)];
         $satirlar[] = ['Filtre Hesap', $this->hesapFiltreEtiketi($hesap)];
         $satirlar[] = ['Filtre Tahsilat Durumu', $this->tahsilatDurumuFiltreEtiketi($tahsilatDurumu)];
-        $satirlar[] = ['Filtre Parti / Lot', trim((string) ($partiDegeri ?? '')) !== '' ? trim((string) $partiDegeri) : 'Hepsi'];
         $satirlar[] = ['Filtre Seri No Barkodu', trim((string) ($seriDegeri ?? '')) !== '' ? trim((string) $seriDegeri) : 'Hepsi'];
         $satirlar[] = ['Filtre Tarih Araligi', $this->tarihAraligiEtiketi($tarihBaslangic, $tarihBitis)];
 
@@ -754,25 +731,6 @@ class BarkodluSatisGecmisiSayfasi extends Page implements HasTable
         return 'Belirsiz';
     }
 
-    private function satisPartiEtiketi(BarkodluSatis $kayit): string
-    {
-        $partiler = [];
-
-        foreach ($kayit->kalemler as $kalem) {
-            if (filled($kalem->parca_kodu ?? null)) {
-                $partiler[] = (string) $kalem->parca_kodu;
-            }
-
-            foreach ((array) ($kalem->parca_dagilimi ?? []) as $parti) {
-                if (is_array($parti) && filled($parti['parca_kodu'] ?? null)) {
-                    $partiler[] = (string) $parti['parca_kodu'];
-                }
-            }
-        }
-
-        return implode(', ', array_values(array_unique(array_filter(array_map('trim', $partiler)))));
-    }
-
     private function satisSeriEtiketi(BarkodluSatis $kayit): string
     {
         $seriler = [];
@@ -791,18 +749,9 @@ class BarkodluSatisGecmisiSayfasi extends Page implements HasTable
 
     private function satisIzlemeEtiketi(BarkodluSatis $kayit): string
     {
-        $etiketler = [];
-        $parti = $this->satisPartiEtiketi($kayit);
         $seri = $this->satisSeriEtiketi($kayit);
 
-        if ($parti !== '') {
-            $etiketler[] = 'Parti: '.$parti;
-        }
-        if ($seri !== '') {
-            $etiketler[] = 'Seri: '.$seri;
-        }
-
-        return implode(' | ', $etiketler);
+        return $seri !== '' ? 'Seri: '.$seri : '';
     }
 
     private function musteriTipiRenk(BarkodluSatis $kayit): string
@@ -1220,7 +1169,12 @@ class BarkodluSatisGecmisiSayfasi extends Page implements HasTable
     private function iadeEdilebilirKalemSecenekleri(BarkodluSatis $satis): array
     {
         $iadeMiktarlari = [];
-        foreach ($satis->iadeler as $iade) {
+        $iadeler = BarkodluSatisIade::query()
+            ->where('firma_id', (int) $satis->firma_id)
+            ->where('satis_id', (int) $satis->id)
+            ->with('kalemler')
+            ->get();
+        foreach ($iadeler as $iade) {
             foreach ($iade->kalemler as $iadeKalemi) {
                 $satisKalemId = (int) $iadeKalemi->satis_kalem_id;
                 $iadeMiktarlari[$satisKalemId] = (float) ($iadeMiktarlari[$satisKalemId] ?? 0) + (float) $iadeKalemi->miktar;
@@ -1228,7 +1182,11 @@ class BarkodluSatisGecmisiSayfasi extends Page implements HasTable
         }
 
         $secenekler = [];
-        foreach ($satis->kalemler as $kalem) {
+        $kalemler = BarkodluSatisKalemi::query()
+            ->where('firma_id', (int) $satis->firma_id)
+            ->where('satis_id', (int) $satis->id)
+            ->get(['id', 'miktar', 'stok_adi']);
+        foreach ($kalemler as $kalem) {
             $kalemId = (int) $kalem->id;
             $kalan = max(0, (float) $kalem->miktar - (float) ($iadeMiktarlari[$kalemId] ?? 0));
             if ($kalan <= 0.0001) {

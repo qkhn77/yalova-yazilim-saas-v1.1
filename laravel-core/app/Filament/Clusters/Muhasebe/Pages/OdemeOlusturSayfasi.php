@@ -183,6 +183,8 @@ class OdemeOlusturSayfasi extends Page implements HasForms
                         Forms\Components\Select::make('cari_id')
                             ->label('Cari')
                             ->searchable()
+                            ->options(fn (): array => $this->cariAramaSonuclari(''))
+                            ->optionsLimit(50)
                             ->getSearchResultsUsing(fn (string $search): array => $this->cariAramaSonuclari($search))
                             ->getOptionLabelUsing(fn ($value): ?string => $this->cariEtiketi($value))
                             ->required()
@@ -246,6 +248,10 @@ class OdemeOlusturSayfasi extends Page implements HasForms
                         Forms\Components\DateTimePicker::make('tarih')
                             ->label('İşlem tarihi')
                             ->required()
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function (Get $get, Forms\Set $set): void {
+                                $this->otomatikKurDoldur($get, $set);
+                            })
                             ->seconds(false)
                             ->hintActions([
                                 Forms\Components\Actions\Action::make('kur_cek_tarih')
@@ -259,7 +265,10 @@ class OdemeOlusturSayfasi extends Page implements HasForms
                                     ->label('Şimdi')
                                     ->icon('heroicon-o-clock')
                                     ->color('success')
-                                    ->action(fn (Forms\Set $set) => $set('tarih', now()->format('Y-m-d H:i')))
+                                    ->action(function (Get $get, Forms\Set $set): void {
+                                        $set('tarih', now()->format('Y-m-d H:i'));
+                                        $this->otomatikKurDoldur($get, $set);
+                                    })
                             ),
 
                         Forms\Components\Select::make('doviz_kuru_turu')
@@ -313,6 +322,7 @@ class OdemeOlusturSayfasi extends Page implements HasForms
                                 $f = Fatura::query()->find((int) $state);
                                 if ($f && bccomp((string) ($f->acik_tutar ?? '0'), '0', 2) > 0) {
                                     $acik = (string) $f->acik_tutar;
+                                    $set('hedef_para_birimi', strtoupper((string) ($f->para_birimi ?: 'TRY')));
                                     if (! filled($get('tutar')) || bccomp((string) $get('tutar'), '0', 2) <= 0) {
                                         $set('tutar', $acik);
                                     }
@@ -740,10 +750,16 @@ class OdemeOlusturSayfasi extends Page implements HasForms
             return;
         }
 
+        $faturaId = filled($data['fatura_id'] ?? null) ? (int) $data['fatura_id'] : null;
+        $fatura = $faturaId ? Fatura::query()
+            ->where('firma_id', $firmaId)
+            ->whereKey($faturaId)
+            ->where('cari_id', $cariId)
+            ->first() : null;
         $cariParaBirimi = (string) (Cari::query()->whereKey($cariId)->value('para_birimi') ?? '');
         $hesapParaBirimi = (string) $this->hesapParaBirimi($hesapTipi, $hesapId);
         $kaynakPb = strtoupper(trim($hesapParaBirimi !== '' ? $hesapParaBirimi : (string) ($data['kaynak_para_birimi'] ?? '')));
-        $hedefPb = strtoupper(trim($cariParaBirimi !== '' ? $cariParaBirimi : (string) ($data['hedef_para_birimi'] ?? '')));
+        $hedefPb = strtoupper(trim((string) ($fatura?->para_birimi ?: ($data['hedef_para_birimi'] ?? $cariParaBirimi ?: 'TRY'))));
         if ($kaynakPb === '' || $hedefPb === '') {
             Notification::make()->title('Para birimi bulunamadi')->danger()->send();
 
@@ -752,7 +768,6 @@ class OdemeOlusturSayfasi extends Page implements HasForms
 
         $tarih = Carbon::parse((string) ($data['tarih'] ?? now()->format('Y-m-d H:i')));
         $aciklama = filled($data['aciklama'] ?? null) ? (string) $data['aciklama'] : null;
-        $faturaId = filled($data['fatura_id'] ?? null) ? (int) $data['fatura_id'] : null;
         $refTur = $faturaId ? 'fatura' : null;
         $refId = $faturaId ?: null;
 

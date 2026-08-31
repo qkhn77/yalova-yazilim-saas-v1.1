@@ -3,6 +3,7 @@
 namespace App\Models\Muhasebe;
 
 use App\Models\Concerns\HasFirmaTenantScope;
+use App\Models\Concerns\HasParaBirimiSnapshot;
 use App\Models\Firma;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,6 +11,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class AlacakTahsilatEslesmesi extends Model
 {
     use HasFirmaTenantScope;
+    use HasParaBirimiSnapshot;
+
+    protected function paraBirimiSnapshotTarihAlani(): string
+    {
+        return 'tarih';
+    }
 
     protected $table = 'muhasebe_alacak_tahsilat_eslesmeleri';
 
@@ -19,6 +26,10 @@ class AlacakTahsilatEslesmesi extends Model
         'alacak_plan_taksiti_id',
         'finans_hareketi_id',
         'tutar',
+        'para_birimi',
+        'kur',
+        'baz_para_birimi',
+        'baz_tutar',
         'tarih',
     ];
 
@@ -26,6 +37,8 @@ class AlacakTahsilatEslesmesi extends Model
     {
         return [
             'tutar' => 'decimal:2',
+            'kur' => 'decimal:8',
+            'baz_tutar' => 'decimal:2',
             'tarih' => 'datetime',
         ];
     }

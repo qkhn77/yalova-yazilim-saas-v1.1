@@ -7,8 +7,6 @@ use App\Models\Muhasebe\StokKarti;
 use App\Models\Muhasebe\Depo;
 use App\Models\Muhasebe\StokDepoBakiyesi;
 use App\Models\Muhasebe\StokTransferi;
-use App\Models\Muhasebe\StokParcasi;
-use App\Models\Muhasebe\StokHareketiParcasi;
 use App\Models\Muhasebe\StokSeriNo;
 use App\Models\Muhasebe\StokHareketiSeri;
 use App\Models\Muhasebe\StokOlcuBakiyesi;
@@ -55,10 +53,9 @@ class StokHareketServisi
         }
 
         $miktar = $this->normalizePozitifMiktar($alanlar['miktar'] ?? null);
-        $parcaIds = array_values(array_unique(array_filter(array_map('intval', (array) ($alanlar['stok_parcasi_ids'] ?? [])))));
         $tarih = $alanlar['tarih'] ?? now();
 
-        return DB::transaction(function () use ($firmaId, $alanlar, $stokId, $kaynakDepoId, $hedefDepoId, $miktar, $parcaIds, $tarih): StokTransferi {
+        return DB::transaction(function () use ($firmaId, $alanlar, $stokId, $kaynakDepoId, $hedefDepoId, $miktar, $tarih): StokTransferi {
             $depolar = Depo::query()
                 ->where('firma_id', $firmaId)
                 ->where('aktif_mi', true)
@@ -66,10 +63,6 @@ class StokHareketServisi
                 ->count();
             if ($depolar !== 2) {
                 throw new IsKuraliIstisnasi('Depolar aktif firmaya ait olmalıdır.');
-            }
-
-            if ($parcaIds !== []) {
-                throw new IsKuraliIstisnasi('Stok parçası/Parti-Lot transferi devre dışıdır. Basit stok miktarı transfer edilebilir.');
             }
 
             $transfer = StokTransferi::query()->create([
@@ -97,12 +90,10 @@ class StokHareketServisi
             $cikis = $this->kayitOlustur($firmaId, array_merge($ortak, [
                 'depo_id' => $kaynakDepoId,
                 'islem_turu' => StokHareketIslemTuru::TransferCikis,
-                'parca_transferi_ids' => $parcaIds,
             ]));
             $giris = $this->kayitOlustur($firmaId, array_merge($ortak, [
                 'depo_id' => $hedefDepoId,
                 'islem_turu' => StokHareketIslemTuru::TransferGiris,
-                'parti_devirleri' => [],
                 'seri_devirleri' => $cikis->seriHareketleri()->with('seriNo')->get()
                     ->map(fn (StokHareketiSeri $seri): array => [
                         'seri_no' => (string) $seri->seriNo->seri_no,
@@ -175,6 +166,23 @@ class StokHareketServisi
                 : StokBelgeTuru::from($alanlar['belge_turu']);
 
             $miktar = $this->normalizePozitifMiktar($alanlar['miktar'] ?? null);
+            if ($islemTuru === StokHareketIslemTuru::TransferCikis
+                && $depoId > 0
+                && (bool) ($stok->stok_takip ?? true)
+                && ! (bool) ($alanlar['negatif_stok_izinli'] ?? false)
+                && ! (bool) $this->firmaAyarDeposu->oku($firmaId, 'negatif_stok_izinli', false)
+                && ! (bool) config('muhasebe.stok.negatif_stok_izinli', false)) {
+                $depoBakiye = StokDepoBakiyesi::query()
+                    ->where('firma_id', $firmaId)
+                    ->where('depo_id', $depoId)
+                    ->where('stok_id', (int) $stok->id)
+                    ->lockForUpdate()
+                    ->first();
+
+                if (bccomp((string) ($depoBakiye?->miktar ?? 0), $miktar, 8) < 0) {
+                    throw new IsKuraliIstisnasi('Kaynak depoda yeterli stok bulunmuyor. Lütfen miktarı kontrol edin.');
+                }
+            }
             $birimFiyat = $this->normalizeSifirVeyaPozitifTutar($alanlar['birim_fiyat'] ?? 0, 'Birim fiyat negatif olamaz.');
             $birimMaliyetGirdi = $this->normalizeSifirVeyaPozitifTutar($alanlar['birim_maliyet'] ?? $birimFiyat, 'Birim maliyet negatif olamaz.');
             $toplam = (string) ($alanlar['toplam'] ?? bcmul($miktar, $birimFiyat, self::PARA_BASAMAK));
@@ -280,98 +288,7 @@ class StokHareketServisi
     }
 
     /**
-     * Daha önce basit stok olarak açılmış mevcut miktarı yeni bir partiye bağlar.
-     * Stok miktarını değiştirmez; yalnızca parti bakiyesini oluşturur.
-     */
-    public function mevcutStoguPartiyeAktar(int $firmaId, StokKarti $stok, array $alanlar): StokParcasi
-    {
-        $this->firmaDenetleyicisi->yazmaIcinFirmaKontrolEt($firmaId);
-
-        return DB::transaction(function () use ($firmaId, $stok, $alanlar): StokParcasi {
-            $kilitliStok = StokKarti::query()->lockForUpdate()->whereKey($stok->getKey())->firstOrFail();
-            if ((int) $kilitliStok->firma_id !== $firmaId) {
-                throw new IsKuraliIstisnasi('Stok kartı farklı firmaya ait.');
-            }
-            if (! $kilitliStok->partiTakibiAktifMi()) {
-                throw new IsKuraliIstisnasi('Bu ürün için parti takibi açık değil.');
-            }
-
-            $mevcut = (string) ($kilitliStok->stok_miktari ?? '0');
-            if (bccomp($mevcut, '0', 8) <= 0) {
-                throw new IsKuraliIstisnasi('Partiye aktarılacak mevcut stok bulunmuyor.');
-            }
-
-            $aktifPartiVar = StokParcasi::query()
-                ->where('firma_id', $firmaId)
-                ->where('stok_id', $kilitliStok->id)
-                ->where('kalan_miktar', '>', 0)
-                ->exists();
-            if ($aktifPartiVar) {
-                throw new IsKuraliIstisnasi('Bu ürünün zaten aktif parti kayıtları var.');
-            }
-
-            $parcaKodu = trim((string) ($alanlar['parca_kodu'] ?? ''));
-            if ($parcaKodu === '') {
-                throw new IsKuraliIstisnasi('Parti / Lot No girilmelidir.');
-            }
-
-            $miktar = $this->normalizePozitifMiktar($alanlar['miktar'] ?? $mevcut);
-            if (bccomp($miktar, $mevcut, 8) !== 0) {
-                throw new IsKuraliIstisnasi('Aktarım miktarı mevcut stokla aynı olmalıdır.');
-            }
-
-            $depoId = (int) ($alanlar['depo_id'] ?? ($kilitliStok->depo_id ?? 0));
-            if ($depoId > 0 && ! Depo::query()->where('firma_id', $firmaId)->whereKey($depoId)->where('aktif_mi', true)->exists()) {
-                throw new IsKuraliIstisnasi('Seçilen depo aktif firmaya ait değil veya aktif değil.');
-            }
-
-            if (StokParcasi::query()
-                ->where('firma_id', $firmaId)
-                ->where('stok_id', $kilitliStok->id)
-                ->where('depo_id', $depoId > 0 ? $depoId : null)
-                ->where('parca_kodu', $parcaKodu)
-                ->exists()) {
-                throw new IsKuraliIstisnasi('Bu ürün ve depo için aynı Parti / Lot No zaten kayıtlı.');
-            }
-
-            $parti = StokParcasi::query()->create([
-                'firma_id' => $firmaId,
-                'stok_id' => $kilitliStok->id,
-                'depo_id' => $depoId > 0 ? $depoId : null,
-                'parca_kodu' => $parcaKodu,
-                'parca_kodu' => $alanlar['parca_kodu'] ?? null,
-                'barkod' => $alanlar['barkod'] ?? null,
-                'parca_mi' => (bool) ($alanlar['parca_mi'] ?? false),
-                'parca_durumu' => $alanlar['parca_durumu'] ?? (($alanlar['parca_mi'] ?? false) ? 'aktif' : null),
-                'blok_no' => $alanlar['blok_no'] ?? null,
-                'ocak_tedarikci' => $alanlar['ocak_tedarikci'] ?? null,
-                'kalite_sinifi' => $alanlar['kalite_sinifi'] ?? null,
-                'renk_desen' => $alanlar['renk_desen'] ?? null,
-                'kalinlik_cm' => $alanlar['kalinlik_cm'] ?? null,
-                'metrekare' => $alanlar['metrekare'] ?? null,
-                'plaka_no' => $alanlar['plaka_no'] ?? null,
-                'parca_no' => $alanlar['parca_no'] ?? null,
-                'uretim_tarihi' => $alanlar['uretim_tarihi'] ?? null,
-                'son_kullanma_tarihi' => $alanlar['son_kullanma_tarihi'] ?? null,
-                'birim_maliyet' => $alanlar['birim_maliyet'] ?? ($kilitliStok->guncel_birim_maliyet ?? 0),
-                'giren_miktar' => $miktar,
-                'kalan_miktar' => $miktar,
-            ]);
-
-            $this->logInfo('stok.parti_mevcut_stok_aktarimi', [
-                'firma_id' => $firmaId,
-                'stok_id' => (int) $kilitliStok->id,
-                'stok_parcasi_id' => (int) $parti->id,
-                'miktar' => $miktar,
-            ]);
-
-            return $parti;
-        });
-    }
-
-    /**
-     * Depodaki basit stok için sayım sonucunu fark hareketiyle uygular.
-     * Parti/seri takipli ürünler kendi özel sayım akışlarından ilerler.
+     * Depo sayımıyla mevcut stok miktarını hedef bakiyeye getirir.
      */
     public function depoSayiminiUygula(
         int $firmaId,
@@ -396,8 +313,8 @@ class StokHareketServisi
             if ((int) $stok->firma_id !== $firmaId) {
                 throw new IsKuraliIstisnasi('Stok kartı farklı firmaya ait.');
             }
-            if ($stok->partiTakibiAktifMi() || (string) ($stok->stok_takip_tipi ?? '') === StokKarti::STOK_TAKIP_TIPI_SERI) {
-                throw new IsKuraliIstisnasi('Parti veya seri takipli ürünlerde özel sayım akışı kullanılmalıdır.');
+            if ((string) ($stok->stok_takip_tipi ?? '') === StokKarti::STOK_TAKIP_TIPI_SERI) {
+                throw new IsKuraliIstisnasi('Seri numarası takipli ürünlerde özel sayım akışı kullanılmalıdır.');
             }
 
             $bakiye = StokDepoBakiyesi::query()
@@ -441,44 +358,7 @@ class StokHareketServisi
         });
     }
 
-    /** Sayım sonucundaki parti miktarına ulaşmak için fark hareketi oluşturur. */
-    public function partiMiktariniDuzelt(int $firmaId, StokParcasi $parti, string|int|float $hedefMiktar, ?string $aciklama = null): StokHareketi
-    {
-        $this->firmaDenetleyicisi->yazmaIcinFirmaKontrolEt($firmaId);
-        $hedef = str_replace(',', '.', trim((string) $hedefMiktar));
-        if ($hedef === '' || ! is_numeric($hedef) || bccomp($hedef, '0', 8) < 0) {
-            throw new IsKuraliIstisnasi('Sayım miktarı sıfırdan küçük olamaz.');
-        }
-
-        $parti->loadMissing('stokKarti');
-        if ((int) $parti->firma_id !== $firmaId || ! $parti->stokKarti || ! $parti->stokKarti->partiTakibiAktifMi()) {
-            throw new IsKuraliIstisnasi('Geçerli bir parti kaydı seçilmelidir.');
-        }
-
-        $fark = bcsub($hedef, (string) $parti->kalan_miktar, 8);
-        if (bccomp($fark, '0', 8) === 0) {
-            throw new IsKuraliIstisnasi('Sayım miktarı mevcut parti miktarıyla aynı.');
-        }
-
-        $giris = bccomp($fark, '0', 8) > 0;
-        return $this->kayitOlustur($firmaId, [
-            'stok_id' => (int) $parti->stok_id,
-            'depo_id' => (int) ($parti->depo_id ?? 0),
-            'islem_turu' => $giris ? StokHareketIslemTuru::Acilis : StokHareketIslemTuru::Satis,
-            'miktar' => ltrim($fark, '+-'),
-            'birim_fiyat' => $parti->birim_maliyet,
-            'birim_maliyet' => $parti->birim_maliyet,
-            'parca_kodu' => $parti->parca_kodu,
-            'belge_turu' => StokBelgeTuru::Duzeltme,
-            'belge_id' => (int) $parti->id,
-            'referans_tipi' => StokBelgeTuru::Duzeltme->value,
-            'referans_id' => (int) $parti->id,
-            'aciklama' => $aciklama ?: 'Parti sayım düzeltmesi',
-            'tarih' => now(),
-            'negatif_stok_izinli' => false,
-        ]);
-    }
-
+    /** Sayım sonucundaki hedef miktara ulaşmak için fark hareketi oluşturur. */
     public function tersKayitOlustur(StokHareketi $hareket, ?string $aciklama = null): StokHareketi
     {
         return $this->retryableTransaction(function () use ($hareket, $aciklama): StokHareketi {
@@ -590,7 +470,7 @@ class StokHareketServisi
                 'iptal_edilen_hareket_id' => $kilitliHareket->getKey(),
             ]);
 
-            $this->tersPartiVeSeriHareketleriniUygula($kilitliHareket, $ters);
+            $this->tersSeriHareketleriniUygula($kilitliHareket, $ters);
 
             $this->logWarning('stok_hareketi.ters_kayit', [
                 'firma_id' => (int) $kilitliHareket->firma_id,
@@ -739,325 +619,11 @@ class StokHareketServisi
         $bakiye->update(['miktar' => bcadd((string) $bakiye->miktar, $delta, 8)]);
     }
 
-    /**
-     * Parti takibi açık ürünlerde gelen hareketi partiye ekler, çıkan hareketi
-     * FIFO sırasıyla partilerden düşer. Parti takibi kapalı ürünlerde no-op'tur.
-     *
-     * @return array<int, StokHareketiParcasi>
-     */
-    private function partiHareketiniUygula(
-        StokKarti $stok,
-        StokHareketi $hareket,
-        int $depoId,
-        string $miktar,
-        StokHareketIslemTuru $islemTuru,
-        array $alanlar
-    ): array {
-        // Parti/Lot ve fiziksel stok parçası hareketleri devre dışıdır.
-        // Eski uygulama akışı aşağıda tutulsa da hiçbir yeni işlem bu bölüme
-        // fiziksel stok tablosu sorgusu yaptırmamalıdır.
-        return [];
-
-        $parcaTransferiIds = array_values(array_unique(array_filter(array_map('intval', (array) ($alanlar['parca_transferi_ids'] ?? [])))));
-        if ($islemTuru === StokHareketIslemTuru::TransferCikis && $parcaTransferiIds !== []) {
-            $parcalar = StokParcasi::query()->where('firma_id', $stok->firma_id)->where('stok_id', $stok->id)
-                ->where('depo_id', $depoId)->where('parca_mi', true)->where('kalan_miktar', '>', 0)
-                ->whereIn('id', $parcaTransferiIds)->lockForUpdate()->get();
-            if ($parcalar->count() !== count($parcaTransferiIds)) {
-                throw new IsKuraliIstisnasi('Transfer için seçilen stok parçalarından biri kaynak depoda bulunmuyor.');
-            }
-            $toplam = $parcalar->reduce(fn (string $sum, StokParcasi $parca): string => bcadd($sum, (string) $parca->kalan_miktar, 8), '0');
-            if (bccomp($toplam, $miktar, 8) !== 0) {
-                throw new IsKuraliIstisnasi('Seçilen stok parçalarının toplamı transfer miktarıyla aynı olmalıdır.');
-            }
-            return $parcalar->map(fn (StokParcasi $parca): StokHareketiParcasi => StokHareketiParcasi::query()->create([
-                'firma_id' => $stok->firma_id, 'stok_hareketi_id' => $hareket->id, 'stok_parcasi_id' => $parca->id,
-                'miktar' => $parca->kalan_miktar, 'birim_maliyet' => $parca->birim_maliyet,
-            ]))->all();
-        }
-
-        $girisMi = in_array($islemTuru, [
-            StokHareketIslemTuru::Acilis,
-            StokHareketIslemTuru::Alis,
-            StokHareketIslemTuru::Iade,
-            StokHareketIslemTuru::SatisIadesi,
-            StokHareketIslemTuru::TransferGiris,
-        ], true);
-
-        if ($girisMi) {
-            $devirler = is_array($alanlar['parti_devirleri'] ?? null)
-                ? $alanlar['parti_devirleri']
-                : [];
-            if ($devirler !== []) {
-                $sonuclar = [];
-                foreach ($devirler as $devir) {
-                    $sonuclar[] = $this->partiGirisiniUygula($stok, $hareket, $depoId, [
-                        'parca_kodu' => $devir['parca_kodu'] ?? '',
-                        'parca_kodu' => $devir['parca_kodu'] ?? null,
-                        'barkod' => $devir['barkod'] ?? null,
-                        'parca_mi' => (bool) ($devir['parca_mi'] ?? false),
-                        'parca_durumu' => $devir['parca_durumu'] ?? null,
-                        'blok_no' => $devir['blok_no'] ?? null,
-                        'ocak_tedarikci' => $devir['ocak_tedarikci'] ?? null,
-                        'kalite_sinifi' => $devir['kalite_sinifi'] ?? null,
-                        'renk_desen' => $devir['renk_desen'] ?? null,
-                        'kalinlik_cm' => $devir['kalinlik_cm'] ?? null,
-                        'metrekare' => $devir['metrekare'] ?? null,
-                        'plaka_no' => $devir['plaka_no'] ?? null,
-                        'parca_no' => $devir['parca_no'] ?? null,
-                        'uretim_tarihi' => $devir['uretim_tarihi'] ?? null,
-                        'son_kullanma_tarihi' => $devir['son_kullanma_tarihi'] ?? null,
-                        'birim_maliyet' => $devir['birim_maliyet'] ?? $hareket->birim_maliyet,
-                        'miktar' => $devir['miktar'] ?? 0,
-                    ]);
-                }
-
-                return $sonuclar;
-            }
-
-            $parcaKodu = trim((string) ($alanlar['parca_kodu'] ?? ''));
-            if ($parcaKodu === '') {
-                return [];
-            }
-
-            return [$this->partiGirisiniUygula($stok, $hareket, $depoId, [
-                'parca_kodu' => $parcaKodu,
-                'blok_no' => $alanlar['blok_no'] ?? null,
-                'ocak_tedarikci' => $alanlar['ocak_tedarikci'] ?? null,
-                'kalite_sinifi' => $alanlar['kalite_sinifi'] ?? null,
-                'renk_desen' => $alanlar['renk_desen'] ?? null,
-                'kalinlik_cm' => $alanlar['kalinlik_cm'] ?? null,
-                'metrekare' => $alanlar['metrekare'] ?? null,
-                'plaka_no' => $alanlar['plaka_no'] ?? null,
-                'parca_no' => $alanlar['parca_no'] ?? null,
-                'uretim_tarihi' => $alanlar['uretim_tarihi'] ?? null,
-                'son_kullanma_tarihi' => $alanlar['son_kullanma_tarihi'] ?? null,
-                'birim_maliyet' => $alanlar['birim_maliyet'] ?? $hareket->birim_maliyet,
-                'miktar' => $miktar,
-            ])];
-        }
-
-        $sonKullanmaEngeli = $this->sonKullanmaEngeliAktifMi($stok);
-        $parcaDagilimi = is_array($alanlar['parca_dagilimi'] ?? null) ? $alanlar['parca_dagilimi'] : [];
-        if ($parcaDagilimi !== []) {
-            $toplamDagilim = '0';
-            $sonuclar = [];
-            $gorulenPartiler = [];
-            foreach ($parcaDagilimi as $satir) {
-                $parcaKodu = trim((string) ($satir['parca_kodu'] ?? ''));
-                $satirMiktar = $this->normalizePozitifMiktar($satir['miktar'] ?? null);
-                if ($parcaKodu === '') {
-                    throw new IsKuraliIstisnasi('Parti dağılımında Parti / Lot No boş bırakılamaz.');
-                }
-                if (isset($gorulenPartiler[$parcaKodu])) {
-                    throw new IsKuraliIstisnasi('Aynı Parti / Lot No dağılımda birden fazla kez kullanılamaz.');
-                }
-                $gorulenPartiler[$parcaKodu] = true;
-                $parti = StokParcasi::query()
-                    ->where('firma_id', $stok->firma_id)
-                    ->where('stok_id', $stok->id)
-                    ->where('depo_id', $depoId > 0 ? $depoId : null)
-                    ->where('parca_kodu', $parcaKodu)
-                    ->where('kalan_miktar', '>', 0)
-                    ->when($sonKullanmaEngeli, fn ($query) => $query->where(function ($inner): void {
-                        $inner->whereNull('son_kullanma_tarihi')->orWhereDate('son_kullanma_tarihi', '>=', now()->toDateString());
-                    }))
-                    ->lockForUpdate()
-                    ->first();
-                if (! $parti) {
-                    throw new IsKuraliIstisnasi('Parti dağılımındaki '.$parcaKodu.' bu depoda stokta bulunmuyor.');
-                }
-                if (bccomp((string) $parti->kalan_miktar, $satirMiktar, 8) < 0) {
-                    throw new IsKuraliIstisnasi('Parti dağılımındaki '.$parcaKodu.' için yeterli stok bulunmuyor.');
-                }
-                $this->partiKalaniniGuncelle($parti, bcsub((string) $parti->kalan_miktar, $satirMiktar, 8));
-                $toplamDagilim = bcadd($toplamDagilim, $satirMiktar, 8);
-                $sonuclar[] = ['parti' => $parti, 'miktar' => $satirMiktar];
-            }
-            if (bccomp($toplamDagilim, $miktar, 8) !== 0) {
-                throw new IsKuraliIstisnasi('Parti dağılımı toplamı satır miktarıyla aynı olmalıdır.');
-            }
-            return array_map(fn (array $satir): StokHareketiParcasi => StokHareketiParcasi::query()->create([
-                'firma_id' => $stok->firma_id,
-                'stok_hareketi_id' => $hareket->id,
-                'stok_parcasi_id' => $satir['parti']->id,
-                'miktar' => $satir['miktar'],
-                'birim_maliyet' => $satir['parti']->birim_maliyet,
-            ]), $sonuclar);
-        }
-
-        // Fiziksel stok parçaları mevcutsa satışın hangi parçadan yapıldığı
-        // belirsiz bırakılamaz; kullanıcı parça/parti dağılımını seçmelidir.
-        $parcaTakibiVar = StokParcasi::query()
-            ->where('firma_id', $stok->firma_id)
-            ->where('stok_id', $stok->id)
-            ->where('depo_id', $depoId > 0 ? $depoId : null)
-            ->where('parca_mi', true)
-            ->where('kalan_miktar', '>', 0)
-            ->exists();
-        if ($parcaTakibiVar && $islemTuru === StokHareketIslemTuru::Satis) {
-            throw new IsKuraliIstisnasi('Bu stokta aktif stok parçaları var. Satış için en az bir stok parçası seçip dağılım miktarını girin.');
-        }
-
-        $manuelPartiNo = trim((string) ($alanlar['parca_kodu'] ?? ''));
-        if ($manuelPartiNo !== '') {
-            $parti = StokParcasi::query()
-                ->where('firma_id', $stok->firma_id)
-                ->where('stok_id', $stok->id)
-                ->where('depo_id', $depoId > 0 ? $depoId : null)
-                ->where('parca_kodu', $manuelPartiNo)
-                ->where('kalan_miktar', '>', 0)
-                ->when($sonKullanmaEngeli, fn ($query) => $query->where(function ($inner): void {
-                    $inner->whereNull('son_kullanma_tarihi')->orWhereDate('son_kullanma_tarihi', '>=', now()->toDateString());
-                }))
-                ->lockForUpdate()
-                ->first();
-
-            if (! $parti) {
-                throw new IsKuraliIstisnasi('Seçilen Parti / Lot No bu depoda stokta bulunmuyor.');
-            }
-            if (bccomp((string) $parti->kalan_miktar, $miktar, 8) < 0) {
-                throw new IsKuraliIstisnasi('Seçilen partide yeterli stok bulunmuyor.');
-            }
-
-            $this->partiKalaniniGuncelle($parti, bcsub((string) $parti->kalan_miktar, $miktar, 8));
-
-            return [StokHareketiParcasi::query()->create([
-                'firma_id' => $stok->firma_id,
-                'stok_hareketi_id' => $hareket->id,
-                'stok_parcasi_id' => $parti->id,
-                'miktar' => $miktar,
-                'birim_maliyet' => $parti->birim_maliyet,
-            ])];
-        }
-
-        $kalan = $miktar;
-        $partiler = StokParcasi::query()
-            ->where('firma_id', $stok->firma_id)
-            ->where('stok_id', $stok->id)
-            ->where('depo_id', $depoId > 0 ? $depoId : null)
-            ->where('kalan_miktar', '>', 0)
-            ->when($sonKullanmaEngeli, fn ($query) => $query->where(function ($inner): void {
-                $inner->whereNull('son_kullanma_tarihi')->orWhereDate('son_kullanma_tarihi', '>=', now()->toDateString());
-            }))
-            ->lockForUpdate()
-            ->orderByRaw('son_kullanma_tarihi IS NULL')
-            ->orderBy('son_kullanma_tarihi')
-            ->orderBy('id')
-            ->get();
-
-        $sonuclar = [];
-        foreach ($partiler as $parti) {
-            if (bccomp($kalan, '0', 8) <= 0) {
-                break;
-            }
-
-            $dusulecek = bccomp((string) $parti->kalan_miktar, $kalan, 8) >= 0
-                ? $kalan
-                : (string) $parti->kalan_miktar;
-            $this->partiKalaniniGuncelle($parti, bcsub((string) $parti->kalan_miktar, $dusulecek, 8));
-            $sonuclar[] = StokHareketiParcasi::query()->create([
-                'firma_id' => $stok->firma_id,
-                'stok_hareketi_id' => $hareket->id,
-                'stok_parcasi_id' => $parti->id,
-                'miktar' => $dusulecek,
-                'birim_maliyet' => $parti->birim_maliyet,
-            ]);
-            $kalan = bcsub($kalan, $dusulecek, 8);
-        }
-
-        if (bccomp($kalan, '0', 8) > 0) {
-            $mesaj = $sonKullanmaEngeli
-                ? 'Son kullanma tarihi uygun partilerde yeterli stok bulunmuyor.'
-                : 'Seçili depodaki partiler hareket miktarını karşılamıyor.';
-
-            throw new IsKuraliIstisnasi($mesaj);
-        }
-
-        return $sonuclar;
-    }
-
     private function sonKullanmaEngeliAktifMi(StokKarti $stok): bool
     {
         return (string) $this->firmaAyarDeposu->oku((int) $stok->firma_id, 'stok_son_kullanma_tarihi_kurali', 'uyar') === 'engelle';
     }
 
-    private function partiKalaniniGuncelle(StokParcasi $parti, string $yeniKalan): void
-    {
-        $alanlar = ['kalan_miktar' => $yeniKalan];
-        if ($parti->parca_mi) {
-            $alanlar['parca_durumu'] = bccomp($yeniKalan, '0', 8) <= 0
-                ? 'tukenmis'
-                : (bccomp($yeniKalan, (string) $parti->giren_miktar, 8) < 0 ? 'kismi' : 'aktif');
-        }
-        $parti->update($alanlar);
-    }
-
-    /** @param array<string, mixed> $alanlar */
-    private function partiGirisiniUygula(StokKarti $stok, StokHareketi $hareket, int $depoId, array $alanlar): StokHareketiParcasi
-    {
-        $parcaKodu = trim((string) ($alanlar['parca_kodu'] ?? ''));
-        $miktar = $this->normalizePozitifMiktar($alanlar['miktar'] ?? null);
-        $parti = StokParcasi::query()
-            ->where('firma_id', $stok->firma_id)
-            ->where('stok_id', $stok->id)
-            ->where('depo_id', $depoId > 0 ? $depoId : null)
-            ->where('parca_kodu', $parcaKodu)
-            ->lockForUpdate()
-            ->first();
-
-        if (! $parti) {
-            $parti = StokParcasi::query()->create([
-                'firma_id' => $stok->firma_id,
-                'stok_id' => $stok->id,
-                'depo_id' => $depoId > 0 ? $depoId : null,
-                'parca_kodu' => $parcaKodu,
-                'blok_no' => $alanlar['blok_no'] ?? null,
-                'ocak_tedarikci' => $alanlar['ocak_tedarikci'] ?? null,
-                'kalite_sinifi' => $alanlar['kalite_sinifi'] ?? null,
-                'renk_desen' => $alanlar['renk_desen'] ?? null,
-                'kalinlik_cm' => $alanlar['kalinlik_cm'] ?? null,
-                'metrekare' => $alanlar['metrekare'] ?? null,
-                'plaka_no' => $alanlar['plaka_no'] ?? null,
-                'parca_no' => $alanlar['parca_no'] ?? null,
-                'uretim_tarihi' => $alanlar['uretim_tarihi'] ?? null,
-                'son_kullanma_tarihi' => $alanlar['son_kullanma_tarihi'] ?? null,
-                'birim_maliyet' => $alanlar['birim_maliyet'] ?? $hareket->birim_maliyet,
-                'giren_miktar' => $miktar,
-                'kalan_miktar' => $miktar,
-            ]);
-        } else {
-            $parti->update([
-                'giren_miktar' => bcadd((string) $parti->giren_miktar, $miktar, 8),
-                'kalan_miktar' => bcadd((string) $parti->kalan_miktar, $miktar, 8),
-                'birim_maliyet' => $alanlar['birim_maliyet'] ?? $parti->birim_maliyet,
-                'uretim_tarihi' => $parti->uretim_tarihi ?: ($alanlar['uretim_tarihi'] ?? null),
-                'son_kullanma_tarihi' => $parti->son_kullanma_tarihi ?: ($alanlar['son_kullanma_tarihi'] ?? null),
-                'blok_no' => $parti->blok_no ?: ($alanlar['blok_no'] ?? null),
-                'ocak_tedarikci' => $parti->ocak_tedarikci ?: ($alanlar['ocak_tedarikci'] ?? null),
-                'kalite_sinifi' => $parti->kalite_sinifi ?: ($alanlar['kalite_sinifi'] ?? null),
-                'renk_desen' => $parti->renk_desen ?: ($alanlar['renk_desen'] ?? null),
-                'kalinlik_cm' => $parti->kalinlik_cm ?: ($alanlar['kalinlik_cm'] ?? null),
-                'metrekare' => $parti->metrekare ?: ($alanlar['metrekare'] ?? null),
-                'plaka_no' => $parti->plaka_no ?: ($alanlar['plaka_no'] ?? null),
-                'parca_no' => $parti->parca_no ?: ($alanlar['parca_no'] ?? null),
-            ]);
-        }
-
-        return StokHareketiParcasi::query()->create([
-            'firma_id' => $stok->firma_id,
-            'stok_hareketi_id' => $hareket->id,
-            'stok_parcasi_id' => $parti->id,
-            'miktar' => $miktar,
-            'birim_maliyet' => $parti->birim_maliyet,
-        ]);
-    }
-
-    /**
-     * Seri numarası takibi açık ürünlerde, girilen seri listesini stokta tutar
-     * ve çıkışta seri numaralarını stoktan düşürür. Liste boşsa mevcut akış
-     * bozulmaz; böylece özellik firmalar için zorunlu hale gelmez.
-     */
     private function seriHareketiniUygula(
         StokKarti $stok,
         StokHareketi $hareket,
@@ -1199,7 +765,7 @@ class StokHareketServisi
         ))));
     }
 
-    private function tersPartiVeSeriHareketleriniUygula(StokHareketi $kaynak, StokHareketi $ters): void
+    private function tersSeriHareketleriniUygula(StokHareketi $kaynak, StokHareketi $ters): void
     {
         $kaynakGirisMi = in_array($kaynak->islem_turu, [
             StokHareketIslemTuru::Acilis,
@@ -1208,11 +774,6 @@ class StokHareketServisi
             StokHareketIslemTuru::SatisIadesi,
             StokHareketIslemTuru::TransferGiris,
         ], true);
-
-        // Fiziksel parça/parti tabloları kaldırıldı. Bu nedenle ters stok
-        // hareketinde artık olmayan parcaHareketleri ilişkisini çağırma;
-        // ölçü dağılımları ve seri hareketleri aşağıdaki ortak akışlarla
-        // terslenir.
 
         foreach ($kaynak->seriHareketleri()->lockForUpdate()->get() as $kaynakSeriHareketi) {
             $seri = StokSeriNo::query()->lockForUpdate()->find($kaynakSeriHareketi->stok_seri_no_id);

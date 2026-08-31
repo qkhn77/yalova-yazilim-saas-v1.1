@@ -5,6 +5,7 @@ namespace App\Models\Muhasebe;
 use App\Models\Concerns\HasFirmaTenantScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class FaturaFinansKapama extends Model
 {
@@ -18,6 +19,8 @@ class FaturaFinansKapama extends Model
         'finans_hareket_id',
         'uygulanan_tutar',
         'baz_uygulanan_tutar',
+        'baz_fatura_tutari',
+        'kur_farki_tutari',
         'para_birimi',
         'baz_para_birimi',
         'kur',
@@ -28,6 +31,8 @@ class FaturaFinansKapama extends Model
         return [
             'uygulanan_tutar' => 'decimal:8',
             'baz_uygulanan_tutar' => 'decimal:8',
+            'baz_fatura_tutari' => 'decimal:8',
+            'kur_farki_tutari' => 'decimal:8',
             'kur' => 'decimal:8',
         ];
     }
@@ -40,5 +45,10 @@ class FaturaFinansKapama extends Model
     public function finansHareketi(): BelongsTo
     {
         return $this->belongsTo(FinansHareketi::class, 'finans_hareket_id');
+    }
+
+    public function kurFarkiHareketi(): HasOne
+    {
+        return $this->hasOne(KurFarkiHareketi::class, 'fatura_finans_kapama_id');
     }
 }

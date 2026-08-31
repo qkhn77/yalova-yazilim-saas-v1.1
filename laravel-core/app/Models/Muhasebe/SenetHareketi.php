@@ -3,6 +3,7 @@
 namespace App\Models\Muhasebe;
 
 use App\Models\Concerns\HasFirmaTenantScope;
+use App\Models\Concerns\HasParaBirimiSnapshot;
 use App\Models\Firma;
 use App\Models\User;
 use App\Muhasebe\Enumlar\SenetHareketDurumu;
@@ -14,6 +15,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SenetHareketi extends Model
 {
     use HasFirmaTenantScope;
+    use HasParaBirimiSnapshot;
+
+    protected function paraBirimiSnapshotTarihAlani(): string
+    {
+        return 'islem_tarihi';
+    }
 
     protected $table = 'senet_hareketleri';
 
@@ -27,6 +34,9 @@ class SenetHareketi extends Model
         'islem_tarihi',
         'tutar',
         'para_birimi',
+        'kur',
+        'baz_para_birimi',
+        'baz_tutar',
         'idempotency_key',
         'durum',
         'iptal_edilen_hareket_id',
@@ -40,6 +50,8 @@ class SenetHareketi extends Model
             'durum' => SenetHareketDurumu::class,
             'islem_tarihi' => 'datetime',
             'tutar' => 'decimal:2',
+            'kur' => 'decimal:8',
+            'baz_tutar' => 'decimal:2',
         ];
     }
 

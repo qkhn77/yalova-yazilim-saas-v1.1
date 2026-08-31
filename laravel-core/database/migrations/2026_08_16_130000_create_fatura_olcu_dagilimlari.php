@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreignId('stok_olcusu_id')->constrained('stok_olculeri')->restrictOnDelete();
             $table->foreignId('stok_olcu_bakiyesi_id')->nullable()->constrained('stok_olcu_bakiyeleri')->restrictOnDelete();
             $table->foreignId('depo_id')->constrained('muhasebe_depolar')->restrictOnDelete();
-            $table->foreignId('stok_parcasi_id')->nullable()->constrained('stok_parcalari')->nullOnDelete();
             $table->foreignId('islem_birimi_id')->nullable()->constrained('muhasebe_birimler')->nullOnDelete();
             $table->decimal('girilen_miktar', 20, 8);
             $table->decimal('ana_miktar', 20, 8);

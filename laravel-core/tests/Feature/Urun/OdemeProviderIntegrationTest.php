@@ -35,6 +35,10 @@ class OdemeProviderIntegrationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // Provider/controller behavior is tested independently of the
+        // temporary unpublished public-site gate.
+        $this->withoutMiddleware(\App\Http\Middleware\OnePagePublicSiteMiddleware::class);
+        $this->withoutMiddleware(\App\Http\Middleware\EcommerceFrontErisimMiddleware::class);
         config()->set('app.url', 'http://localhost');
         URL::forceRootUrl('http://localhost');
         config(['ecommerce.odeme_dakika' => 15]);

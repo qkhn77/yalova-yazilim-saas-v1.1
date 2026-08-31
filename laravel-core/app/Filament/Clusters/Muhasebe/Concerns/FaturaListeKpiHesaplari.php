@@ -6,6 +6,7 @@ use App\Filament\Clusters\Muhasebe\Pages\FaturaListesiFiltreliSayfasi;
 use App\Services\TenantContextService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 /**
  * Fatura filtreli liste sayfalarında tablo ile aynı filtre/arama kapsamında KPI üretir.
@@ -25,16 +26,16 @@ trait FaturaListeKpiHesaplari
      */
     public function faturaListeKpiKartlari(): array
     {
-        $row = $this->faturaListeKpiHamSatir();
+        $satirlar = $this->faturaListeKpiHamSatir();
 
-        $kayit = (int) ($row->kayit_sayisi ?? 0);
-        $toplamGenel = $this->formatPara((string) ($row->toplam_genel ?? '0'));
-        $toplamAcik = $this->formatPara((string) ($row->toplam_acik ?? '0'));
-        $vadesiGecmis = $this->formatPara((string) ($row->vadesi_gecmis_acik ?? '0'));
-        $buAy = $this->formatPara((string) ($row->bu_ay_genel ?? '0'));
+        $kayit = (int) $satirlar->sum('kayit_sayisi');
+        $toplamGenel = $this->kpiParaDagilimi($satirlar, 'toplam_genel');
+        $toplamAcik = $this->kpiParaDagilimi($satirlar, 'toplam_acik');
+        $vadesiGecmis = $this->kpiParaDagilimi($satirlar, 'vadesi_gecmis_acik');
+        $buAy = $this->kpiParaDagilimi($satirlar, 'bu_ay_genel');
 
-        $acikPozitif = bccomp((string) ($row->toplam_acik ?? '0'), '0', 2) > 0;
-        $vadePozitif = bccomp((string) ($row->vadesi_gecmis_acik ?? '0'), '0', 2) > 0;
+        $acikPozitif = (float) $satirlar->sum('toplam_acik') > 0;
+        $vadePozitif = (float) $satirlar->sum('vadesi_gecmis_acik') > 0;
 
         $kartlar = [
             [
@@ -93,7 +94,7 @@ trait FaturaListeKpiHesaplari
         return (string) (static::$title ?? 'Faturalar');
     }
 
-    protected function faturaListeKpiHamSatir(): object
+    protected function faturaListeKpiHamSatir(): Collection
     {
         $sub = $this->getFilteredTableQuery()->clone()
             ->reorder()
@@ -103,6 +104,7 @@ trait FaturaListeKpiHesaplari
                 'faturalar.vade_tarihi',
                 'faturalar.genel_toplam',
                 'faturalar.acik_tutar',
+                'faturalar.para_birimi',
             ]);
         $driver = $sub->getModel()->getConnection()->getDriverName();
         $today = now()->toDateString();
@@ -115,6 +117,7 @@ trait FaturaListeKpiHesaplari
         return Cache::remember($cacheKey, now()->addSeconds(30), function () use ($sub, $driver, $today, $monthStart, $nextMonthStart): object {
             if ($driver === 'sqlite') {
                 return DB::query()->fromSub($sub, 'f')
+                    ->selectRaw("UPPER(COALESCE(f.para_birimi, 'TRY')) as para_birimi")
                     ->selectRaw('COUNT(*) as kayit_sayisi')
                     ->selectRaw('COALESCE(SUM(f.genel_toplam), 0) as toplam_genel')
                     ->selectRaw('COALESCE(SUM(f.acik_tutar), 0) as toplam_acik')
@@ -126,10 +129,12 @@ trait FaturaListeKpiHesaplari
                         'COALESCE(SUM(CASE WHEN f.tarih >= ? AND f.tarih < ? THEN f.genel_toplam ELSE 0 END), 0) as bu_ay_genel',
                         [$monthStart, $nextMonthStart]
                     )
-                    ->first() ?? (object) [];
+                    ->groupBy('f.para_birimi')
+                    ->get();
             }
 
             return DB::query()->fromSub($sub, 'f')
+                ->selectRaw("UPPER(COALESCE(f.para_birimi, 'TRY')) as para_birimi")
                 ->selectRaw('COUNT(*) as kayit_sayisi')
                 ->selectRaw('COALESCE(SUM(f.genel_toplam), 0) as toplam_genel')
                 ->selectRaw('COALESCE(SUM(f.acik_tutar), 0) as toplam_acik')
@@ -141,11 +146,20 @@ trait FaturaListeKpiHesaplari
                     'COALESCE(SUM(CASE WHEN f.tarih >= ? AND f.tarih < ? THEN f.genel_toplam ELSE 0 END), 0) as bu_ay_genel',
                     [$monthStart, $nextMonthStart]
                 )
-                ->first() ?? (object) [];
+                ->groupBy('f.para_birimi')
+                ->get();
         });
     }
 
-    protected function formatPara(string $tutar): string
+    protected function kpiParaDagilimi(Collection $satirlar, string $alan): string
+    {
+        return $satirlar
+            ->filter(fn (object $satir): bool => abs((float) ($satir->{$alan} ?? 0)) > 0.000001)
+            ->map(fn (object $satir): string => $this->formatPara((string) ($satir->{$alan} ?? 0), (string) ($satir->para_birimi ?? 'TRY')))
+            ->implode(' · ') ?: $this->formatPara('0', 'TRY');
+    }
+
+    protected function formatPara(string $tutar, string $paraBirimi = 'TRY'): string
     {
         $normalized = bcadd(is_numeric($tutar) ? $tutar : '0', '0', 2);
         $negative = str_starts_with($normalized, '-');
@@ -153,6 +167,6 @@ trait FaturaListeKpiHesaplari
         [$whole, $fraction] = array_pad(explode('.', $normalized, 2), 2, '00');
         $whole = preg_replace('/\B(?=(\d{3})+(?!\d))/', '.', $whole) ?: '0';
 
-        return ($negative ? '-' : '').$whole.','.$fraction.' TRY';
+        return ($negative ? '-' : '').$whole.','.$fraction.' '.strtoupper($paraBirimi ?: 'TRY');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Muhasebe\Tanimlar;
 
+use App\Muhasebe\Servisler\BirimKodResolver;
 use App\Models\Muhasebe\Birim;
 use App\Models\Muhasebe\CariGrubu;
 use App\Models\Muhasebe\MuhasebeMarka;
@@ -48,7 +49,7 @@ final class TanimKullanimDenetleyicisi
     private static function paraBirimiKullanimdaMi(ParaBirimi $para): bool
     {
         $kod = strtoupper(trim((string) $para->kod));
-        if ($kod === '') {
+        if ($kod === null) {
             return false;
         }
 
@@ -110,16 +111,19 @@ final class TanimKullanimDenetleyicisi
 
     private static function birimKullanimdaMi(Birim $birim): bool
     {
-        $kod = strtoupper(trim((string) $birim->kod));
+        $kod = BirimKodResolver::normalize($birim->kod);
         if ($kod === '') {
             return false;
         }
+
+        $kodlar = BirimKodResolver::acceptedCodes($kod);
+        $kodSql = count($kodlar) > 1 ? 'IN (?, ?)' : '= ?';
 
         $firmaId = $birim->firma_id !== null ? (int) $birim->firma_id : null;
         $global = (bool) $birim->is_sabit || $firmaId === null;
 
         if (Schema::hasTable('stok_kartlari') && Schema::hasColumn('stok_kartlari', 'birim')) {
-            $s = StokKarti::query()->whereRaw('UPPER(TRIM(birim)) = ?', [$kod]);
+            $s = StokKarti::query()->whereRaw('UPPER(TRIM(birim)) '.$kodSql, $kodlar);
             if (! $global && $firmaId !== null) {
                 $s->where('firma_id', $firmaId);
             }
@@ -129,7 +133,7 @@ final class TanimKullanimDenetleyicisi
         }
 
         if (Schema::hasTable('fatura_kalemleri') && Schema::hasColumn('fatura_kalemleri', 'birim')) {
-            $q = DB::table('fatura_kalemleri')->whereRaw('UPPER(TRIM(birim)) = ?', [$kod]);
+            $q = DB::table('fatura_kalemleri')->whereRaw('UPPER(TRIM(birim)) '.$kodSql, $kodlar);
             if (! $global && $firmaId !== null && Schema::hasColumn('faturalar', 'firma_id')) {
                 $q->whereExists(function ($sub) use ($firmaId): void {
                     $sub->selectRaw('1')

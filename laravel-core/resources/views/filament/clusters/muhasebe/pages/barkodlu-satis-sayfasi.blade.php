@@ -151,9 +151,6 @@
                                     <td class="px-2 py-2">
                                         <div class="font-medium text-gray-900 dark:text-gray-100">{{ $kalem['stok_adi'] ?? '-' }}</div>
                                         <div class="text-xs text-gray-500 dark:text-gray-400">Kod: {{ $kalem['stok_kod'] ?? '-' }} | Birim: {{ $kalem['birim'] ?? 'AD' }}</div>
-                                        @if(filled($kalem['stok_partisi_no'] ?? null))
-                                            <div class="text-xs font-medium text-info-600 dark:text-info-400">Stok parçası: {{ $kalem['stok_partisi_no'] }}</div>
-                                        @endif
                                     </td>
                                     <td class="px-2 py-2">{{ $kalem['barkod'] ?? '-' }}</td>
                                     <td class="px-2 py-2">
@@ -162,7 +159,7 @@
                                             min="0.0001"
                                             step="0.0001"
                                             tabindex="{{ 100 + ($index * 10) + 1 }}"
-                                            wire:click.stop
+                                            x-on:click.stop="event.stopPropagation()"
                                             wire:model.blur="kalemler.{{ $index }}.miktar"
                                             class="fi-input block w-28 rounded-lg border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900"
                                         />
@@ -173,7 +170,7 @@
                                             min="0"
                                             step="0.01"
                                             tabindex="{{ 100 + ($index * 10) + 2 }}"
-                                            wire:click.stop
+                                            x-on:click.stop="event.stopPropagation()"
                                             wire:model.blur="kalemler.{{ $index }}.birim_fiyat"
                                             @disabled(! $this->fiyatDegistirmeYetkisiVarMi())
                                             class="fi-input block w-28 rounded-lg border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900"
@@ -185,7 +182,7 @@
                                             min="0"
                                             step="0.01"
                                             tabindex="{{ 100 + ($index * 10) + 3 }}"
-                                            wire:click.stop
+                                            x-on:click.stop="event.stopPropagation()"
                                             wire:model.blur="kalemler.{{ $index }}.iskonto_tutari"
                                             @disabled(! $this->iskontoUygulamaYetkisiVarMi())
                                             class="fi-input block w-24 rounded-lg border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900"
@@ -197,7 +194,7 @@
                                             min="0"
                                             step="0.01"
                                             tabindex="{{ 100 + ($index * 10) + 4 }}"
-                                            wire:click.stop
+                                            x-on:click.stop="event.stopPropagation()"
                                             wire:model.blur="kalemler.{{ $index }}.kdv_orani"
                                             class="fi-input block w-20 rounded-lg border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900"
                                         />
@@ -208,7 +205,7 @@
                                             size="xs"
                                             icon="heroicon-o-trash"
                                             tabindex="{{ 100 + ($index * 10) + 5 }}"
-                                            wire:click.stop
+                                            x-on:click.stop="event.stopPropagation()"
                                             wire:click="kalemSil({{ $index }})"
                                         >
                                             Sil

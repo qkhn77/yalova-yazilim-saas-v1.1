@@ -11,7 +11,7 @@ return new class extends Migration
         if (Schema::hasTable('faturalar')) {
             Schema::table('faturalar', function (Blueprint $table): void {
                 if (! Schema::hasColumn('faturalar', 'e_belge_uuid')) {
-                    $table->uuid('e_belge_uuid')->nullable()->after('e_belge_tipi');
+                    $table->char('e_belge_uuid', 36)->nullable()->after('e_belge_tipi');
                 }
                 if (! Schema::hasColumn('faturalar', 'e_belge_durumu')) {
                     $table->string('e_belge_durumu', 32)->nullable()->after('e_belge_uuid')->index();

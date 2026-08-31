@@ -8,6 +8,7 @@ use App\Muhasebe\Guvenlik\MuhasebeFilamentErisimYardimcisi;
 use App\Muhasebe\Enumlar\FaturaDurumu;
 use App\Muhasebe\Servisler\FaturaIslemServisi;
 use App\Muhasebe\Servisler\FaturaOlcuKalemiServisi;
+use App\Muhasebe\Servisler\FaturaParaBirimiDogrulamaServisi;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
@@ -62,7 +63,6 @@ class EditFatura extends EditRecord
                 ->label(fn (Fatura $record): string => static::faturaNumarasiEksikMi($record) ? 'Fatura no tamamla' : 'Onayla')
                 ->visible(fn (Fatura $record): bool => static::faturaYetkisiVarMi('onay') && (in_array($record->durum, [FaturaDurumu::Taslak, FaturaDurumu::Beklemede], true) || static::faturaNumarasiEksikMi($record)))
                 ->disabled(fn (Fatura $record): bool => ! in_array($record->durum, [FaturaDurumu::Taslak, FaturaDurumu::Beklemede], true) && ! static::faturaNumarasiEksikMi($record))
-                ->requiresConfirmation()
                 ->action(function (Fatura $record): void {
                     static::faturaYetkisiniDogrula('onay');
                     try {
@@ -283,6 +283,22 @@ class EditFatura extends EditRecord
 
         if ($this->record->durum === FaturaDurumu::Onayli) {
             return [];
+        }
+
+        $cariId = (int) ($data['cari_id'] ?? $this->record->cari_id ?? 0);
+        if ($cariId > 0) {
+            try {
+                app(FaturaParaBirimiDogrulamaServisi::class)->dogrula(
+                    (int) $this->record->firma_id,
+                    $cariId,
+                    (string) ($data['para_birimi'] ?? $this->record->para_birimi ?? 'TRY'),
+                );
+            } catch (\App\Muhasebe\Exceptions\IsKuraliIstisnasi $e) {
+                throw ValidationException::withMessages([
+                    'cari_id' => $e->getMessage(),
+                    'para_birimi' => $e->getMessage(),
+                ]);
+            }
         }
 
         if (FaturaKaynagi::kalemDetaylariGoster()) {

@@ -26,7 +26,7 @@ class StokDepoListesiSayfasi extends Page implements HasForms
 
     protected static string $view = 'filament.clusters.muhasebe.pages.stok-depo-listesi-sayfasi';
 
-    protected static ?string $title = 'Depo stokları';
+    protected static ?string $title = 'Depo Stokları';
 
     protected static ?string $slug = 'stok/depo-stoklari';
 

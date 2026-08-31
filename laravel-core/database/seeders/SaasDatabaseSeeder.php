@@ -6,7 +6,8 @@ use Illuminate\Database\Seeder;
 
 /**
  * SaaS çekirdek verisi: roller, modüller, yetkiler, matrisler, planlar.
- * Demo örnek veri {@see SaasDevSampleSeeder} içinde yalnızca local/testing ortamında çalışır.
+ * Demo örnek veri {@see SaasDevSampleSeeder} ile ayrıca ve yalnızca local/testing
+ * ortamında çalıştırılabilir; çekirdek zincirin parçası değildir.
  *
  * Çalıştırma (yalnızca bu şekilde):
  * - php artisan db:seed --class=SaasDatabaseSeeder
@@ -23,7 +24,6 @@ class SaasDatabaseSeeder extends Seeder
             SaasPlansSeeder::class,
             SaasPlanModuleMatrixSeeder::class,
             MuhasebeOlcuBirimleriSeeder::class,
-            SaasDevSampleSeeder::class,
         ]);
     }
 }

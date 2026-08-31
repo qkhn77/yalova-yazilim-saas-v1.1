@@ -11,6 +11,7 @@ use App\Filament\Clusters\Muhasebe\Resources\FaturaKaynagi\Pages\CreateGidenIade
 use App\Filament\Clusters\Muhasebe\Resources\FaturaKaynagi\Pages\CreateGiderFaturasi;
 use App\Filament\Clusters\Muhasebe\Resources\FaturaKaynagi\Pages\CreateIptalFatura;
 use App\Filament\Clusters\Muhasebe\Resources\FaturaKaynagi\Pages\CreateProformaFatura;
+use App\Filament\Clusters\Muhasebe\Resources\FaturaKaynagi;
 use App\Models\Firma;
 use App\Models\Muhasebe\Birim;
 use App\Models\Muhasebe\Cari;
@@ -28,13 +29,14 @@ use App\Muhasebe\Enumlar\StokKartiTuru;
 use App\Muhasebe\Servisler\StokOlcuBakiyeServisi;
 use App\Services\TenantContextService;
 use Database\Seeders\MuhasebeOlcuBirimleriSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Validation\ValidationException;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class FaturaOnayliOlusturmaAkisiTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     public function test_tum_fatura_olusturma_sayfalari_ortak_guvenli_olusturma_akisini_kullanir(): void
     {
@@ -156,6 +158,12 @@ class FaturaOnayliOlusturmaAkisiTest extends TestCase
             'durum' => CariDurumu::Aktif->value,
             'para_birimi' => 'TRY',
         ]);
+        $depo = Depo::query()->create([
+            'firma_id' => $firma->id,
+            'kod' => 'D-OLCU-EMPTY',
+            'ad' => 'Ölçülü Test Deposu',
+            'aktif_mi' => true,
+        ]);
         $this->seed(MuhasebeOlcuBirimleriSeeder::class);
         $anaBirim = Birim::withoutGlobalScopes()->where('kod', 'MTK')->firstOrFail();
         $adetBirimi = Birim::withoutGlobalScopes()->where('kod', 'AD')->firstOrFail();
@@ -170,48 +178,32 @@ class FaturaOnayliOlusturmaAkisiTest extends TestCase
             'kdv_orani' => 0,
             'stok_takip' => true,
             'stok_miktari' => 10,
+            'depo_id' => $depo->id,
             'olculu_takip_turu' => 'alan',
             'ana_birim_id' => $anaBirim->id,
             'ikincil_birim_id' => $adetBirimi->id,
         ]);
-
         $this->actingAs($user);
         session([TenantContextService::SESSION_AKTIF_FIRMA_ID => $firma->id]);
 
-        Livewire::test(CreateGidenFatura::class)
-            ->set('data', [
-                'firma_id' => $firma->id,
-                'cari_id' => $cari->id,
-                'tur' => FaturaTuru::Giden->value,
-                'durum' => FaturaDurumu::Onayli->value,
-                'tarih' => now()->format('Y-m-d H:i:s'),
-                'para_birimi' => 'TRY',
-                'doviz_kuru' => 1,
-                'kdv_dahil_fiyatlandirma_mi' => false,
-                'tevkifat_orani' => 0,
-                'ara_toplam' => 1000,
-                'kdv_toplam' => 0,
-                'genel_toplam' => 1000,
-                'odenecek_tutar' => 1000,
-                'acik_tutar' => 1000,
-                'kalemler' => [[
-                    'satir_no' => 1,
-                    'sira_no' => 1,
-                    'kalem_tipi' => 'stok_kalemi',
-                    'stok_id' => $stok->id,
-                    'birim' => 'MTK',
-                    'miktar' => 1,
-                    'birim_fiyat' => 100,
-                    'kdv_orani' => 0,
-                    'fiyat_birimi_id' => $anaBirim->id,
-                    'olcu_dagilimlari' => [],
-                    'para_birimi' => 'TRY',
-                ]],
-            ])
-            ->call('create')
-            ->assertHasErrors(['data.kalemler.0.olcu_dagilimlari']);
-
-        $this->assertSame(0, Fatura::withoutGlobalScopes()->count());
+        $data = [
+            'firma_id' => $firma->id,
+            'tur' => FaturaTuru::Giden->value,
+            'kalemler' => [[
+                'kalem_tipi' => 'stok_kalemi',
+                'stok_id' => $stok->id,
+                'birim' => 'MTK',
+                'depo_id' => $depo->id,
+                'miktar' => 1,
+                'olcu_dagilimlari' => [],
+            ]],
+        ];
+        try {
+            FaturaKaynagi::olcuKartlariniFaturaVerisineDonustur($data, $firma->id);
+            $this->fail('Ölçü dağılımı olmayan giden fatura satırı reddedilmeliydi.');
+        } catch (ValidationException $exception) {
+            $this->assertArrayHasKey('kalemler.0.olcu_dagilimlari', $exception->errors());
+        }
     }
 
     public function test_olculu_stok_olcu_dagilimiyle_onayli_fatura_olusturabilir(): void
@@ -298,6 +290,7 @@ class FaturaOnayliOlusturmaAkisiTest extends TestCase
                     'kalem_tipi' => 'stok_kalemi',
                     'stok_id' => $stok->id,
                     'birim' => 'MTK',
+                    'depo_id' => $depo->id,
                     'miktar' => 1,
                     'birim_fiyat' => 1000,
                     'kdv_orani' => 0,

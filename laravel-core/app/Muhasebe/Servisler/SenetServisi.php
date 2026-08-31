@@ -69,7 +69,7 @@ class SenetServisi
             }
 
             $kullaniciId = Auth::id();
-            $senet = Senet::query()->create([
+            $senet = new Senet([
                 'firma_id' => $firmaId,
                 'turu' => SenetTuru::Alinan,
                 'durum' => SenetDurumu::Portfoyde,
@@ -87,6 +87,8 @@ class SenetServisi
                 'arka_gorsel_yolu' => $arkaGorselYolu,
                 'aciklama' => $this->bosVeyaMetin($veri['aciklama'] ?? null),
             ]);
+            $senet->setAttribute('para_birimi_snapshot_tarihi', $islemTarihi);
+            $senet->save();
 
             SenetHareketi::query()->create([
                 'firma_id' => $firmaId,
@@ -164,7 +166,7 @@ class SenetServisi
                 if ($senetNo === '') {
                     throw new IsKuraliIstisnasi('Senet numarası zorunludur.');
                 }
-                $senet = Senet::query()->create([
+                $senet = new Senet([
                     'firma_id' => $firmaId,
                     'turu' => SenetTuru::Verilen,
                     'durum' => SenetDurumu::Verildi,
@@ -182,6 +184,8 @@ class SenetServisi
                     'arka_gorsel_yolu' => $this->gorselYolunuDogrula($firmaId, $veri['arka_gorsel_yolu'] ?? null),
                     'aciklama' => $this->bosVeyaMetin($veri['aciklama'] ?? null),
                 ]);
+                $senet->setAttribute('para_birimi_snapshot_tarihi', $islemTarihi);
+                $senet->save();
             }
 
             $aktifCikis = SenetHareketi::query()
@@ -602,10 +606,6 @@ class SenetServisi
     private function cariyiDogrula(int $firmaId, int $cariId, string $paraBirimi): Cari
     {
         $cari = Cari::query()->whereKey($cariId)->where('firma_id', $firmaId)->firstOrFail();
-        if (strtoupper((string) ($cari->para_birimi ?: 'TRY')) !== strtoupper($paraBirimi)) {
-            throw new IsKuraliIstisnasi('Cari para birimi ile senet para birimi uyuşmuyor.');
-        }
-
         return $cari;
     }
 

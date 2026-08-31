@@ -26,7 +26,7 @@ class StokDepoTransferGecmisiSayfasi extends Page implements HasTable
 
     protected static string $view = 'filament.clusters.muhasebe.pages.stok-depo-transfer-gecmisi';
 
-    protected static ?string $title = 'Depo transfer geçmişi';
+    protected static ?string $title = 'Depo Transfer Geçmişi';
 
     protected static ?string $slug = 'stok/depo-transfer-gecmisi';
 
@@ -58,6 +58,8 @@ class StokDepoTransferGecmisiSayfasi extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
+            ->heading('Transfer Kayıtları')
+            ->emptyStateHeading('Transfer Kaydı Yok')
             ->query(static::transferSorgusu())
             ->columns([
                 Tables\Columns\TextColumn::make('tarih')
@@ -82,12 +84,6 @@ class StokDepoTransferGecmisiSayfasi extends Page implements HasTable
                 Tables\Columns\TextColumn::make('cikisHareketi.miktar')
                     ->label('Miktar')
                     ->numeric(decimalPlaces: 4),
-                Tables\Columns\TextColumn::make('tasinan_parcalar')
-                    ->label('Taşınan parçalar')
-                    ->getStateUsing(fn (StokTransferi $record): string => static::tasinanParcaOzeti($record))
-                    ->placeholder('—')
-                    ->wrap()
-                    ->toggleable(),
                 Tables\Columns\TextColumn::make('durum')
                     ->label('Durum')
                     ->badge()
@@ -126,28 +122,7 @@ class StokDepoTransferGecmisiSayfasi extends Page implements HasTable
             'kaynakDepo:id,firma_id,kod,ad',
             'hedefDepo:id,firma_id,kod,ad',
             'cikisHareketi.stokKarti:id,firma_id,kod,ad',
-            'cikisHareketi.parcaHareketleri:id,firma_id,stok_hareketi_id,stok_parcasi_id,miktar',
-            'cikisHareketi.parcaHareketleri.stokParcasi:id,firma_id,parca_kodu,parca_kodu,plaka_no,parca_mi',
         ]);
     }
 
-    public static function tasinanParcaOzeti(StokTransferi $transfer): string
-    {
-        $hareketler = $transfer->cikisHareketi?->parcaHareketleri;
-        if ($hareketler === null) {
-            return '';
-        }
-
-        return $hareketler
-            ->filter(fn ($hareket): bool => (bool) $hareket->stokParcasi?->parca_mi)
-            ->map(function ($hareket): string {
-                $parca = $hareket->stokParcasi;
-
-                return (string) ($parca->parca_kodu ?: $parca->plaka_no ?: $parca->parca_kodu);
-            })
-            ->filter()
-            ->unique()
-            ->values()
-            ->implode(', ');
-    }
 }

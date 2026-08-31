@@ -21,19 +21,39 @@ class TeknikServisKalem extends Model
     protected $fillable = [
         'firma_id',
         'teknik_servis_kaydi_id',
+        'satir_no',
+        'kalem_tipi',
         'kalem_rolu',
         'muhasebe_durumu',
         'aciklama',
         'stok_id',
+        'depo_id',
+        'seri_nolari',
+        'garanti_baslangic_tarihi',
+        'garanti_bitis_tarihi',
         'birim',
+        'fiyat_birimi_id',
         'miktar',
+        'fiyat_miktari',
+        'ana_miktar',
+        'adet_esdegeri',
+        'olcu_donusum_snapshot',
+        'olcu_satis_birimi',
+        'dogrudan_ortak_adet_fiyati',
         'birim_fiyat',
         'kdv_orani',
         'kdv_dahil_mi',
         'iskonto_tipi',
         'iskonto_orani',
         'iskonto_tutari',
+        'indirim_orani',
+        'indirim_tutari',
+        'kdv_tutari',
         'satir_toplami',
+        'toplam',
+        'net_tutar',
+        'satir_genel_toplam',
+        'satir_indirim_tutari',
         'para_birimi',
     ];
 
@@ -42,6 +62,17 @@ class TeknikServisKalem extends Model
         return [
             'kalem_rolu' => TeknikServisKalemRolu::class,
             'muhasebe_durumu' => TeknikServisKalemMuhasebeDurumu::class,
+            'satir_no' => 'integer',
+            'depo_id' => 'integer',
+            'fiyat_birimi_id' => 'integer',
+            'seri_nolari' => 'array',
+            'garanti_baslangic_tarihi' => 'date',
+            'garanti_bitis_tarihi' => 'date',
+            'fiyat_miktari' => 'decimal:8',
+            'ana_miktar' => 'decimal:8',
+            'adet_esdegeri' => 'decimal:8',
+            'olcu_donusum_snapshot' => 'array',
+            'dogrudan_ortak_adet_fiyati' => 'boolean',
             'miktar' => 'decimal:8',
             'birim_fiyat' => 'decimal:4',
             'kdv_orani' => 'decimal:2',
@@ -49,8 +80,30 @@ class TeknikServisKalem extends Model
             'iskonto_tipi' => 'string',
             'iskonto_orani' => 'decimal:2',
             'iskonto_tutari' => 'decimal:2',
+            'indirim_orani' => 'decimal:2',
+            'indirim_tutari' => 'decimal:2',
+            'kdv_tutari' => 'decimal:2',
             'satir_toplami' => 'decimal:2',
+            'toplam' => 'decimal:2',
+            'net_tutar' => 'decimal:2',
+            'satir_genel_toplam' => 'decimal:2',
+            'satir_indirim_tutari' => 'decimal:2',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (self $kalem): void {
+            $kalem->kalem_tipi ??= 'stok_kalemi';
+            $kalem->kalem_rolu ??= TeknikServisKalemRolu::Satis;
+            $kalem->muhasebe_durumu ??= TeknikServisKalemMuhasebeDurumu::Taslak;
+            $kalem->iskonto_tipi ??= 'oran';
+            $kalem->indirim_orani ??= $kalem->iskonto_orani ?? 0;
+            $kalem->indirim_tutari ??= $kalem->iskonto_tutari ?? 0;
+            $kalem->toplam ??= $kalem->satir_toplami ?? 0;
+            $kalem->satir_genel_toplam ??= $kalem->toplam ?? 0;
+            $kalem->satir_indirim_tutari ??= $kalem->indirim_tutari ?? 0;
+        });
     }
 
     public function firma(): BelongsTo

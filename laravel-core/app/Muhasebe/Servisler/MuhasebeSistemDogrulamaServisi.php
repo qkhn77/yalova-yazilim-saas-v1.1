@@ -36,12 +36,53 @@ class MuhasebeSistemDogrulamaServisi
             $hatalar = array_merge($hatalar, $this->kontrolFinansFaturaKapama($fid));
             $hatalar = array_merge($hatalar, $this->kontrolStokHareketFaturaCapraz($fid));
             $hatalar = array_merge($hatalar, $this->kontrolFinansHareketleri($fid));
+            $hatalar = array_merge($hatalar, $this->kontrolEskiParaBirimiSnapshotlari($fid));
         }
 
         if ($kayitLogla) {
             foreach ($hatalar as $h) {
                 Log::channel($this->logKanali())->warning('muhasebe.sistem.tutarsizlik', $h);
             }
+        }
+
+        return $hatalar;
+    }
+
+    /** Yabancı para eski kayıtlarının kur snapshotı yoksa sessizce varsayım yapma. */
+    private function kontrolEskiParaBirimiSnapshotlari(int $firmaId): array
+    {
+        $hatalar = [];
+        $baz = strtoupper((string) config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY'));
+        $tablolar = [
+            'muhasebe_alacak_planlari',
+            'muhasebe_alacak_plan_taksitleri',
+            'muhasebe_alacak_tahsilat_eslesmeleri',
+            'cekler',
+            'cek_hareketleri',
+            'senetler',
+            'senet_hareketleri',
+        ];
+
+        foreach ($tablolar as $tablo) {
+            if (! DB::getSchemaBuilder()->hasTable($tablo)) {
+                continue;
+            }
+
+            DB::table($tablo)
+                ->where('firma_id', $firmaId)
+                ->whereNotNull('para_birimi')
+                ->where('para_birimi', '!=', $baz)
+                ->whereNull('baz_tutar')
+                ->limit(500)
+                ->pluck('id')
+                ->each(function ($id) use (&$hatalar, $firmaId, $tablo): void {
+                    $hatalar[] = [
+                        'kod' => 'eski_para_birimi_snapshot_yok',
+                        'detay' => $tablo.' kaydının işlem para birimi baz para biriminden farklı ancak kur/baz tutar snapshotı yok.',
+                        'firma_id' => $firmaId,
+                        'kaynak_id' => (int) $id,
+                    ];
+                });
         }
 
         return $hatalar;
@@ -280,9 +321,9 @@ class MuhasebeSistemDogrulamaServisi
         $kapamalar = FaturaFinansKapama::query()
             ->withoutGlobalScopes()
             ->where('firma_id', $firmaId)
-            ->select(['id', 'firma_id', 'fatura_id', 'finans_hareket_id'])
+            ->select(['id', 'firma_id', 'fatura_id', 'finans_hareket_id', 'kur_farki_tutari'])
             ->with([
-                'fatura' => fn ($q) => $q->withoutGlobalScopes()->select(['id', 'firma_id', 'cari_id']),
+                'fatura' => fn ($q) => $q->withoutGlobalScopes()->select(['id', 'firma_id', 'cari_id', 'para_birimi']),
                 'finansHareketi' => fn ($q) => $q->withoutGlobalScopes()->select(['id', 'firma_id', 'cari_id']),
             ])
             ->get();
@@ -331,6 +372,16 @@ class MuhasebeSistemDogrulamaServisi
                 $hatalar[] = [
                     'kod' => 'kapama_cari_fatura_finans',
                     'detay' => 'Kapamada fatura cari_id ile finans cari_id eşleşmiyor.',
+                    'firma_id' => $firmaId,
+                    'kaynak_id' => (int) $k->id,
+                ];
+            }
+
+            if ($fatura !== null && strtoupper((string) ($fatura->para_birimi ?? 'TRY')) !== 'TRY'
+                && $k->kur_farki_tutari === null) {
+                $hatalar[] = [
+                    'kod' => 'eski_kur_farki_snapshot_yok',
+                    'detay' => 'Yabancı para faturanın eski kapama kaydında kur farkı snapshotı yok. Geçmiş kayıt yeniden hesaplanmadan önce incelenmelidir.',
                     'firma_id' => $firmaId,
                     'kaynak_id' => (int) $k->id,
                 ];

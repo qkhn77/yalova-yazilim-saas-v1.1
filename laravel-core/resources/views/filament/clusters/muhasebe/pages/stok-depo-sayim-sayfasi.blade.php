@@ -18,7 +18,7 @@
             description="Sayım sonucu mevcut depo bakiyesiyle karşılaştırılır; yalnızca fark kadar stok hareketi oluşturulur."
         >
             <p class="text-sm text-gray-600 dark:text-gray-400">
-                Parti ve seri numarası takipli ürünler bu ekrandan sayılmaz. Bu ürünlerde parti veya seri bazlı miktarların korunması için ilgili özel giriş akışı kullanılmalıdır.
+                Seri numarası takipli ürünler bu ekrandan sayılmaz. Seri bazlı miktarların korunması için ilgili özel giriş akışı kullanılmalıdır.
             </p>
         </x-filament::section>
     </div>

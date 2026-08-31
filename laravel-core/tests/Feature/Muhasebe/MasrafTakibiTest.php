@@ -27,14 +27,14 @@ use App\Muhasebe\Servisler\FaturaIslemServisi;
 use App\Services\MuhasebeDisaAktarimServisi;
 use App\Services\TenantContextService;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class MasrafTakibiTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     public function test_hizli_masraf_kaydi_tenant_ve_idempotency_kurallarini_korur(): void
     {
@@ -365,7 +365,8 @@ class MasrafTakibiTest extends TestCase
         ]);
         $this->assertDatabaseCount('masraf_fatura_dagitilari', 1);
         $this->assertDatabaseHas('faturalar', [
-            'tur' => FaturaTuru::Gider->value,
+            'tur' => FaturaTuru::Gelen->value,
+            'fatura_sinifi' => 'gider',
             'durum' => FaturaDurumu::Onayli->value,
             'cari_id' => $cari->id,
             'genel_toplam' => '1250.50',

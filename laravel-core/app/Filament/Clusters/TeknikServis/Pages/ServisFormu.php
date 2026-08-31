@@ -407,18 +407,27 @@ class ServisFormu extends Page
     private function odemeOzetiHtml(array $toplamlar): string
     {
         $kdvHaricToplam = $this->kdvHaricToplam($toplamlar);
-        $odenen = (float) ($this->kayit?->tahsilatlar?->where('durum', 'aktif')->sum('tutar') ?? 0);
-        if ($odenen <= 0) {
-            $odenen = (float) ($this->kayit?->odenen_tutar ?? 0);
+        $odenenEtiketi = $this->tahsilatDagilimiEtiketi();
+        if ($odenenEtiketi === '') {
+            $odenenEtiketi = $this->paraFormatla((float) ($this->kayit?->odenen_tutar ?? 0));
         }
 
         $durum = $this->durumDegeri($this->kayit?->odeme_durumu ?? '');
 
         return '<div class="tsf-summary">'
             .$this->ozetSatiri('Toplam Tutar', $this->paraFormatla($kdvHaricToplam))
-            .$this->ozetSatiri('Ödenen', $this->paraFormatla($odenen))
+            .$this->ozetSatiri('Ödenen', $odenenEtiketi)
             .$this->ozetSatiri('Ödeme Durumu', $durum !== '' ? $durum : '-')
             .'</div>';
+    }
+
+    private function tahsilatDagilimiEtiketi(): string
+    {
+        return collect($this->kayit?->tahsilatlar ?? [])
+            ->where('durum', 'aktif')
+            ->groupBy(fn ($tahsilat): string => strtoupper((string) ($tahsilat->kaynak_para_birimi ?: 'TRY')))
+            ->map(fn ($satirlar, $paraBirimi): string => $this->paraFormatla((float) $satirlar->sum('tutar'), (string) $paraBirimi))
+            ->implode(' · ');
     }
 
     /**

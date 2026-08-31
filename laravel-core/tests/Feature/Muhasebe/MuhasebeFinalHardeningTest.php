@@ -9,6 +9,7 @@ use App\Models\Muhasebe\Cari;
 use App\Models\Muhasebe\Fatura;
 use App\Models\Muhasebe\FaturaKalemi;
 use App\Models\Muhasebe\FinansHareketi;
+use App\Models\Muhasebe\DovizKuru;
 use App\Models\Muhasebe\KasaHareketi;
 use App\Models\Muhasebe\KasaHesabi;
 use App\Models\Muhasebe\PosHareketi;
@@ -229,8 +230,14 @@ class MuhasebeFinalHardeningTest extends TestCase
 
     public function test_farkli_para_birimi_kapama_reddedilir(): void
     {
+        config([
+            'muhasebe.coklu_para_birimi.aktif' => true,
+            'muhasebe.coklu_para_birimi.kur_donusumu_aktif' => true,
+            'muhasebe.coklu_para_birimi.baz_para_birimi' => 'TRY',
+        ]);
         $firma = $this->firma('PB1');
         $this->superAdminVeSession($firma);
+        $this->usdKuruEkle($firma);
         $cariUsd = $this->cari($firma, 'USD');
         $kasaUsd = $this->kasa($firma, 'USD');
         $cariTry = $this->cari($firma, 'TRY');
@@ -325,8 +332,14 @@ class MuhasebeFinalHardeningTest extends TestCase
 
     public function test_cari_bakiye_para_birimi_bazinda_dogru_hesaplanir(): void
     {
+        config([
+            'muhasebe.coklu_para_birimi.aktif' => true,
+            'muhasebe.coklu_para_birimi.kur_donusumu_aktif' => true,
+            'muhasebe.coklu_para_birimi.baz_para_birimi' => 'TRY',
+        ]);
         $firma = $this->firma('CB');
         $this->superAdminVeSession($firma);
+        $this->usdKuruEkle($firma);
         $cariTry = $this->cari($firma, 'TRY');
         $cariUsd = $this->cari($firma, 'USD');
         $kasaTry = $this->kasa($firma, 'TRY');
@@ -342,6 +355,20 @@ class MuhasebeFinalHardeningTest extends TestCase
 
         $this->assertSame('60.00', (string) $try->bakiye);
         $this->assertSame('50.00', (string) $usd->bakiye);
+    }
+
+    private function usdKuruEkle(Firma $firma): void
+    {
+        DovizKuru::query()->create([
+            'firma_id' => $firma->id,
+            'kaynak_para_birimi' => 'USD',
+            'hedef_para_birimi' => 'TRY',
+            'is_sabit' => false,
+            'tanim_firma_kapsami' => $firma->id,
+            'tarih' => now()->toDateString(),
+            'kur' => '40',
+            'manuel_mi' => true,
+        ]);
     }
 
     public function test_finans_kasa_banka_pos_tutarliligi_ve_export_verisi_dogrulanir(): void

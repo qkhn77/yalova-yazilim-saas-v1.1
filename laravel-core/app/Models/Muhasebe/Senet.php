@@ -3,6 +3,7 @@
 namespace App\Models\Muhasebe;
 
 use App\Models\Concerns\HasFirmaTenantScope;
+use App\Models\Concerns\HasParaBirimiSnapshot;
 use App\Models\Firma;
 use App\Models\User;
 use App\Muhasebe\Enumlar\SenetDurumu;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Senet extends Model
 {
     use HasFirmaTenantScope;
+    use HasParaBirimiSnapshot;
 
     protected $table = 'senetler';
 
@@ -29,6 +31,9 @@ class Senet extends Model
         'avalist_adi',
         'tutar',
         'para_birimi',
+        'kur',
+        'baz_para_birimi',
+        'baz_tutar',
         'duzenleme_tarihi',
         'vade_tarihi',
         'sorumlu_kullanici_id',
@@ -49,6 +54,8 @@ class Senet extends Model
             'turu' => SenetTuru::class,
             'durum' => SenetDurumu::class,
             'tutar' => 'decimal:2',
+            'kur' => 'decimal:8',
+            'baz_tutar' => 'decimal:2',
             'duzenleme_tarihi' => 'date',
             'vade_tarihi' => 'date',
             'kapanma_tarihi' => 'datetime',

@@ -86,7 +86,9 @@ class HizliSatisSayfasi extends BarkodluSatisSayfasi
 
     protected function getHeaderActions(): array
     {
-        return [$this->parcaSecerekEkleAction()];
+        // Physical piece tracking was retired from the canonical stock model;
+        // do not expose the removed legacy action on the quick-sale page.
+        return [];
     }
 
     public function form(Form $form): Form

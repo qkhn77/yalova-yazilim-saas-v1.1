@@ -18,8 +18,6 @@ class BarkodluSatisKalemi extends Model
         'satis_id',
         'stok_id',
         'depo_id',
-        'parca_kodu',
-        'parca_dagilimi',
         'barkod',
         'seri_nolari',
         'stok_adi',
@@ -37,7 +35,6 @@ class BarkodluSatisKalemi extends Model
         return [
             'miktar' => 'decimal:8',
             'seri_nolari' => 'array',
-            'parca_dagilimi' => 'array',
             'birim_fiyat' => 'decimal:2',
             'iskonto_tutari' => 'decimal:2',
             'kdv_orani' => 'decimal:2',

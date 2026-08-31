@@ -11,11 +11,13 @@ use App\Models\Muhasebe\StokKarti;
 use App\Models\TeknikServis\TeknikServisKaydi;
 use App\Models\TeknikServis\TeknikServisMuhasebeBaglantisi;
 use App\Muhasebe\Enumlar\FaturaDurumu;
+use App\Muhasebe\Enumlar\FaturaSinifi;
 use App\Muhasebe\Enumlar\FaturaTuru;
 use App\TeknikServis\Enumlar\TeknikServisMuhasebeIslemTipi;
 use App\TeknikServis\Enumlar\TeknikServisMuhasebeSenkronDurumu;
 use Filament\Forms;
 use Filament\Forms\Get;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -169,15 +171,25 @@ class ServisGiderFaturasiDestegi
 
         static::validateReferences($hazirVeri, $firmaId);
 
-        return DB::transaction(function () use ($servis, $hazirVeri, $firmaId, $servisId): Fatura {
+        // Formdaki fatura tarihi yalnızca gün bilgisini taşır. Faturalar tablosu
+        // dateTime kullandığı için saat kısmı aksi halde 00:00:00 olarak kaydolur.
+        // Seçilen tarihi koruyup kayıt anındaki güncel saati ekliyoruz.
+        $faturaTarihi = now();
+        if (filled($hazirVeri['tarih'] ?? null)) {
+            $faturaTarihi = Carbon::parse((string) $hazirVeri['tarih'])
+                ->setTimeFrom($faturaTarihi);
+        }
+
+        return DB::transaction(function () use ($servis, $hazirVeri, $firmaId, $servisId, $faturaTarihi): Fatura {
             $paraBirimi = strtoupper((string) ($hazirVeri['para_birimi'] ?? 'TRY'));
 
             $fatura = Fatura::query()->create([
                 'firma_id' => $firmaId,
                 'cari_id' => (int) $hazirVeri['cari_id'],
                 'tur' => (string) $hazirVeri['tur'],
+                'fatura_sinifi' => FaturaSinifi::Gider->value,
                 'durum' => (string) ($hazirVeri['durum'] ?? FaturaDurumu::Taslak->value),
-                'tarih' => $hazirVeri['tarih'] ?? now(),
+                'tarih' => $faturaTarihi,
                 'doviz_kuru' => (float) ($hazirVeri['doviz_kuru'] ?? 1),
                 'ara_toplam' => $hazirVeri['ara_toplam'] ?? 0,
                 'baz_ara_toplam' => $hazirVeri['ara_toplam'] ?? 0,

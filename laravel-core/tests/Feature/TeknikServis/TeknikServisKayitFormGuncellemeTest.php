@@ -31,14 +31,14 @@ use App\TeknikServis\Enumlar\ServisTipi;
 use App\TeknikServis\Servisler\TeknikServisTahsilatServisi;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\FileUpload;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\URL;
 use ReflectionMethod;
 use Tests\TestCase;
 
 class TeknikServisKayitFormGuncellemeTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     public function test_cihaz_gorseller_alani_append_ve_tekli_parallel_upload_ayari_kullanir(): void
     {
@@ -289,6 +289,96 @@ class TeknikServisKayitFormGuncellemeTest extends TestCase
         ]);
     }
 
+    public function test_farkli_para_birimli_teknik_servis_tahsilati_iptal_ve_duzeltmede_baz_kuru_korur(): void
+    {
+        $firma = $this->firmaOlustur('ts-doviz');
+        $kullanici = $this->superAdminOlustur();
+        $cari = $this->cariOlustur($firma, 'USD');
+        $durum = $this->durumOlustur();
+        $servis = $this->servisKaydiOlustur($firma, $cari, $durum, $kullanici);
+        $kasa = KasaHesabi::query()->create([
+            'firma_id' => $firma->id,
+            'kod' => 'KASA-'.uniqid(),
+            'ad' => 'TRY Kasa',
+            'para_birimi' => 'TRY',
+            'durum' => HesapDurumu::Aktif->value,
+        ]);
+
+        $this->actingAs($kullanici);
+        session([TenantContextService::SESSION_AKTIF_FIRMA_ID => $firma->id]);
+
+        $servisTahsilati = app(TeknikServisTahsilatServisi::class)->olustur($servis->fresh(['cari']) ?? $servis, [
+            'kanal' => 'kasa',
+            'kasa_hesap_id' => $kasa->id,
+            'kaynak_para_birimi' => 'USD',
+            'hedef_para_birimi' => 'TRY',
+            'doviz_kuru_turu' => 'manuel',
+            'doviz_kuru' => '40',
+            'tutar' => '100',
+            'hedef_tutar' => '4000',
+            'tarih' => '2026-08-22 10:00:00',
+        ]);
+
+        $eskiFinansId = (int) $servisTahsilati->finans_hareketi_id;
+        $this->assertDatabaseHas('finans_hareketleri', [
+            'id' => $eskiFinansId,
+            'tutar' => '100.00',
+            'para_birimi' => 'USD',
+            'baz_tutar' => '4000.00',
+            'baz_para_birimi' => 'TRY',
+            'kur' => '40.00000000',
+        ]);
+
+        $duzeltilmis = app(TeknikServisTahsilatServisi::class)->guncelle($servisTahsilati->fresh(), [
+            'kanal' => 'kasa',
+            'kasa_hesap_id' => $kasa->id,
+            'kaynak_para_birimi' => 'USD',
+            'hedef_para_birimi' => 'TRY',
+            'doviz_kuru_turu' => 'manuel',
+            'doviz_kuru' => '42',
+            'tutar' => '120',
+            'hedef_tutar' => '5040',
+            'tarih' => '2026-08-22 11:00:00',
+        ]);
+
+        $duzeltmeTersId = (int) $duzeltilmis->iptal_finans_hareketi_id;
+        $this->assertDatabaseHas('finans_hareketleri', [
+            'id' => $duzeltmeTersId,
+            'durum' => 'aktif',
+            'tutar' => '100.00',
+            'baz_tutar' => '4000.00',
+            'baz_para_birimi' => 'TRY',
+            'kur' => '40.00000000',
+        ]);
+        $this->assertDatabaseHas('finans_hareketleri', [
+            'id' => $eskiFinansId,
+            'durum' => 'iptal',
+        ]);
+        $this->assertDatabaseHas('finans_hareketleri', [
+            'id' => $duzeltilmis->finans_hareketi_id,
+            'durum' => 'aktif',
+            'tutar' => '120.00',
+            'baz_tutar' => '5040.00',
+            'baz_para_birimi' => 'TRY',
+            'kur' => '42.00000000',
+        ]);
+
+        $iptalEdilmis = app(TeknikServisTahsilatServisi::class)->iptalEt($duzeltilmis->fresh(), 'Test iptali');
+        $sonTersId = (int) $iptalEdilmis->iptal_finans_hareketi_id;
+        $this->assertDatabaseHas('finans_hareketleri', [
+            'id' => $sonTersId,
+            'durum' => 'aktif',
+            'tutar' => '120.00',
+            'baz_tutar' => '5040.00',
+            'baz_para_birimi' => 'TRY',
+            'kur' => '42.00000000',
+        ]);
+        $this->assertDatabaseHas('finans_hareketleri', [
+            'id' => $duzeltilmis->finans_hareketi_id,
+            'durum' => 'iptal',
+        ]);
+    }
+
     public function test_teslim_fisi_varsayilan_teslim_sablonunu_kullanir(): void
     {
         $firma = $this->firmaOlustur('ts-teslim');
@@ -362,7 +452,7 @@ class TeknikServisKayitFormGuncellemeTest extends TestCase
         ]);
     }
 
-    private function cariOlustur(Firma $firma): Cari
+    private function cariOlustur(Firma $firma, string $paraBirimi = 'TRY'): Cari
     {
         return Cari::query()->create([
             'firma_id' => $firma->id,
@@ -370,7 +460,7 @@ class TeknikServisKayitFormGuncellemeTest extends TestCase
             'ad' => 'Test Cari',
             'tur' => CariTuru::Musteri->value,
             'durum' => CariDurumu::Aktif->value,
-            'para_birimi' => 'TRY',
+            'para_birimi' => $paraBirimi,
         ]);
     }
 

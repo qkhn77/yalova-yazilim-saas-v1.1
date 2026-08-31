@@ -46,7 +46,7 @@ class BankaHesabiKaynagi extends Resource
 
     protected static ?string $modelLabel = 'Banka hesabi';
 
-    protected static ?string $pluralModelLabel = 'Banka hesaplari';
+    protected static ?string $pluralModelLabel = 'Banka Hesapları';
 
     protected static ?string $recordTitleAttribute = 'ad';
 

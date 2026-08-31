@@ -35,6 +35,9 @@ class EcommerceTahsilatAyarlarFallbackTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // Module-gate behavior has dedicated tests; these cases exercise the
+        // post-payment accounting fallback after a fixture-created order.
+        $this->withoutMiddleware(\App\Http\Middleware\EcommerceFrontErisimMiddleware::class);
         config()->set('app.url', 'http://localhost');
         URL::forceRootUrl('http://localhost');
         config(['ecommerce.odeme_dakika' => 15]);

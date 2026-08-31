@@ -11,8 +11,6 @@ return new class extends Migration
         'stok_kartlari' => ['kritik_seviye_miktar' => ['nullable' => false, 'default' => 0], 'minimum_stok' => ['nullable' => true, 'default' => null], 'maksimum_stok' => ['nullable' => true, 'default' => null], 'stok_miktari' => ['nullable' => false, 'default' => 0], 'rezerve_miktar' => ['nullable' => false, 'default' => 0]],
         'stok_hareketleri' => ['miktar' => ['nullable' => false, 'default' => null], 'onceki_miktar' => ['nullable' => false, 'default' => 0], 'sonraki_miktar' => ['nullable' => false, 'default' => 0]],
         'stok_depo_bakiyeleri' => ['miktar' => ['nullable' => false, 'default' => 0], 'rezerve_miktar' => ['nullable' => false, 'default' => 0]],
-        'stok_parcalari' => ['giren_miktar' => ['nullable' => false, 'default' => 0], 'kalan_miktar' => ['nullable' => false, 'default' => 0]],
-        'stok_hareketi_partileri' => ['miktar' => ['nullable' => false, 'default' => null]],
         'fatura_kalemleri' => ['miktar' => ['nullable' => false, 'default' => 0]],
         'teklif_kalemleri' => ['miktar' => ['nullable' => false, 'default' => 1]],
         'sepet_kalemleri' => ['miktar' => ['nullable' => false, 'default' => 1]],

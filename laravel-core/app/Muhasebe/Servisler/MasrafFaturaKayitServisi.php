@@ -8,6 +8,7 @@ use App\Models\Muhasebe\FaturaKalemi;
 use App\Models\Muhasebe\Masraf;
 use App\Filament\Clusters\Muhasebe\Resources\FaturaKaynagi;
 use App\Muhasebe\Enumlar\FaturaDurumu;
+use App\Muhasebe\Enumlar\FaturaSinifi;
 use App\Muhasebe\Enumlar\FaturaTuru;
 use App\Muhasebe\Exceptions\IsKuraliIstisnasi;
 use Illuminate\Support\Facades\DB;
@@ -160,7 +161,8 @@ final class MasrafFaturaKayitServisi
             'firma_id' => $firmaId,
             'isletme_proje_id' => $masraf->isletme_proje_id,
             'cari_id' => $cariId,
-            'tur' => FaturaTuru::Gider->value,
+            'tur' => FaturaTuru::Gelen->value,
+            'fatura_sinifi' => FaturaSinifi::Gider->value,
             'durum' => FaturaDurumu::Taslak->value,
             'tarih' => $hesap['tarih'] ?? $alanlar['fatura_tarihi'] ?? $masraf->tarih,
             'vade_tarihi' => $alanlar['fatura_vade_tarihi'] ?? null,

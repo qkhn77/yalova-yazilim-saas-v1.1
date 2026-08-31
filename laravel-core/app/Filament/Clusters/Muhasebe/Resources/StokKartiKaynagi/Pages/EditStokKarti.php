@@ -321,8 +321,7 @@ class EditStokKarti extends EditRecord
             $data['tur'] = \App\Muhasebe\Enumlar\StokKartiTuru::ETicaret->value;
         }
 
-        // Parti alanları stok kartında değil, stok hareketi sırasında tutulur.
-        unset($data['parca_kodu'], $data['uretim_tarihi'], $data['son_kullanma_tarihi'], $data['seri_nolari'], $data['garanti_baslangic_tarihi'], $data['garanti_bitis_tarihi']);
+        unset($data['uretim_tarihi'], $data['son_kullanma_tarihi'], $data['seri_nolari'], $data['garanti_baslangic_tarihi'], $data['garanti_bitis_tarihi']);
 
         return $data;
     }

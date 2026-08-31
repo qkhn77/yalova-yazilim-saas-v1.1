@@ -103,10 +103,10 @@ class MuhasebeDisaAktarimServisi
             ->select([
                 DB::raw("COALESCE(NULLIF(para_birimi, ''), 'TRY') as para_birimi"),
                 DB::raw("SUM(CASE WHEN tur IN ('giden','proforma') THEN genel_toplam ELSE 0 END) as gelir"),
-                DB::raw("SUM(CASE WHEN tur IN ('gelen','gider') THEN genel_toplam ELSE 0 END) as gider"),
+                DB::raw("SUM(CASE WHEN tur IN ('gelen','gelen_fatura','gider','gider_faturasi') THEN genel_toplam ELSE 0 END) as gider"),
                 DB::raw('COUNT(*) as fatura_adedi'),
                 DB::raw("SUM(CASE WHEN tur IN ('giden','proforma') THEN 1 ELSE 0 END) as gelir_fatura_adedi"),
-                DB::raw("SUM(CASE WHEN tur IN ('gelen','gider') THEN 1 ELSE 0 END) as gider_fatura_adedi"),
+                DB::raw("SUM(CASE WHEN tur IN ('gelen','gelen_fatura','gider','gider_faturasi') THEN 1 ELSE 0 END) as gider_fatura_adedi"),
             ])
             ->where('firma_id', $firmaId)
             ->where('durum', FaturaDurumu::Onayli)

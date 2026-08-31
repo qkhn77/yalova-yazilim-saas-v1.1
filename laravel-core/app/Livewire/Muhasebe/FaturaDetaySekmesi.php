@@ -98,8 +98,6 @@ class FaturaDetaySekmesi extends Component
                     'aciklama',
                     'birim',
                     'miktar',
-                    'parca_kodu',
-                    'parca_dagilimi',
                     'seri_nolari',
                     'birim_fiyat',
                     'kdv_orani',
@@ -116,7 +114,6 @@ class FaturaDetaySekmesi extends Component
                     'id',
                     'firma_id',
                     'fatura_kalemi_id',
-                    'stok_parcasi_id',
                     'ana_miktar',
                     'adet_esdegeri',
                     'takip_turu',
@@ -127,7 +124,6 @@ class FaturaDetaySekmesi extends Component
                 ])
                 ->orderBy('sira')
                 ->orderBy('id'),
-            'kalemler.olcuDagilimlari.parti:id,firma_id,parca_kodu,parca_kodu,barkod,plaka_no,parca_mi',
         ]);
 
         $rows = '';
@@ -196,16 +192,8 @@ class FaturaDetaySekmesi extends Component
     private function kalemTakipBilgisi(FaturaKalemi $kalem): string
     {
         $satirlar = [];
-        $partiler = [];
-        $stokParcalari = [];
 
         foreach ($kalem->olcuDagilimlari as $dagilim) {
-            $parti = $dagilim->parti;
-            if (! $parti?->parca_mi) {
-                continue;
-            }
-
-            $kod = (string) ($parti->parca_kodu ?: $parti->plaka_no ?: $parti->parca_kodu);
             $miktar = rtrim(rtrim(number_format((float) $dagilim->ana_miktar, 8, '.', ''), '0'), '.');
             $adetEsdegeri = rtrim(rtrim(number_format((float) $dagilim->adet_esdegeri, 8, '.', ''), '0'), '.');
             $birim = match ((string) $dagilim->takip_turu) {
@@ -220,58 +208,17 @@ class FaturaDetaySekmesi extends Component
                 ->map(fn ($deger): string => rtrim(rtrim(number_format((float) $deger, 4, '.', ''), '0'), '.'))
                 ->implode(' × ');
 
-            $etiket = $kod;
-            if ($miktar !== '') {
-                $etiket .= ' · '.$miktar.($birim !== '' ? ' '.$birim : '');
-            }
+            $etiket = $miktar !== '' ? $miktar.($birim !== '' ? ' '.$birim : '') : '';
             if ($adetEsdegeri !== '') {
-                $etiket .= ' · '.$adetEsdegeri.' adet eşdeğeri';
+                $etiket .= ($etiket !== '' ? ' · ' : '').$adetEsdegeri.' adet eşdeğeri';
             }
             if ($boyutlar !== '') {
-                $etiket .= ' · '.$boyutlar;
-            }
-            if (filled($parti->barkod)) {
-                $etiket .= ' · Barkod: '.$parti->barkod;
+                $etiket .= ($etiket !== '' ? ' · ' : '').$boyutlar;
             }
 
-            $stokParcalari[$parti->getKey()] = $etiket;
-        }
-
-        if ($stokParcalari !== []) {
-            $satirlar[] = '<span class="text-xs text-gray-500">Stok parçası: '.e(implode(' | ', array_values($stokParcalari))).'</span>';
-        }
-
-        if (filled($kalem->parca_kodu)) {
-            $partiler[] = (string) $kalem->parca_kodu;
-        }
-
-        foreach ((array) ($kalem->parca_dagilimi ?? []) as $parti) {
-            if (! is_array($parti) || blank($parti['parca_kodu'] ?? null)) {
-                continue;
+            if ($etiket !== '') {
+                $satirlar[] = '<span class="text-xs text-gray-500">Ölçü dağılımı: '.e($etiket).'</span>';
             }
-
-            $etiket = (string) $parti['parca_kodu'];
-            if (filled($parti['miktar'] ?? null)) {
-                $etiket .= ' ('.(string) $parti['miktar'].')';
-            }
-            $partiler[] = $etiket;
-        }
-
-        $partiler = array_values(array_unique($partiler));
-        if ($stokParcalari !== []) {
-            $parcaKodlari = collect($kalem->olcuDagilimlari)
-                ->map(fn ($dagilim): string => (string) ($dagilim->parti?->parca_kodu ?? ''))
-                ->filter()
-                ->all();
-            $partiler = array_values(array_filter(
-                $partiler,
-                fn (string $etiket): bool => ! collect($parcaKodlari)->contains(
-                    fn (string $kod): bool => $etiket === $kod || str_starts_with($etiket, $kod.' (')
-                )
-            ));
-        }
-        if ($partiler !== []) {
-            $satirlar[] = '<span class="text-xs text-gray-500">Parti / Lot: '.e(implode(', ', $partiler)).'</span>';
         }
 
         $seriler = array_values(array_filter(array_map(
@@ -432,7 +379,7 @@ class FaturaDetaySekmesi extends Component
                 <th class="px-3 py-2 font-medium">Stok</th>
                 <th class="px-3 py-2 font-medium">İşlem türü</th>
                 <th class="px-3 py-2 font-medium text-end">Miktar</th>
-                <th class="px-3 py-2 font-medium">Parti / Seri No Barkodu</th>
+                <th class="px-3 py-2 font-medium">Seri No Barkodu</th>
                 <th class="px-3 py-2 font-medium">Tarih</th>
             </tr></thead><tbody>'.$rows.'</tbody></table></div>');
     }

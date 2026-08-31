@@ -46,6 +46,12 @@ final class BarkodluSatisAlacakOzetServisi
                 ->first()
             : null;
 
+        $iptalMi = (string) ($satis->durum ?? '') === 'iptal';
+        if ($iptalMi) {
+            $finansalAcikTutar = 0.0;
+            $plansizKalanTutar = 0.0;
+        }
+
         return [
             'satis' => $satis,
             'toplam_tutar' => $toplamTutar,
@@ -63,8 +69,8 @@ final class BarkodluSatisAlacakOzetServisi
             'taksitler' => $plan ? $plan->taksitler()->orderBy('sira_no')->get() : collect(),
             'plan_tahsilatlari' => $plan ? $this->planTahsilatlari($plan) : collect(),
             'dogrudan_tahsilatlar' => $dogrudanTahsilatlar,
-            'durum' => $this->durum($plan, $finansalAcikTutar, $plansizKalanTutar),
-            'durum_etiketi' => $this->durumEtiketi($plan, $finansalAcikTutar, $plansizKalanTutar),
+            'durum' => $iptalMi ? 'kapali' : $this->durum($plan, $finansalAcikTutar, $plansizKalanTutar),
+            'durum_etiketi' => $iptalMi ? 'Tam' : $this->durumEtiketi($plan, $finansalAcikTutar, $plansizKalanTutar),
         ];
     }
 

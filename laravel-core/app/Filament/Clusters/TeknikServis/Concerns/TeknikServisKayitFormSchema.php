@@ -262,11 +262,18 @@ final class TeknikServisKayitFormSchema
 
                             self::telefonAlaniniDoldur($set, 'musteri_tel', (string) ($cari->telefon ?: $cari->gsm ?: ''));
                             $set('tahsilat_para_birimi', strtoupper((string) ($cari->para_birimi ?: 'TRY')));
-                            $set('tahsilat_doviz_kuru', null);
+                         $set('tahsilat_doviz_kuru', null);
                             $set('tahsilat_hedef_tutar', null);
                         }),
+                    Forms\Components\Placeholder::make('cari_acik_servis_uyarisi')
+                        ->hiddenLabel()
+                        ->content(fn (Forms\Get $get): HtmlString => self::cariAcikServisUyarisi(
+                            (int) ($get('cari_id') ?? 0),
+                        ))
+                        ->visible(fn (Forms\Get $get): bool => self::acikServisKaydiCariIcin((int) ($get('cari_id') ?? 0)) !== null)
+                        ->columnSpanFull(),
                     Forms\Components\Select::make('gecmis_cihaz_id')
-                        ->label('Cari cihazı / geçmiş kayıt')
+                        ->label('Mevcut cihazı seç')
                         ->default(fn (): ?int => (int) request()->query('kayitli_cihaz_id', 0) ?: null)
                         ->options(fn (Forms\Get $get): array => self::cariCihazSecenekleri((int) ($get('cari_id') ?? 0)))
                         ->placeholder('Cari seçtikten sonra cihaz seçin')
@@ -293,6 +300,29 @@ final class TeknikServisKayitFormSchema
                             (string) ($get('seri_no') ?? ''),
                         ))
                         ->columnSpan(['default' => 1, 'md' => 1, 'xl' => 1]),
+                    Forms\Components\Placeholder::make('cari_cihaz_kartlari')
+                        ->hiddenLabel()
+                        ->content(fn (Forms\Get $get): HtmlString => self::cariCihazKartlari(
+                            (int) ($get('cari_id') ?? 0),
+                            (int) ($get('gecmis_cihaz_id') ?? 0),
+                        ))
+                        ->visible(fn (Forms\Get $get): bool => (int) ($get('cari_id') ?? 0) > 0)
+                        ->columnSpanFull(),
+                    Forms\Components\Actions::make([
+                        FormAction::make('yeni_cihaz_ekle')
+                            ->label('Yeni cihaz ekle')
+                            ->icon('heroicon-o-plus')
+                            ->color('gray')
+                            ->action(function (Set $set): void {
+                                $set('gecmis_cihaz_id', null);
+                                $set('cihaz_id', null);
+                                $set('marka_id', null);
+                                $set('model_no', null);
+                                $set('seri_no', null);
+                            }),
+                    ])
+                        ->visible(fn (Forms\Get $get): bool => (int) ($get('cari_id') ?? 0) > 0)
+                        ->columnSpanFull(),
                 ]),
 
             Forms\Components\Section::make("Cihaz bilgileri")
@@ -610,22 +640,22 @@ JS)
                 ->visible(fn (Forms\Get $get): bool => ! self::yeniKayitDurumuSeciliMi($get)
                     && ($olusturma || (bool) $get('stok_kalemlerini_goster')))
                 ->description("Teslim Bekleyen / Teslim Edilen durum ge\u{00E7}i\u{015F}lerinde en az bir stok kalemi zorunludur.")
-                ->extraAttributes(['class' => 'teklif-editor-card teklif-line-card teknik-servis-line-card'])
+                ->extraAttributes(['class' => 'teklif-editor-card teklif-line-card kanakku-kalemler-section fatura-kalemler-section'])
                 ->schema([
                     Forms\Components\Repeater::make('kalemler')
                         ->label("Stok kalemleri")
                         ->relationship('kalemler')
-                        ->collapsible()
-                        ->collapsed()
+                        ->collapsible(false)
                         ->reorderable(false)
-                        ->extraAttributes(['class' => 'teklif-line-repeater teknik-servis-line-repeater'])
+                        ->extraAttributes(['class' => 'fatura-kalemler-repeater'])
                         ->addAction(fn (FormAction $action): FormAction => $action
                             ->icon('heroicon-o-plus')
                             ->color('success')
                         )
                         ->extraItemActions([
                             FormAction::make('guncelle_kalem')
-                                ->label('Güncelle')
+                                ->label(null)
+                                ->tooltip('Güncelle')
                                 ->icon('heroicon-m-arrow-path')
                                 ->button()
                                 ->color('gray')
@@ -633,9 +663,17 @@ JS)
                                     $component->callAfterStateUpdated();
                                 }),
                         ])
-                        ->itemLabel(fn (?array $state = null): string => self::stokKalemSatirOzetiDuzMetin($state ?? []))
-                        ->addActionLabel('Stok kalemi ekle')
-                        ->schema([
+                        ->afterStateHydrated(function (Forms\Components\Repeater $component, ?array $state): void {
+                            self::stokKalemSiralariniNormalizeEt($component, $state);
+                        })
+                        ->afterStateUpdated(function (Forms\Components\Repeater $component, ?array $state): void {
+                            self::stokKalemSiralariniNormalizeEt($component, $state);
+                        })
+                        ->itemLabel(fn (): HtmlString => new HtmlString(
+                            '<div class="fatura-kalemler-item-baslik"><strong>Kalemler</strong><span>Fatura satırlarını aşağıdan ekleyin ve düzenleyin.</span></div>'
+                        ))
+                        ->addActionLabel('Kalem Ekle')
+                        ->schema(false ? [
                             Forms\Components\Hidden::make('firma_id')->default(fn (): int => self::gecerliFirmaId()),
                             Forms\Components\Hidden::make('kalem_rolu')->default(TeknikServisKalemRolu::Satis->value),
                             Forms\Components\Hidden::make('muhasebe_durumu')->default(TeknikServisKalemMuhasebeDurumu::Taslak->value),
@@ -804,8 +842,8 @@ JS)
                                 ->columnSpan(['default' => 1, 'md' => 1, 'lg' => 1, 'xl' => 1]),
                             Forms\Components\Hidden::make('kdv_tutari')->default(0),
                             Forms\Components\Hidden::make('para_birimi')->default('TRY'),
-                        ])
-                        ->columns(['default' => 1, 'md' => 19, 'lg' => 19, 'xl' => 19]),
+                        ] : FaturaKaynagi::kalemlerRepeaterAlani(false, false)->getChildComponents())
+                        ->columns(['default' => 1, 'md' => 12, 'xl' => 12]),
                             Forms\Components\Section::make("Kalem özeti")
                         ->extraAttributes(['style' => 'max-width: 460px; margin-left: auto;'])
                         ->schema([
@@ -1214,10 +1252,17 @@ JS)
                             }
 
                             $set('musteri_tel', (string) ($cari->telefon ?: $cari->gsm ?: ''));
-                            $set('tahsilat_para_birimi', strtoupper((string) ($cari->para_birimi ?: 'TRY')));
+                         $set('tahsilat_para_birimi', strtoupper((string) ($cari->para_birimi ?: 'TRY')));
                         }),
+                    Forms\Components\Placeholder::make('cari_acik_servis_uyarisi')
+                        ->hiddenLabel()
+                        ->content(fn (Forms\Get $get): HtmlString => self::cariAcikServisUyarisi(
+                            (int) ($get('cari_id') ?? 0),
+                        ))
+                        ->visible(fn (Forms\Get $get): bool => self::acikServisKaydiCariIcin((int) ($get('cari_id') ?? 0)) !== null)
+                        ->columnSpanFull(),
                     Forms\Components\Select::make('gecmis_cihaz_id')
-                        ->label('Cari cihazı / geçmiş kayıt')
+                        ->label('Mevcut cihazı seç')
                         ->default(fn (): ?int => (int) request()->query('kayitli_cihaz_id', 0) ?: null)
                         ->options(fn (Forms\Get $get): array => self::cariCihazSecenekleri((int) ($get('cari_id') ?? 0)))
                         ->placeholder('Cari seçtikten sonra cihaz seçin')
@@ -1244,6 +1289,29 @@ JS)
                             (string) ($get('seri_no') ?? ''),
                         ))
                         ->columnSpan(['default' => 1, 'md' => 1, 'xl' => 1]),
+                    Forms\Components\Placeholder::make('cari_cihaz_kartlari')
+                        ->hiddenLabel()
+                        ->content(fn (Forms\Get $get): HtmlString => self::cariCihazKartlari(
+                            (int) ($get('cari_id') ?? 0),
+                            (int) ($get('gecmis_cihaz_id') ?? 0),
+                        ))
+                        ->visible(fn (Forms\Get $get): bool => (int) ($get('cari_id') ?? 0) > 0)
+                        ->columnSpanFull(),
+                    Forms\Components\Actions::make([
+                        FormAction::make('yeni_cihaz_ekle')
+                            ->label('Yeni cihaz ekle')
+                            ->icon('heroicon-o-plus')
+                            ->color('gray')
+                            ->action(function (Set $set): void {
+                                $set('gecmis_cihaz_id', null);
+                                $set('cihaz_id', null);
+                                $set('marka_id', null);
+                                $set('model_no', null);
+                                $set('seri_no', null);
+                            }),
+                    ])
+                        ->visible(fn (Forms\Get $get): bool => (int) ($get('cari_id') ?? 0) > 0)
+                        ->columnSpanFull(),
                     Forms\Components\Placeholder::make('kayitli_cihaz_no')
                         ->label('Benzersiz cihaz numarası')
                         ->content(fn (?TeknikServisKaydi $record): string => $record?->kayitliCihaz?->cihaz_no ?? 'Kayıt oluşturulduktan sonra atanır'),
@@ -2465,6 +2533,54 @@ JS;
      *
      * @return array<int, string>
      */
+    private static function cariAcikServisUyarisi(int $cariId): HtmlString
+    {
+        $servis = self::acikServisKaydiCariIcin($cariId);
+        if (! $servis) {
+            return new HtmlString('');
+        }
+
+        $url = TeknikServisKaydiKaynagi::getUrl('edit', ['record' => $servis]);
+        $durum = e((string) ($servis->servisDurumu?->ad ?: 'Açık servis'));
+        $fisNo = e((string) ($servis->fis_no ?: '#'.$servis->getKey()));
+
+        return new HtmlString(
+            '<div class="teknik-servis-acik-kayit-uyarisi">'
+                .'<div><strong>Bu müşterinin açık servis kaydı var.</strong>'
+                .'<span>Fiş: '.$fisNo.' · Durum: '.$durum.'</span></div>'
+                .'<a href="'.e($url).'">Mevcut kaydı aç</a>'
+            .'</div>'
+        );
+    }
+
+    private static function cariCihazKartlari(int $cariId, int $seciliCihazId): HtmlString
+    {
+        $cihazlar = self::cariCihazSecenekleri($cariId);
+        if ($cihazlar === []) {
+            return new HtmlString(
+                '<div class="teknik-servis-cihaz-kartlari teknik-servis-cihaz-kartlari--empty">'
+                    .'Bu müşteriye ait kayıtlı cihaz bulunamadı. Yeni cihaz bilgilerini aşağıdaki alanlara girebilirsiniz.'
+                .'</div>'
+            );
+        }
+
+        $kartlar = collect($cihazlar)->map(function (string $label, int|string $id) use ($seciliCihazId): string {
+            $selected = (int) $id === $seciliCihazId;
+
+            return '<div class="teknik-servis-cihaz-karti'.($selected ? ' is-selected' : '').'">'
+                .'<span class="teknik-servis-cihaz-karti__icon">'.($selected ? '✓' : '•').'</span>'
+                .'<span>'.e($label).'</span>'
+                .'</div>';
+        })->implode('');
+
+        return new HtmlString(
+            '<div class="teknik-servis-cihaz-kartlari">'
+                .'<div class="teknik-servis-cihaz-kartlari__title">Kayıtlı cihazlar</div>'
+                .'<div class="teknik-servis-cihaz-kartlari__grid">'.$kartlar.'</div>'
+            .'</div>'
+        );
+    }
+
     private static function cariCihazSecenekleri(int $cariId): array
     {
         if ($cariId < 1) {
@@ -3185,6 +3301,34 @@ JS;
         return new HtmlString('<span class="teknik-servis-line-index-value">'.e((string) $satirNo).'</span>');
     }
 
+    /**
+     * Teknik servis repeater'ı fatura repeater'ının alanlarını kullanır;
+     * sıra numarası ise dış repeater tarafından normalize edilir.
+     *
+     * @param  array<int|string, mixed>|null  $state
+     */
+    private static function stokKalemSiralariniNormalizeEt(Forms\Components\Repeater $component, ?array $state): void
+    {
+        if (! is_array($state)) {
+            return;
+        }
+
+        $normalized = [];
+        $sira = 0;
+        foreach ($state as $index => $kalem) {
+            if (! is_array($kalem)) {
+                $kalem = [];
+            }
+
+            $sira++;
+            $kalem['sira_no'] = $sira;
+            $kalem['satir_no'] = $sira;
+            $normalized[$index] = $kalem;
+        }
+
+        $component->state($normalized);
+    }
+
     private static function kayitOlusturulduMu(Forms\Get $get): bool
     {
         return self::servisKaydiId($get) > 0;
@@ -3765,59 +3909,39 @@ JS;
     }
 
     /**
+     * Teknik Servis satır hesaplaması, muhasebe fatura satırı ile aynı çekirdek
+     * hesaplayıcıyı kullanır. Böylece fatura tarafındaki iskonto, KDV ve ölçü
+     * güncellemeleri iki ayrı sonuç üretmez.
+     *
      * @param  array<string, mixed>  $kalem
      * @return array{miktar:float,birim_fiyat:float,brut_fiyat:float,iskonto_orani:float,iskonto_tutari:float,kdv_orani:float,kdv_tutari:float,net_toplam:float}
      */
     private static function satirHesabi(array $kalem, string $guncellenenAlan = ''): array
     {
-        $miktar = max(0, (float) ($kalem['miktar'] ?? 0));
-        $birimFiyat = max(0, (float) ($kalem['birim_fiyat'] ?? 0));
-        $kdvOrani = max(0, (float) ($kalem['kdv_orani'] ?? 0));
-        $kdvTutari = max(0, (float) ($kalem['kdv_tutari'] ?? 0));
-        $iskontoOrani = max(0, min(100, (float) ($kalem['iskonto_orani'] ?? 0)));
-        $iskontoTutari = max(0, (float) ($kalem['iskonto_tutari'] ?? 0));
+        $faturaAlan = match ($guncellenenAlan) {
+            'iskonto_orani' => 'indirim_orani',
+            'iskonto_tutari' => 'indirim_tutari',
+            default => $guncellenenAlan,
+        };
 
-        $brutFiyat = $miktar * $birimFiyat;
-
-        if ($guncellenenAlan === 'iskonto_tutari') {
-            $iskontoTutari = min($iskontoTutari, $brutFiyat);
-            $iskontoOrani = $brutFiyat > 0 ? ($iskontoTutari / $brutFiyat) * 100 : 0;
-        } else {
-            // Kayit/hydrate asamasinda oran kirpilmis olsa bile tutari koru.
-            if ($guncellenenAlan === '' && array_key_exists('iskonto_tutari', $kalem)) {
-                $iskontoTutari = min(max((float) ($kalem['iskonto_tutari'] ?? 0), 0), $brutFiyat);
-                $iskontoOrani = $brutFiyat > 0 ? ($iskontoTutari / $brutFiyat) * 100 : 0;
-            } else {
-                $iskontoTutari = $brutFiyat * $iskontoOrani / 100;
-            }
-        }
-
-        $iskontoTutari = min(max($iskontoTutari, 0), $brutFiyat);
-        $kdvMatrahi = max($brutFiyat - $iskontoTutari, 0);
-        if ($guncellenenAlan === 'kdv_tutari') {
-            $kdvTutari = max(0, $kdvTutari);
-            $kdvOrani = $kdvMatrahi > 0 ? ($kdvTutari / $kdvMatrahi) * 100 : 0;
-        } elseif (
-            $guncellenenAlan === ''
-            && array_key_exists('kdv_tutari', $kalem)
-            && trim((string) ($kalem['kdv_orani'] ?? '')) === ''
-        ) {
-            $kdvTutari = max(0, (float) ($kalem['kdv_tutari'] ?? 0));
-            $kdvOrani = $kdvMatrahi > 0 ? ($kdvTutari / $kdvMatrahi) * 100 : 0;
-        } else {
-            $kdvTutari = $kdvMatrahi * ($kdvOrani / 100);
-        }
-        $netToplam = $kdvMatrahi + $kdvTutari;
+        $hesaplanan = FaturaKaynagi::hesaplaKalemSatiri([
+            'miktar' => $kalem['miktar'] ?? 0,
+            'birim_fiyat' => $kalem['birim_fiyat'] ?? 0,
+            'indirim_orani' => $kalem['iskonto_orani'] ?? $kalem['indirim_orani'] ?? 0,
+            'indirim_tutari' => $kalem['iskonto_tutari'] ?? $kalem['indirim_tutari'] ?? 0,
+            'kdv_orani' => $kalem['kdv_orani'] ?? 0,
+            'kdv_tutari' => $kalem['kdv_tutari'] ?? 0,
+        ], $faturaAlan);
 
         return [
-            'miktar' => $miktar,
-            'birim_fiyat' => $birimFiyat,
-            'brut_fiyat' => $brutFiyat,
-            'iskonto_orani' => $iskontoOrani,
-            'iskonto_tutari' => $iskontoTutari,
-            'kdv_orani' => $kdvOrani,
-            'kdv_tutari' => $kdvTutari,
-            'net_toplam' => $netToplam,
+            'miktar' => (float) ($hesaplanan['miktar'] ?? 0),
+            'birim_fiyat' => (float) ($hesaplanan['birim_fiyat'] ?? 0),
+            'brut_fiyat' => (float) ($hesaplanan['brut_fiyat_gosterim'] ?? 0),
+            'iskonto_orani' => (float) ($hesaplanan['indirim_orani'] ?? 0),
+            'iskonto_tutari' => (float) ($hesaplanan['indirim_tutari'] ?? 0),
+            'kdv_orani' => (float) ($hesaplanan['kdv_orani'] ?? 0),
+            'kdv_tutari' => (float) ($hesaplanan['kdv_tutari'] ?? 0),
+            'net_toplam' => (float) ($hesaplanan['toplam'] ?? 0),
         ];
     }
 

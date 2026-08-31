@@ -213,6 +213,32 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
             ->itemLabel(fn (): HtmlString => new HtmlString(
                 '<div class="fatura-kalemler-item-baslik"><strong>Kalemler</strong><span>Fatura satırlarını aşağıdan ekleyin ve düzenleyin.</span></div>'
             ))
+            ->extraItemActions([
+                fn (): Action => Action::make('depo_ayrintilari')
+                    ->label('Depo')
+                    ->icon('heroicon-m-building-storefront')
+                    ->tooltip(fn (Action $action): string => static::depoAyrintisiActionDikkatGerekliMi($action)
+                        ? 'Depo veya seri bilgisi gerekli' : 'Depo / seri ayrıntılarını aç veya kapat')
+                    ->badge(fn (Action $action): ?string => static::depoAyrintisiActionDikkatGerekliMi($action) ? '!' : null)
+                    ->badgeColor('warning')
+                    ->color(fn (Action $action): string => static::depoAyrintisiActionDikkatGerekliMi($action) ? 'warning' : 'gray')
+                    ->iconButton()
+                    ->alpineClickHandler(<<<'JS'
+                        const section = $el.closest('.fi-fo-repeater-item')?.querySelector('.fatura-kalem-detay-paneli');
+                        if (section?.id) {
+                            section.classList.toggle('fatura-kalem-detay-paneli--acik');
+                            section.dispatchEvent(new CustomEvent(
+                                section.classList.contains('fatura-kalem-detay-paneli--acik')
+                                    ? 'open-section'
+                                    : 'collapse-section',
+                                {
+                                bubbles: true,
+                                detail: { id: section.id },
+                                },
+                            ));
+                        }
+                    JS),
+            ])
             ->reorderable(false)
             ->cloneable(false)
             ->collapsible(false)
@@ -424,6 +450,7 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
                         }
 
                         $set('stok_kodu_secim', (string) $stok->id);
+                        $set('miktar', $get('miktar') ?: 1);
                         $set('birim', static::faturaSatirVarsayilanBirimKodu(static::formFirmaId($get), (int) $stok->id));
                         if ($stok->kdv_orani !== null) {
                             $set('kdv_orani', (float) $stok->kdv_orani);
@@ -455,8 +482,7 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
                         }
                         static::kalemleriHesaplaFormdan($get, $set, 'stok_id');
                     }), 'Stok Adı', ['span' => 4]),
-                Section::make('Depo / Seri ayrıntıları')
-                    ->description('Depo stok hareketinin yerini belirler. Seri numarası ise tek tek izlenen ürünün benzersiz numarasını belirtir.')
+                Section::make('Depo / Seri')
                     ->compact()
                     ->collapsible()
                     ->collapsed()
@@ -497,10 +523,13 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
                                     static::formFirmaId($get),
                                     static::formStokId($get),
                                 );
-                                if ($options !== [] && ! static::depoAlanGosterilmeli(
+                                $varsayilan = static::varsayilanDepoIdForForm(
                                     static::formFirmaId($get),
                                     static::formStokId($get),
-                                )) {
+                                );
+                                if ($varsayilan !== null && array_key_exists($varsayilan, $options)) {
+                                    $component->state($varsayilan);
+                                } elseif (count($options) === 1) {
                                     $component->state(array_key_first($options));
                                 }
                             })
@@ -731,8 +760,13 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
                     ->extraInputAttributes(['class' => 'fatura-kalem-miktar'])
                     ->extraAttributes(['class' => 'fatura-kalem-miktar-alani'])
                     ->default(1)
+                    ->afterStateHydrated(function (TextInput $component, $state): void {
+                        if (blank($state)) {
+                            $component->state(1);
+                        }
+                    })
                     ->required()
-                    ->live(debounce: 300)
+                    ->live(onBlur: true)
                     ->afterStateUpdated(fn (Get $get, callable $set) => static::kalemleriHesaplaFormdan($get, $set, 'miktar')), 'Miktar', ['dar' => true, 'span' => 1]),
                 $h(TextInput::make('birim_fiyat')
                     ->label('Birim Fiyat')
@@ -741,7 +775,7 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
                     ->numeric()
                     ->default(0)
                     ->required()
-                    ->live(debounce: 300)
+                    ->live(onBlur: true)
                     ->afterStateUpdated(fn (Get $get, callable $set) => static::kalemleriHesaplaFormdan($get, $set, 'birim_fiyat')), 'Birim Fiyat', ['dar' => true, 'span' => 2]),
                 Hidden::make('fiyat_miktari')->dehydrated(),
                 Hidden::make('ana_miktar')->dehydrated(),
@@ -994,6 +1028,8 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
                         Select::make('cari_id')
                             ->label('Cari')
                             ->searchable()
+                            ->options(fn (): array => static::cariAramaSonuclari(''))
+                            ->optionsLimit(50)
                             ->getSearchResultsUsing(fn (string $search): array => static::cariAramaSonuclari($search))
                             ->getOptionLabelUsing(fn ($value): ?string => static::cariEtiketi($value))
                             ->live()
@@ -1577,7 +1613,13 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
      */
     public static function cariAramaSonuclari(string $search): array
     {
+        $firmaId = static::aktifFirmaId();
+        if ($firmaId < 1) {
+            return [];
+        }
+
         return Cari::query()
+            ->where('firma_id', $firmaId)
             ->when(trim($search) !== '', function (Builder $query) use ($search): Builder {
                 $aranan = '%'.str_replace(['%', '_'], ['\\%', '\\_'], trim($search)).'%';
 
@@ -2163,6 +2205,39 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
             === StokKarti::STOK_TAKIP_TIPI_SERI;
     }
 
+    /** @param array<string, mixed> $kalem */
+    private static function depoSecimiGerekliMi(array $kalem): bool
+    {
+        $stokId = (int) ($kalem['stok_id'] ?? 0);
+        $firmaId = (int) ($kalem['firma_id'] ?? static::aktifFirmaId());
+
+        return $stokId > 0
+            && static::depoAlanGosterilmeli($firmaId, $stokId)
+            && blank($kalem['depo_id'] ?? null);
+    }
+
+    private static function depoAyrintisiActionDikkatGerekliMi(Action $action): bool
+    {
+        $item = $action->getArguments()['item'] ?? null;
+        $repeater = $action->getComponent()->getParentRepeater();
+
+        return is_string($item)
+            && $repeater !== null
+            && static::depoAyrintisiDikkatGerekliMi($repeater->getRawItemState($item));
+    }
+
+    /** @param array<string, mixed> $kalem */
+    private static function depoAyrintisiDikkatGerekliMi(array $kalem): bool
+    {
+        $stokId = (int) ($kalem['stok_id'] ?? 0);
+        $seriGerekli = $stokId > 0
+            && (string) StokKarti::withoutGlobalScopes()->whereKey($stokId)->value('stok_takip_tipi')
+                === StokKarti::STOK_TAKIP_TIPI_SERI
+            && count(array_filter((array) ($kalem['seri_nolari'] ?? []), fn ($seri): bool => filled(trim((string) $seri)))) === 0;
+
+        return static::depoSecimiGerekliMi($kalem) || $seriGerekli;
+    }
+
     private static function kalemFizikselParcaTakibiAktifMi(Get $get): bool
     {
         $stokId = static::formStokId($get);
@@ -2215,25 +2290,21 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
             return false;
         }
 
-        if (static::depoModuluAktifMi($firmaId)) {
-            $olculu = $stok->olculu_takip_turu?->olculuMu() === true;
-            $depoSayisi = $olculu
-                ? StokOlcuBakiyesi::withoutGlobalScopes()
-                    ->where('firma_id', $firmaId)
-                    ->where('stok_id', $stokId)
-                    ->where('ana_miktar', '>', 0)
-                    ->whereNotNull('depo_id')
-                    ->distinct('depo_id')
-                    ->count('depo_id')
-                : StokDepoBakiyesi::withoutGlobalScopes()
-                    ->where('firma_id', $firmaId)
-                    ->where('stok_id', $stokId)
-                    ->where('miktar', '>', 0)
-                    ->whereNotNull('depo_id')
-                    ->distinct('depo_id')
-                    ->count('depo_id');
+        // Ölçülü stokta depo, ölçü bakiyesinin ayrılmaz parçasıdır. Depo
+        // modülü ayarı kapalı olsa bile tek depo bulunan firmalarda bu alanı
+        // gizlemek ölçü dağılımını ve fatura onayını imkânsız bırakır.
+        if ($stok->olculu_takip_turu?->olculuMu() === true) {
+            return Depo::tenantScopeOlmadan(fn (): bool => Depo::query()
+                ->where('firma_id', $firmaId)
+                ->where('aktif_mi', true)
+                ->exists());
+        }
 
-            return $depoSayisi > 1;
+        if (static::depoModuluAktifMi($firmaId)) {
+            // Hedef depo, stokta henüz bakiye yokken de seçilebilir olmalıdır.
+            // Bakiye sayısını görünürlük koşulu yapmak gelen faturada depo
+            // seçimini tamamen saklıyordu.
+            return count(static::depoSecenekleri($firmaId)) > 1;
         }
 
         return false;
@@ -2336,10 +2407,6 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
         }
 
         if (static::depoModuluAktifMi($firmaId)) {
-            if (static::depoAlanGosterilmeli($firmaId, $stokId)) {
-                return null;
-            }
-
             return static::varsayilanDepoId($firmaId);
         }
 

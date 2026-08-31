@@ -10,6 +10,6 @@ class CreateGiderFaturasi extends CreateFatura
 
     protected function varsayilanTur(): ?FaturaTuru
     {
-        return FaturaTuru::Gider;
+        return FaturaTuru::Gelen;
     }
 }

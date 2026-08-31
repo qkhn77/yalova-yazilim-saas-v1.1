@@ -92,12 +92,17 @@ class ReconciliationBakimServisi
 
         foreach ($finanslar as $finans) {
             $kontrol++;
-            $gercekKullanilan = (string) (FaturaFinansKapama::query()->withoutGlobalScopes()->where('finans_hareket_id', $finans->id)->sum('uygulanan_tutar'));
-            $gercekAvans = bcsub((string) $finans->tutar, $gercekKullanilan, self::PARA_BASAMAK);
+            // Finans hareketindeki kullanilan_tutar ve avans_tutar kolonları
+            // 2 basamaklıdır; kapama satırları ise 8 basamak saklayabilir.
+            // Karşılaştırma ve düzeltme finans kolonunun gerçek hassasiyetinde
+            // yapılmazsa 999,996 -> 1.000,00 farkı sürekli hata görünür.
+            $gercekKullanilanHam = (string) (FaturaFinansKapama::query()->withoutGlobalScopes()->where('finans_hareket_id', $finans->id)->sum('uygulanan_tutar'));
+            $gercekKullanilan = number_format((float) $gercekKullanilanHam, 2, '.', '');
+            $gercekAvans = number_format((float) bcsub((string) $finans->tutar, $gercekKullanilanHam, self::PARA_BASAMAK), 2, '.', '');
             $kayitKullanilan = (string) ($finans->kullanilan_tutar ?? '0');
             $kayitAvans = (string) ($finans->avans_tutar ?? '0');
 
-            if (bccomp($kayitKullanilan, $gercekKullanilan, self::PARA_BASAMAK) !== 0 || bccomp($kayitAvans, $gercekAvans, self::PARA_BASAMAK) !== 0) {
+            if (bccomp($kayitKullanilan, $gercekKullanilan, 2) !== 0 || bccomp($kayitAvans, $gercekAvans, 2) !== 0) {
                 $sorun = [
                     'kod' => 'finans.avans_kullanilan_tutarsizligi',
                     'duzeltilebilir' => true,

@@ -228,6 +228,7 @@ class VadeTakipSayfasi extends Page implements HasTable
         $operasyonModu = $this->operasyonModu();
 
         return $table
+            ->heading('Alacak Plan Taksitleri')
             ->query(
                 AlacakPlanTaksiti::query()
                     ->select([
@@ -241,6 +242,10 @@ class VadeTakipSayfasi extends Page implements HasTable
                         'tutar',
                         'odenen_tutar',
                         'kalan_tutar',
+                        'para_birimi',
+                        'kur',
+                        'baz_para_birimi',
+                        'baz_tutar',
                         'son_tahsilat_tarihi',
                         'durum',
                     ])
@@ -292,6 +297,18 @@ class VadeTakipSayfasi extends Page implements HasTable
                     ->label('Tutar')
                     ->formatStateUsing(fn ($state, AlacakPlanTaksiti $record): string => $this->para((string) $state, (string) ($record->plan?->para_birimi ?? 'TRY')))
                     ->sortable(),
+                Tables\Columns\TextColumn::make('kur')
+                    ->label('Kur')
+                    ->formatStateUsing(fn ($state): string => $state === null ? '—' : number_format((float) $state, 8, ',', '.'))
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('baz_tutar')
+                    ->label('Baz tutar')
+                    ->formatStateUsing(fn ($state, AlacakPlanTaksiti $record): string => $state === null
+                        ? '—'
+                        : $this->para((string) $state, (string) ($record->baz_para_birimi ?: config('muhasebe.baz_para_birimi', 'TRY'))))
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('odenen_tutar')
                     ->label('Odenen')
                     ->formatStateUsing(fn ($state, AlacakPlanTaksiti $record): string => $this->para((string) $state, (string) ($record->plan?->para_birimi ?? 'TRY')))
@@ -1730,11 +1747,11 @@ class VadeTakipSayfasi extends Page implements HasTable
                 ->step('0.01')
                 ->live()
                 ->visible(fn (Forms\Get $get): bool => (bool) $get('vade_farki_uygula')),
-            Forms\Components\TextInput::make('para_birimi')
+            Forms\Components\Select::make('para_birimi')
                 ->label('Para birimi')
+                ->options(fn (): array => CariKartiKaynagi::paraBirimiSecenekleriForFirma($this->aktifFirmaId()))
+                ->searchable()
                 ->default('TRY')
-                ->disabled()
-                ->dehydrated()
                 ->required(),
             Forms\Components\Placeholder::make('planlanacak_tutar')
                 ->label('Planlanacak kalan')
@@ -1884,19 +1901,19 @@ class VadeTakipSayfasi extends Page implements HasTable
                 ->required(),
             Forms\Components\Select::make('kasa_hesap_id')
                 ->label('Kasa hesabi')
-                ->options(fn (): array => $this->hesapSecenekleri('kasa', (int) $record->firma_id, $paraBirimi))
+                ->options(fn (): array => $this->hesapSecenekleriTumParaBirimleri('kasa', (int) $record->firma_id))
                 ->visible(fn (Forms\Get $get): bool => (string) $get('kanal') === 'kasa')
                 ->required(fn (Forms\Get $get): bool => (string) $get('kanal') === 'kasa')
                 ->searchable(),
             Forms\Components\Select::make('banka_hesap_id')
                 ->label('Banka hesabi')
-                ->options(fn (): array => $this->hesapSecenekleri('banka', (int) $record->firma_id, $paraBirimi))
+                ->options(fn (): array => $this->hesapSecenekleriTumParaBirimleri('banka', (int) $record->firma_id))
                 ->visible(fn (Forms\Get $get): bool => (string) $get('kanal') === 'banka')
                 ->required(fn (Forms\Get $get): bool => (string) $get('kanal') === 'banka')
                 ->searchable(),
             Forms\Components\Select::make('pos_hesap_id')
                 ->label('POS hesabi')
-                ->options(fn (): array => $this->hesapSecenekleri('pos', (int) $record->firma_id, $paraBirimi))
+                ->options(fn (): array => $this->hesapSecenekleriTumParaBirimleri('pos', (int) $record->firma_id))
                 ->visible(fn (Forms\Get $get): bool => (string) $get('kanal') === 'pos')
                 ->required(fn (Forms\Get $get): bool => (string) $get('kanal') === 'pos')
                 ->searchable(),
@@ -1928,6 +1945,18 @@ class VadeTakipSayfasi extends Page implements HasTable
                 ->maxValue($planKalan)
                 ->step('0.01')
                 ->required(),
+            Forms\Components\TextInput::make('doviz_kuru')
+                ->label('Dönüşüm kuru')
+                ->numeric()
+                ->minValue(0.00000001)
+                ->step('0.00000001')
+                ->helperText('Hesap para birimi vadeden farklıysa zorunludur.'),
+            Forms\Components\TextInput::make('hedef_tutar')
+                ->label('Hesaba geçecek tutar')
+                ->numeric()
+                ->minValue(0.01)
+                ->step('0.01')
+                ->helperText('Boş bırakılırsa kur ve tahsilat tutarından hesaplanır.'),
             Forms\Components\DateTimePicker::make('tarih')
                 ->label('Tahsilat tarihi')
                 ->default(now())
@@ -1997,6 +2026,18 @@ class VadeTakipSayfasi extends Page implements HasTable
                 ->step('0.01')
                 ->visible(fn (Forms\Get $get): bool => (string) $get('tahsilat_tipi') === 'ozel')
                 ->required(fn (Forms\Get $get): bool => (string) $get('tahsilat_tipi') === 'ozel'),
+            Forms\Components\TextInput::make('doviz_kuru')
+                ->label('Dönüşüm kuru')
+                ->numeric()
+                ->minValue(0.00000001)
+                ->step('0.00000001')
+                ->helperText('Tahsilat hesabı vadeden farklı para birimindeyse zorunludur.'),
+            Forms\Components\TextInput::make('hedef_tutar')
+                ->label('Hesaba geçecek tutar')
+                ->numeric()
+                ->minValue(0.01)
+                ->step('0.01')
+                ->helperText('Boş bırakılırsa kur ve vade tutarından hesaplanır.'),
             Forms\Components\DateTimePicker::make('tarih')
                 ->label('Tahsilat tarihi')
                 ->default(now())
@@ -2049,22 +2090,34 @@ class VadeTakipSayfasi extends Page implements HasTable
                 ->required(),
             Forms\Components\Select::make('kasa_hesap_id')
                 ->label('Kasa hesabi')
-                ->options(fn (): array => $this->hesapSecenekleri('kasa', (int) $record->firma_id, $paraBirimi))
+                ->options(fn (): array => $this->hesapSecenekleriTumParaBirimleri('kasa', (int) $record->firma_id))
                 ->visible(fn (Forms\Get $get): bool => (string) $get('kanal') === 'kasa')
                 ->required(fn (Forms\Get $get): bool => (string) $get('kanal') === 'kasa')
                 ->searchable(),
             Forms\Components\Select::make('banka_hesap_id')
                 ->label('Banka hesabi')
-                ->options(fn (): array => $this->hesapSecenekleri('banka', (int) $record->firma_id, $paraBirimi))
+                ->options(fn (): array => $this->hesapSecenekleriTumParaBirimleri('banka', (int) $record->firma_id))
                 ->visible(fn (Forms\Get $get): bool => (string) $get('kanal') === 'banka')
                 ->required(fn (Forms\Get $get): bool => (string) $get('kanal') === 'banka')
                 ->searchable(),
             Forms\Components\Select::make('pos_hesap_id')
                 ->label('POS hesabi')
-                ->options(fn (): array => $this->hesapSecenekleri('pos', (int) $record->firma_id, $paraBirimi))
+                ->options(fn (): array => $this->hesapSecenekleriTumParaBirimleri('pos', (int) $record->firma_id))
                 ->visible(fn (Forms\Get $get): bool => (string) $get('kanal') === 'pos')
                 ->required(fn (Forms\Get $get): bool => (string) $get('kanal') === 'pos')
                 ->searchable(),
+            Forms\Components\TextInput::make('doviz_kuru')
+                ->label('Dönüşüm kuru')
+                ->numeric()
+                ->minValue(0.00000001)
+                ->step('0.00000001')
+                ->helperText('Hesap para birimi plandan farklıysa zorunludur.'),
+            Forms\Components\TextInput::make('hedef_tutar')
+                ->label('Hesaba geçecek tutar')
+                ->numeric()
+                ->minValue(0.01)
+                ->step('0.01')
+                ->helperText('Boş bırakılırsa kur ve plan kalanından hesaplanır.'),
             Forms\Components\DateTimePicker::make('tarih')
                 ->label('Tahsilat tarihi')
                 ->default(now())
@@ -2403,6 +2456,21 @@ class VadeTakipSayfasi extends Page implements HasTable
                 ->all(),
             default => [],
         };
+    }
+
+    private function hesapParaBirimi(string $tip, int $firmaId, int $hesapId): string
+    {
+        $model = match ($tip) {
+            'kasa' => KasaHesabi::class,
+            'banka' => BankaHesabi::class,
+            'pos' => PosHesabi::class,
+            default => null,
+        };
+        if (! $model) {
+            return 'TRY';
+        }
+
+        return strtoupper((string) (($model::query()->where('firma_id', $firmaId)->whereKey($hesapId)->value('para_birimi')) ?: 'TRY'));
     }
 
     /**
@@ -3318,8 +3386,26 @@ class VadeTakipSayfasi extends Page implements HasTable
         }
 
         $servis = app(FinansHareketServisi::class);
+        $hesapParaBirimi = $this->hesapParaBirimi($kanal, (int) $record->firma_id, $hesapId);
+        $kur = (float) ($data['doviz_kuru'] ?? 0);
+        $hedefTutar = (float) ($data['hedef_tutar'] ?? 0);
+        if ($hesapParaBirimi !== $paraBirimi) {
+            if ($kur <= 0) {
+                Notification::make()->title('Tahsilat kaydedilemedi')->body('Farklı para birimlerinde kur zorunludur.')->danger()->send();
+                return;
+            }
+            if ($hedefTutar <= 0) {
+                $hedefTutar = $paraBirimi === 'TRY' ? (float) bcdiv($tutar, (string) $kur, 2) : (float) bcmul($tutar, (string) $kur, 2);
+            }
+        }
         $sonuc = match ($kanal) {
-            'kasa' => $servis->tahsilatKasadanKaydet(
+            'kasa' => $hesapParaBirimi !== $paraBirimi
+                ? $servis->tahsilatKurIleKaydet(
+                    (int) $record->firma_id, (int) $record->cari_id, 'kasa', $hesapId, $tutar, $paraBirimi,
+                    number_format($hedefTutar, 2, '.', ''), $hesapParaBirimi, number_format($kur, 8, '.', ''),
+                    $data['tarih'] ?? now(), $data['aciklama'] ?? null, 'alacak_plan_taksiti', (int) $record->getKey(),
+                )
+                : $servis->tahsilatKasadanKaydet(
                 (int) $record->firma_id,
                 (int) $record->cari_id,
                 $hesapId,
@@ -3330,7 +3416,13 @@ class VadeTakipSayfasi extends Page implements HasTable
                 'alacak_plan_taksiti',
                 (int) $record->getKey(),
             ),
-            'banka' => $servis->tahsilatBankadanKaydet(
+            'banka' => $hesapParaBirimi !== $paraBirimi
+                ? $servis->tahsilatKurIleKaydet(
+                    (int) $record->firma_id, (int) $record->cari_id, 'banka', $hesapId, $tutar, $paraBirimi,
+                    number_format($hedefTutar, 2, '.', ''), $hesapParaBirimi, number_format($kur, 8, '.', ''),
+                    $data['tarih'] ?? now(), $data['aciklama'] ?? null, 'alacak_plan_taksiti', (int) $record->getKey(),
+                )
+                : $servis->tahsilatBankadanKaydet(
                 (int) $record->firma_id,
                 (int) $record->cari_id,
                 $hesapId,
@@ -3341,7 +3433,13 @@ class VadeTakipSayfasi extends Page implements HasTable
                 'alacak_plan_taksiti',
                 (int) $record->getKey(),
             ),
-            'pos' => $servis->tahsilatPosKaydet(
+            'pos' => $hesapParaBirimi !== $paraBirimi
+                ? $servis->tahsilatKurIleKaydet(
+                    (int) $record->firma_id, (int) $record->cari_id, 'pos', $hesapId, $tutar, $paraBirimi,
+                    number_format($hedefTutar, 2, '.', ''), $hesapParaBirimi, number_format($kur, 8, '.', ''),
+                    $data['tarih'] ?? now(), $data['aciklama'] ?? null, 'alacak_plan_taksiti', (int) $record->getKey(),
+                )
+                : $servis->tahsilatPosKaydet(
                 (int) $record->firma_id,
                 (int) $record->cari_id,
                 $hesapId,

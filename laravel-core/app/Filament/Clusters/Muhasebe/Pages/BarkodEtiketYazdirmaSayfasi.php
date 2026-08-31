@@ -6,7 +6,6 @@ use App\BarkodluSatis\Guvenlik\BarkodluSatisFilamentErisimYardimcisi;
 use App\Filament\Clusters\Muhasebe as MuhasebeCluster;
 use App\Models\Muhasebe\EtiketSablonu;
 use App\Models\Muhasebe\StokKarti;
-use App\Models\Muhasebe\StokParcasi;
 use App\Muhasebe\Guvenlik\MuhasebeFilamentErisimYardimcisi;
 use App\Services\TenantContextService;
 use App\Support\Barcode\Code128SvgUretici;
@@ -44,8 +43,6 @@ class BarkodEtiketYazdirmaSayfasi extends Page implements HasForms
     public bool $otoYazdirTalebi = false;
 
     public bool $sablonYonetimiAcik = false;
-
-    public ?int $stokParcasiId = null;
 
     private ?int $aktifFirmaIdCache = null;
 
@@ -98,8 +95,6 @@ class BarkodEtiketYazdirmaSayfasi extends Page implements HasForms
     {
         return BarkodluSatisFilamentErisimYardimcisi::herhangiBirBarkodluSatisYetkisiVarMi(static::muhasebeSayfasiYetkiKodlari())
             || MuhasebeFilamentErisimYardimcisi::herhangiBirMuhasebeYetkisiVarMi([
-                MuhasebeYetkiSablonlari::STOK_PARTI_GORUNTULE,
-                MuhasebeYetkiSablonlari::STOK_PARTI_DUZELT,
                 MuhasebeYetkiSablonlari::STOK_GORUNTULE,
             ]);
     }
@@ -109,66 +104,10 @@ class BarkodEtiketYazdirmaSayfasi extends Page implements HasForms
         $this->enCokKullanilanSablonlariTamamla();
         $varsayilanSablonId = $this->varsayilanSablonId();
         $stokId = (int) request()->query('stok_id', 0);
-        $this->stokParcasiId = (int) request()->query('stok_parcasi_id', 0) ?: null;
-        $adet = max(1, min(500, (int) request()->query('adet', 1)));
-        $this->otoYazdirTalebi = (bool) request()->boolean('auto_print', false);
-
-        $this->form->fill([
-            'stok_id' => $stokId > 0 ? $stokId : null,
-            'adet' => $adet,
-            'onizleme_olcek' => '100',
-            'baski_modu' => 'rulo',
-            'sayfa_ust_bosluk_mm' => 0,
-            'sayfa_sol_bosluk_mm' => 0,
-            'etiket_yatay_bosluk_mm' => 2,
-            'etiket_dikey_bosluk_mm' => 2,
-            'sayfa_sutun_sayisi' => 3,
-            'stok_adi_goster' => true,
-            'stok_kodu_goster' => true,
-            'fiyat_goster' => true,
-            'barkod_yazisi_goster' => true,
-            'etiket_sablonu_id' => $varsayilanSablonId,
-            'sablon_ad' => '',
-            'sablon_kod' => '',
-            'sablon_genislik_mm' => 50,
-            'sablon_yukseklik_mm' => 30,
-            'sablon_barkod_tipi' => 'ean13',
-            'sablon_tasarim_tipi' => 'standart',
-            'sablon_aktif' => true,
-            'sablon_varsayilan_mi' => false,
-        ]);
-        $this->seciliSablon = $this->varsayilanSablonBilgisi();
-        if ($varsayilanSablonId > 0) {
-            $this->seciliSablon = $this->sablonBilgisiGetir((int) $varsayilanSablonId);
-        }
-
-        if ($this->stokParcasiId) {
-            $parti = StokParcasi::query()
-                ->with('stokKarti:id,firma_id,kod,ad,satis_fiyati,para_birimi')
-                ->where('firma_id', $this->aktifFirmaId())
-                ->where('parca_mi', true)
-                ->find($this->stokParcasiId);
-            if ($parti?->stokKarti) {
-                $this->data['stok_id'] = (int) $parti->stok_id;
-                $this->etiketSepeti = [[
-                    'stok_id' => (int) $parti->stok_id,
-                    'stok_parcasi_id' => (int) $parti->id,
-                    'stok_adi' => (string) $parti->stokKarti->ad,
-                    'kod' => (string) ($parti->parca_kodu ?: $parti->parca_kodu),
-                    'barkod' => (string) ($parti->barkod ?: $parti->parca_kodu ?: $parti->parca_kodu),
-                    'fiyat' => number_format((float) ($parti->stokKarti->satis_fiyati ?? 0), 2, ',', '.'),
-                    'para_birimi' => strtoupper((string) ($parti->stokKarti->para_birimi ?? 'TRY')),
-                    'stok_miktari' => (float) $parti->kalan_miktar,
-                    'adet' => $adet,
-                    'barkod_tipi' => 'code128',
-                ]];
-                $this->etiketleriOlustur();
-
-                return;
-            }
-        }
-
         if ($stokId > 0) {
+            $this->data['stok_id'] = $stokId;
+            $this->data['adet'] = max(1, min(500, (int) request()->query('adet', 1)));
+            $this->data['etiket_sablonu_id'] = $varsayilanSablonId > 0 ? $varsayilanSablonId : null;
             $this->etiketleriOlustur();
         }
     }
@@ -1113,8 +1052,6 @@ class BarkodEtiketYazdirmaSayfasi extends Page implements HasForms
             MuhasebeYetkiSablonlari::BARKODLU_SATIS_ETIKET_YAZDIR,
             MuhasebeYetkiSablonlari::BARKODLU_SATIS_GUNCELLE,
         ]) || MuhasebeFilamentErisimYardimcisi::herhangiBirMuhasebeYetkisiVarMi([
-            MuhasebeYetkiSablonlari::STOK_PARTI_GORUNTULE,
-            MuhasebeYetkiSablonlari::STOK_PARTI_DUZELT,
             MuhasebeYetkiSablonlari::STOK_GORUNTULE,
         ]);
     }

@@ -152,7 +152,7 @@ class KabulFisi extends Page
             '{{ARIZA_ACIKLAMASI}}' => nl2br(e((string) ($this->kayit->musteri_sikayeti ?: $this->kayit->ariza?->ad ?: '-'))),
             '{{TESLIM_NOTU}}' => nl2br(e((string) ($this->kayit->teslim_notu ?: '-'))),
             '{{TESPIT_UCRETI}}' => e('750,00 TL'),
-            '{{TOPLAM_TUTAR}}' => e(number_format((float) ($this->kayit->toplam_tutar ?? 0), 2, ',', '.').' TRY'),
+            '{{TOPLAM_TUTAR}}' => e(number_format((float) ($this->kayit->toplam_tutar ?? 0), 2, ',', '.').' '.strtoupper((string) ($this->kayit->tahsilat_para_birimi ?: $this->kayit->cari?->para_birimi ?: 'TRY'))),
             '{{SEHIR}}' => e($this->firmaSehirMetni($firma)),
         ];
     }

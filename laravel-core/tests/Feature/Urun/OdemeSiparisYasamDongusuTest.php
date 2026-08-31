@@ -37,6 +37,9 @@ class OdemeSiparisYasamDongusuTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // Module-gate behavior is covered separately; this class validates
+        // the order/payment/stocks side effects after a prepared fixture.
+        $this->withoutMiddleware(\App\Http\Middleware\EcommerceFrontErisimMiddleware::class);
         config()->set('app.url', 'http://localhost');
         URL::forceRootUrl('http://localhost');
         config(['ecommerce.odeme_dakika' => 15]);

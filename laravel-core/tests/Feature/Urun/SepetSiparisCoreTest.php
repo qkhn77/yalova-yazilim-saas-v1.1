@@ -32,6 +32,11 @@ class SepetSiparisCoreTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->withoutMiddleware(\App\Http\Middleware\EcommerceFrontErisimMiddleware::class);
+        // Public cart rendering is tested independently of the temporary
+        // unpublished-site gate; checkout/auth behavior remains covered by
+        // dedicated route and middleware tests.
+        $this->withoutMiddleware(\App\Http\Middleware\OnePagePublicSiteMiddleware::class);
         config()->set('app.url', 'http://localhost');
         URL::forceRootUrl('http://localhost');
     }

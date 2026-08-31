@@ -23,7 +23,7 @@ class DepoHareketleriWidget extends TableWidget
         $firmaId = (int) (app(TenantContextService::class)->aktifFirmaId() ?? 0);
 
         return $table
-            ->heading('Depo hareketleri')
+            ->heading('Depo Hareketleri')
             ->description('Firmaya ait tüm depo stok giriş, çıkış, transfer ve sayım hareketlerini filtreleyin.')
             ->query(StokHareketi::query()
                 ->where('firma_id', $firmaId)

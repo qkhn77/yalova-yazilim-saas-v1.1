@@ -145,6 +145,7 @@ class CekYonetimiSayfasi extends Page implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
+            ->heading('Çek')
             ->query(fn (): Builder => Cek::query()->with([
                 'girisHareketi.cari:id,ad,kod',
                 'cikisHareketi.cari:id,ad,kod',
@@ -186,6 +187,18 @@ class CekYonetimiSayfasi extends Page implements HasForms, HasTable
                     ->label('Tutar')
                     ->formatStateUsing(fn ($state, Cek $record): string => number_format((float) $state, 2, ',', '.').' '.strtoupper((string) ($record->para_birimi ?: 'TRY')))
                     ->sortable(),
+                Tables\Columns\TextColumn::make('kur')
+                    ->label('Kur')
+                    ->formatStateUsing(fn ($state): string => $state === null ? '—' : number_format((float) $state, 8, ',', '.'))
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('baz_tutar')
+                    ->label('Baz tutar')
+                    ->formatStateUsing(fn ($state, Cek $record): string => $state === null
+                        ? '—'
+                        : number_format((float) $state, 2, ',', '.').' '.strtoupper((string) ($record->baz_para_birimi ?: config('muhasebe.baz_para_birimi', 'TRY'))))
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('vade_tarihi')
                     ->label('Vade')
                     ->date('d.m.Y')
@@ -275,6 +288,8 @@ class CekYonetimiSayfasi extends Page implements HasForms, HasTable
                 ->label('Çeki veren cari')
                 ->required()
                 ->searchable()
+                ->options(fn (): array => $this->cariAramaSonuclari(''))
+                ->optionsLimit(50)
                 ->getSearchResultsUsing(fn (string $search): array => $this->cariAramaSonuclari($search))
                 ->getOptionLabelUsing(fn ($value): ?string => $this->cariEtiketi($value))
                 ->createOptionForm($this->hizliCariFormu())
@@ -338,6 +353,8 @@ class CekYonetimiSayfasi extends Page implements HasForms, HasTable
                 ->label('Çekin verildiği cari')
                 ->required()
                 ->searchable()
+                ->options(fn (): array => $this->cariAramaSonuclari(''))
+                ->optionsLimit(50)
                 ->getSearchResultsUsing(fn (string $search): array => $this->cariAramaSonuclari($search))
                 ->getOptionLabelUsing(fn ($value): ?string => $this->cariEtiketi($value))
                 ->createOptionForm($this->hizliCariFormu())

@@ -15,7 +15,7 @@ return new class extends Migration
         });
 
         Schema::table('stok_kartlari', function (Blueprint $table): void {
-            $table->string('olculu_takip_turu', 24)->default('standart')->after('stok_takip_tipi');
+            $table->string('olculu_takip_turu', 24)->default('standart')->after('stok_takip');
             $table->string('olcu_yapisi', 16)->nullable()->after('olculu_takip_turu');
             $table->foreignId('ana_birim_id')->nullable()->constrained('muhasebe_birimler')->nullOnDelete();
             $table->foreignId('ikincil_birim_id')->nullable()->constrained('muhasebe_birimler')->nullOnDelete();
@@ -56,8 +56,6 @@ return new class extends Migration
             $table->foreignId('stok_id')->constrained('stok_kartlari')->restrictOnDelete();
             $table->foreignId('stok_olcusu_id')->constrained('stok_olculeri')->restrictOnDelete();
             $table->foreignId('depo_id')->constrained('muhasebe_depolar')->restrictOnDelete();
-            $table->foreignId('stok_parcasi_id')->nullable()->constrained('stok_parcalari')->restrictOnDelete();
-            $table->unsignedBigInteger('parca_kapsami')->default(0);
             $table->decimal('ana_miktar', 20, 8)->default(0);
             $table->decimal('adet_esdegeri', 20, 8)->default(0);
             $table->decimal('rezerve_ana_miktar', 20, 8)->default(0);
@@ -65,7 +63,7 @@ return new class extends Migration
             $table->decimal('donusum_ana_miktari', 20, 8)->nullable();
             $table->string('durum', 16)->default('aktif');
             $table->timestamps();
-            $table->unique(['firma_id', 'stok_id', 'stok_olcusu_id', 'depo_id', 'parca_kapsami'], 'stok_olcu_bakiye_tekil');
+            $table->unique(['firma_id', 'stok_id', 'stok_olcusu_id', 'depo_id'], 'stok_olcu_bakiye_tekil');
             $table->index(['firma_id', 'stok_id', 'depo_id']);
         });
         */
@@ -77,7 +75,6 @@ return new class extends Migration
             $table->foreignId('stok_id')->constrained('stok_kartlari')->restrictOnDelete();
             $table->foreignId('stok_olcusu_id')->constrained('stok_olculeri')->restrictOnDelete();
             $table->foreignId('stok_olcu_bakiyesi_id')->constrained('stok_olcu_bakiyeleri')->restrictOnDelete();
-            $table->foreignId('stok_parcasi_id')->nullable()->constrained('stok_parcalari')->restrictOnDelete();
             $table->foreignId('depo_id')->constrained('muhasebe_depolar')->restrictOnDelete();
             $table->decimal('ana_miktar', 20, 8);
             $table->decimal('adet_esdegeri', 20, 8);

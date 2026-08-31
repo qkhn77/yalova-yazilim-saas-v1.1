@@ -309,18 +309,25 @@ class TeslimFisi extends Page
     private function odemeOzetiHtml(array $toplamlar): string
     {
         $kdvHaricToplam = $this->kdvHaricToplam($toplamlar);
-        $odenen = (float) ($this->kayit?->tahsilatlar?->where('durum', 'aktif')->sum('tutar') ?? 0);
-        if ($odenen <= 0) {
-            $odenen = (float) ($this->kayit?->odenen_tutar ?? 0);
+        $tahsilatDagilimi = collect($this->kayit?->tahsilatlar ?? [])
+            ->where('durum', 'aktif')
+            ->groupBy(fn ($tahsilat): string => strtoupper((string) ($tahsilat->kaynak_para_birimi ?: 'TRY')))
+            ->map(fn ($satirlar): float => (float) $satirlar->sum('tutar'));
+        $odenenEtiketi = $tahsilatDagilimi
+            ->map(fn (float $tutar, $paraBirimi): string => $this->paraFormatla($tutar, (string) $paraBirimi))
+            ->implode(' · ');
+        if ($odenenEtiketi === '') {
+            $odenenEtiketi = $this->paraFormatla((float) ($this->kayit?->odenen_tutar ?? 0));
         }
-
-        $kalan = max($kdvHaricToplam - $odenen, 0);
+        $kalan = $tahsilatDagilimi->count() <= 1
+            ? max($kdvHaricToplam - (float) ($tahsilatDagilimi->first() ?? $this->kayit?->odenen_tutar ?? 0), 0)
+            : null;
         $durum = $this->durumDegeri($this->kayit?->odeme_durumu ?? '');
 
         return '<div class="tsf-summary">'
             .$this->ozetSatiri('Toplam Tutar', $this->paraFormatla($kdvHaricToplam))
-            .$this->ozetSatiri('Ödenen', $this->paraFormatla($odenen))
-            .$this->ozetSatiri('Kalan', $this->paraFormatla($kalan))
+            .$this->ozetSatiri('Ödenen', $odenenEtiketi)
+            .$this->ozetSatiri('Kalan', $kalan === null ? 'Çoklu para birimi' : $this->paraFormatla($kalan))
             .$this->ozetSatiri('Ödeme Durumu', $durum !== '' ? $durum : '-')
             .'</div>';
     }

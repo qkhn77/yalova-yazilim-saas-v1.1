@@ -17,6 +17,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Para birimi / stok kategorisi ile aynı yetki ve sabit/firma form deseninde standart tanım CRUD.
@@ -217,8 +218,13 @@ abstract class StandartMuhasebeTanimKaynakResource extends Resource
             /** @var class-string<Model> $model */
             $model = static::getModel();
 
+            $columns = ['id', 'firma_id', 'ad'];
+            if (Schema::hasColumn((new $model)->getTable(), 'is_sabit')) {
+                $columns[] = 'is_sabit';
+            }
+
             return $model::query()
-                ->select(['id', 'firma_id', 'is_sabit', 'ad'])
+                ->select($columns)
                 ->whereKey($key)
                 ->first();
         }

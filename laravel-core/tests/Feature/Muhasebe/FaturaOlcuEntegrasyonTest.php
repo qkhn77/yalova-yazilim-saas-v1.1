@@ -15,7 +15,6 @@ use App\Models\Muhasebe\StokHareketiOlcuDagilimi;
 use App\Models\Muhasebe\StokKarti;
 use App\Models\Muhasebe\StokOlcuBakiyesi;
 use App\Models\Muhasebe\StokOlcusu;
-use App\Models\Muhasebe\StokParcasi;
 use App\Models\User;
 use App\Muhasebe\Enumlar\CariDurumu;
 use App\Muhasebe\Enumlar\CariTuru;
@@ -29,14 +28,14 @@ use App\Muhasebe\Servisler\FaturaOlcuKalemiServisi;
 use App\Muhasebe\Servisler\StokOlcuBakiyeServisi;
 use App\Services\FirmaAyarDeposu;
 use Database\Seeders\MuhasebeOlcuBirimleriSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Validation\ValidationException;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class FaturaOlcuEntegrasyonTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     public function test_taslak_olcu_dagilimi_saklanir_ve_sunucuda_hesaplanir(): void
     {
@@ -51,39 +50,7 @@ class FaturaOlcuEntegrasyonTest extends TestCase
         $this->assertDatabaseHas('fatura_kalemi_olcu_dagilimlari', ['fatura_kalemi_id' => $kalem->id, 'ana_miktar' => '1.00000000']);
     }
 
-    public function test_fatura_detayinda_satilan_fiziksel_parca_kodu_ve_miktari_gorunur(): void
-    {
-        [$firma, , $depo, $stok, $olcu, $bakiye, $fatura, $kalem] = $this->kurulum();
-        $parca = StokParcasi::create([
-            'firma_id' => $firma->id,
-            'stok_id' => $stok->id,
-            'depo_id' => $depo->id,
-            'parca_kodu' => 'YB-STK001-PLK-0001',
-            'parca_kodu' => 'YB-STK001-PLK-0001',
-            'barkod' => 'YB-STK001-PLK-0001',
-            'plaka_no' => 'YB-STK001-PLK-0001',
-            'parca_mi' => true,
-            'parca_durumu' => 'aktif',
-            'giren_miktar' => '4',
-            'kalan_miktar' => '4',
-        ]);
-        $bakiye->update(['stok_parcasi_id' => $parca->id, 'parca_kapsami' => $parca->id]);
 
-        app(FaturaOlcuKalemiServisi::class)->dagilimlariSakla($kalem, [[
-            'stok_olcusu_id' => $olcu->id,
-            'stok_olcu_bakiyesi_id' => $bakiye->id,
-            'stok_parcasi_id' => $parca->id,
-            'depo_id' => $depo->id,
-            'islem_birimi_id' => $stok->ana_birim_id,
-            'girilen_miktar' => '1',
-        ]], true);
-
-        Livewire::test(FaturaDetaySekmesi::class, ['record' => $fatura])
-            ->assertSee('Stok parçası:')
-            ->assertSee('YB-STK001-PLK-0001')
-            ->assertSee('1 m²')
-            ->assertSee('0.25 adet eşdeğeri');
-    }
 
     public function test_olculu_satis_onayinda_hareket_ana_miktarla_olur_ve_bakiye_azalir(): void
     {
@@ -408,51 +375,9 @@ class FaturaOlcuEntegrasyonTest extends TestCase
         $this->assertSame(FaturaDurumu::Onayli, $yeniden->fresh()->durum);
     }
 
-    public function test_partili_olculu_alis_iadesi_ayni_partiden_cikar(): void
-    {
-        [$firma, $cari, $depo, $stok, $olcu, $bakiye, $kaynak, $kaynakKalem] = $this->kurulum();
-        $kaynak->update(['tur' => FaturaTuru::Gelen->value]);
-        $stok->update(['stok_takip_tipi' => StokKarti::STOK_TAKIP_TIPI_PARTI]);
-        $parti = StokParcasi::create(['firma_id' => $firma->id, 'stok_id' => $stok->id, 'depo_id' => $depo->id, 'parca_kodu' => 'P-1', 'giren_miktar' => '5', 'kalan_miktar' => '5', 'birim_maliyet' => '1']);
-        $partiBakiye = app(StokOlcuBakiyeServisi::class)->bakiyeBulVeyaOlustur($firma->id, $stok, $olcu, $depo, $parti);
-        app(FaturaOlcuKalemiServisi::class)->dagilimlariSakla($kaynakKalem, [['stok_olcusu_id' => $olcu->id, 'stok_olcu_bakiyesi_id' => $partiBakiye->id, 'stok_parcasi_id' => $parti->id, 'depo_id' => $depo->id, 'islem_birimi_id' => Birim::withoutGlobalScopes()->where('kod', 'MTK')->value('id'), 'girilen_miktar' => '1']], false);
-        app(FaturaIslemServisi::class)->faturayiOnayla($kaynak->fresh());
-        $iade = $this->alisIadeKalemiOlustur($kaynak, $kaynakKalem, $cari, $depo, $stok);
-        app(FaturaIslemServisi::class)->faturayiOnayla($iade->fresh());
-        $this->assertSame($parti->id, $iade->kalemler()->firstOrFail()->olcuDagilimlari()->firstOrFail()->stok_parcasi_id);
-        $this->assertSame('0.00000000', $partiBakiye->refresh()->ana_miktar);
-    }
 
-    public function test_fiziksel_parca_olcu_bakiyesi_secimi_parca_dagilimini_otomatik_baglar(): void
-    {
-        [$firma, $cari, $depo, $stok, $olcu, $bakiye, $fatura, $kalem] = $this->kurulum();
-        $stok->update(['stok_takip_tipi' => StokKarti::STOK_TAKIP_TIPI_PARTI]);
-        $parca = StokParcasi::create([
-            'firma_id' => $firma->id, 'stok_id' => $stok->id, 'depo_id' => $depo->id,
-            'parca_kodu' => 'PLK-0001', 'parca_kodu' => 'PLK-0001', 'barkod' => 'PLK-0001',
-            'parca_mi' => true, 'parca_durumu' => 'aktif',
-            'giren_miktar' => '1', 'kalan_miktar' => '1', 'birim_maliyet' => '1',
-        ]);
-        $parcaBakiyesi = app(StokOlcuBakiyeServisi::class)->bakiyeBulVeyaOlustur($firma->id, $stok, $olcu, $depo, $parca);
-        app(StokOlcuBakiyeServisi::class)->giris($parcaBakiyesi, anaMiktar: '1');
 
-        app(FaturaOlcuKalemiServisi::class)->dagilimlariSakla($kalem, [[
-            'stok_olcusu_id' => $olcu->id,
-            'stok_olcu_bakiyesi_id' => $parcaBakiyesi->id,
-            'depo_id' => $depo->id,
-            'islem_birimi_id' => Birim::withoutGlobalScopes()->where('kod', 'MTK')->value('id'),
-            'girilen_miktar' => '1',
-        ]], true);
 
-        $kalem->refresh();
-        $this->assertSame($parca->id, (int) $kalem->olcuDagilimlari()->firstOrFail()->stok_parcasi_id);
-        $this->assertSame([['parca_kodu' => 'PLK-0001', 'miktar' => '1.00000000']], $kalem->parca_dagilimi);
-
-        app(FaturaIslemServisi::class)->faturayiOnayla($fatura->fresh());
-        $this->assertSame('0.00000000', $parcaBakiyesi->refresh()->ana_miktar);
-        $this->assertSame('0.00000000', $parca->refresh()->kalan_miktar);
-        $this->assertSame('tukenmis', $parca->parca_durumu);
-    }
 
     public function test_coklu_olculu_alis_iadesi_her_olcuden_cikar(): void
     {
@@ -487,23 +412,7 @@ class FaturaOlcuEntegrasyonTest extends TestCase
         }
     }
 
-    public function test_alis_iadesi_dogru_stok_ve_olcuda_farkli_parti_payloadini_reddeder(): void
-    {
-        [$firma, $cari, $depo, $stok, $olcu, $bakiye, $kaynak, $kaynakKalem] = $this->kurulum();
-        $stok->update(['stok_takip_tipi' => StokKarti::STOK_TAKIP_TIPI_PARTI]);
-        $kaynak->update(['tur' => FaturaTuru::Gelen->value]);
-        $parti1 = StokParcasi::create(['firma_id' => $firma->id, 'stok_id' => $stok->id, 'depo_id' => $depo->id, 'parca_kodu' => 'P-1', 'giren_miktar' => '5', 'kalan_miktar' => '5', 'birim_maliyet' => '1']);
-        $parti2 = StokParcasi::create(['firma_id' => $firma->id, 'stok_id' => $stok->id, 'depo_id' => $depo->id, 'parca_kodu' => 'P-2', 'giren_miktar' => '5', 'kalan_miktar' => '5', 'birim_maliyet' => '1']);
-        $partiBakiye1 = app(StokOlcuBakiyeServisi::class)->bakiyeBulVeyaOlustur($firma->id, $stok, $olcu, $depo, $parti1);
-        $partiBakiye2 = app(StokOlcuBakiyeServisi::class)->bakiyeBulVeyaOlustur($firma->id, $stok, $olcu, $depo, $parti2);
-        $birim = Birim::withoutGlobalScopes()->where('kod', 'MTK')->value('id');
-        app(FaturaOlcuKalemiServisi::class)->dagilimlariSakla($kaynakKalem, [['stok_olcusu_id' => $olcu->id, 'stok_olcu_bakiyesi_id' => $partiBakiye1->id, 'stok_parcasi_id' => $parti1->id, 'depo_id' => $depo->id, 'islem_birimi_id' => $birim, 'girilen_miktar' => '1']], false);
-        app(FaturaIslemServisi::class)->faturayiOnayla($kaynak->fresh());
-        $iade = $this->alisIadeKalemiOlustur($kaynak, $kaynakKalem, $cari, $depo, $stok);
-        $iade->kalemler()->firstOrFail()->olcuDagilimlari()->update(['stok_olcu_bakiyesi_id' => $partiBakiye2->id, 'stok_parcasi_id' => $parti2->id]);
-        $this->expectException(IsKuraliIstisnasi::class);
-        app(FaturaIslemServisi::class)->faturayiOnayla($iade->fresh());
-    }
+
 
     public function test_iptal_edilmis_alis_kaynagi_olculu_iadeyi_reddeder(): void
     {
@@ -869,7 +778,7 @@ class FaturaOlcuEntegrasyonTest extends TestCase
         $iade = Fatura::create(['firma_id' => $kaynak->firma_id, 'cari_id' => $cari->id, 'bagli_fatura_id' => $kaynak->id, 'tur' => FaturaTuru::AlisIadesi->value, 'durum' => FaturaDurumu::Taslak->value, 'tarih' => now(), 'ara_toplam' => '1000', 'kdv_toplam' => '0', 'genel_toplam' => '1000', 'toplam_indirim' => '0', 'odenecek_tutar' => '1000', 'odendi_tutari' => '0', 'acik_tutar' => '1000', 'para_birimi' => 'TRY', 'doviz_kuru' => '1']);
         $kalem = FaturaKalemi::create(['firma_id' => $kaynak->firma_id, 'fatura_id' => $iade->id, 'kaynak_fatura_kalemi_id' => $kaynakKalem->id, 'satir_no' => 1, 'stok_id' => $stok->id, 'depo_id' => $depo->id, 'miktar' => '1', 'ana_miktar' => '1', 'birim' => 'MTK', 'birim_fiyat' => '1000', 'kdv_orani' => '0', 'net_tutar' => '1000', 'toplam' => '1000', 'satir_toplami' => '1000', 'satir_genel_toplam' => '1000', 'para_birimi' => 'TRY']);
         $sources = $coklu ? $kaynakKalem->olcuDagilimlari()->orderBy('sira')->get() : collect([$kaynakKalem->olcuDagilimlari()->firstOrFail()]);
-        app(FaturaOlcuKalemiServisi::class)->dagilimlariSakla($kalem, $sources->map(fn ($source): array => ['stok_olcusu_id' => $source->stok_olcusu_id, 'stok_olcu_bakiyesi_id' => $source->stok_olcu_bakiyesi_id, 'depo_id' => $source->depo_id, 'stok_parcasi_id' => $source->stok_parcasi_id, 'kaynak_olcu_dagilimi_id' => $source->id, 'islem_birimi_id' => $source->islem_birimi_id, 'girilen_miktar' => (string) $source->girilen_miktar])->all(), true);
+        app(FaturaOlcuKalemiServisi::class)->dagilimlariSakla($kalem, $sources->map(fn ($source): array => ['stok_olcusu_id' => $source->stok_olcusu_id, 'stok_olcu_bakiyesi_id' => $source->stok_olcu_bakiyesi_id, 'depo_id' => $source->depo_id, 'kaynak_olcu_dagilimi_id' => $source->id, 'islem_birimi_id' => $source->islem_birimi_id, 'girilen_miktar' => (string) $source->girilen_miktar])->all(), true);
 
         return $iade->fresh();
     }
@@ -899,7 +808,7 @@ class FaturaOlcuEntegrasyonTest extends TestCase
         $iade = Fatura::create(['firma_id' => $kaynak->firma_id, 'cari_id' => $cari->id, 'bagli_fatura_id' => $kaynak->id, 'tur' => FaturaTuru::SatisIadesi->value, 'durum' => FaturaDurumu::Taslak->value, 'tarih' => now(), 'ara_toplam' => '1000', 'kdv_toplam' => '0', 'genel_toplam' => '1000', 'toplam_indirim' => '0', 'odenecek_tutar' => '1000', 'odendi_tutari' => '0', 'acik_tutar' => '1000', 'para_birimi' => 'TRY', 'doviz_kuru' => '1']);
         $kalem = FaturaKalemi::create(['firma_id' => $kaynak->firma_id, 'fatura_id' => $iade->id, 'kaynak_fatura_kalemi_id' => $kaynakKalem->id, 'satir_no' => 1, 'stok_id' => $stok->id, 'depo_id' => $depo->id, 'miktar' => '1', 'ana_miktar' => '1', 'birim' => 'MTK', 'birim_fiyat' => '1000', 'kdv_orani' => '0', 'net_tutar' => '1000', 'toplam' => '1000', 'satir_toplami' => '1000', 'satir_genel_toplam' => '1000', 'para_birimi' => 'TRY']);
         $source = $kaynakKalem->olcuDagilimlari()->firstOrFail();
-        app(FaturaOlcuKalemiServisi::class)->dagilimlariSakla($kalem, [['stok_olcusu_id' => $source->stok_olcusu_id, 'stok_olcu_bakiyesi_id' => $source->stok_olcu_bakiyesi_id, 'depo_id' => $source->depo_id, 'stok_parcasi_id' => $source->stok_parcasi_id, 'kaynak_olcu_dagilimi_id' => $source->id, 'islem_birimi_id' => $source->islem_birimi_id, 'girilen_miktar' => (string) $source->girilen_miktar]], false);
+        app(FaturaOlcuKalemiServisi::class)->dagilimlariSakla($kalem, [['stok_olcusu_id' => $source->stok_olcusu_id, 'stok_olcu_bakiyesi_id' => $source->stok_olcu_bakiyesi_id, 'depo_id' => $source->depo_id, 'kaynak_olcu_dagilimi_id' => $source->id, 'islem_birimi_id' => $source->islem_birimi_id, 'girilen_miktar' => (string) $source->girilen_miktar]], false);
 
         return $iade->fresh();
     }

@@ -9,6 +9,7 @@ use App\Filament\Clusters\Muhasebe\Resources\FaturaKaynagi;
 use App\Models\Muhasebe\Fatura;
 use App\Models\Proje\IsletmeProjesi;
 use App\Muhasebe\Enumlar\FaturaDurumu;
+use App\Muhasebe\Enumlar\FaturaSinifi;
 use App\Muhasebe\Enumlar\FaturaTuru;
 use App\Muhasebe\Guvenlik\MuhasebeFilamentErisimYardimcisi;
 use App\Muhasebe\Servisler\FaturaKopyalamaServisi;
@@ -56,6 +57,12 @@ abstract class FaturaListesiFiltreliSayfasi extends Page implements HasTable
     abstract public static function faturaTurleri(): array;
 
     public static function faturaDurumlari(): array
+    {
+        return [];
+    }
+
+    /** @return array<int, string> */
+    public static function faturaSiniflari(): array
     {
         return [];
     }
@@ -115,6 +122,7 @@ abstract class FaturaListesiFiltreliSayfasi extends Page implements HasTable
     {
         return $table
             ->query(static::faturaSorgusu())
+            ->heading(static::listeIslemEtiketi())
             ->defaultSort('tarih', 'desc')
             ->columns([
                 TextColumn::make('fatura_no')
@@ -141,6 +149,25 @@ abstract class FaturaListesiFiltreliSayfasi extends Page implements HasTable
 
                         return is_scalar($state) ? (string) $state : '—';
                     })
+                    ->toggleable(),
+                TextColumn::make('fatura_sinifi')
+                    ->label('Sınıf')
+                    ->badge()
+                    ->formatStateUsing(function ($state, Fatura $record): string {
+                        if ($record->eskiGiderKaydiMi()) {
+                            return 'Eski gider kaydı';
+                        }
+
+                        $sinif = $state instanceof FaturaSinifi
+                            ? $state
+                            : FaturaSinifi::tryFrom((string) $state);
+
+                        return $sinif?->etiket() ?? '—';
+                    })
+                    ->color(fn (Fatura $record): string => $record->eskiGiderKaydiMi() ? 'warning' : 'gray')
+                    ->tooltip(fn (Fatura $record): ?string => $record->eskiGiderKaydiMi()
+                        ? 'Eski gider türü kullanıyor. Sınıfı güncellemeniz önerilir; kayıt otomatik değiştirilmedi.'
+                        : null)
                     ->toggleable(),
                 TextColumn::make('durum')
                     ->badge()
@@ -255,6 +282,7 @@ abstract class FaturaListesiFiltreliSayfasi extends Page implements HasTable
                 'faturalar.fatura_no',
                 'faturalar.belge_no',
                 'faturalar.tur',
+                'faturalar.fatura_sinifi',
                 'faturalar.durum',
                 'faturalar.odeme_durumu',
                 'faturalar.tarih',
@@ -278,6 +306,7 @@ abstract class FaturaListesiFiltreliSayfasi extends Page implements HasTable
                     ->on('projeler.firma_id', '=', 'faturalar.firma_id');
             });
         $turler = static::faturaTurleri();
+        $siniflar = static::faturaSiniflari();
         $dogrudanIadeTurleri = static::dogrudanIadeEdilenFaturaTurleri();
         $durumlar = static::faturaDurumlari();
         if (! empty($turler)) {
@@ -294,6 +323,18 @@ abstract class FaturaListesiFiltreliSayfasi extends Page implements HasTable
         }
         if (! empty($durumlar)) {
             $q->whereIn('faturalar.durum', $durumlar);
+        }
+        if ($siniflar !== []) {
+            $q->where(function (Builder $sinifSorgusu) use ($siniflar, $turler): void {
+                $sinifSorgusu->whereIn('faturalar.fatura_sinifi', $siniflar);
+                if (array_intersect($turler, [FaturaTuru::Gider->value, FaturaTuru::GiderFaturasi->value]) !== []) {
+                    $sinifSorgusu->orWhere(function (Builder $eskiGiderSorgusu): void {
+                        $eskiGiderSorgusu
+                            ->whereNull('faturalar.fatura_sinifi')
+                            ->whereIn('faturalar.tur', [FaturaTuru::Gider->value, FaturaTuru::GiderFaturasi->value]);
+                    });
+                }
+            });
         }
 
         return $q;

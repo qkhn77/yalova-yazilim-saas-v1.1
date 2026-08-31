@@ -8,10 +8,8 @@ use App\Filament\Clusters\Muhasebe\Resources\StokKartiKaynagi;
 use App\Models\Muhasebe\Depo;
 use App\Models\Muhasebe\FaturaKalemi;
 use App\Models\Muhasebe\StokHareketi;
-use App\Models\Muhasebe\StokHareketiParcasi;
 use App\Models\Muhasebe\StokKarti;
 use App\Models\Muhasebe\StokOlcuBakiyesi;
-use App\Models\Muhasebe\StokParcasi;
 use App\Models\Muhasebe\StokSeriNo;
 use App\Muhasebe\Enumlar\HesapDurumu;
 use App\Muhasebe\Enumlar\OlculuStokTakipTuru;
@@ -22,7 +20,6 @@ use App\Muhasebe\Enumlar\StokKartiTuru;
 use App\Muhasebe\Exceptions\IsKuraliIstisnasi;
 use App\Muhasebe\Guvenlik\MuhasebeFilamentErisimYardimcisi;
 use App\Muhasebe\Servisler\StokHareketServisi;
-use App\Muhasebe\Servisler\StokParcaDonusumServisi;
 use App\Support\MuhasebeYetkiSablonlari;
 use Filament\Actions;
 use Filament\Forms;
@@ -32,7 +29,6 @@ use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HtmlString;
 
@@ -48,11 +44,7 @@ class ViewStokKarti extends ViewRecord
 
     private ?HtmlString $stokHareketleriHtmlCache = null;
 
-    private ?HtmlString $stokPartiHareketleriHtmlCache = null;
-
     private ?HtmlString $faturaKalemleriHtmlCache = null;
-
-    private ?HtmlString $stokPartileriHtmlCache = null;
 
     private ?HtmlString $stokSerileriHtmlCache = null;
 
@@ -87,74 +79,6 @@ class ViewStokKarti extends ViewRecord
     public function getHeading(): string|Htmlable
     {
         return $this->getTitle();
-    }
-
-    private function donusturulebilirAnaPartiSorgusu(StokKarti $stok): Builder
-    {
-        return StokParcasi::query()
-            ->where('firma_id', $stok->firma_id)
-            ->where('stok_id', $stok->id)
-            ->where('parca_mi', false)
-            ->where('kalan_miktar', '>', 0)
-            ->whereDoesntHave('parcalar', fn (Builder $query): Builder => $query->where('kalan_miktar', '>', 0));
-    }
-
-    private function anaParcaSecenekleri(StokKarti $stok, string $arama = ''): array
-    {
-        return $this->donusturulebilirAnaPartiSorgusu($stok)
-            ->when(trim($arama) !== '', fn (Builder $query): Builder => $query->where(function (Builder $inner) use ($arama): void {
-                $arama = trim($arama);
-                $inner->where('parca_kodu', 'like', '%'.$arama.'%')->orWhere('barkod', 'like', '%'.$arama.'%');
-            }))
-            ->with('depo:id,ad')
-            ->latest('id')->limit(50)->get()
-            ->mapWithKeys(fn (StokParcasi $parti): array => [$parti->id => $this->anaParcaEtiketi($parti)])
-            ->all();
-    }
-
-    private function anaParcaEtiketi(StokParcasi|int|null $parti, ?StokKarti $stok = null): ?string
-    {
-        if (is_int($parti)) {
-            $parti = $stok ? $this->donusturulebilirAnaPartiSorgusu($stok)->with('depo:id,ad')->find($parti) : null;
-        }
-
-        return $parti ? $parti->parca_kodu.' · Kalan: '.$parti->kalan_miktar.' · '.($parti->depo?->ad ?: 'Genel stok') : null;
-    }
-
-    private function partiDonusumFormunuDoldur(Forms\Set $set, StokKarti $stok, int $partiId, int $istenenParcaSayisi): void
-    {
-        $parti = $partiId > 0 ? $this->donusturulebilirAnaPartiSorgusu($stok)->find($partiId) : null;
-        if (! $parti) {
-            $set('parcalar', []);
-
-            return;
-        }
-        $servis = app(StokParcaDonusumServisi::class);
-        $parcaSayisi = max($servis->partiMinimumParcaSayisi($parti), min(5000, max(1, $istenenParcaSayisi)));
-        $set('parca_sayisi', $parcaSayisi);
-        $set('parcalar', $servis->partiDonusumOnerisi($parti, $parcaSayisi));
-    }
-
-    private function stokPartiSecenekleri(StokKarti $stok, string $arama = ''): array
-    {
-        return StokParcasi::query()->where('firma_id', $stok->firma_id)->where('stok_id', $stok->id)
-            ->when(trim($arama) !== '', fn (Builder $query): Builder => $query->where(function (Builder $inner) use ($arama): void {
-                $arama = trim($arama);
-                $inner->where('parca_kodu', 'like', '%'.$arama.'%')->orWhere('parca_kodu', 'like', '%'.$arama.'%')
-                    ->orWhere('barkod', 'like', '%'.$arama.'%')->orWhere('kalan_miktar', 'like', '%'.$arama.'%');
-            }))
-            ->orderBy('parca_kodu')->limit(50)->get()
-            ->mapWithKeys(fn (StokParcasi $parti): array => [$parti->id => $this->stokPartiEtiketi($parti)])
-            ->all();
-    }
-
-    private function stokPartiEtiketi(StokParcasi|int|null $parti, ?StokKarti $stok = null): ?string
-    {
-        if (is_int($parti)) {
-            $parti = $stok ? StokParcasi::query()->where('firma_id', $stok->firma_id)->where('stok_id', $stok->id)->find($parti) : null;
-        }
-
-        return $parti ? ($parti->parca_kodu ?: $parti->parca_kodu).' · Kalan: '.$this->formatMiktar((string) $parti->kalan_miktar) : null;
     }
 
     public function getSubheading(): ?string
@@ -262,13 +186,12 @@ class ViewStokKarti extends ViewRecord
                                         TextEntry::make('stok_takip_tipi')
                                             ->label('Takip şekli')
                                             ->formatStateUsing(fn (?string $state): string => match ($state) {
-                                                StokKarti::STOK_TAKIP_TIPI_PARTI => 'Parti / Lot',
                                                 StokKarti::STOK_TAKIP_TIPI_SERI => 'Seri No Barkodu',
                                                 default => 'Basit stok',
                                             })
                                             ->badge()
                                             ->color(fn (?string $state): string => match ($state) {
-                                                StokKarti::STOK_TAKIP_TIPI_PARTI, StokKarti::STOK_TAKIP_TIPI_SERI => 'info',
+                                                StokKarti::STOK_TAKIP_TIPI_SERI => 'info',
                                                 default => 'gray',
                                             }),
                                         TextEntry::make('negative_flag')
@@ -291,15 +214,13 @@ class ViewStokKarti extends ViewRecord
                                     ->compact()
                                     ->description('Liste fiyatları; maliyet ayrı sekmede.')
                                     ->schema([
-                                        TextEntry::make('alis_fiyati')
-                                            ->label('Alış fiyatı')
-                                            ->money(fn (StokKarti $r) => $r->para_birimi ?: 'TRY'),
-                                        TextEntry::make('satis_fiyati')
-                                            ->label('Satış fiyatı')
-                                            ->money(fn (StokKarti $r) => $r->para_birimi ?: 'TRY'),
-                                        TextEntry::make('para_birimi')->label('Para birimi'),
-                                        TextEntry::make('kdv_orani')->label('KDV oranı (%)'),
-                                    ])->columns(2),
+                                        TextEntry::make('_fiyat_html')
+                                            ->label('')
+                                            ->getStateUsing(fn (): int => 1)
+                                            ->formatStateUsing(fn (TextEntry $c): HtmlString => $this->fiyatBilgisiHtml($c->getRecord()))
+                                            ->html()
+                                            ->columnSpanFull(),
+                                    ])->columns(1),
                                 Section::make('Stok seviyeleri')
                                     ->compact()
                                     ->schema([
@@ -323,19 +244,6 @@ class ViewStokKarti extends ViewRecord
                                             ->placeholder('—')
                                             ->visible(fn (StokKarti $r): bool => $r->toplamMetrekare() !== null),
                                     ])->columns(2),
-                                Section::make('Parti / lot stokları')
-                                    ->compact()
-                                    ->description('Sadece parti takibi açık ürünlerde görünür. Satışlar son kullanma tarihi yaklaşan partiden başlar.')
-                                    ->schema([
-                                        TextEntry::make('_stok_parcalari')
-                                            ->label('')
-                                            ->getStateUsing(fn (): int => 1)
-                                            ->formatStateUsing(fn (TextEntry $c): HtmlString => $this->stokPartileriTablosuHtml($c->getRecord()))
-                                            ->html()
-                                            ->columnSpanFull(),
-                                    ])
-                                    ->visible(fn (StokKarti $r): bool => false)
-                                    ->columnSpanFull(),
                                 Section::make('Ölçü stokları')
                                     ->compact()
                                     ->description('Ölçü bakiyeleri salt okunur gösterilir; düzeltmeler stok hareketi üzerinden yapılır.')
@@ -366,19 +274,6 @@ class ViewStokKarti extends ViewRecord
                         Section::make('Hareketler')
                             ->compact()
                             ->schema([
-                                Section::make('Parti hareket geçmişi')
-                                    ->compact()
-                                    ->description('Parti bazında son giriş ve çıkış hareketleri.')
-                                    ->schema([
-                                        TextEntry::make('_stok_parca_hareketleri')
-                                            ->label('')
-                                            ->getStateUsing(fn (): int => 1)
-                                            ->formatStateUsing(fn (TextEntry $c): HtmlString => $this->stokPartiHareketleriTablosuHtml($c->getRecord()))
-                                            ->html()
-                                            ->columnSpanFull(),
-                                    ])
-                                    ->visible(fn (StokKarti $r): bool => false)
-                                    ->columnSpanFull(),
                                 TextEntry::make('_stok_hareket')
                                     ->label('')
                                     ->getStateUsing(fn (): int => 1)
@@ -395,14 +290,14 @@ class ViewStokKarti extends ViewRecord
                                     ->schema([
                                         TextEntry::make('guncel_birim_maliyet')
                                             ->label('Güncel birim maliyet')
-                                            ->money(fn (StokKarti $r) => $r->para_birimi ?: 'TRY'),
+                                            ->formatStateUsing(fn ($state, StokKarti $r): string => $this->fiyatStr($state, $r)),
                                         TextEntry::make('son_giris_maliyeti')
                                             ->label('Son giriş maliyeti')
-                                            ->money(fn (StokKarti $r) => $r->para_birimi ?: 'TRY')
+                                            ->formatStateUsing(fn ($state, StokKarti $r): string => $this->fiyatStr($state, $r))
                                             ->placeholder('—'),
                                         TextEntry::make('stok_degeri')
                                             ->label('Stok değeri')
-                                            ->money(fn (StokKarti $r) => $r->para_birimi ?: 'TRY'),
+                                            ->formatStateUsing(fn ($state, StokKarti $r): string => $this->fiyatStr($state, $r)),
                                         TextEntry::make('son_hareket_tarihi')
                                             ->label('Son hareket')
                                             ->dateTime('d.m.Y H:i')
@@ -447,228 +342,12 @@ class ViewStokKarti extends ViewRecord
                 ->icon('heroicon-o-arrow-left')
                 ->url(StokKartiKaynagi::getUrl('index'))
                 ->color('gray'),
-            ...[
-                Actions\Action::make('stokParcalariniOlustur')
-                    ->label('Stoğu parçalara ayır')
-                    ->icon('heroicon-o-squares-plus')
-                    ->color('warning')
-                    ->visible(fn (): bool => $this->partiDuzeltmeYetkisiVarMi()
-                        && $r->partiTakibiAktifMi()
-                        && bccomp(app(StokParcaDonusumServisi::class)->toplamMiktar($r), '0', 8) > 0
-                        && ! StokParcasi::query()->where('firma_id', $r->firma_id)->where('stok_id', $r->id)->where('kalan_miktar', '>', 0)->exists())
-                    ->modalHeading('Stoğu fiziksel stok parçalarına ayır')
-                    ->modalDescription('Sistem eşit dağılım önerir. Kayıt tamamlanmadan önce miktarları kontrol edip onaylayın.')
-                    ->form([
-                        Forms\Components\TextInput::make('parca_sayisi')
-                            ->label('Parça sayısı')
-                            ->numeric()
-                            ->minValue(1)
-                            ->maxValue(5000)
-                            ->default(fn (): int => app(StokParcaDonusumServisi::class)->minimumParcaSayisi($r))
-                            ->required()
-                            ->live()
-                            ->afterStateUpdated(function (Forms\Set $set, $state) use ($r): void {
-                                $servis = app(StokParcaDonusumServisi::class);
-                                $adet = max($servis->minimumParcaSayisi($r), min(5000, max(1, (int) $state)));
-                                $set('parca_sayisi', $adet);
-                                $set('parcalar', $servis->donusumOnerisi($r, $adet));
-                            }),
-                        Forms\Components\Repeater::make('parcalar')
-                            ->label('Önerilen stok parçaları')
-                            ->schema([
-                                Forms\Components\Hidden::make('stok_olcu_bakiyesi_id'),
-                                Forms\Components\Hidden::make('stok_olcusu_id'),
-                                Forms\Components\Hidden::make('takip_turu'),
-                                Forms\Components\Hidden::make('olcu_birimi'),
-                                Forms\Components\Hidden::make('agirlik_birimi'),
-                                Forms\Components\TextInput::make('olcu_kaynagi')
-                                    ->label('Ölçü kaynağı')
-                                    ->disabled()
-                                    ->dehydrated(false),
-                                Forms\Components\TextInput::make('parca_kodu')->label('Parça kodu')->placeholder('Otomatik üretilir')->maxLength(128),
-                                Forms\Components\TextInput::make('ana_miktar')->label('Ana miktar')->numeric()->minValue(0)->required(),
-                                Forms\Components\TextInput::make('maliyet')->label('m² maliyeti')->numeric()->minValue(0),
-                                Forms\Components\TextInput::make('en')->label('En')->numeric()->minValue(0)
-                                    ->visible(fn (Forms\Get $get): bool => in_array((string) $get('takip_turu'), ['alan', 'hacim'], true)),
-                                Forms\Components\TextInput::make('boy')->label('Boy')->numeric()->minValue(0)
-                                    ->visible(fn (Forms\Get $get): bool => in_array((string) $get('takip_turu'), ['uzunluk', 'alan', 'hacim'], true)),
-                                Forms\Components\TextInput::make('yukseklik')->label('Kalınlık / yükseklik')->numeric()->minValue(0)
-                                    ->visible(fn (Forms\Get $get): bool => (string) $get('takip_turu') === 'hacim'),
-                                Forms\Components\TextInput::make('bir_adet_agirlik')->label('Bir adet ağırlığı')->numeric()->minValue(0)
-                                    ->visible(fn (Forms\Get $get): bool => (string) $get('takip_turu') === 'agirlik'),
-                                Forms\Components\TextInput::make('renk_desen')->label('Renk / desen')->maxLength(191),
-                                Forms\Components\TextInput::make('kalite_sinifi')->label('Kalite sınıfı')->maxLength(64),
-                            ])
-                            ->columns(4)
-                            ->default(fn (): array => app(StokParcaDonusumServisi::class)->donusumOnerisi(
-                                $r,
-                                app(StokParcaDonusumServisi::class)->minimumParcaSayisi($r),
-                            ))
-                            ->reorderable(false)
-                            ->addable(false)
-                            ->deletable(false)
-                            ->columnSpanFull(),
-                        Forms\Components\Checkbox::make('onay')
-                            ->label('Dağılımı kontrol ettim ve onaylıyorum.')
-                            ->accepted()
-                            ->required()
-                            ->columnSpanFull(),
-                    ])
-                    ->action(function (array $data) use ($r): void {
-                        $this->partiDuzeltmeYetkisiniDogrula();
-                        try {
-                            app(StokParcaDonusumServisi::class)->donustur($r, array_values((array) ($data['parcalar'] ?? [])));
-                            Notification::make()->title('Stok parçaları oluşturuldu')->success()->send();
-                        } catch (IsKuraliIstisnasi $exception) {
-                            Notification::make()->title($exception->getMessage())->danger()->send();
-                        }
-                    }),
-                Actions\Action::make('anaParcayiParcalaraAyir')
-                    ->label('Ana partiyi parçalara ayır')
-                    ->icon('heroicon-o-rectangle-group')
-                    ->color('warning')
-                    ->visible(fn (): bool => false)
-                    ->modalHeading('Mevcut ana partiyi stok parçalarına ayır')
-                    ->modalDescription('Yalnız seçilen partinin kalan bakiyesi dönüştürülür. Önceki satış hareketleri korunur; parti bilgileri yeni parçalara aktarılır.')
-                    ->form([
-                        Forms\Components\Select::make('ana_parca_id')
-                            ->label('Ana parti')
-                            ->getSearchResultsUsing(fn (string $search): array => $this->anaParcaSecenekleri($r, $search))
-                            ->getOptionLabelUsing(fn ($value): ?string => $this->anaParcaEtiketi((int) $value, $r))
-                            ->searchable()
-                            ->live()
-                            ->afterStateUpdated(function (Forms\Set $set, Forms\Get $get, $state) use ($r): void {
-                                $this->partiDonusumFormunuDoldur($set, $r, (int) $state, (int) ($get('parca_sayisi') ?: 1));
-                            })
-                            ->required(),
-                        Forms\Components\TextInput::make('parca_sayisi')
-                            ->label('Parça sayısı')
-                            ->numeric()
-                            ->minValue(1)
-                            ->maxValue(5000)
-                            ->required()
-                            ->live()
-                            ->afterStateUpdated(function (Forms\Set $set, Forms\Get $get, $state) use ($r): void {
-                                $this->partiDonusumFormunuDoldur($set, $r, (int) ($get('ana_parca_id') ?? 0), (int) $state);
-                            }),
-                        Forms\Components\Repeater::make('parcalar')
-                            ->label('Önerilen stok parçaları')
-                            ->schema([
-                                Forms\Components\Hidden::make('stok_olcu_bakiyesi_id'),
-                                Forms\Components\Hidden::make('stok_olcusu_id'),
-                                Forms\Components\Hidden::make('takip_turu'),
-                                Forms\Components\Hidden::make('olcu_birimi'),
-                                Forms\Components\Hidden::make('agirlik_birimi'),
-                                Forms\Components\TextInput::make('olcu_kaynagi')->label('Ölçü kaynağı')->disabled()->dehydrated(false),
-                                Forms\Components\TextInput::make('parca_kodu')->label('Parça kodu')->maxLength(128),
-                                Forms\Components\TextInput::make('ana_miktar')->label('Ana miktar')->numeric()->minValue(0)->required(),
-                                Forms\Components\TextInput::make('maliyet')->label('m² maliyeti')->numeric()->minValue(0),
-                                Forms\Components\TextInput::make('en')->label('En')->numeric()->minValue(0)
-                                    ->visible(fn (Forms\Get $get): bool => in_array((string) $get('takip_turu'), ['alan', 'hacim'], true)),
-                                Forms\Components\TextInput::make('boy')->label('Boy')->numeric()->minValue(0)
-                                    ->visible(fn (Forms\Get $get): bool => in_array((string) $get('takip_turu'), ['uzunluk', 'alan', 'hacim'], true)),
-                                Forms\Components\TextInput::make('yukseklik')->label('Kalınlık / yükseklik')->numeric()->minValue(0)
-                                    ->visible(fn (Forms\Get $get): bool => (string) $get('takip_turu') === 'hacim'),
-                                Forms\Components\TextInput::make('bir_adet_agirlik')->label('Bir adet ağırlığı')->numeric()->minValue(0)
-                                    ->visible(fn (Forms\Get $get): bool => (string) $get('takip_turu') === 'agirlik'),
-                                Forms\Components\TextInput::make('renk_desen')->label('Renk / desen')->maxLength(191),
-                                Forms\Components\TextInput::make('kalite_sinifi')->label('Kalite sınıfı')->maxLength(64),
-                            ])
-                            ->columns(4)
-                            ->reorderable(false)
-                            ->addable(false)
-                            ->deletable(false)
-                            ->default([])
-                            ->columnSpanFull(),
-                        Forms\Components\Checkbox::make('onay')
-                            ->label('Partinin kalan dağılımını kontrol ettim ve onaylıyorum.')
-                            ->accepted()
-                            ->required()
-                            ->columnSpanFull(),
-                    ])
-                    ->action(function (array $data) use ($r): void {
-                        $this->partiDuzeltmeYetkisiniDogrula();
-                        try {
-                            $parti = $this->donusturulebilirAnaPartiSorgusu($r)->findOrFail((int) $data['ana_parca_id']);
-                            app(StokParcaDonusumServisi::class)->partiyiDonustur($parti, array_values((array) ($data['parcalar'] ?? [])));
-                            Notification::make()->title('Ana parti stok parçalarına dönüştürüldü')->success()->send();
-                        } catch (IsKuraliIstisnasi $exception) {
-                            Notification::make()->title($exception->getMessage())->danger()->send();
-                        }
-                    }),
-                Actions\Action::make('partiSayimDuzeltmesi')
-                    ->label('Parti sayımı düzelt')
-                    ->icon('heroicon-o-clipboard-document-check')
-                    ->color('gray')
-                    ->visible(fn (): bool => $this->partiDuzeltmeYetkisiVarMi() && $r->partiTakibiAktifMi() && StokParcasi::query()->where('firma_id', $r->firma_id)->where('stok_id', $r->id)->exists())
-                    ->modalHeading('Parti sayımını düzelt')
-                    ->modalDescription('Saydığınız gerçek miktarı girin. Sistem yalnızca fark kadar stok düzeltmesi oluşturur.')
-                    ->form([
-                        Forms\Components\Select::make('stok_parcasi_id')
-                            ->label('Parti / Lot')
-                            ->getSearchResultsUsing(fn (string $search): array => $this->stokPartiSecenekleri($r, $search))
-                            ->getOptionLabelUsing(fn ($value): ?string => $this->stokPartiEtiketi((int) $value, $r))
-                            ->searchable()
-                            ->required(),
-                        Forms\Components\TextInput::make('hedef_miktar')
-                            ->label('Sayım miktarı')
-                            ->numeric()
-                            ->required()
-                            ->helperText('Seçtiğiniz partide saydığınız gerçek miktarı yazın.'),
-                    ])
-                    ->action(function (array $data) use ($r): void {
-                        $this->partiDuzeltmeYetkisiniDogrula();
-                        try {
-                            $parti = StokParcasi::query()->where('firma_id', $r->firma_id)->where('stok_id', $r->id)->findOrFail((int) $data['stok_parcasi_id']);
-                            app(StokHareketServisi::class)->partiMiktariniDuzelt((int) $r->firma_id, $parti, $data['hedef_miktar']);
-                            Notification::make()->title('Parti sayımı güncellendi')->success()->send();
-                        } catch (IsKuraliIstisnasi $exception) {
-                            Notification::make()->title($exception->getMessage())->danger()->send();
-                        }
-                    }),
-                Actions\Action::make('mevcutStoguPartiyeAktar')
-                    ->label('Mevcut stoğu partiye bağla')
-                    ->icon('heroicon-o-tag')
-                    ->color('warning')
-                    ->visible(fn (): bool => $this->partiDuzeltmeYetkisiVarMi() && $r->partiTakibiAktifMi()
-                        && bccomp((string) ($r->stok_miktari ?? 0), '0', 4) > 0
-                        && ! StokParcasi::query()->where('firma_id', $r->firma_id)->where('stok_id', $r->id)->where('kalan_miktar', '>', 0)->exists())
-                    ->modalHeading('Mevcut stoğu partiye bağla')
-                    ->modalDescription('Mevcut stok miktarı değişmez. Sadece bu stok için parti kaydı oluşturulur.')
-                    ->form([
-                        Forms\Components\TextInput::make('parca_kodu')->label('Parti / Lot No')->required()->maxLength(128)->helperText('Bu ürün ve depo için daha önce kullanılmamış bir numara girin.'),
-                        Forms\Components\TextInput::make('miktar')->label('Miktar')->numeric()->required()->default(fn (): string => (string) $r->stok_miktari),
-                        Forms\Components\TextInput::make('birim_maliyet')->label('Birim maliyet')->numeric()->default(fn (): string => (string) ($r->guncel_birim_maliyet ?? 0)),
-                        Forms\Components\Select::make('depo_id')
-                            ->label('Depo')
-                            ->options(fn (): array => [0 => 'Genel stok'] + Depo::query()->where('firma_id', $r->firma_id)->aktif()->orderBy('ad')->pluck('ad', 'id')->all())
-                            ->default((int) ($r->depo_id ?? 0)),
-                        Forms\Components\DatePicker::make('uretim_tarihi')->label('Üretim tarihi'),
-                        Forms\Components\DatePicker::make('son_kullanma_tarihi')->label('Son kullanma tarihi'),
-                        Forms\Components\TextInput::make('blok_no')->label('Blok no')->maxLength(128),
-                        Forms\Components\TextInput::make('ocak_tedarikci')->label('Ocak / tedarikçi')->maxLength(191),
-                        Forms\Components\TextInput::make('kalite_sinifi')->label('Kalite sınıfı')->maxLength(64),
-                        Forms\Components\TextInput::make('renk_desen')->label('Renk / desen')->maxLength(191),
-                        Forms\Components\TextInput::make('metrekare')->label('Toplam m²')->numeric()->minValue(0),
-                        Forms\Components\TextInput::make('plaka_no')->label('Plaka no')->maxLength(128),
-                        Forms\Components\TextInput::make('parca_no')->label('Parça no')->maxLength(128),
-                    ])
-                    ->action(function (array $data) use ($r): void {
-                        $this->partiDuzeltmeYetkisiniDogrula();
-                        try {
-                            app(StokHareketServisi::class)->mevcutStoguPartiyeAktar((int) $r->firma_id, $r, $data);
-                            Notification::make()->title('Mevcut stok partiye bağlandı')->success()->send();
-                        } catch (IsKuraliIstisnasi $exception) {
-                            Notification::make()->title($exception->getMessage())->danger()->send();
-                        }
-                    }),
-                Actions\Action::make('kritikStoklar')
-                    ->label('Kritik stoklar')
-                    ->icon('heroicon-o-bell-alert')
-                    ->url(KritikStoklarSayfasi::getUrl())
-                    ->visible(fn (): bool => $this->kritikDurumdaMi($r) && KritikStoklarSayfasi::canAccess())
-                    ->color('warning'),
-            ],
+            Actions\Action::make('kritikStoklar')
+                ->label('Kritik stoklar')
+                ->icon('heroicon-o-bell-alert')
+                ->url(KritikStoklarSayfasi::getUrl())
+                ->visible(fn (): bool => $this->kritikDurumdaMi($r) && KritikStoklarSayfasi::canAccess())
+                ->color('warning'),
         ];
     }
 
@@ -684,19 +363,40 @@ class ViewStokKarti extends ViewRecord
         return bccomp((string) ($s->stok_miktari ?? '0'), (string) $s->minimum_stok, 4) <= 0;
     }
 
-    private function partiDuzeltmeYetkisiVarMi(): bool
-    {
-        return MuhasebeFilamentErisimYardimcisi::muhasebeYetkisiVarMi(MuhasebeYetkiSablonlari::STOK_PARTI_DUZELT);
-    }
-
-    private function partiDuzeltmeYetkisiniDogrula(): void
-    {
-        abort_unless($this->partiDuzeltmeYetkisiVarMi(), 403, 'Stok parti düzenleme yetkiniz bulunmuyor.');
-    }
-
     private function formatMiktar(string $v): string
     {
         return str_replace('.', ',', rtrim(rtrim(bcadd($v, '0', 4), '0'), '.'));
+    }
+
+    private function fiyatStr(mixed $state, StokKarti $r): string
+    {
+        if ($state === null || $state === '') {
+            return '—';
+        }
+
+        $paraBirimi = strtoupper((string) ($r->para_birimi ?: 'TRY'));
+        $sembol = match ($paraBirimi) {
+            'TRY' => '₺',
+            'USD' => '$',
+            'EUR' => '€',
+            'GBP' => '£',
+            default => $paraBirimi,
+        };
+
+        return $sembol.number_format((float) $state, 2, ',', '.');
+    }
+
+    private function fiyatBilgisiHtml(StokKarti $stok): HtmlString
+    {
+        $paraBirimi = strtoupper((string) ($stok->para_birimi ?: 'TRY'));
+        $satir = static fn (string $etiket, string $deger): string => '<div class="flex items-center justify-between gap-4 border-b border-gray-100 py-2 last:border-b-0 dark:border-white/10"><span class="text-sm text-gray-500">'.e($etiket).'</span><span class="text-sm font-medium">'.e($deger).'</span></div>';
+
+        return new HtmlString('<div class="grid gap-1 sm:grid-cols-2">'
+            .$satir('Alış fiyatı', $this->fiyatStr($stok->alis_fiyati, $stok))
+            .$satir('Satış fiyatı', $this->fiyatStr($stok->satis_fiyati, $stok))
+            .$satir('Para birimi', $paraBirimi)
+            .$satir('KDV oranı (%)', $stok->kdv_orani !== null ? (string) $stok->kdv_orani : '—')
+            .'</div>');
     }
 
     private function gorsellerHtml(StokKarti $stok): HtmlString
@@ -735,40 +435,6 @@ class ViewStokKarti extends ViewRecord
         return $this->formatMiktar((string) ($r->stok_miktari ?? '0'));
     }
 
-    private function stokPartileriTablosuHtml(StokKarti $stok): HtmlString
-    {
-        if ($this->stokPartileriHtmlCache !== null) {
-            return $this->stokPartileriHtmlCache;
-        }
-
-        $partiler = StokParcasi::query()
-            ->where('firma_id', $stok->firma_id)
-            ->where('stok_id', $stok->id)
-            ->where('kalan_miktar', '>', 0)
-            ->with('depo:id,ad')
-            ->orderByRaw('son_kullanma_tarihi IS NULL')
-            ->orderBy('son_kullanma_tarihi')
-            ->orderBy('id')
-            ->limit(50)
-            ->get();
-
-        if ($partiler->isEmpty()) {
-            return $this->stokPartileriHtmlCache = new HtmlString('<div class="text-sm text-gray-500">Henüz parti kaydı yok. Alış veya açılış stokunda parti numarası girebilirsiniz.</div>');
-        }
-
-        $rows = $partiler->map(fn (StokParcasi $parti): string => sprintf(
-            '<tr class="border-b border-gray-100 dark:border-white/10"><td class="px-3 py-2 text-sm">%s</td><td class="px-3 py-2 text-sm">%s</td><td class="px-3 py-2 text-sm text-end">%s</td><td class="px-3 py-2 text-sm">%s</td></tr>',
-            e($parti->parca_kodu),
-            e($parti->depo?->ad ?? 'Genel stok'),
-            e($this->formatMiktar((string) $parti->kalan_miktar)),
-            e($parti->son_kullanma_tarihi?->format('d.m.Y') ?? '—')
-        ))->implode('');
-
-        return $this->stokPartileriHtmlCache = new HtmlString(
-            '<div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-white/10"><table class="w-full text-sm"><thead><tr class="bg-gray-50 dark:bg-white/5 text-start"><th class="px-3 py-2 font-medium">Parti / Lot</th><th class="px-3 py-2 font-medium">Depo</th><th class="px-3 py-2 font-medium text-end">Kalan</th><th class="px-3 py-2 font-medium">Son kullanma</th></tr></thead><tbody>'.$rows.'</tbody></table></div>'
-        );
-    }
-
     private function stokSerileriTablosuHtml(StokKarti $stok): HtmlString
     {
         if ($this->stokSerileriHtmlCache !== null) {
@@ -803,7 +469,7 @@ class ViewStokKarti extends ViewRecord
         $bakiyeler = StokOlcuBakiyesi::query()
             ->where('firma_id', $stok->firma_id)
             ->where('stok_id', $stok->id)
-            ->with(['olcu:id,kod,ad,aktif_mi', 'depo:id,ad', 'parti:id,parca_kodu'])
+            ->with(['olcu:id,kod,ad,aktif_mi', 'depo:id,ad'])
             ->orderBy('id')
             ->limit(200)
             ->get();
@@ -817,15 +483,15 @@ class ViewStokKarti extends ViewRecord
             $toplamAdet = bcadd($toplamAdet, (string) $b->adet_esdegeri, 8);
 
             return sprintf(
-                '<tr class="border-b border-gray-100 dark:border-white/10"><td class="px-3 py-2 text-sm">%s</td><td class="px-3 py-2 text-sm">%s</td><td class="px-3 py-2 text-sm">%s</td><td class="px-3 py-2 text-sm text-end">%s</td><td class="px-3 py-2 text-sm text-end">%s</td><td class="px-3 py-2 text-sm text-end">%s</td><td class="px-3 py-2 text-sm text-end">%s</td><td class="px-3 py-2 text-sm text-end">%s</td></tr>',
-                e($b->olcu?->ad ?: $b->olcu?->kod ?: '—'), e($b->depo?->ad ?: 'Genel stok'), e($b->parti?->parca_kodu ?: '—'),
+                '<tr class="border-b border-gray-100 dark:border-white/10"><td class="px-3 py-2 text-sm">%s</td><td class="px-3 py-2 text-sm">%s</td><td class="px-3 py-2 text-sm text-end">%s</td><td class="px-3 py-2 text-sm text-end">%s</td><td class="px-3 py-2 text-sm text-end">%s</td><td class="px-3 py-2 text-sm text-end">%s</td><td class="px-3 py-2 text-sm">%s</td></tr>',
+                e($b->olcu?->ad ?: $b->olcu?->kod ?: '—'), e($b->depo?->ad ?: 'Genel stok'),
                 e($this->formatMiktar((string) $b->ana_miktar)), e($this->formatMiktar((string) $b->adet_esdegeri)),
                 e($this->formatMiktar((string) $b->rezerve_ana_miktar)), e($this->formatMiktar(bcsub((string) $b->ana_miktar, (string) $b->rezerve_ana_miktar, 8))), e((string) $b->durum)
             );
         })->implode('');
-        $ozet = '<tr class="font-semibold bg-gray-50 dark:bg-white/5"><td class="px-3 py-2" colspan="3">Toplam</td><td class="px-3 py-2 text-end">'.$this->formatMiktar($toplamAna).'</td><td class="px-3 py-2 text-end">'.$this->formatMiktar($toplamAdet).'</td><td class="px-3 py-2" colspan="3">—</td></tr>';
+        $ozet = '<tr class="font-semibold bg-gray-50 dark:bg-white/5"><td class="px-3 py-2" colspan="2">Toplam</td><td class="px-3 py-2 text-end">'.$this->formatMiktar($toplamAna).'</td><td class="px-3 py-2 text-end">'.$this->formatMiktar($toplamAdet).'</td><td class="px-3 py-2" colspan="3">—</td></tr>';
 
-        return $this->stokOlcuBakiyeleriHtmlCache = new HtmlString('<div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-white/10"><table class="w-full text-sm"><thead><tr class="bg-gray-50 dark:bg-white/5 text-start"><th class="px-3 py-2 font-medium">Ölçü</th><th class="px-3 py-2 font-medium">Depo</th><th class="px-3 py-2 font-medium">Parti / lot</th><th class="px-3 py-2 font-medium text-end">Ana miktar</th><th class="px-3 py-2 font-medium text-end">Adet eşdeğeri</th><th class="px-3 py-2 font-medium text-end">Rezerv</th><th class="px-3 py-2 font-medium text-end">Kullanılabilir</th><th class="px-3 py-2 font-medium">Durum</th></tr></thead><tbody>'.$rows.$ozet.'</tbody></table></div>');
+        return $this->stokOlcuBakiyeleriHtmlCache = new HtmlString('<div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-white/10"><table class="w-full text-sm"><thead><tr class="bg-gray-50 dark:bg-white/5 text-start"><th class="px-3 py-2 font-medium">Ölçü</th><th class="px-3 py-2 font-medium">Depo</th><th class="px-3 py-2 font-medium text-end">Ana miktar</th><th class="px-3 py-2 font-medium text-end">Adet eşdeğeri</th><th class="px-3 py-2 font-medium text-end">Rezerv</th><th class="px-3 py-2 font-medium text-end">Kullanılabilir</th><th class="px-3 py-2 font-medium">Durum</th></tr></thead><tbody>'.$rows.$ozet.'</tbody></table></div>');
     }
 
     private function minStr(StokKarti $r): string
@@ -889,48 +555,6 @@ class ViewStokKarti extends ViewRecord
         $html .= '<p class="mt-2 text-xs text-gray-500">Son 12 hareket. Negatif ve kritik durumlar üst bölümde renkli uyarı ile ayrılır.</p>';
 
         return $this->stokHareketleriHtmlCache = new HtmlString($html);
-    }
-
-    private function stokPartiHareketleriTablosuHtml(StokKarti $stok): HtmlString
-    {
-        if ($this->stokPartiHareketleriHtmlCache !== null) {
-            return $this->stokPartiHareketleriHtmlCache;
-        }
-
-        $hareketler = StokHareketiParcasi::query()
-            ->where('firma_id', $stok->firma_id)
-            ->whereHas('stokParcasi', fn ($query) => $query->where('stok_id', $stok->id))
-            ->with(['stokParcasi:id,parca_kodu', 'stokHareketi:id,tarih,islem_turu,belge_turu,belge_id'])
-            ->latest('id')
-            ->limit(30)
-            ->get();
-
-        if ($hareketler->isEmpty()) {
-            return $this->stokPartiHareketleriHtmlCache = new HtmlString('<div class="text-sm text-gray-500">Henüz parti hareketi yok.</div>');
-        }
-
-        $rows = $hareketler->map(function (StokHareketiParcasi $hareket): string {
-            $islem = $hareket->stokHareketi?->islem_turu;
-            $giris = in_array($islem, [StokHareketIslemTuru::Alis, StokHareketIslemTuru::Acilis, StokHareketIslemTuru::SatisIadesi, StokHareketIslemTuru::TransferGiris], true);
-            $belgeTuru = $hareket->stokHareketi?->belge_turu;
-            $belge = $belgeTuru instanceof StokBelgeTuru ? $belgeTuru->value : (string) $belgeTuru;
-            if ($belgeTuru === StokBelgeTuru::Fatura && $hareket->stokHareketi?->belge_id) {
-                $belge = '<a href="'.e(FaturaKaynagi::getUrl('view', ['record' => (int) $hareket->stokHareketi->belge_id])).'" class="text-primary-600 hover:underline">Fatura #'.e((string) $hareket->stokHareketi->belge_id).'</a>';
-            } elseif ($hareket->stokHareketi?->belge_id) {
-                $belge .= ' #'.(int) $hareket->stokHareketi->belge_id;
-            }
-
-            return sprintf(
-                '<tr class="border-b border-gray-100 dark:border-white/10"><td class="px-3 py-2 text-sm">%s</td><td class="px-3 py-2 text-sm font-medium">%s</td><td class="px-3 py-2 text-sm">%s</td><td class="px-3 py-2 text-sm text-end">%s</td><td class="px-3 py-2 text-sm">%s</td></tr>',
-                e(optional($hareket->stokHareketi?->tarih)->format('d.m.Y H:i') ?? '—'),
-                e($hareket->stokParcasi?->parca_kodu ?? '—'),
-                $giris ? '<span class="text-success-600">Giriş</span>' : '<span class="text-danger-600">Çıkış</span>',
-                e($this->formatMiktar((string) $hareket->miktar)),
-                $belge
-            );
-        })->implode('');
-
-        return $this->stokPartiHareketleriHtmlCache = new HtmlString('<div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-white/10"><table class="w-full text-sm"><thead><tr class="bg-gray-50 dark:bg-white/5 text-start"><th class="px-3 py-2 font-medium">Tarih</th><th class="px-3 py-2 font-medium">Parti / Lot</th><th class="px-3 py-2 font-medium">Yön</th><th class="px-3 py-2 font-medium text-end">Miktar</th><th class="px-3 py-2 font-medium">Belge</th></tr></thead><tbody>'.$rows.'</tbody></table></div>');
     }
 
     private function faturaKalemleriTablosuHtml(StokKarti $stok): HtmlString

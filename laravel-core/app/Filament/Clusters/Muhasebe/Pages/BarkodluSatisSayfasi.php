@@ -13,7 +13,6 @@ use App\Models\Muhasebe\KasaHesabi;
 use App\Models\Muhasebe\PosHesabi;
 use App\Models\Muhasebe\StokBarkodu;
 use App\Models\Muhasebe\StokKarti;
-use App\Models\Muhasebe\StokParcasi;
 use App\Models\Muhasebe\StokSeriNo;
 use App\Muhasebe\Enumlar\HesapDurumu;
 use App\Muhasebe\Enumlar\StokKartiTuru;
@@ -364,7 +363,6 @@ class BarkodluSatisSayfasi extends Page implements HasForms
     protected function getHeaderActions(): array
     {
         return [
-            $this->parcaSecerekEkleAction(),
             Actions\Action::make('barkodEkle')
                 ->label('Barkodu Ekle')
                 ->icon('heroicon-o-plus')
@@ -386,170 +384,6 @@ class BarkodluSatisSayfasi extends Page implements HasForms
         ];
     }
 
-    protected function parcaSecerekEkleAction(): Actions\Action
-    {
-        return Actions\Action::make('parcaSecerekEkle')
-            ->label('Stok parçası seç')
-            ->icon('heroicon-o-rectangle-stack')
-            ->color('gray')
-            ->visible(fn (): bool => $this->islemYetkisiVarMi() && Schema::hasTable('stok_parcalari') && StokParcasi::query()
-                ->where('firma_id', $this->aktifFirmaId())
-                ->where('parca_mi', true)
-                ->where('kalan_miktar', '>', 0)
-                ->exists())
-            ->modalHeading('Fiziksel stok parçası seç')
-            ->modalDescription('Parçayı arayın, sıralayın ve bu satışta kullanılacak ana miktarı girin. Aynı satışa birden fazla parça ayrı ayrı eklenebilir.')
-            ->form([
-                Forms\Components\Select::make('siralama')
-                    ->label('Sıralama')
-                    ->options([
-                        'tarih_yeni' => 'Giriş tarihi · yeni önce',
-                        'tarih_eski' => 'Giriş tarihi · eski önce',
-                        'kalan_azalan' => 'Kalan miktar · yüksek önce',
-                        'kalan_artan' => 'Kalan miktar · düşük önce',
-                        'olcu_azalan' => 'Ölçü · yüksek önce',
-                        'olcu_artan' => 'Ölçü · düşük önce',
-                        'kod' => 'Parça kodu',
-                        'parti' => 'Ana parti / lot',
-                        'maliyet' => 'Maliyet · yüksek önce',
-                        'desen' => 'Renk / desen',
-                    ])
-                    ->default('tarih_yeni')
-                    ->live()
-                    ->required(),
-                Forms\Components\Select::make('stok_parcasi_id')
-                    ->label('Fiziksel parça')
-                    ->options(fn (Forms\Get $get): array => $this->stokParcaAramaSonuclari('', (string) ($get('siralama') ?: 'tarih_yeni')))
-                    ->getSearchResultsUsing(fn (Forms\Get $get, string $search): array => $this->stokParcaAramaSonuclari($search, (string) ($get('siralama') ?: 'tarih_yeni')))
-                    ->getOptionLabelUsing(fn (mixed $value): ?string => $this->stokParcaSecimEtiketi((int) $value))
-                    ->searchable()
-                    ->live()
-                    ->afterStateUpdated(function (Forms\Set $set, $state): void {
-                        $parca = $state ? StokParcasi::query()
-                            ->where('firma_id', $this->aktifFirmaId())
-                            ->where('parca_mi', true)
-                            ->where('kalan_miktar', '>', 0)
-                            ->find((int) $state) : null;
-                        $set('miktar', $parca?->kalan_miktar);
-                    })
-                    ->required(),
-                Forms\Components\TextInput::make('miktar')
-                    ->label('Satılacak ana miktar')
-                    ->helperText('Kısmi satışta parçanın tamamı yerine satılan m²/ana miktarı yazın. Kalan aynı parça kaydında izlenir.')
-                    ->numeric()
-                    ->minValue(0.00000001)
-                    ->required(),
-            ])
-            ->action(function (array $data): void {
-                $this->stokParcasiniSecerekEkle((int) ($data['stok_parcasi_id'] ?? 0), $data['miktar'] ?? 0);
-            });
-    }
-
-    public function stokParcasiniSecerekEkle(int $parcaId, mixed $girilenMiktar): bool
-    {
-        $parca = StokParcasi::query()
-            ->where('firma_id', $this->aktifFirmaId())
-            ->where('parca_mi', true)
-            ->where('kalan_miktar', '>', 0)
-            ->with('stokKarti')
-            ->find($parcaId);
-        if (! $parca || ! $parca->stokKarti) {
-            Notification::make()->title('Seçilen stok parçası bulunamadı')->danger()->send();
-
-            return false;
-        }
-
-        $miktar = str_replace(',', '.', trim((string) $girilenMiktar));
-        if (! is_numeric($miktar) || bccomp($miktar, '0', 8) <= 0) {
-            Notification::make()->title('Satış miktarı sıfırdan büyük olmalıdır')->warning()->send();
-
-            return false;
-        }
-        $mevcutSepetMiktari = collect($this->kalemler)
-            ->filter(fn (array $kalem): bool => (int) ($kalem['stok_parcasi_id'] ?? 0) === (int) $parca->id)
-            ->sum(fn (array $kalem): float => (float) ($kalem['miktar'] ?? 0));
-        $toplam = bcadd((string) $mevcutSepetMiktari, $miktar, 8);
-        if (bccomp($toplam, (string) $parca->kalan_miktar, 8) > 0) {
-            Notification::make()
-                ->title('Seçilen miktar parça bakiyesini aşıyor')
-                ->body('Kullanılabilir: '.$parca->kalan_miktar.' · Sepette: '.$mevcutSepetMiktari)
-                ->warning()
-                ->send();
-
-            return false;
-        }
-
-        $this->stoktanSepeteEkle($parca->stokKarti, (string) ($parca->barkod ?: $parca->parca_kodu), null, $parca, (float) $miktar);
-        Notification::make()->title('Stok parçası sepete eklendi')->success()->send();
-
-        return true;
-    }
-
-    /** @return array<int, string> */
-    protected function stokParcaAramaSonuclari(string $arama, string $siralama): array
-    {
-        $arama = trim($arama);
-        $query = StokParcasi::query()
-            ->where('firma_id', $this->aktifFirmaId())
-            ->where('parca_mi', true)
-            ->where('kalan_miktar', '>', 0)
-            ->with(['stokKarti:id,kod,ad,birim', 'depo:id,kod,ad', 'ustParca:id,parca_kodu', 'olcuBakiyeleri.olcu'])
-            ->when($arama !== '', fn ($q) => $q->where(function ($inner) use ($arama): void {
-                $inner->where('parca_kodu', 'like', '%'.$arama.'%')
-                    ->orWhere('parca_kodu', 'like', '%'.$arama.'%')
-                    ->orWhere('barkod', 'like', '%'.$arama.'%')
-                    ->orWhere('renk_desen', 'like', '%'.$arama.'%')
-                    ->orWhereHas('ustParca', fn ($parti) => $parti->where('parca_kodu', 'like', '%'.$arama.'%'))
-                    ->orWhereHas('stokKarti', fn ($stok) => $stok->where('ad', 'like', '%'.$arama.'%')->orWhere('kod', 'like', '%'.$arama.'%'));
-            }));
-
-        match ($siralama) {
-            'tarih_eski' => $query->orderBy('created_at'),
-            'kalan_azalan' => $query->orderByDesc('kalan_miktar'),
-            'kalan_artan' => $query->orderBy('kalan_miktar'),
-            'olcu_azalan' => $query->orderByDesc('metrekare')->orderByDesc('kalan_miktar'),
-            'olcu_artan' => $query->orderBy('metrekare')->orderBy('kalan_miktar'),
-            'kod' => $query->orderBy('parca_kodu'),
-            'parti' => $query->orderBy('ust_parca_id')->orderBy('parca_kodu'),
-            'maliyet' => $query->orderByDesc('birim_maliyet'),
-            'desen' => $query->orderBy('renk_desen')->orderBy('parca_kodu'),
-            default => $query->orderByDesc('created_at'),
-        };
-
-        return $query->limit(50)->get()->mapWithKeys(fn (StokParcasi $parca): array => [
-            $parca->id => $this->stokParcaSecimEtiketiModel($parca),
-        ])->all();
-    }
-
-    protected function stokParcaSecimEtiketi(int $parcaId): ?string
-    {
-        $parca = StokParcasi::query()
-            ->where('firma_id', $this->aktifFirmaId())
-            ->where('parca_mi', true)
-            ->with(['stokKarti:id,kod,ad,birim', 'depo:id,kod,ad', 'ustParca:id,parca_kodu', 'olcuBakiyeleri.olcu'])
-            ->find($parcaId);
-
-        return $parca ? $this->stokParcaSecimEtiketiModel($parca) : null;
-    }
-
-    protected function stokParcaSecimEtiketiModel(StokParcasi $parca): string
-    {
-        $bakiye = $parca->olcuBakiyeleri->first();
-        $olcu = $bakiye?->olcu;
-        $olcuEtiketi = $olcu?->ad ?: $olcu?->kod ?: ($parca->metrekare ? $parca->metrekare.' m²' : 'Ölçü yok');
-
-        return implode(' · ', array_filter([
-            (string) ($parca->parca_kodu ?: $parca->parca_kodu),
-            (string) ($parca->stokKarti?->ad ?? ''),
-            'Kalan '.$parca->kalan_miktar.' '.($parca->stokKarti?->birim ?: ''),
-            $olcuEtiketi,
-            $bakiye ? 'Adet eşd. '.$bakiye->adet_esdegeri : null,
-            $parca->ustParca?->parca_kodu ? 'Parti '.$parca->ustParca->parca_kodu : null,
-            $parca->depo?->ad ? 'Depo '.$parca->depo->ad : null,
-            $parca->renk_desen ? 'Desen '.$parca->renk_desen : null,
-        ]));
-    }
-
     public function barkodEkle(): void
     {
         if (! $this->islemYetkisiVarMi()) {
@@ -568,24 +402,6 @@ class BarkodluSatisSayfasi extends Page implements HasForms
         $barkod = trim((string) ($this->data['barkod'] ?? ''));
         if ($barkod === '') {
             Notification::make()->title('Barkod giriniz')->warning()->send();
-            $this->dispatch('barkod-odakla');
-
-            return;
-        }
-
-        $stokParcasi = StokParcasi::query()
-            ->where('firma_id', $firmaId)
-            ->where('parca_mi', true)
-            ->where('kalan_miktar', '>', 0)
-            ->where(function ($query) use ($barkod): void {
-                $query->where('barkod', $barkod)->orWhere('parca_kodu', $barkod)->orWhere('parca_kodu', $barkod);
-            })
-            ->with('stokKarti')
-            ->first();
-        if ($stokParcasi?->stokKarti && in_array((string) $stokParcasi->stokKarti->tur?->value, $this->barkodluSatisGorunenStokTurleri(), true)) {
-            $this->stoktanSepeteEkle($stokParcasi->stokKarti, $barkod, null, $stokParcasi);
-            $this->data['barkod'] = null;
-            $this->barkodAdaylari = [];
             $this->dispatch('barkod-odakla');
 
             return;
@@ -1842,7 +1658,7 @@ class BarkodluSatisSayfasi extends Page implements HasForms
         };
     }
 
-    protected function stoktanSepeteEkle(StokKarti $stok, string $girilenBarkod = '', ?string $seriNo = null, ?StokParcasi $stokParcasi = null, ?float $stokParcasiMiktari = null): void
+    protected function stoktanSepeteEkle(StokKarti $stok, string $girilenBarkod = '', ?string $seriNo = null): void
     {
         if (! in_array((string) $stok->tur?->value, $this->barkodluSatisGorunenStokTurleri(), true)) {
             Notification::make()
@@ -1867,44 +1683,33 @@ class BarkodluSatisSayfasi extends Page implements HasForms
             'fiyat' => max(0, $satisFiyati),
             'indirimli_fiyat' => max(0, (float) ($stok->indirimli_fiyat ?? 0)),
             'kdv_orani' => max(0, (float) ($stok->kdv_orani ?? 0)),
-        ], $girilenBarkod, $seriNo, $stokParcasi, $stokParcasiMiktari);
+        ], $girilenBarkod, $seriNo);
     }
 
     /**
      * @param  array<string, mixed>  $stok
      */
-    protected function stokDizisindenSepeteEkle(array $stok, string $girilenBarkod = '', ?string $seriNo = null, ?StokParcasi $stokParcasi = null, ?float $stokParcasiMiktari = null): void
+    protected function stokDizisindenSepeteEkle(array $stok, string $girilenBarkod = '', ?string $seriNo = null): void
     {
         $stokId = (int) ($stok['id'] ?? 0);
         if ($stokId < 1) {
             return;
         }
 
-        $stokParcasiId = (int) ($stokParcasi?->id ?? 0);
-        $eklenecekParcaMiktari = $stokParcasi
-            ? max(0.00000001, $stokParcasiMiktari ?? (float) $stokParcasi->kalan_miktar)
-            : 1.0;
-        $index = collect($this->kalemler)->search(fn (array $kalem): bool => (int) ($kalem['stok_id'] ?? 0) === $stokId
-            && (int) ($kalem['stok_parcasi_id'] ?? 0) === $stokParcasiId);
+        $index = collect($this->kalemler)->search(fn (array $kalem): bool => (int) ($kalem['stok_id'] ?? 0) === $stokId);
         if ($index !== false) {
             if ($seriNo !== null && $seriNo !== '') {
                 $mevcutSeriler = array_values(array_filter(array_map('strval', (array) ($this->kalemler[$index]['seri_nolari'] ?? []))));
                 if (in_array($seriNo, $mevcutSeriler, true)) {
                     Notification::make()->title('Bu Seri No Barkodu sepette zaten var')->warning()->send();
-
                     return;
                 }
                 $mevcutSeriler[] = $seriNo;
                 $this->kalemler[$index]['seri_nolari'] = $mevcutSeriler;
             }
-            $miktar = max(0, (float) ($this->kalemler[$index]['miktar'] ?? 0)) + $eklenecekParcaMiktari;
-            $this->kalemler[$index]['miktar'] = $miktar;
-            if ($stokParcasi) {
-                $this->kalemler[$index]['parca_dagilimi'] = [['parca_kodu' => $stokParcasi->parca_kodu, 'miktar' => $miktar]];
-            }
+            $this->kalemler[$index]['miktar'] = max(0, (float) ($this->kalemler[$index]['miktar'] ?? 0)) + 1.0;
             $this->seciliKalemIndex = (int) $index;
             $this->aktifSepetiKaydet();
-
             return;
         }
 
@@ -1916,18 +1721,12 @@ class BarkodluSatisSayfasi extends Page implements HasForms
             'stok_miktari' => max(0, (float) ($stok['stok'] ?? $stok['stok_miktari'] ?? 0)),
             'gorsel_url' => (string) ($stok['gorsel_url'] ?? ''),
             'birim' => (string) (($stok['birim'] ?? '') ?: 'AD'),
-            'miktar' => $stokParcasi ? $eklenecekParcaMiktari : 1.0,
+            'miktar' => 1.0,
             'birim_fiyat' => max(0, (float) ($stok['fiyat'] ?? 0)),
             'indirimli_fiyat' => max(0, (float) ($stok['indirimli_fiyat'] ?? 0)),
             'iskonto_tutari' => 0.0,
             'kdv_orani' => max(0, (float) ($stok['kdv_orani'] ?? 0)),
             'seri_nolari' => $seriNo !== null && $seriNo !== '' ? [$seriNo] : [],
-            'stok_parcasi_id' => $stokParcasiId ?: null,
-            'stok_parcasi_no' => $stokParcasi?->parca_kodu,
-            'parca_dagilimi' => $stokParcasi ? [[
-                'parca_kodu' => (string) $stokParcasi->parca_kodu,
-                'miktar' => $eklenecekParcaMiktari,
-            ]] : [],
         ];
         $this->seciliKalemIndex = count($this->kalemler) - 1;
         $this->aktifSepetiKaydet();
@@ -1940,13 +1739,6 @@ class BarkodluSatisSayfasi extends Page implements HasForms
             $kalem['birim_fiyat'] = max(0, (float) ($kalem['birim_fiyat'] ?? 0));
             $kalem['iskonto_tutari'] = max(0, (float) ($kalem['iskonto_tutari'] ?? 0));
             $kalem['kdv_orani'] = max(0, (float) ($kalem['kdv_orani'] ?? 0));
-            if (filled($kalem['stok_parcasi_no'] ?? null)) {
-                $kalem['parca_dagilimi'] = [[
-                    'parca_kodu' => (string) $kalem['stok_parcasi_no'],
-                    'miktar' => $kalem['miktar'],
-                ]];
-            }
-
             return $kalem;
         }, $this->kalemler));
     }
@@ -2212,3 +2004,4 @@ class BarkodluSatisSayfasi extends Page implements HasForms
         Cache::forget($this->aktifSepetCacheKey());
     }
 }
+

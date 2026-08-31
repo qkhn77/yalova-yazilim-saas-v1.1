@@ -3,6 +3,7 @@
 namespace App\Models\Muhasebe;
 
 use App\Models\Concerns\HasFirmaTenantScope;
+use App\Models\Concerns\HasParaBirimiSnapshot;
 use App\Models\Firma;
 use App\Models\User;
 use App\Muhasebe\Enumlar\CekDurumu;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Cek extends Model
 {
     use HasFirmaTenantScope;
+    use HasParaBirimiSnapshot;
 
     protected $table = 'cekler';
 
@@ -28,6 +30,9 @@ class Cek extends Model
         'sube_adi',
         'tutar',
         'para_birimi',
+        'kur',
+        'baz_para_birimi',
+        'baz_tutar',
         'keside_tarihi',
         'vade_tarihi',
         'sorumlu_kullanici_id',
@@ -43,6 +48,8 @@ class Cek extends Model
             'turu' => CekTuru::class,
             'durum' => CekDurumu::class,
             'tutar' => 'decimal:2',
+            'kur' => 'decimal:8',
+            'baz_tutar' => 'decimal:2',
             'keside_tarihi' => 'date',
             'vade_tarihi' => 'date',
         ];

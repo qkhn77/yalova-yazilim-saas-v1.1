@@ -3,6 +3,7 @@
 namespace App\Filament\Clusters\Muhasebe\Pages;
 
 use App\Muhasebe\Enumlar\FaturaTuru;
+use App\Muhasebe\Enumlar\FaturaSinifi;
 
 class GiderFaturasiSayfasi extends FaturaListesiFiltreliSayfasi
 {
@@ -12,7 +13,17 @@ class GiderFaturasiSayfasi extends FaturaListesiFiltreliSayfasi
 
     public static function faturaTurleri(): array
     {
-        return [FaturaTuru::Gider->value, FaturaTuru::GiderFaturasi->value];
+        return [
+            FaturaTuru::Gelen->value,
+            FaturaTuru::GelenFatura->value,
+            FaturaTuru::Gider->value,
+            FaturaTuru::GiderFaturasi->value,
+        ];
+    }
+
+    public static function faturaSiniflari(): array
+    {
+        return [FaturaSinifi::Gider->value];
     }
 
     protected static function olusturmaSayfasiAnahtari(): string

@@ -159,8 +159,6 @@
             @endif
             class="ms-auto flex items-center gap-x-4"
         >
-            {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::GLOBAL_SEARCH_BEFORE) }}
-
             @if (filament()->isGlobalSearchEnabled())
                 @livewire(Filament\Livewire\GlobalSearch::class)
             @endif

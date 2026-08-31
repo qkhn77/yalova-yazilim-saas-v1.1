@@ -132,7 +132,7 @@ return new class extends Migration
             return false;
         }
 
-        if ($driver !== 'mysql') {
+        if (! in_array($driver, ['mysql', 'mariadb'], true)) {
             return false;
         }
 

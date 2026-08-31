@@ -5,6 +5,8 @@ namespace Tests\Feature\Muhasebe;
 use App\Models\Firma;
 use App\Models\Muhasebe\Cari;
 use App\Models\Muhasebe\CariHareketi;
+use App\Models\Muhasebe\DovizKuru;
+use App\Models\Muhasebe\ParaBirimi;
 use App\Models\Muhasebe\Fatura;
 use App\Models\Muhasebe\FaturaKalemi;
 use App\Models\Muhasebe\StokHareketi;
@@ -308,6 +310,64 @@ class FaturaEntegrasyonHardeningTest extends TestCase
         $this->assertSame(FaturaDurumu::Onayli, $fatura->fresh()->durum);
         $this->assertSame(0, CariHareketi::query()->where('belge_id', $fatura->id)->count());
         $this->assertSame(0, StokHareketi::query()->where('belge_id', $fatura->id)->count());
+    }
+
+    public function test_fatura_para_birimi_cariden_farkli_olsa_da_baz_tutarla_onaylanabilir(): void
+    {
+        $firma = $this->firmaOlustur('FAT-PB');
+        $this->superAdminVeSession($firma);
+        ParaBirimi::query()->create([
+            'firma_id' => $firma->id,
+            'kod' => 'USD',
+            'ad' => 'Amerikan Doları',
+            'aktif_mi' => true,
+            'is_sabit' => false,
+            'tanim_firma_kapsami' => $firma->id,
+        ]);
+        $cari = Cari::query()->create([
+            'firma_id' => $firma->id,
+            'kod' => 'C-PB',
+            'ad' => 'TL Cari',
+            'tur' => CariTuru::Musteri->value,
+            'durum' => CariDurumu::Aktif->value,
+            'para_birimi' => 'TRY',
+        ]);
+        $fatura = $this->faturaOlustur($firma, $cari, FaturaTuru::Giden);
+        $fatura->update(['para_birimi' => 'USD']);
+        FaturaKalemi::query()->create([
+            'firma_id' => $firma->id,
+            'fatura_id' => $fatura->id,
+            'satir_no' => 1,
+            'kalem_tipi' => 'hizmet_kalemi',
+            'hizmet_mi' => true,
+            'miktar' => '1',
+            'birim_fiyat' => '100',
+            'kdv_orani' => '20',
+            'net_tutar' => '100',
+            'kdv_tutari' => '20',
+            'toplam' => '120',
+            'satir_toplami' => '100',
+            'satir_genel_toplam' => '120',
+            'para_birimi' => 'USD',
+        ]);
+        DovizKuru::query()->create([
+            'firma_id' => $firma->id,
+            'is_sabit' => false,
+            'tanim_firma_kapsami' => $firma->id,
+            'kaynak_para_birimi' => 'USD',
+            'hedef_para_birimi' => 'TRY',
+            'tarih' => now()->toDateString(),
+            'kur' => '40',
+            'manuel_mi' => true,
+        ]);
+
+        app(FaturaIslemServisi::class)->faturayiOnayla($fatura->fresh());
+
+        $fatura = $fatura->fresh();
+        $this->assertSame(FaturaDurumu::Onayli, $fatura->durum);
+        $this->assertSame('TRY', $fatura->baz_para_birimi);
+        $this->assertSame('4800.00000000', $fatura->baz_genel_toplam);
+        $this->assertSame('USD', CariHareketi::query()->where('belge_id', $fatura->id)->value('para_birimi'));
     }
 
     public function test_idempotent_atla_tutarsizlik_warning_log_uretir(): void

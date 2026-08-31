@@ -7,6 +7,7 @@ use App\Models\Muhasebe\Masraf;
 use App\Models\Muhasebe\MasrafFaturaDagitimi;
 use App\Models\Proje\IsletmeProjesi;
 use App\Muhasebe\Enumlar\FaturaDurumu;
+use App\Muhasebe\Enumlar\FaturaSinifi;
 use App\Muhasebe\Enumlar\FaturaTuru;
 use App\Muhasebe\Exceptions\IsKuraliIstisnasi;
 use App\Muhasebe\Guvenlik\MuhasebeFirmaErisimDenetleyicisi;
@@ -44,7 +45,8 @@ final class MasrafFaturaBaglantiServisi
                 ? $fatura->tur->kanonik()
                 : FaturaTuru::from((string) $fatura->tur)->kanonik();
 
-            if ($faturaTuru !== FaturaTuru::Gider) {
+            if ($fatura->fatura_sinifi !== FaturaSinifi::Gider
+                && ! ($fatura->fatura_sinifi === null && $faturaTuru === FaturaTuru::Gider)) {
                 throw new IsKuraliIstisnasi('Masraf yalnızca gider faturasıyla eşleştirilebilir.');
             }
 

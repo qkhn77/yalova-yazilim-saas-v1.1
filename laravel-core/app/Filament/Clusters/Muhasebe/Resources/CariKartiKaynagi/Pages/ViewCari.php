@@ -307,8 +307,12 @@ class ViewCari extends ViewRecord implements HasTable
                         'belge_id',
                         'islem_tarihi',
                         'borc',
+                        'baz_borc',
                         'alacak',
+                        'baz_alacak',
                         'para_birimi',
+                        'baz_para_birimi',
+                        'kur',
                         'vade_tarihi',
                         'iptal_edilen_hareket_id',
                         'durum',
@@ -381,6 +385,25 @@ class ViewCari extends ViewRecord implements HasTable
                     ->label('Alacak')
                     ->formatStateUsing(fn ($state, CariHareketi $record): string => number_format((float) $state, 2, ',', '.').' '.strtoupper((string) $record->para_birimi))
                     ->sortable(),
+                Tables\Columns\TextColumn::make('baz_borc')
+                    ->label('Baz borç')
+                    ->formatStateUsing(fn ($state, CariHareketi $record): string => $state === null
+                        ? '—'
+                        : number_format((float) $state, 2, ',', '.').' '.strtoupper((string) ($record->baz_para_birimi ?: config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY'))))
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('baz_alacak')
+                    ->label('Baz alacak')
+                    ->formatStateUsing(fn ($state, CariHareketi $record): string => $state === null
+                        ? '—'
+                        : number_format((float) $state, 2, ',', '.').' '.strtoupper((string) ($record->baz_para_birimi ?: config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY'))))
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('kur')
+                    ->label('Kur')
+                    ->formatStateUsing(fn ($state): string => $state === null ? '—' : number_format((float) $state, 8, ',', '.'))
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('vade_tarihi')
                     ->label('Vade')
                     ->date('d.m.Y')
@@ -390,7 +413,7 @@ class ViewCari extends ViewRecord implements HasTable
             ->recordClasses(fn (CariHareketi $record): string => ($record->durum instanceof CariHareketDurumu ? $record->durum : CariHareketDurumu::tryFrom((string) $record->durum)) === CariHareketDurumu::Iptal
                 ? 'bg-danger-50/60 text-danger-900 line-through decoration-danger-500 decoration-2 dark:bg-danger-500/10 dark:text-danger-100'
                 : '')
-            ->heading('Cari hareketleri')
+            ->heading('Cari Hareketleri')
             ->description('Bu cariye ait tahsilat, ödeme ve diğer muhasebe hareketleri.')
             ->defaultSort('islem_tarihi', 'desc')
             ->filters([

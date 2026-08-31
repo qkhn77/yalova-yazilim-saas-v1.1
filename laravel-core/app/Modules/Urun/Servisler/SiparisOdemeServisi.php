@@ -865,8 +865,6 @@ class SiparisOdemeServisi
                 'aciklama' => 'E-ticaret sipariş stok iadesi #'.$siparis->siparis_no,
                 'tarih' => now(),
                 'seri_nolari' => array_values(array_filter(array_map('trim', (array) ($kalem->seri_nolari ?? [])))),
-                'parca_kodu' => $kalem->parca_kodu,
-                'parca_dagilimi' => $kalem->parca_dagilimi,
             ], true);
         }
     }

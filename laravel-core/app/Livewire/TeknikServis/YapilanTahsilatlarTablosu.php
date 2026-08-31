@@ -19,6 +19,7 @@ use App\TeknikServis\Filament\TeknikServisTahsilatFormu;
 use App\TeknikServis\Servisler\TeknikServisAlacakOzetServisi;
 use App\TeknikServis\Servisler\TeknikServisTahsilatServisi;
 use App\Muhasebe\Servisler\MasrafFaturaKayitServisi;
+use App\Muhasebe\Enumlar\FaturaSinifi;
 use App\Muhasebe\Exceptions\IsKuraliIstisnasi;
 use App\Support\MasrafTakipYetkiSablonlari;
 use App\Support\TeknikServisYetkiSablonlari;
@@ -925,7 +926,10 @@ class YapilanTahsilatlarTablosu extends Component implements HasForms, HasTable
     {
         return Fatura::query()
             ->where('firma_id', $firmaId)
-            ->where('tur', 'gider')
+            ->where(function (Builder $query): void {
+                $query->where('tur', 'gider')
+                    ->orWhere('fatura_sinifi', FaturaSinifi::Gider->value);
+            })
             ->where('durum', '<>', 'iptal')
             ->when(trim($search) !== '', fn (Builder $query): Builder => $query->where(function (Builder $inner) use ($search): void {
                 $inner->where('fatura_no', 'like', '%'.trim($search).'%')
@@ -944,7 +948,10 @@ class YapilanTahsilatlarTablosu extends Component implements HasForms, HasTable
     {
         $fatura ??= Fatura::query()
             ->where('firma_id', $firmaId)
-            ->where('tur', 'gider')
+            ->where(function (Builder $query): void {
+                $query->where('tur', 'gider')
+                    ->orWhere('fatura_sinifi', FaturaSinifi::Gider->value);
+            })
             ->whereKey((int) $value)
             ->where('durum', '<>', 'iptal')
             ->withSum('masrafDagitimlari as masraf_dagitim_toplami', 'tutar')
@@ -968,7 +975,10 @@ class YapilanTahsilatlarTablosu extends Component implements HasForms, HasTable
             ? $value
             : Fatura::query()
                 ->where('firma_id', $firmaId)
-                ->where('tur', 'gider')
+                ->where(function (Builder $query): void {
+                    $query->where('tur', 'gider')
+                        ->orWhere('fatura_sinifi', FaturaSinifi::Gider->value);
+                })
                 ->whereKey((int) $value)
                 ->where('durum', '<>', 'iptal')
                 ->withSum('masrafDagitimlari as masraf_dagitim_toplami', 'tutar')

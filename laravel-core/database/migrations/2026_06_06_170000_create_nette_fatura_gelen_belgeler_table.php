@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('status', 128)->nullable()->index();
             $table->string('report_status', 128)->nullable();
             $table->string('cancel_report_status', 128)->nullable();
-            $table->uuid('ettn')->nullable()->index();
+            $table->char('ettn', 36)->nullable()->index();
             $table->json('raw_payload')->nullable();
             $table->timestamp('last_synced_at')->nullable();
             $table->timestamps();

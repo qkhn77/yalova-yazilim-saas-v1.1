@@ -5,6 +5,7 @@ namespace Tests\Feature\Muhasebe;
 use App\Models\Firma;
 use App\Models\Muhasebe\Cari;
 use App\Models\Muhasebe\CariHareketi;
+use App\Models\Muhasebe\DovizKuru;
 use App\Models\User;
 use App\Muhasebe\Enumlar\CariDurumu;
 use App\Muhasebe\Enumlar\CariHareketBelgeTuru;
@@ -17,7 +18,7 @@ use App\Muhasebe\Servisler\CariHareketServisi;
 use App\Muhasebe\Servisler\CariYaslandirmaServisi;
 use App\Services\TenantContextService;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 /**
@@ -25,7 +26,7 @@ use Tests\TestCase;
  */
 class CariBakiyeOlcekTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     private function firmaVeKiraci(string $kod): array
     {
@@ -140,6 +141,16 @@ class CariBakiyeOlcekTest extends TestCase
     {
         [$firma, $cari] = $this->firmaVeKiraci('OL3');
         $svc = app(CariHareketServisi::class);
+        DovizKuru::query()->create([
+            'firma_id' => $firma->id,
+            'is_sabit' => false,
+            'tanim_firma_kapsami' => $firma->id,
+            'kaynak_para_birimi' => 'USD',
+            'hedef_para_birimi' => 'TRY',
+            'tarih' => now()->toDateString(),
+            'kur' => '40',
+            'manuel_mi' => true,
+        ]);
 
         $svc->kayitOlustur((int) $firma->id, [
             'cari_id' => (int) $cari->id,

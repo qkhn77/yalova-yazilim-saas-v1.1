@@ -131,6 +131,17 @@ protected function getCreateFormAction(): Actions\Action
             ]);
         }
 
+        $seriNo = trim((string) ($data['seri_no'] ?? ''));
+        if ($seriNo !== '' && TeknikServisKaydi::query()
+            ->where('firma_id', $firmaId)
+            ->where('cari_id', $cariId)
+            ->whereRaw('LOWER(TRIM(seri_no)) = ?', [mb_strtolower($seriNo, 'UTF-8')])
+            ->exists()) {
+            throw ValidationException::withMessages([
+                'seri_no' => 'Bu müşterinin aynı seri numarasına sahip cihazı zaten kayıtlı. Mevcut cihazı seçerek devam edin.',
+            ]);
+        }
+
         $ham = $this->form->getRawState();
         $arizaSecimleri = $data['arizalar'] ?? (is_array($ham) ? ($ham['arizalar'] ?? []) : []);
         $data['ariza_id'] = array_values(array_filter((array) $arizaSecimleri))[0] ?? null;

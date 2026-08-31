@@ -4,6 +4,9 @@ namespace App\Muhasebe\Servisler;
 
 use App\Models\Muhasebe\AlacakPlanTaksiti;
 use App\Models\Muhasebe\AlacakPlani;
+use App\Models\Muhasebe\BankaHesabi;
+use App\Models\Muhasebe\KasaHesabi;
+use App\Models\Muhasebe\PosHesabi;
 use App\Muhasebe\Exceptions\IsKuraliIstisnasi;
 use Illuminate\Support\Facades\DB;
 
@@ -78,6 +81,7 @@ class AlacakOperasyonServisi
             }
 
             $kalanDagitim = $tahsilEdilecek;
+            $hesapParaBirimi = $this->hesapParaBirimi($firmaId, $kanal, $hesapId);
             $finansHareketIdleri = [];
             $islemAdedi = 0;
             $kapatilanTaksit = 0;
@@ -103,6 +107,8 @@ class AlacakOperasyonServisi
                     $veri['tarih'] ?? now(),
                     $this->tahsilatAciklamasi($taksit, $veri),
                     (int) $taksit->getKey(),
+                    $hesapParaBirimi,
+                    $veri,
                 );
 
                 if (isset($sonuc['finans'])) {
@@ -231,7 +237,41 @@ class AlacakOperasyonServisi
         mixed $tarih,
         ?string $aciklama,
         int $taksitId,
+        string $hesapParaBirimi,
+        array $veri,
     ): array {
+        $hesapParaBirimi = strtoupper($hesapParaBirimi);
+        $paraBirimi = strtoupper($paraBirimi);
+        if ($hesapParaBirimi !== $paraBirimi) {
+            $kur = (float) ($veri['doviz_kuru'] ?? 0);
+            if ($kur <= 0) {
+                throw new IsKuraliIstisnasi('Farklı para birimlerinde tahsilat için kur bilgisi zorunludur.');
+            }
+
+            $hedefTutar = (float) ($veri['hedef_tutar'] ?? 0);
+            if ($hedefTutar <= 0) {
+                $hedefTutar = $paraBirimi === 'TRY'
+                    ? (float) bcdiv($tutar, (string) $kur, 2)
+                    : (float) bcmul($tutar, (string) $kur, 2);
+            }
+
+            return $this->finansHareketServisi->tahsilatKurIleKaydet(
+                $firmaId,
+                $cariId,
+                $kanal,
+                $hesapId,
+                $tutar,
+                $paraBirimi,
+                number_format($hedefTutar, 2, '.', ''),
+                $hesapParaBirimi,
+                number_format($kur, 8, '.', ''),
+                $tarih,
+                $aciklama,
+                'alacak_plan_taksiti',
+                $taksitId,
+            );
+        }
+
         return match ($kanal) {
             'kasa' => $this->finansHareketServisi->tahsilatKasadanKaydet(
                 $firmaId,
@@ -268,6 +308,23 @@ class AlacakOperasyonServisi
             ),
             default => throw new IsKuraliIstisnasi('Gecersiz tahsilat kanali.'),
         };
+    }
+
+    private function hesapParaBirimi(int $firmaId, string $kanal, int $hesapId): string
+    {
+        $model = match ($kanal) {
+            'kasa' => KasaHesabi::class,
+            'banka' => BankaHesabi::class,
+            'pos' => PosHesabi::class,
+            default => throw new IsKuraliIstisnasi('Gecersiz tahsilat kanali.'),
+        };
+
+        $hesap = $model::query()->where('firma_id', $firmaId)->whereKey($hesapId)->first();
+        if (! $hesap) {
+            throw new IsKuraliIstisnasi('Seçilen hesap aktif firmaya ait değil.');
+        }
+
+        return strtoupper((string) ($hesap->para_birimi ?: 'TRY'));
     }
 
     /**

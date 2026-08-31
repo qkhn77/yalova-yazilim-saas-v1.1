@@ -3,6 +3,7 @@
 namespace App\Models\Muhasebe;
 
 use App\Models\Concerns\HasFirmaTenantScope;
+use App\Models\Concerns\HasParaBirimiSnapshot;
 use App\Models\Firma;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +13,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class AlacakPlanTaksiti extends Model
 {
     use HasFirmaTenantScope;
+    use HasParaBirimiSnapshot;
+
+    protected function paraBirimiSnapshotTarihAlani(): string
+    {
+        return 'vade_tarihi';
+    }
     use SoftDeletes;
 
     protected $table = 'muhasebe_alacak_plan_taksitleri';
@@ -26,6 +33,10 @@ class AlacakPlanTaksiti extends Model
         'tutar',
         'odenen_tutar',
         'kalan_tutar',
+        'para_birimi',
+        'kur',
+        'baz_para_birimi',
+        'baz_tutar',
         'son_tahsilat_tarihi',
         'durum',
     ];
@@ -37,6 +48,8 @@ class AlacakPlanTaksiti extends Model
             'tutar' => 'decimal:2',
             'odenen_tutar' => 'decimal:2',
             'kalan_tutar' => 'decimal:2',
+            'kur' => 'decimal:8',
+            'baz_tutar' => 'decimal:2',
             'son_tahsilat_tarihi' => 'datetime',
         ];
     }

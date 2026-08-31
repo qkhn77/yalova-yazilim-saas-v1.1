@@ -37,6 +37,14 @@ class OnePagePublicSiteMiddleware
         $allowedPrefixes = [
             'admin',
             trim(AdminPanelProvider::adminPath(), '/'),
+            // Kimlik doğrulama ekranları public tek-sayfa fallback'ine düşmemeli.
+            // Aksi hâlde /admin -> /yonetici-giris yönlendirmesi root'a geri döner.
+            'giris',
+            'yonetici-giris',
+            'uye-giris',
+            'kayit',
+            'uye-kayit',
+            'firma-kodumu-bul',
             'restoran/qr-menu',
             'api',
             'sistem',

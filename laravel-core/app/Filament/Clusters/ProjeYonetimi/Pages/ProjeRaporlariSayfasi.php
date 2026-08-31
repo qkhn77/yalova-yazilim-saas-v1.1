@@ -41,11 +41,12 @@ class ProjeRaporlariSayfasi extends Page implements HasForms
 
     public function mount(): void
     {
+        $firmaId = (int) (app(TenantContextService::class)->aktifFirmaId() ?? 0);
         $projeId = (int) request()->query('proje_id', 0);
         $proje = $projeId > 0
             ? IsletmeProjesi::query()
-                ->where('firma_id', $this->aktifFirmaId() ?? 0)
-                ->kullaniciIcinGorunur(null, $this->aktifFirmaId())
+                ->where('firma_id', $firmaId)
+                ->kullaniciIcinGorunur(null, $firmaId)
                 ->whereKey($projeId)
                 ->first(['id', 'durum'])
             : null;

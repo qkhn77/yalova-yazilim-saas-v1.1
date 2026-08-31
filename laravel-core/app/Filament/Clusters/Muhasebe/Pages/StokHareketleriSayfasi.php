@@ -76,6 +76,7 @@ class StokHareketleriSayfasi extends Page implements HasTable
         $compactHeader = ['class' => '!px-2 !py-2 text-xs leading-tight'];
 
         return $table
+            ->heading('Stok Hareketleri')
             ->query(static::stokHareketSorgusu())
             ->columns([
                 Tables\Columns\TextColumn::make('islem_tarihi')
@@ -171,7 +172,7 @@ class StokHareketleriSayfasi extends Page implements HasTable
                     ->numeric(decimalPlaces: 4)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('takip_ozeti')
-                    ->label('Parti / parça / seri')
+                    ->label('Seri numaraları')
                     ->getStateUsing(fn (StokHareketi $record): string => static::takipOzeti($record))
                     ->placeholder('—')
                     ->wrap()
@@ -287,9 +288,6 @@ class StokHareketleriSayfasi extends Page implements HasTable
 
     public static function takipOzeti(StokHareketi $hareket): string
     {
-        // Fiziksel parça/parti tabloları kaldırıldığı için bu özet yalnızca
-        // seri hareketlerinden oluşturulur. Parça ilişkisini eager-load etmek
-        // stok hareketleri sayfasında olmayan tabloya sorgu göndermemelidir.
         $satirlar = collect();
 
         $seriler = $hareket->seriHareketleri

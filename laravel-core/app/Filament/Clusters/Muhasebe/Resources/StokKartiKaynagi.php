@@ -62,7 +62,7 @@ class StokKartiKaynagi extends StokKaynagi
 
     protected static ?string $modelLabel = 'Stok kartı';
 
-    protected static ?string $pluralModelLabel = 'Stok kartları';
+    protected static ?string $pluralModelLabel = 'Stok Kartları';
 
     protected static ?string $recordTitleAttribute = 'ad';
 
@@ -1155,6 +1155,7 @@ class StokKartiKaynagi extends StokKaynagi
                                 ->options(fn (Get $get): array => (OlculuStokTakipTuru::tryFrom((string) ($get('olculu_takip_turu') ?? 'standart'))?->olculuMu() ?? false)
                                     ? ['AD' => 'Adet']
                                     : static::birimSecenekleri(static::firmaId($get)))
+                                ->selectablePlaceholder(fn (Get $get): bool => ! (OlculuStokTakipTuru::tryFrom((string) ($get('olculu_takip_turu') ?? 'standart'))?->olculuMu() ?? false))
                                 ->default(fn (Get $get): ?string => (OlculuStokTakipTuru::tryFrom((string) ($get('olculu_takip_turu') ?? 'standart'))?->olculuMu() ?? false)
                                     ? 'AD'
                                     : static::varsayilanBirimKodu(static::firmaId($get)))
@@ -1634,21 +1635,6 @@ class StokKartiKaynagi extends StokKaynagi
                 ->select(['id', 'firma_id', 'durum'])
                 ->whereKey($key)
                 ->first();
-        }
-
-        if (filled(request()->route('record')) && ! static::detayModu()) {
-            $routeName = (string) (request()->route()?->getName() ?? '');
-            if (str_ends_with($routeName, '.view')) {
-                return static::getModel()::query()
-                    ->select([
-                        'id',
-                        'firma_id',
-                        'ad',
-                        'stok_miktari',
-                    ])
-                    ->whereKey($key)
-                    ->first();
-            }
         }
 
         return parent::resolveRecordRouteBinding($key);

@@ -150,6 +150,8 @@ class TahsilatOlusturSayfasi extends Page implements HasForms
                         Forms\Components\Select::make('cari_id')
                             ->label('Cari')
                             ->searchable()
+                            ->options(fn (): array => $this->cariAramaSonuclari(''))
+                            ->optionsLimit(50)
                             ->getSearchResultsUsing(fn (string $search): array => $this->cariAramaSonuclari($search))
                             ->getOptionLabelUsing(fn ($value): ?string => $this->cariEtiketi($value))
                             ->required()
@@ -281,6 +283,10 @@ class TahsilatOlusturSayfasi extends Page implements HasForms
                             ->required()
                             ->native(false)
                             ->seconds(false)
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function (Get $get, Forms\Set $set): void {
+                                $this->otomatikKurDoldur($get, $set);
+                            })
                             ->hintActions([
                                 Forms\Components\Actions\Action::make('kur_cek_tarih')
                                     ->label('Kur cek')
@@ -293,7 +299,10 @@ class TahsilatOlusturSayfasi extends Page implements HasForms
                                     ->label('Simdi')
                                     ->icon('heroicon-o-clock')
                                     ->color('success')
-                                    ->action(fn (Forms\Set $set) => $set('tarih', now()->format('Y-m-d H:i')))
+                                    ->action(function (Get $get, Forms\Set $set): void {
+                                        $set('tarih', now()->format('Y-m-d H:i'));
+                                        $this->otomatikKurDoldur($get, $set);
+                                    })
                             ),
 
                         Forms\Components\TextInput::make('doviz_kuru')
@@ -335,6 +344,7 @@ class TahsilatOlusturSayfasi extends Page implements HasForms
                                 $f = Fatura::query()->find((int) $state);
                                 if ($f && bccomp((string) ($f->acik_tutar ?? '0'), '0', 2) > 0) {
                                     $acik = (string) $f->acik_tutar;
+                                    $set('kaynak_para_birimi', strtoupper((string) ($f->para_birimi ?: 'TRY')));
                                     if (! filled($get('tutar')) || bccomp((string) $get('tutar'), '0', 2) <= 0) {
                                         $set('tutar', $acik);
                                     }
@@ -797,8 +807,14 @@ class TahsilatOlusturSayfasi extends Page implements HasForms
             return;
         }
 
+        $faturaId = filled($data['fatura_id'] ?? null) ? (int) $data['fatura_id'] : null;
+        $fatura = $faturaId ? Fatura::query()
+            ->where('firma_id', $firmaId)
+            ->whereKey($faturaId)
+            ->where('cari_id', $cariId)
+            ->first() : null;
         $cariParaBirimi = (string) (Cari::query()->whereKey($cariId)->value('para_birimi') ?? '');
-        $kaynakPb = strtoupper(trim($cariParaBirimi !== '' ? $cariParaBirimi : (string) ($data['kaynak_para_birimi'] ?? '')));
+        $kaynakPb = strtoupper(trim((string) ($fatura?->para_birimi ?: ($data['kaynak_para_birimi'] ?? $cariParaBirimi ?: 'TRY'))));
         $hedefPb = strtoupper((string) ($data['hedef_para_birimi'] ?? $this->hesapParaBirimi($hesapTipi, $hesapId)));
         if ($kaynakPb === '' || $hedefPb === '') {
             Notification::make()->title('Para birimi bulunamadi')->danger()->send();
@@ -809,7 +825,6 @@ class TahsilatOlusturSayfasi extends Page implements HasForms
         $tarih = Carbon::parse((string) ($data['tarih'] ?? now()->format('Y-m-d H:i')));
         $aciklama = filled($data['aciklama'] ?? null) ? (string) $data['aciklama'] : null;
         $alacakPlanTaksitiId = filled($data['alacak_plan_taksiti_id'] ?? null) ? (int) $data['alacak_plan_taksiti_id'] : 0;
-        $faturaId = filled($data['fatura_id'] ?? null) ? (int) $data['fatura_id'] : null;
         $refTur = $faturaId ? 'fatura' : null;
         $refId = $faturaId ?: null;
 

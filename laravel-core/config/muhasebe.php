@@ -81,9 +81,9 @@ return [
     |
     */
     'coklu_para_birimi' => [
-        'aktif' => (bool) env('MUHASEBE_COKLU_PARA_BIRIMI_AKTIF', false),
+        'aktif' => (bool) env('MUHASEBE_COKLU_PARA_BIRIMI_AKTIF', true),
         'baz_para_birimi' => strtoupper((string) env('MUHASEBE_BAZ_PARA_BIRIMI', 'TRY')),
-        'kur_donusumu_aktif' => (bool) env('MUHASEBE_KUR_DONUSUMU_AKTIF', false),
+        'kur_donusumu_aktif' => (bool) env('MUHASEBE_KUR_DONUSUMU_AKTIF', true),
     ],
 
     'doviz' => [

@@ -6,6 +6,7 @@ use App\Models\Firma;
 use App\Models\Muhasebe\Cari;
 use App\Models\Muhasebe\Cek;
 use App\Models\Muhasebe\CekHareketi;
+use App\Models\Muhasebe\DovizKuru;
 use App\Models\Muhasebe\FinansHareketi;
 use App\Models\User;
 use App\Muhasebe\Enumlar\CariDurumu;
@@ -95,6 +96,65 @@ class CekTakipTest extends TestCase
             'on_gorsel_yolu' => 'muhasebe/cekler/'.$firma->id.'/on-001.jpg',
             'arka_gorsel_yolu' => 'muhasebe/cekler/'.$firma->id.'/arka-001.jpg',
         ]);
+    }
+
+    public function test_yabanci_para_cek_islem_ve_baz_tutar_snapshotlarini_ve_finansi_olusturur(): void
+    {
+        config([
+            'muhasebe.coklu_para_birimi.aktif' => true,
+            'muhasebe.coklu_para_birimi.kur_donusumu_aktif' => true,
+            'muhasebe.coklu_para_birimi.baz_para_birimi' => 'TRY',
+        ]);
+
+        $firma = $this->firmaOlustur('CK-USD');
+        $this->superAdminVeSession($firma);
+        $cari = $this->cariOlustur($firma, 'C-USD');
+        DovizKuru::query()->create([
+            'firma_id' => $firma->id,
+            'kaynak_para_birimi' => 'USD',
+            'hedef_para_birimi' => 'TRY',
+            'is_sabit' => false,
+            'tanim_firma_kapsami' => $firma->id,
+            'tarih' => '2026-07-20',
+            'kur' => '40',
+            'manuel_mi' => true,
+        ]);
+
+        $cek = app(CekServisi::class)->girisKaydet($firma->id, [
+            'cari_id' => $cari->id,
+            'cek_no' => 'CHK-USD-001',
+            'tutar' => '100.00',
+            'para_birimi' => 'USD',
+            'vade_tarihi' => '2026-08-15',
+            'islem_tarihi' => '2026-07-20 10:00:00',
+        ]);
+
+        $this->assertSame('USD', (string) $cek->para_birimi);
+        $this->assertSame('40.00000000', (string) $cek->kur);
+        $this->assertSame('4000.00', (string) $cek->baz_tutar);
+        $this->assertDatabaseHas('cek_hareketleri', [
+            'cek_id' => $cek->id,
+            'para_birimi' => 'USD',
+            'kur' => '40.00000000',
+            'baz_tutar' => '4000.00',
+        ]);
+        $this->assertDatabaseHas('finans_hareketleri', [
+            'referans_turu' => 'cek',
+            'referans_id' => $cek->id,
+            'para_birimi' => 'USD',
+            'baz_tutar' => '4000.00',
+        ]);
+        $finans = FinansHareketi::query()
+            ->where('referans_turu', 'cek')
+            ->where('referans_id', $cek->id)
+            ->firstOrFail();
+
+        app(CekServisi::class)->iptalEt($cek);
+        $ters = FinansHareketi::query()
+            ->where('iptal_edilen_hareket_id', $finans->id)
+            ->firstOrFail();
+        $this->assertSame('4000.00', (string) $ters->baz_tutar);
+        $this->assertSame('40.00000000', (string) $ters->kur);
     }
 
     public function test_portfoydeki_cek_cariye_verilebilir(): void

@@ -18,6 +18,7 @@
     use App\Filament\Clusters\Muhasebe\Pages\CekYonetimiSayfasi;
     use App\Filament\Clusters\Muhasebe\Pages\FinansDashboardSayfasi;
     use App\Filament\Clusters\Muhasebe\Pages\FinansHareketleriListesiSayfasi;
+    use App\Filament\Clusters\Muhasebe\Pages\KurFarkiHareketleriSayfasi;
     use App\Filament\Clusters\Muhasebe\Pages\GelenFatura;
     use App\Filament\Clusters\Muhasebe\Pages\GelenIadeFaturasiSayfasi;
     use App\Filament\Clusters\Muhasebe\Pages\GiderFaturasiSayfasi;
@@ -28,7 +29,6 @@
     use App\Filament\Clusters\Muhasebe\Resources\KasaHesabiKaynagi;
     use App\Filament\Clusters\Muhasebe\Pages\KritikStoklarSayfasi;
     use App\Filament\Clusters\Muhasebe\Pages\MuhasebeDashboardSayfasi;
-    use App\Filament\Clusters\Muhasebe\Pages\NetteFaturaEntegrasyonSayfasi;
     use App\Filament\Clusters\Muhasebe\Pages\StokDepoListesiSayfasi;
     use App\Filament\Clusters\Muhasebe\Pages\StokDepoTransferSayfasi;
     use App\Filament\Clusters\Muhasebe\Pages\StokDepoTransferGecmisiSayfasi;
@@ -587,7 +587,7 @@
         >
             <span class="nav-item-start">
                 <x-filament::icon icon="heroicon-o-presentation-chart-bar" class="nav-item-icon" />
-                <span>Gösterge Paneli</span>
+                <span>Ana Sayfa</span>
             </span>
         </a>
 
@@ -703,14 +703,14 @@
                     <span>Cari Yönetimi</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                 </button>
                 <div x-show="muhasebeCariOpen" x-collapse class="nav-group">
+                    @if($muhasebeYetki(MuhasebeYetkiSablonlari::CARI_OLUSTUR))
+                        <a href="{{ CariKartiKaynagi::getUrl('create') }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/cari-yonetimi/cariler/create') ? 'is-active' : '' }}"><span>Cari Ekle</span></a>
+                    @endif
                     @if($cariListeRaporMenusu)
                         <a href="{{ CariKartiKaynagi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/cari-yonetimi/cariler*') ? 'is-active' : '' }}"><span>Cari Listesi</span></a>
                         <a href="{{ CariHareketleriSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/cari-yonetimi/cari-hareketleri') ? 'is-active' : '' }}"><span>Cari Hareketleri</span></a>
                         <a href="{{ CariEkstreSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/cari-yonetimi/cari-ekstreleri') ? 'is-active' : '' }}"><span>Cari Ekstreleri</span></a>
                         <a href="{{ CariYaslandirmaSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/cari-yonetimi/cari-yaslandirma') ? 'is-active' : '' }}"><span>Cari Yaşlandırma</span></a>
-                    @endif
-                    @if($muhasebeYetki(MuhasebeYetkiSablonlari::CARI_OLUSTUR))
-                        <a href="{{ CariKartiKaynagi::getUrl('create') }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/cari-yonetimi/cariler/create') ? 'is-active' : '' }}"><span>Cari Ekle</span></a>
                     @endif
                 </div>
             @endif
@@ -720,14 +720,14 @@
                     <span>Stok</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                 </button>
                 <div x-show="muhasebeStokOpen" x-collapse class="nav-group">
+                    @if($muhasebeYetki(MuhasebeYetkiSablonlari::STOK_OLUSTUR))
+                        <a href="{{ StokKartiKaynagi::getUrl('create') }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/stok/stok-listesi/create') ? 'is-active' : '' }}"><span>Stok Ekle</span></a>
+                    @endif
                     @if($stokListeMenusu)
                         <a href="{{ StokKartiKaynagi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/stok/stok-listesi*') ? 'is-active' : '' }}"><span>Stok Listesi</span></a>
                         <a href="{{ StokHareketleriSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/stok/stok-hareketleri') ? 'is-active' : '' }}"><span>Stok Hareketleri</span></a>
                         <a href="{{ KritikStoklarSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/stok/kritik-stoklar') ? 'is-active' : '' }}"><span>Kritik Stoklar</span></a>
                         <a href="{{ StokKategoriKaynagi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/stok/stok-kategorileri') ? 'is-active' : '' }}"><span>Kategoriler</span></a>
-                    @endif
-                    @if($muhasebeYetki(MuhasebeYetkiSablonlari::STOK_OLUSTUR))
-                        <a href="{{ StokKartiKaynagi::getUrl('create') }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/stok/stok-listesi/create') ? 'is-active' : '' }}"><span>Stok Ekle</span></a>
                     @endif
                 </div>
             @endif
@@ -737,6 +737,9 @@
                     <span>Faturalar</span><svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                 </button>
                 <div x-show="muhasebeFaturalarOpen" x-collapse class="nav-group">
+                    @if($muhasebeYetki(\App\Support\MuhasebeYetkiSablonlari::FATURA_OLUSTUR))
+                        <a href="{{ FaturaKaynagi::getUrl('create') }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/fatura-kaynagis/create') ? 'is-active' : '' }}"><span>Yeni fatura</span></a>
+                    @endif
                     <a href="{{ TumFaturalarSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/faturalar/tum-faturalar') ? 'is-active' : '' }}"><span>Tüm faturalar</span></a>
                     <a href="{{ GelenFatura::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/faturalar/gelen-faturalar') ? 'is-active' : '' }}"><span>Gelen faturalar</span></a>
                     <a href="{{ GidenFatura::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/faturalar/giden-faturalar') ? 'is-active' : '' }}"><span>Giden faturalar</span></a>
@@ -746,12 +749,6 @@
                     <a href="{{ GelenIadeFaturasiSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/faturalar/gelen-iade-faturalari') ? 'is-active' : '' }}"><span>Gelen iade faturaları</span></a>
                     <a href="{{ ProformaFaturaSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/faturalar/proforma-fatura') ? 'is-active' : '' }}"><span>Proforma</span></a>
                     <a href="{{ GiderFaturasiSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/faturalar/gider-faturasi') ? 'is-active' : '' }}"><span>Gider faturası</span></a>
-                    @if($muhasebeYetki(\App\Support\MuhasebeYetkiSablonlari::FATURA_OLUSTUR))
-                        <a href="{{ FaturaKaynagi::getUrl('create') }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/fatura-kaynagis/create') ? 'is-active' : '' }}"><span>Yeni fatura</span></a>
-                    @endif
-                    @if($muhasebeYetki(\App\Support\MuhasebeYetkiSablonlari::FATURA_GORUNTULE))
-                        <a href="{{ NetteFaturaEntegrasyonSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/entegrasyonlar/nette-fatura') ? 'is-active' : '' }}"><span>NetteFatura Entegrasyonu</span></a>
-                    @endif
                 </div>
             @endif
 
@@ -763,6 +760,7 @@
                     @if($muhasebeYetki(MuhasebeYetkiSablonlari::FINANS_GORUNTULE))
                         <a href="{{ FinansDashboardSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/finans/finans-panel') ? 'is-active' : '' }}"><span>Finans paneli</span></a>
                         <a href="{{ FinansHareketleriListesiSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/finans/finans-hareketleri') ? 'is-active' : '' }}"><span>Finans hareketleri</span></a>
+                        <a href="{{ KurFarkiHareketleriSayfasi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/finans/kur-farki-hareketleri') ? 'is-active' : '' }}"><span>Kur farkı hareketleri</span></a>
                         <a href="{{ KasaHesabiKaynagi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/finans/kasalar') || request()->is($adminPrefix.'/muhasebe/finans/kasa-hesaplari*') ? 'is-active' : '' }}"><span>Kasalar</span></a>
                         <a href="{{ BankaHesabiKaynagi::getUrl() }}" class="nav-item {{ request()->is($adminPrefix.'/muhasebe/finans/bankalar') || request()->is($adminPrefix.'/muhasebe/finans/banka-hesaplari*') ? 'is-active' : '' }}"><span>Bankalar</span></a>
                     @endif

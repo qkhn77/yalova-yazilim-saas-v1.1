@@ -23,6 +23,9 @@ class UrunYayinTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // These unpublished-web tests exercise product controllers directly;
+        // the production one-page gate is validated separately.
+        $this->withoutMiddleware(\App\Http\Middleware\OnePagePublicSiteMiddleware::class);
         // Front-end tarafinda tenant scope aktif olmasin; servis zaten tenantScopeOlmadan ile fallback yapiyor.
         app(TenantContextService::class)->temizle();
         // Testler sırasında istek URI'sine "/yalova-kamera" prefix'i eklenip route eşleşmesini bozmasin.

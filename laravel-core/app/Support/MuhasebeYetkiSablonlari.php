@@ -48,10 +48,6 @@ final class MuhasebeYetkiSablonlari
 
     public const DEPO_GUNCELLE = 'depo.guncelle';
 
-    public const STOK_PARTI_GORUNTULE = 'stok_parti.goruntule';
-
-    public const STOK_PARTI_DUZELT = 'stok_parti.duzelt';
-
     public const STOK_SERI_GORUNTULE = 'stok_seri.goruntule';
 
     public const FATURA_GORUNTULE = 'fatura.goruntule';

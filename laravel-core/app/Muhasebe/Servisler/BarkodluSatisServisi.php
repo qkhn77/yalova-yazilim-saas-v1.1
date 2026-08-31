@@ -163,7 +163,6 @@ class BarkodluSatisServisi
                         'negatif_stok_izinli' => $eksiStokIzinli,
                         'tarih' => $veri['satis_tarihi'],
                         'seri_nolari' => array_values(array_filter(array_map('trim', (array) ($kalem['seri_nolari'] ?? [])))),
-                        'parca_dagilimi' => array_values((array) ($kalem['parca_dagilimi'] ?? [])),
                     ]);
 
                     $stok->increment('satis_adedi', $miktar);
@@ -280,6 +279,15 @@ class BarkodluSatisServisi
 
                 if ((string) ($satis->durum ?? 'tamamlandi') === 'iptal') {
                     throw new InvalidArgumentException('Bu satis daha once iptal edilmis.');
+                }
+
+                if (BarkodluSatisIade::query()
+                    ->where('firma_id', $firmaId)
+                    ->where('satis_id', $satisId)
+                    ->exists()) {
+                    throw new InvalidArgumentException(
+                        'Iade kaydi bulunan satis iptal edilemez. Once iade kaydini geri alin.'
+                    );
                 }
 
                 app(AlacakPlanServisi::class)->kaynakPlaniniIptalEt(
@@ -422,8 +430,6 @@ class BarkodluSatisServisi
                     }
                 }
 
-                $parcaDagilimi = $this->iadePartiDagilimi($kalem, $iadeMiktari);
-
                 $net = max(0, ($iadeMiktari * (float) $kalem->birim_fiyat));
                 $kdv = round($net * (((float) $kalem->kdv_orani) / 100), 2);
                 $satirToplami = round($net + $kdv, 2);
@@ -443,9 +449,6 @@ class BarkodluSatisServisi
                     'firma_id' => $firmaId,
                     'satis_kalem_id' => $satisKalemId,
                     'stok_id' => (int) $kalem->stok_id,
-                    'parca_kodu' => count($parcaDagilimi) === 1 ? $parcaDagilimi[0]['parca_kodu'] : null,
-                    'parca_dagilimi' => $parcaDagilimi,
-                    'seri_nolari' => $seriListesi,
                     'miktar' => $iadeMiktari,
                     'birim_fiyat' => (float) $kalem->birim_fiyat,
                     'kdv_orani' => (float) $kalem->kdv_orani,
@@ -459,7 +462,6 @@ class BarkodluSatisServisi
                     'cari_id' => $satis->cari_id,
                     'islem_turu' => StokHareketIslemTuru::SatisIadesi,
                     'miktar' => $iadeMiktari,
-                    'parca_dagilimi' => $parcaDagilimi,
                     'seri_nolari' => $seriListesi,
                     'birim_fiyat' => (float) $kalem->birim_fiyat,
                     'toplam' => $satirToplami,
@@ -516,38 +518,6 @@ class BarkodluSatisServisi
 
             throw $e;
         }
-    }
-
-    /** @return array<int, array{parca_kodu:string,miktar:float}> */
-    private function iadePartiDagilimi(BarkodluSatisKalemi $kalem, float $iadeMiktari): array
-    {
-        $kaynak = (array) ($kalem->parca_dagilimi ?? []);
-        if ($kaynak === [] && filled($kalem->parca_kodu ?? null)) {
-            $kaynak = [['parca_kodu' => (string) $kalem->parca_kodu, 'miktar' => (float) $kalem->miktar]];
-        }
-        if ($kaynak === []) {
-            return [];
-        }
-
-        $kalan = $iadeMiktari;
-        $sonuc = [];
-        foreach ($kaynak as $satir) {
-            $parcaKodu = trim((string) ($satir['parca_kodu'] ?? ''));
-            $miktar = max(0, (float) ($satir['miktar'] ?? 0));
-            if ($parcaKodu === '' || $miktar <= 0 || $kalan <= 0.0001) {
-                continue;
-            }
-
-            $secilecek = min($miktar, $kalan);
-            $sonuc[] = ['parca_kodu' => $parcaKodu, 'miktar' => round($secilecek, 4)];
-            $kalan = round($kalan - $secilecek, 4);
-        }
-
-        if ($kalan > 0.0001) {
-            throw new InvalidArgumentException('Iade miktari satis kaydindaki parti / lot dagilimini asiyor.');
-        }
-
-        return $sonuc;
     }
 
     private function stokDepoId(int $firmaId, StokKarti $stok): ?int

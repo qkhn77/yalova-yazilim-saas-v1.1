@@ -36,7 +36,12 @@ class AlacakTahsilatServisi
         }
 
         DB::transaction(function () use ($finans): void {
+            // E-ticaret/provider callback'leri oturumsuz çalışabilir. Finans
+            // nesnesi zaten firma doğrulamasından geçmiş olarak metoda geldiği
+            // için burada aktif kullanıcı tenant scope'una değil, doğrudan
+            // kilitli finans kaydının kimliğine bağlanmalıyız.
             $finans = FinansHareketi::query()
+                ->withoutGlobalScopes()
                 ->lockForUpdate()
                 ->whereKey($finans->getKey())
                 ->firstOrFail();
@@ -112,6 +117,7 @@ class AlacakTahsilatServisi
                     'alacak_plan_taksiti_id' => (int) $taksit->getKey(),
                     'finans_hareketi_id' => (int) $finans->getKey(),
                     'tutar' => $uygulanacak,
+                    'para_birimi' => strtoupper((string) ($finans->para_birimi ?: $taksit->para_birimi ?: 'TRY')),
                     'tarih' => $finans->tarih ?? now(),
                 ]);
 

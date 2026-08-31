@@ -86,20 +86,8 @@
                                 <td class="border border-gray-300 px-2 py-1">
                                     {{ $kalem->satisKalemi?->stok_adi ?? '-' }}
                                     @php
-                                        $partiler = [];
-                                        if (filled($kalem->parti_no ?? null)) {
-                                            $partiler[] = (string) $kalem->parti_no;
-                                        }
-                                        foreach ((array) ($kalem->parti_dagilimi ?? []) as $parti) {
-                                            if (is_array($parti) && filled($parti['parti_no'] ?? null)) {
-                                                $partiler[] = (string) $parti['parti_no'];
-                                            }
-                                        }
                                         $seriler = array_values(array_filter(array_map('trim', (array) ($kalem->seri_nolari ?? []))));
                                     @endphp
-                                    @if ($partiler !== [])
-                                        <div class="text-xs text-gray-600">Parti / Lot: {{ implode(', ', array_unique($partiler)) }}</div>
-                                    @endif
                                     @if ($seriler !== [])
                                         <div class="text-xs text-gray-600">Seri No Barkodu: {{ implode(', ', array_unique($seriler)) }}</div>
                                     @endif

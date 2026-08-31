@@ -7,6 +7,7 @@ use App\Models\Firma;
 use App\Models\Proje\IsletmeProjesi;
 use App\Muhasebe\Enumlar\CariHareketBelgeTuru;
 use App\Muhasebe\Enumlar\FaturaDurumu;
+use App\Muhasebe\Enumlar\FaturaSinifi;
 use App\Muhasebe\Enumlar\FaturaTuru;
 use App\Muhasebe\Enumlar\StokBelgeTuru;
 use Illuminate\Database\Eloquent\Builder;
@@ -41,6 +42,7 @@ class Fatura extends Model
         'seri',
         'sira_no',
         'tur',
+        'fatura_sinifi',
         'durum',
         'fatura_no',
         'odeme_durumu',
@@ -91,6 +93,7 @@ class Fatura extends Model
     {
         return [
             'tur' => FaturaTuru::class,
+            'fatura_sinifi' => FaturaSinifi::class,
             'durum' => FaturaDurumu::class,
             'tarih' => 'datetime',
             'vade_tarihi' => 'date',
@@ -144,6 +147,17 @@ class Fatura extends Model
         return $this->belongsTo(self::class, 'bagli_fatura_id');
     }
 
+    public function giderSinifiMi(): bool
+    {
+        return $this->fatura_sinifi === FaturaSinifi::Gider
+            || ($this->fatura_sinifi === null && $this->tur?->kanonik() === FaturaTuru::Gider);
+    }
+
+    public function eskiGiderKaydiMi(): bool
+    {
+        return $this->fatura_sinifi === null && $this->tur?->kanonik() === FaturaTuru::Gider;
+    }
+
     public function kalemler(): HasMany
     {
         return $this->hasMany(FaturaKalemi::class, 'fatura_id');
@@ -161,6 +175,11 @@ class Fatura extends Model
     public function finansKapatmalari(): HasMany
     {
         return $this->hasMany(FaturaFinansKapama::class, 'fatura_id');
+    }
+
+    public function kurFarkiHareketleri(): HasMany
+    {
+        return $this->hasMany(KurFarkiHareketi::class, 'fatura_id');
     }
 
     public function masrafDagitimlari(): HasMany

@@ -23,6 +23,7 @@ use App\Models\TeknikServis\TeknikServisKaydi;
 use App\TeknikServis\Filament\ServisGiderFaturasiDestegi;
 use App\Muhasebe\Guvenlik\MuhasebeFilamentErisimYardimcisi;
 use App\Muhasebe\Enumlar\FaturaDurumu;
+use App\Muhasebe\Enumlar\FaturaSinifi;
 use App\Muhasebe\Enumlar\FaturaTuru;
 use App\Filament\Clusters\Muhasebe\Resources\FaturaKaynagi;
 use App\Muhasebe\Exceptions\IsKuraliIstisnasi;
@@ -925,7 +926,7 @@ class MasrafTakibiSayfasi extends Page implements HasForms, HasTable
                     $inner->where('faturalar.acik_tutar', '>', 0)
                         ->orWhere('faturalar.odenecek_tutar', '>', 0);
                 })
-                ->select(['faturalar.id', 'faturalar.cari_id', 'faturalar.tur', 'faturalar.durum', 'faturalar.fatura_no', 'faturalar.odenecek_tutar', 'faturalar.acik_tutar', 'faturalar.para_birimi']);
+                ->select(['faturalar.id', 'faturalar.cari_id', 'faturalar.tur', 'faturalar.fatura_sinifi', 'faturalar.durum', 'faturalar.fatura_no', 'faturalar.odenecek_tutar', 'faturalar.acik_tutar', 'faturalar.para_birimi']);
         }
 
         $query = Masraf::query()
@@ -984,7 +985,7 @@ class MasrafTakibiSayfasi extends Page implements HasForms, HasTable
         ];
     }
 
-    /** @return array<int, array{id:int, ad:string, ust_kategori_id:int|null}> */
+    /** @return array<int, array{id:int, ad:string, ust_kategori_id:int|null, secilir_mi:bool}> */
     private function kategoriAgaci(): array
     {
         if ($this->kategoriAgaciCache !== null) {
@@ -1001,12 +1002,13 @@ class MasrafTakibiSayfasi extends Page implements HasForms, HasTable
             ->aktif()
             ->orderBy('sira')
             ->orderBy('ad')
-            ->get(['id', 'ad', 'ust_kategori_id'])
+            ->get(['id', 'ad', 'ust_kategori_id', 'secilir_mi'])
             ->mapWithKeys(fn (MasrafKategorisi $kategori): array => [
                 (int) $kategori->id => [
                     'id' => (int) $kategori->id,
                     'ad' => (string) $kategori->ad,
                     'ust_kategori_id' => $kategori->ust_kategori_id ? (int) $kategori->ust_kategori_id : null,
+                    'secilir_mi' => (bool) $kategori->secilir_mi,
                 ],
             ])
             ->all();
@@ -1247,7 +1249,10 @@ class MasrafTakibiSayfasi extends Page implements HasForms, HasTable
 
         return Fatura::query()
             ->where('firma_id', $firmaId)
-            ->whereIn('tur', [FaturaTuru::Gider->value, FaturaTuru::GiderFaturasi->value])
+            ->where(function (Builder $query): void {
+                $query->whereIn('tur', [FaturaTuru::Gider->value, FaturaTuru::GiderFaturasi->value])
+                    ->orWhere('fatura_sinifi', FaturaSinifi::Gider->value);
+            })
             ->whereNot('durum', FaturaDurumu::Iptal->value)
             ->when(trim($arama) !== '', function (Builder $query) use ($arama): void {
                 $term = '%'.trim($arama).'%';
@@ -1277,7 +1282,10 @@ class MasrafTakibiSayfasi extends Page implements HasForms, HasTable
         $fatura = Fatura::query()
             ->where('firma_id', $firmaId)
             ->whereKey((int) $value)
-            ->whereIn('tur', [FaturaTuru::Gider->value, FaturaTuru::GiderFaturasi->value])
+            ->where(function (Builder $query): void {
+                $query->whereIn('tur', [FaturaTuru::Gider->value, FaturaTuru::GiderFaturasi->value])
+                    ->orWhere('fatura_sinifi', FaturaSinifi::Gider->value);
+            })
             ->whereNot('durum', FaturaDurumu::Iptal->value)
             ->withSum('masrafDagitimlari as masraf_dagitim_toplami', 'tutar')
             ->first(['id', 'fatura_no', 'tarih', 'genel_toplam', 'odenecek_tutar', 'para_birimi', 'aciklama']);
@@ -1295,7 +1303,10 @@ class MasrafTakibiSayfasi extends Page implements HasForms, HasTable
         return Fatura::query()
             ->where('firma_id', $firmaId)
             ->whereKey($id)
-            ->whereIn('tur', [FaturaTuru::Gider->value, FaturaTuru::GiderFaturasi->value])
+            ->where(function (Builder $query): void {
+                $query->whereIn('tur', [FaturaTuru::Gider->value, FaturaTuru::GiderFaturasi->value])
+                    ->orWhere('fatura_sinifi', FaturaSinifi::Gider->value);
+            })
             ->whereNot('durum', FaturaDurumu::Iptal->value)
             ->withSum('masrafDagitimlari as masraf_dagitim_toplami', 'tutar')
             ->first(['id', 'fatura_no', 'tarih', 'genel_toplam', 'odenecek_tutar', 'para_birimi', 'aciklama']);

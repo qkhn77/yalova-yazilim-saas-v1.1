@@ -87,10 +87,12 @@ $teknikServisCompactCssYukle = str_contains(request()->path(), 'teknik-servis/se
         import tableComponent from @js(\Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('table', 'filament/tables'));
         import selectComponent from @js(\Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('select', 'filament/forms'));
         import textareaComponent from @js(\Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('textarea', 'filament/forms'));
+        import dateTimePickerComponent from @js(\Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('date-time-picker', 'filament/forms'));
 
     document.addEventListener('alpine:init', () => {
             Alpine.data('table', tableComponent)
             Alpine.data('selectFormComponent', selectComponent)
             Alpine.data('textareaFormComponent', textareaComponent)
+            Alpine.data('dateTimePickerFormComponent', dateTimePickerComponent)
         }, { once: true })
 </script>

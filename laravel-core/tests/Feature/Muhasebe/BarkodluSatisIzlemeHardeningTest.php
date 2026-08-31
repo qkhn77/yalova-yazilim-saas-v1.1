@@ -72,22 +72,29 @@ class BarkodluSatisIzlemeHardeningTest extends TestCase
 
         Cache::forget('muhasebe:metrics:barkodlu_satis:iade');
         Cache::forget('muhasebe:metrics:barkodlu_satis:iptal');
+        Cache::forget('muhasebe:metrics:barkodlu_satis:hata');
 
         app(BarkodluSatisServisi::class)->satisKalemiIadeEt((int) $firma->id, (int) $satis->id, $kalemId, 1, (int) $user->id, 'kismi');
-        app(BarkodluSatisServisi::class)->satisIptalEt((int) $firma->id, (int) $satis->id, (int) $user->id, 'iptal');
+
+        try {
+            app(BarkodluSatisServisi::class)->satisIptalEt((int) $firma->id, (int) $satis->id, (int) $user->id, 'iptal');
+            $this->fail('Iade kaydi bulunan satis iptal edilmemelidir.');
+        } catch (InvalidArgumentException $e) {
+            $this->assertStringContainsString('Iade kaydi bulunan satis iptal edilemez', $e->getMessage());
+        }
 
         $this->assertDatabaseHas('sistem_olaylari', [
             'tip' => 'barkodlu_satis.satis_iade_olusturuldu',
             'seviye' => 'info',
             'firma_id' => (int) $firma->id,
         ]);
-        $this->assertDatabaseHas('sistem_olaylari', [
+        $this->assertDatabaseMissing('sistem_olaylari', [
             'tip' => 'barkodlu_satis.satis_iptal_edildi',
-            'seviye' => 'warning',
             'firma_id' => (int) $firma->id,
         ]);
         $this->assertSame(1, (int) Cache::get('muhasebe:metrics:barkodlu_satis:iade', 0));
-        $this->assertSame(1, (int) Cache::get('muhasebe:metrics:barkodlu_satis:iptal', 0));
+        $this->assertSame(0, (int) Cache::get('muhasebe:metrics:barkodlu_satis:iptal', 0));
+        $this->assertSame(1, (int) Cache::get('muhasebe:metrics:barkodlu_satis:hata', 0));
     }
 
     public function test_hata_durumunda_hata_olayi_ve_hata_metrigi_kaydedilir(): void

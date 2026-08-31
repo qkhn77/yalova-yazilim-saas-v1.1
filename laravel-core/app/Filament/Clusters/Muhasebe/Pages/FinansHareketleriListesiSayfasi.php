@@ -16,6 +16,7 @@ use App\Muhasebe\Enumlar\FinansHareketTuru;
 use App\Muhasebe\Exceptions\IsKuraliIstisnasi;
 use App\Muhasebe\Guvenlik\MuhasebeFilamentErisimYardimcisi;
 use App\Muhasebe\Servisler\FinansHareketServisi;
+use App\Muhasebe\Servisler\DovizKurServisi;
 use App\Services\Restoran\RestoranTahsilatServisi;
 use App\Support\MuhasebeYetkiSablonlari;
 use App\TeknikServis\Servisler\TeknikServisTahsilatServisi;
@@ -29,6 +30,7 @@ use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Carbon;
 
 class FinansHareketleriListesiSayfasi extends Page implements HasTable
 {
@@ -79,6 +81,7 @@ class FinansHareketleriListesiSayfasi extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
+            ->heading('Finans Hareketleri')
             ->query(
                 FinansHareketi::query()
                     ->select([
@@ -89,6 +92,9 @@ class FinansHareketleriListesiSayfasi extends Page implements HasTable
                         'tarih',
                         'tutar',
                         'para_birimi',
+                        'baz_tutar',
+                        'baz_para_birimi',
+                        'kur',
                         'referans_turu',
                         'referans_id',
                         'iptal_edilen_hareket_id',
@@ -164,6 +170,20 @@ class FinansHareketleriListesiSayfasi extends Page implements HasTable
                     ->label('Tutar')
                     ->formatStateUsing(fn ($state, FinansHareketi $r) => number_format((float) $state, 2, ',', '.').' '.strtoupper((string) ($r->para_birimi ?: 'TRY')))
                     ->sortable(),
+                Tables\Columns\TextColumn::make('baz_tutar')
+                    ->label('Baz tutar')
+                    ->formatStateUsing(fn ($state, FinansHareketi $r): string => $state === null
+                        ? '—'
+                        : number_format((float) $state, 2, ',', '.').' '.strtoupper((string) ($r->baz_para_birimi ?: config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY'))))
+                    ->placeholder('—')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('kur')
+                    ->label('Kur')
+                    ->formatStateUsing(fn ($state): string => $state === null ? '—' : number_format((float) $state, 8, ',', '.'))
+                    ->placeholder('—')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('kaynak_kanal')
                     ->label('Kaynak')
                     ->getStateUsing(fn (FinansHareketi $r): string => $this->kaynakMetni($r))
@@ -447,6 +467,9 @@ class FinansHareketleriListesiSayfasi extends Page implements HasTable
                 ->disabled()
                 ->dehydrated()
                 ->placeholder('İlgili hesap seçin'),
+            Forms\Components\Hidden::make('doviz_kuru_turu')
+                ->default('otomatik')
+                ->dehydrated(),
             Forms\Components\TextInput::make('tutar')
                 ->label('Tahsilat tutarı')
                 ->numeric()
@@ -458,6 +481,8 @@ class FinansHareketleriListesiSayfasi extends Page implements HasTable
                 ->numeric()
                 ->step('0.00000001')
                 ->minValue(0.00000001)
+                ->live(onBlur: true)
+                ->afterStateUpdated(fn (Forms\Get $get, Forms\Set $set) => $this->tahsilatHedefTutarGuncelle($get, $set))
                 ->visible(fn (Forms\Get $get): bool => $this->tahsilatFarkliParaBirimiSeciliMi($get, $kaynakParaBirimi))
                 ->required(fn (Forms\Get $get): bool => $this->tahsilatFarkliParaBirimiSeciliMi($get, $kaynakParaBirimi)),
             Forms\Components\TextInput::make('hedef_tutar')
@@ -469,7 +494,9 @@ class FinansHareketleriListesiSayfasi extends Page implements HasTable
                 ->label('İşlem tarihi')
                 ->native(false)
                 ->seconds(false)
-                ->required(),
+                ->required()
+                ->live(onBlur: true)
+                ->afterStateUpdated(fn (Forms\Get $get, Forms\Set $set) => $this->tahsilatOtomatikKurDoldur($get, $set)),
             Forms\Components\Textarea::make('aciklama')
                 ->label('Açıklama')
                 ->rows(2)
@@ -630,7 +657,63 @@ class FinansHareketleriListesiSayfasi extends Page implements HasTable
         if ($pb === strtoupper((string) ($get('kaynak_para_birimi') ?: $kaynakParaBirimi))) {
             $set('doviz_kuru', null);
             $set('hedef_tutar', null);
+
+            return;
         }
+
+        $this->tahsilatOtomatikKurDoldur($get, $set);
+    }
+
+    private function tahsilatOtomatikKurDoldur(Forms\Get $get, Forms\Set $set): void
+    {
+        if ((string) ($get('doviz_kuru_turu') ?? 'otomatik') !== 'otomatik') {
+            return;
+        }
+
+        $kaynak = strtoupper((string) ($get('kaynak_para_birimi') ?? ''));
+        $hedef = strtoupper((string) ($get('hedef_para_birimi') ?? ''));
+        if ($kaynak === '' || $hedef === '' || $kaynak === $hedef) {
+            return;
+        }
+
+        $tarih = (string) ($get('tarih') ?? now()->format('Y-m-d H:i'));
+        $kurTipi = $kaynak !== 'TRY' && $hedef === 'TRY' ? 'alis' : 'satis';
+
+        try {
+            $sonuc = app(DovizKurServisi::class)->otomatikKurGetirKurTipi(
+                $kaynak,
+                $hedef,
+                Carbon::parse($tarih)->toDateString(),
+                $kurTipi,
+            );
+            $kur = number_format((float) ($sonuc['kur'] ?? 0), 8, '.', '');
+            if ($kaynak === 'TRY' && $hedef !== 'TRY' && (float) $kur > 0) {
+                $kur = number_format((float) bcdiv('1', $kur, 8), 8, '.', '');
+            }
+            if ((float) $kur > 0) {
+                $set('doviz_kuru', $kur);
+            }
+        } catch (\Throwable) {
+            // Kayıt anında servis tekrar doğrular; formu yalnızca öneri amacıyla dolduruyoruz.
+        }
+
+        $this->tahsilatHedefTutarGuncelle($get, $set);
+    }
+
+    private function tahsilatHedefTutarGuncelle(Forms\Get $get, Forms\Set $set): void
+    {
+        $tutar = (float) ($get('tutar') ?? 0);
+        $kur = (float) ($get('doviz_kuru') ?? 0);
+        $kaynak = strtoupper((string) ($get('kaynak_para_birimi') ?? ''));
+        $hedef = strtoupper((string) ($get('hedef_para_birimi') ?? ''));
+        if ($tutar <= 0 || $kur <= 0 || $kaynak === '' || $hedef === '') {
+            return;
+        }
+
+        $hedefTutar = $kaynak === 'TRY' && $hedef !== 'TRY'
+            ? $tutar / $kur
+            : $tutar * $kur;
+        $set('hedef_tutar', number_format($hedefTutar, 2, '.', ''));
     }
 
     private function tahsilatHesapParaBirimi(string $tip, int $hesapId): ?string

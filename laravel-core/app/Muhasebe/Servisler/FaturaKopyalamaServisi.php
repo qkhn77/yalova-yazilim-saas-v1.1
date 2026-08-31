@@ -50,10 +50,9 @@ class FaturaKopyalamaServisi
                     'fatura_id' => $kopya->getKey(),
                     'kaynak_fatura_kalemi_id' => null,
                     'olcu_donusum_snapshot' => null,
-                    'parca_dagilimi' => null,
                 ]);
                 if ($olculu) {
-                    // Ölçülü çıkış kopyası yeni depo/ölçü/parti seçimi olmadan onaylanamaz.
+                    // Ölçülü çıkış kopyası yeni depo ve ölçü seçimi olmadan onaylanamaz.
                     $kalem->depo_id = null;
                 }
                 $kalem->save();

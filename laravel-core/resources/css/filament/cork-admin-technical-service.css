@@ -297,3 +297,91 @@ body.fi-panel-admin .ts-cork-history-item strong {
         transition: none;
     }
 }
+
+body.fi-panel-admin .teknik-servis-acik-kayit-uyarisi {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: .7rem .85rem;
+    border: 1px solid rgb(245 158 11 / 35%);
+    border-radius: .6rem;
+    background: rgb(255 251 235 / 90%);
+    color: rgb(120 53 15);
+    font-size: .78rem;
+}
+
+body.fi-panel-admin .teknik-servis-acik-kayit-uyarisi div {
+    display: grid;
+    gap: .15rem;
+}
+
+body.fi-panel-admin .teknik-servis-acik-kayit-uyarisi span {
+    color: rgb(146 64 14 / 80%);
+}
+
+body.fi-panel-admin .teknik-servis-acik-kayit-uyarisi a {
+    flex: 0 0 auto;
+    color: rgb(180 83 9);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+body.fi-panel-admin .teknik-servis-cihaz-kartlari {
+    display: grid;
+    gap: .5rem;
+    padding: .7rem .8rem;
+    border: 1px solid var(--saas-border, #e0e6ed);
+    border-radius: .6rem;
+    background: var(--saas-surface-muted, #fafafa);
+}
+
+body.fi-panel-admin .teknik-servis-cihaz-kartlari__title {
+    color: var(--saas-text, #3b3f5c);
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+body.fi-panel-admin .teknik-servis-cihaz-kartlari__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: .45rem;
+}
+
+body.fi-panel-admin .teknik-servis-cihaz-karti {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    min-width: 0;
+    padding: .55rem .65rem;
+    border: 1px solid var(--saas-border, #e0e6ed);
+    border-radius: .5rem;
+    background: var(--saas-surface, #fff);
+    color: var(--saas-text-soft, #515365);
+    font-size: .75rem;
+}
+
+body.fi-panel-admin .teknik-servis-cihaz-karti.is-selected {
+    border-color: rgb(67 97 238 / 45%);
+    background: rgb(67 97 238 / 8%);
+    color: var(--saas-primary, #4361ee);
+    font-weight: 600;
+}
+
+body.fi-panel-admin .teknik-servis-cihaz-karti__icon {
+    flex: 0 0 auto;
+    color: var(--saas-primary, #4361ee);
+    font-weight: 800;
+}
+
+body.fi-panel-admin .teknik-servis-cihaz-kartlari--empty {
+    color: var(--saas-text-muted, #888ea8);
+    font-size: .75rem;
+}
+
+@media (max-width: 640px) {
+    body.fi-panel-admin .teknik-servis-acik-kayit-uyarisi {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

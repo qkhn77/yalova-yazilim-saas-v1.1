@@ -11,7 +11,6 @@ use App\Models\Muhasebe\StokHareketiOlcuDagilimi;
 use App\Models\Muhasebe\StokKarti;
 use App\Models\Muhasebe\StokOlcuBakiyesi;
 use App\Models\Muhasebe\StokOlcusu;
-use App\Models\Muhasebe\StokParcasi;
 use App\Muhasebe\Enumlar\OlculuStokTakipTuru;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
@@ -50,7 +49,6 @@ class FaturaOlcuKalemiServisi
             if ($faktor === '' || bccomp($faktor, '0', 8) <= 0) throw new InvalidArgumentException('Ölçü dönüşüm katsayısı bulunamadı.');
             $ana = $birimId === (int) $stok->ikincil_birim_id ? $this->hesap->adettenAnaMiktara($girilen, $faktor) : $girilen;
             $adet = $this->hesap->anaMiktardanAdede($ana, $faktor);
-            $partiId = isset($satir['stok_parcasi_id']) && $satir['stok_parcasi_id'] ? (int) $satir['stok_parcasi_id'] : null;
             $bakiye = null;
             if (! empty($satir['stok_olcu_bakiyesi_id'])) {
                 $bakiye = StokOlcuBakiyesi::withoutGlobalScopes()
@@ -59,24 +57,13 @@ class FaturaOlcuKalemiServisi
                     ->where('stok_olcusu_id', $olcu->id)
                     ->where('depo_id', $depo->id)
                     ->findOrFail((int) $satir['stok_olcu_bakiyesi_id']);
-                $bakiyePartiId = $bakiye->stok_parcasi_id ? (int) $bakiye->stok_parcasi_id : null;
-                if ($partiId !== null && $partiId !== $bakiyePartiId) {
-                    throw new InvalidArgumentException('Ölçü bakiyesi parti bağlantısı ile uyumlu değil.');
-                }
-                $partiId ??= $bakiyePartiId;
-            }
-            $parti = $partiId
-                ? StokParcasi::withoutGlobalScopes()->where('firma_id', $kalem->firma_id)->where('stok_id', $stok->id)->where('depo_id', $depo->id)->findOrFail($partiId)
-                : null;
-            if ($bakiye && (int) ($bakiye->parca_kapsami ?? 0) !== (int) ($parti?->id ?? 0)) {
-                throw new InvalidArgumentException('Ölçü bakiyesi parti bağlantısı ile uyumlu değil.');
             }
             if ($cikis && ! $bakiye) {
                 throw new InvalidArgumentException('Ölçülü çıkışta ölçü bakiyesi seçimi zorunludur.');
             }
             $toplamAna = bcadd($toplamAna, $ana, 8);
             $toplamAdet = bcadd($toplamAdet, $adet, 8);
-            $dagilimlar[] = array_merge(compact('sira', 'olcu', 'depo', 'parti', 'bakiye', 'birimId', 'girilen', 'ana', 'adet', 'faktor'), [
+            $dagilimlar[] = array_merge(compact('sira', 'olcu', 'depo', 'bakiye', 'birimId', 'girilen', 'ana', 'adet', 'faktor'), [
                 'kaynak_olcu_dagilimi_id' => $satir['kaynak_olcu_dagilimi_id'] ?? null,
             ]);
         }
@@ -89,7 +76,7 @@ class FaturaOlcuKalemiServisi
                     'kaynak_olcu_dagilimi_id' => isset($d['kaynak_olcu_dagilimi_id']) ? (int) $d['kaynak_olcu_dagilimi_id'] : null,
                     'stok_id' => $stok->id,
                     'stok_olcusu_id' => $d['olcu']->id, 'stok_olcu_bakiyesi_id' => $d['bakiye']?->id, 'depo_id' => $d['depo']->id,
-                    'stok_parcasi_id' => $d['parti']?->id, 'islem_birimi_id' => $d['birimId'], 'girilen_miktar' => $d['girilen'],
+                    'islem_birimi_id' => $d['birimId'], 'girilen_miktar' => $d['girilen'],
                     'ana_miktar' => $d['ana'], 'adet_esdegeri' => $d['adet'], 'sira' => $d['sira'],
                     'takip_turu' => $d['olcu']->takip_turu->value, 'olcu_birimi' => $d['olcu']->olcu_birimi,
                     'en' => $d['olcu']->en, 'boy' => $d['olcu']->boy, 'yukseklik' => $d['olcu']->yukseklik,
@@ -98,33 +85,6 @@ class FaturaOlcuKalemiServisi
                 ]);
             }
             $guncellenecek = ['ana_miktar' => $toplamAna, 'adet_esdegeri' => $toplamAdet, 'islem_birimi_id' => $dagilimlar[0]['birimId']];
-            $otomatikPartiDagilimi = [];
-            foreach ($dagilimlar as $dagilim) {
-                if (! $dagilim['parti']) {
-                    continue;
-                }
-                $parcaKodu = (string) $dagilim['parti']->parca_kodu;
-                $otomatikPartiDagilimi[$parcaKodu] = bcadd($otomatikPartiDagilimi[$parcaKodu] ?? '0', $dagilim['ana'], 8);
-            }
-            if ($otomatikPartiDagilimi !== []) {
-                $beklenen = collect($otomatikPartiDagilimi)->map(fn (string $miktar, $parcaKodu): array => [
-                    'parca_kodu' => (string) $parcaKodu,
-                    'miktar' => $miktar,
-                ])->values()->all();
-                $mevcut = collect((array) ($kalem->parca_dagilimi ?? []))->mapWithKeys(fn (array $satir): array => [
-                    trim((string) ($satir['parca_kodu'] ?? '')) => bcadd((string) ($satir['miktar'] ?? '0'), '0', 8),
-                ])->filter(fn (string $miktar, string $parcaKodu): bool => $parcaKodu !== '')->all();
-                if ($mevcut !== []) {
-                    ksort($mevcut);
-                    $kontrol = $otomatikPartiDagilimi;
-                    ksort($kontrol);
-                    if ($mevcut !== $kontrol) {
-                        throw new InvalidArgumentException('Parti dağılımı, seçilen fiziksel ölçü bakiyeleriyle aynı olmalıdır.');
-                    }
-                }
-                $guncellenecek['parca_dagilimi'] = $beklenen;
-                $guncellenecek['parca_kodu'] = count($beklenen) === 1 ? $beklenen[0]['parca_kodu'] : null;
-            }
             $kalem->update($guncellenecek);
         });
     }
@@ -226,7 +186,10 @@ class FaturaOlcuKalemiServisi
             || ! array_key_exists('fiyat_miktari', $kalem->getAttributes())) {
             return;
         }
-        if (! $kalem->fiyat_birimi_id && blank($kalem->olcu_donusum_snapshot)) {
+        // İade/legacy kalemleri fiyat birimi ve fiyat miktarı taşımayabilir.
+        // Bu kalemlerdeki olcu_donusum_snapshot yalnızca stok miktarı
+        // dönüşümünü temsil eder; fiyat snapshot doğrulamasına girmez.
+        if (! $kalem->fiyat_birimi_id || blank($kalem->fiyat_miktari)) {
             return;
         }
         $stok = StokKarti::withoutGlobalScopes()->where('firma_id', $kalem->firma_id)->findOrFail($kalem->stok_id);

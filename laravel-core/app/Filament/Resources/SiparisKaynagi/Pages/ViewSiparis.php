@@ -246,7 +246,7 @@ class ViewSiparis extends ViewRecord
                                         TextEntry::make('urun_adi_snapshot')->label('Ürün'),
                                         TextEntry::make('urun_kodu_snapshot')->label('Kod')->placeholder('—'),
                                         TextEntry::make('stok_takip_bilgisi')
-                                            ->label('Parti / Seri No Barkodu')
+                                            ->label('Seri No Barkodu')
                                             ->getStateUsing(fn ($record): string => $this->stokTakipBilgisi($record))
                                             ->placeholder('—')
                                             ->columnSpanFull(),
@@ -361,33 +361,12 @@ class ViewSiparis extends ViewRecord
 
     private function stokTakipBilgisi(mixed $kalem): string
     {
-        $partiler = [];
-        if (filled($kalem->parca_kodu ?? null)) {
-            $partiler[] = (string) $kalem->parca_kodu;
-        }
-
-        foreach ((array) ($kalem->parca_dagilimi ?? []) as $parti) {
-            if (! is_array($parti) || blank($parti['parca_kodu'] ?? null)) {
-                continue;
-            }
-
-            $etiket = (string) $parti['parca_kodu'];
-            if (filled($parti['miktar'] ?? null)) {
-                $etiket .= ' ('.(string) $parti['miktar'].')';
-            }
-            $partiler[] = $etiket;
-        }
-
-        $partiler = array_values(array_unique($partiler));
         $seriler = array_values(array_filter(array_map(
             static fn ($seri): string => trim((string) $seri),
             (array) ($kalem->seri_nolari ?? [])
         ), static fn (string $seri): bool => $seri !== ''));
 
         $satirlar = [];
-        if ($partiler !== []) {
-            $satirlar[] = 'Parti / Lot: '.implode(', ', $partiler);
-        }
         if ($seriler !== []) {
             $satirlar[] = 'Seri No Barkodu: '.implode(', ', $seriler);
         }

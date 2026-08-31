@@ -39,7 +39,7 @@
     .fi-sidebar-nav {
         padding-left: 0.5rem !important;
         padding-right: 0.25rem !important;
-        scrollbar-gutter: auto !important;
+        scrollbar-gutter: stable both-edges !important;
     }
 
     .custom-sidebar svg.nav-item-icon,
@@ -106,16 +106,6 @@
         .fi-main-sidebar:not(.fi-sidebar-open) .custom-sidebar .section-gap,
         .fi-main-sidebar:not(.fi-sidebar-open) .custom-sidebar .chevron {
             display: none !important;
-        }
-
-        .fi-main-sidebar:not(.fi-sidebar-open) .fi-sidebar-header .fi-logo,
-        .fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-header .fi-logo,
-        .fi-main-sidebar:not(.fi-sidebar-open) .fi-sidebar-header a:has(.fi-logo),
-        .fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-header a:has(.fi-logo) {
-            display: none !important;
-            opacity: 0 !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
         }
 
         .fi-main-sidebar:not(.fi-sidebar-open) .fi-sidebar-header,

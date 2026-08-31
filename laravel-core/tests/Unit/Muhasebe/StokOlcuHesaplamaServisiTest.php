@@ -29,6 +29,13 @@ class StokOlcuHesaplamaServisiTest extends TestCase
         self::assertSame('3.60000000', $this->servis->adettenAnaMiktara('10', '0.36'));
     }
 
+    public function test_adet_ile_metrekare_cift_yonlu_bakiye_regresyonu(): void
+    {
+        self::assertSame('16.00000000', $this->servis->adettenAnaMiktara('4', '4'));
+        self::assertSame('3.50000000', $this->servis->anaMiktardanAdede('14', '4'));
+        self::assertSame('2.00000000', $this->servis->adettenAnaMiktara('0.5', '4'));
+    }
+
     public function test_hacim_ve_uzunluk_hesaplarini_yapar(): void
     {
         $faktor = $this->servis->birAdetAnaMiktar(OlculuStokTakipTuru::Hacim, ['en' => '1', 'boy' => '2', 'yukseklik' => '0.05']);

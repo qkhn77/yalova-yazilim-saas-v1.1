@@ -38,6 +38,39 @@ body.fi-panel-admin .fi-fo-field-wrp-error-message {
     font-weight: 500;
 }
 
+/* Profil özetini form kartlarıyla aynı sakin yüzey diline getirir. */
+body.fi-panel-admin .yk-profile-summary {
+    border-color: var(--saas-border, #e0e6ed) !important;
+    border-radius: var(--saas-radius-md, .5rem) !important;
+    box-shadow: 0 1px 2px rgb(31 45 61 / 4%) !important;
+}
+
+body.fi-panel-admin .yk-profile-summary__body {
+    background: var(--saas-surface, #ffffff);
+    border-inline-start: 3px solid var(--saas-primary, #4361ee);
+}
+
+body.fi-panel-admin .yk-profile-summary__identity {
+    align-items: center;
+}
+
+body.fi-panel-admin .yk-profile-summary__avatar {
+    height: 3rem;
+    width: 3rem;
+    background: rgb(67 97 238 / 8%);
+    box-shadow: inset 0 0 0 1px rgb(67 97 238 / 10%);
+}
+
+body.fi-panel-admin .yk-profile-summary__meta {
+    color: var(--saas-text-muted, #888ea8);
+    font-size: .75rem;
+}
+
+html.dark body.fi-panel-admin .yk-profile-summary__body,
+body.fi-panel-admin.dark .yk-profile-summary__body {
+    background: rgb(15 23 42 / 88%);
+}
+
 /* Stok takip açıklaması alanın altında okunmalı; form temasındaki ortak
  * grid sırası bu tek alanda açıklamayı inputun üstüne taşıyabiliyor. */
 body.fi-panel-admin .stok-takip-yontemi-field .fi-input-wrp {
@@ -330,6 +363,221 @@ body.fi-panel-admin .fi-fo-repeater-item {
 body.fi-panel-admin .fi-fo-repeater-item-header {
     background: var(--saas-surface-muted);
     border-color: var(--saas-border) !important;
+}
+
+/* Fatura satırı aksiyonları (Depo/Sil) kolon başlıklarının akışına karışmaz.
+ * Header kendi satırını korur; böylece dar ekranlarda da form grid'inin
+ * üzerine binmez. */
+body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-header {
+    display: flex;
+    min-height: 2.25rem;
+    height: 2.25rem;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.25rem 0.5rem !important;
+    overflow: visible;
+    position: relative;
+    z-index: 2;
+}
+
+body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-header > h4 {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    padding-inline-end: 4rem;
+    text-align: start;
+}
+
+body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-header > ul {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.25rem;
+    min-width: 3.75rem;
+    position: static;
+    margin: 0 0 0 auto;
+    justify-content: flex-end;
+}
+
+body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-header > ul > li {
+    flex: 0 0 auto;
+}
+
+body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content {
+    position: relative;
+    z-index: 1;
+    clear: both;
+}
+
+/* Depo / seri ayrıntıları, satış hesap alanlarının arasına girmesin.
+ * Filament bu Section'ı bir grid sarmalayıcısı içinde render eder; sıralama
+ * doğrudan Section'a değil, grid item olan sarmalayıcıya uygulanmalıdır. */
+body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(> .fatura-kalem-detay-paneli) {
+    order: 999;
+}
+
+body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-header .fi-icon-btn {
+    flex: 0 0 1.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+@media (max-width: 767px) {
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-header {
+        min-height: 2.125rem;
+        height: 2.125rem;
+        padding-inline: 0.375rem !important;
+    }
+
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-header > ul {
+        min-width: 3.5rem;
+    }
+}
+
+/* Filament'in md/lg geçişinde 768px civarında formu iki kolona ayırması,
+ * fatura kalemleri gibi geniş tablo formlarını yarım alana sıkıştırır. Orta
+ * genişlikte form bölümleri tam genişlikte aksın; masaüstü geniş görünüm ve
+ * küçük mobil breakpoint'in mevcut davranışı korunur. */
+@media (min-width: 768px) and (max-width: 1023px) {
+    body.fi-panel-admin form#form:has(.fatura-kalemler-repeater) > .fi-fo-component-ctn {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    body.fi-panel-admin form#form:has(.fatura-kalemler-repeater) > .fi-fo-component-ctn > div {
+        grid-column: 1 / -1 !important;
+    }
+}
+
+/* Orta genişlikte (özellikle daraltılmış masaüstü penceresinde) mali alanlar
+ * ilk satırdaki stok alanlarını sıkıştırıp kart dışına taşmasın. */
+@media (min-width: 768px) and (max-width: 1199px) {
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid {
+        grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+        min-width: 0;
+        width: 100%;
+    }
+
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(.fatura-kalem-birim-fiyat-alani) {
+        grid-column: 1 / span 2 !important;
+    }
+
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(.fatura-kalem-indirim-orani-alani),
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(.fatura-kalem-indirim-tutari-alani),
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(.fatura-kalem-kdv-orani-alani),
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(.fatura-kalem-kdv-tutari-gosterim-alani),
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(.fatura-kalem-net-toplam-alani) {
+        grid-column: span 2 !important;
+        min-width: 0;
+    }
+
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(.fatura-kalem-birim-fiyat-alani),
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(.fatura-kalem-indirim-orani-alani),
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(.fatura-kalem-indirim-tutari-alani),
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(.fatura-kalem-kdv-orani-alani),
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(.fatura-kalem-kdv-tutari-gosterim-alani),
+    body.fi-panel-admin .fatura-kalemler-repeater .fi-fo-repeater-item-content > .grid > div:has(.fatura-kalem-net-toplam-alani) {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Fatura satırındaki isteğe bağlı depo/seri ayrıntıları, satırı gereksiz yere
+ * büyütmeden açılabilen kompakt bir bölüm olarak kalır. */
+body.fi-panel-admin .fatura-kalem-detay-paneli .fi-section-header {
+    min-height: 2.5rem;
+    padding: 0.5rem 0.75rem !important;
+}
+
+body.fi-panel-admin .fatura-kalem-detay-paneli {
+    display: none !important;
+    width: 100% !important;
+    max-width: 100%;
+}
+
+body.fi-panel-admin .fatura-kalem-detay-paneli.fatura-kalem-detay-paneli--acik {
+    display: block !important;
+}
+
+/* Filament section'ı col-[--col-span-default] sarmalayıcısına aldığı için
+ * yalnız section genişliğini değiştirmek yeterli olmaz; dış grid hücresini de
+ * tam satır yayılımından çıkarmak gerekir. */
+body.fi-panel-admin .fi-fo-repeater-item-content > div:has(> .fatura-kalem-detay-paneli) {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: 100%;
+    min-height: 0 !important;
+    align-self: start !important;
+}
+
+body.fi-panel-admin .fatura-kalem-detay-paneli .fi-section-content-ctn {
+    padding: 0.25rem 0.5rem !important;
+    width: 100% !important;
+    max-width: 100%;
+}
+
+body.fi-panel-admin .fatura-kalem-detay-paneli .fi-section-header {
+    white-space: nowrap;
+    min-height: 5px !important;
+    height: auto;
+    padding: 0.25rem 0.5rem !important;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+/* Ayrıntılar yalnız repeater satırındaki Depo aksiyonu ile açılır. Kapalı
+ * durumda section başlığı da yer kaplamaz; Filament'in content x-show'u
+ * aç/kapat durumunu yönetmeye devam eder. */
+body.fi-panel-admin .fatura-kalem-detay-paneli > .fi-section-header {
+    display: none !important;
+}
+
+body.fi-panel-admin .fatura-kalem-detay-paneli .fi-section-content {
+    padding: 0 !important;
+}
+
+body.fi-panel-admin .fatura-kalem-detay-paneli .fi-fo-field-wrp {
+    min-width: 0;
+    margin: 0 !important;
+}
+
+body.fi-panel-admin .fatura-kalem-detay-paneli .fi-fo-field-wrp-label {
+    margin: 0;
+}
+
+body.fi-panel-admin .fatura-kalem-detay-paneli .fi-fo-field-wrp .fi-input-wrp {
+    min-width: 7.5rem;
+}
+
+body.fi-panel-admin .fatura-kalem-detay-paneli .fi-fo-field-wrp-label {
+    font-size: 0.75rem;
+    line-height: 1.1rem;
+}
+
+body.fi-panel-admin .fatura-kalem-detay-paneli .fi-input-wrp {
+    min-height: 1.5rem;
+}
+
+@media (max-width: 767px) {
+    body.fi-panel-admin .fatura-kalem-detay-paneli {
+        display: none !important;
+    }
+
+    body.fi-panel-admin .fatura-kalem-detay-paneli.fatura-kalem-detay-paneli--acik {
+        display: block !important;
+    }
+
+    body.fi-panel-admin .fatura-kalem-detay-paneli .fi-section-header,
+    body.fi-panel-admin .fatura-kalem-detay-paneli .fi-section-content-ctn {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+    }
+
+    body.fi-panel-admin .fatura-kalem-detay-paneli .fi-section-header {
+        min-height: 1.75rem !important;
+        height: auto;
+        padding: 0.125rem 0 !important;
+        white-space: normal;
+    }
 }
 
 /* Fatura kalemindeki ölçü dağılımı: masaüstünde tek satır, mobilde akışkan. */

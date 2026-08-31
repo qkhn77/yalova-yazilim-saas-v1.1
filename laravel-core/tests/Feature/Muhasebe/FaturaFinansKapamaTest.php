@@ -4,9 +4,13 @@ namespace Tests\Feature\Muhasebe;
 
 use App\Models\Firma;
 use App\Models\Muhasebe\Cari;
+use App\Models\Muhasebe\CariHareketi;
 use App\Models\Muhasebe\Fatura;
 use App\Models\Muhasebe\FaturaKalemi;
 use App\Models\Muhasebe\KasaHesabi;
+use App\Models\Muhasebe\DovizKuru;
+use App\Models\Muhasebe\KurFarkiHareketi;
+use App\Models\Muhasebe\ParaBirimi;
 use App\Models\User;
 use App\Muhasebe\Enumlar\CariDurumu;
 use App\Muhasebe\Enumlar\CariTuru;
@@ -19,12 +23,13 @@ use App\Muhasebe\Servisler\FaturaIslemServisi;
 use App\Muhasebe\Servisler\FaturaKapamaDogrulamaServisi;
 use App\Muhasebe\Servisler\FinansHareketServisi;
 use App\Services\TenantContextService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class FaturaFinansKapamaTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     private function firmaOlustur(string $kod): Firma
     {
@@ -584,5 +589,119 @@ class FaturaFinansKapamaTest extends TestCase
         app(FaturaFinansKapamaServisi::class)->finansiFaturalaraDagit($finans, [
             ['fatura_id' => $fEur->id, 'tutar' => '50'],
         ]);
+    }
+
+    public function test_usd_fatura_try_kasa_ile_kurdan_kapanir(): void
+    {
+        $firma = $this->firmaOlustur('FK20');
+        $this->superAdminVeSession($firma);
+        $cari = $this->cariOlustur($firma, CariTuru::Musteri);
+        $kasa = $this->kasaOlustur($firma);
+
+        ParaBirimi::query()->create([
+            'firma_id' => $firma->id,
+            'kod' => 'USD',
+            'ad' => 'ABD Dolari',
+            'aktif_mi' => true,
+            'is_sabit' => false,
+        ]);
+        DovizKuru::query()->create([
+            'firma_id' => $firma->id,
+            'kaynak_para_birimi' => 'USD',
+            'hedef_para_birimi' => 'TRY',
+            'is_sabit' => false,
+            'tanim_firma_kapsami' => $firma->id,
+            'tarih' => now()->toDateString(),
+            'kur' => '41',
+            'saglayici' => 'test',
+            'manuel_mi' => true,
+        ]);
+
+        $fatura = Fatura::query()->create([
+            'firma_id' => $firma->id,
+            'cari_id' => $cari->id,
+            'tur' => FaturaTuru::GelenFatura->value,
+            'durum' => FaturaDurumu::Taslak->value,
+            'tarih' => now(),
+            'ara_toplam' => '100',
+            'kdv_toplam' => '0',
+            'genel_toplam' => '100',
+            'genel_indirim_tutari' => '0',
+            'toplam_indirim' => '0',
+            'odenecek_tutar' => '100',
+            'odendi_tutari' => '0',
+            'acik_tutar' => '100',
+            'odeme_durumu' => 'odenmedi',
+            'para_birimi' => 'USD',
+            'doviz_kuru' => '40',
+        ]);
+        FaturaKalemi::query()->create([
+            'firma_id' => $firma->id,
+            'fatura_id' => $fatura->id,
+            'satir_no' => 1,
+            'kalem_tipi' => 'hizmet_kalemi',
+            'hizmet_mi' => true,
+            'miktar' => '1',
+            'birim_fiyat' => '100',
+            'kdv_orani' => '0',
+            'net_tutar' => '100',
+            'kdv_tutari' => '0',
+            'toplam' => '100',
+            'satir_toplami' => '100',
+            'satir_genel_toplam' => '100',
+            'para_birimi' => 'USD',
+        ]);
+        app(FaturaIslemServisi::class)->faturayiOnayla($fatura);
+        DB::table('faturalar')->where('id', $fatura->id)->update(['doviz_kuru' => '40']);
+
+        $sonuc = app(FinansHareketServisi::class)->odemeKurIleKaydet(
+            $firma->id,
+            $cari->id,
+            'kasa',
+            $kasa->id,
+            '100',
+            'USD',
+            '4100',
+            'TRY',
+            '41',
+            now(),
+            'USD fatura odemesi',
+            'fatura',
+            $fatura->id,
+        );
+
+        $this->assertSame('USD', $sonuc['finans']->fresh()->para_birimi);
+        $this->assertSame('4100.00', number_format((float) $sonuc['finans']->fresh()->baz_tutar, 2, '.', ''));
+        $cariHareketi = CariHareketi::query()
+            ->where('belge_id', $sonuc['finans']->id)
+            ->where('belge_turu', 'odeme')
+            ->firstOrFail();
+        $this->assertSame('4100.00', number_format((float) $cariHareketi->baz_alacak, 2, '.', ''));
+        $this->assertSame('41.00000000', (string) $cariHareketi->kur);
+        $kapama = $fatura->fresh()->finansKapatmalari()->firstOrFail();
+        $this->assertSame('4000.00000000', (string) $kapama->baz_fatura_tutari);
+        $this->assertSame('100.00000000', (string) $kapama->kur_farki_tutari);
+        $this->assertDatabaseHas('kur_farki_hareketleri', [
+            'fatura_finans_kapama_id' => $kapama->id,
+            'tutar' => '100.00000000',
+            'yon' => 'zarar',
+            'durum' => 'aktif',
+        ]);
+        $this->assertSame('0.00', number_format((float) $fatura->fresh()->acik_tutar, 2, '.', ''));
+        $this->assertSame('odendi', $fatura->fresh()->odeme_durumu);
+
+        app(FinansHareketServisi::class)->tersKayitOlustur($sonuc['finans']->fresh());
+
+        $this->assertDatabaseHas('cari_hareketleri', [
+            'id' => $cariHareketi->id,
+            'durum' => 'iptal',
+            'baz_borc' => '0.00',
+            'baz_alacak' => '4100.00',
+            'kur' => '41.00000000',
+        ]);
+
+        $this->assertSame('iptal', (string) KurFarkiHareketi::query()
+            ->where('fatura_finans_kapama_id', $kapama->id)
+            ->value('durum'));
     }
 }

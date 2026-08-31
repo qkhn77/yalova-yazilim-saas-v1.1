@@ -51,7 +51,7 @@ class KasaHesabiKaynagi extends Resource
 
     protected static ?string $modelLabel = 'Kasa hesabı';
 
-    protected static ?string $pluralModelLabel = 'Kasa hesapları';
+    protected static ?string $pluralModelLabel = 'Kasa Hesapları';
 
     protected static ?string $recordTitleAttribute = 'ad';
 

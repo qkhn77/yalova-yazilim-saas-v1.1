@@ -86,7 +86,9 @@ class StokDepoSayimSayfasi extends Page implements HasForms
                         ->mapWithKeys(fn (StokKarti $stok): array => [$stok->id => $stok->kod.' — '.$stok->ad])
                         ->all())
                     ->searchable()
-                    ->helperText('Bu ekran yalnızca basit stoklar içindir. Parti/Lot ve Seri No Barkodu takipli ürünleri üstteki ilgili sayım ekranından yönetin.')
+                    ->optionsLimit(50)
+                    ->live(onBlur: true)
+                    ->helperText('Bu ekran yalnızca basit stoklar içindir. Seri No Barkodu takipli ürünleri üstteki ilgili sayım ekranından yönetin.')
                     ->required(),
                 Forms\Components\Select::make('depo_id')
                     ->label('Depo')
@@ -131,9 +133,9 @@ class StokDepoSayimSayfasi extends Page implements HasForms
             throw ValidationException::withMessages(['stok_id' => 'Seçilen stok bulunamadı.']);
         }
 
-        if ($stok->partiTakibiAktifMi() || (string) ($stok->stok_takip_tipi ?? '') === StokKarti::STOK_TAKIP_TIPI_SERI) {
+        if ((string) ($stok->stok_takip_tipi ?? '') === StokKarti::STOK_TAKIP_TIPI_SERI) {
             throw ValidationException::withMessages([
-                'stok_id' => 'Parti veya seri takipli ürünlerde özel sayım akışı kullanılmalıdır.',
+                'stok_id' => 'Seri numarası takipli ürünlerde özel sayım akışı kullanılmalıdır.',
             ]);
         }
 

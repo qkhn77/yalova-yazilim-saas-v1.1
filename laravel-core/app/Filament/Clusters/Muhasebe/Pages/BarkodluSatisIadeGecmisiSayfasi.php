@@ -5,6 +5,7 @@ namespace App\Filament\Clusters\Muhasebe\Pages;
 use App\BarkodluSatis\Guvenlik\BarkodluSatisFilamentErisimYardimcisi;
 use App\Filament\Clusters\Muhasebe as MuhasebeCluster;
 use App\Models\Muhasebe\BarkodluSatis;
+use App\Models\Muhasebe\BarkodluSatisKalemi;
 use App\Models\Muhasebe\BarkodluSatisIade;
 use App\Muhasebe\Servisler\BarkodluSatisServisi;
 use App\Services\FirmaAyarDeposu;
@@ -494,10 +495,7 @@ class BarkodluSatisIadeGecmisiSayfasi extends Page implements HasForms, HasTable
             return [];
         }
 
-        $satis = BarkodluSatis::query()
-            ->whereKey($satisId)
-            ->with(['kalemler', 'iadeler.kalemler'])
-            ->first();
+        $satis = BarkodluSatis::query()->whereKey($satisId)->first();
         if (! $satis) {
             return [];
         }
@@ -511,7 +509,11 @@ class BarkodluSatisIadeGecmisiSayfasi extends Page implements HasForms, HasTable
         }
 
         $secenekler = [];
-        foreach ($satis->kalemler as $kalem) {
+        $kalemler = BarkodluSatisKalemi::query()
+            ->where('firma_id', (int) $satis->firma_id)
+            ->where('satis_id', (int) $satis->id)
+            ->get(['id', 'miktar', 'stok_adi']);
+        foreach ($kalemler as $kalem) {
             $kalemId = (int) $kalem->id;
             $kalan = max(0, (float) $kalem->miktar - (float) ($iadeMiktarlari[$kalemId] ?? 0));
             if ($kalan <= 0.0001) {

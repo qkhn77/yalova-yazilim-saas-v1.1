@@ -222,8 +222,6 @@ class EcommerceMuhasebeEntegrasyonServisi
             $payloadlar[] = [
                 'kalem_tipi' => 'stok_kalemi',
                 'stok_id' => (int) $kalem->stok_karti_id,
-                'parca_kodu' => $kalem->parca_kodu,
-                'parca_dagilimi' => $kalem->parca_dagilimi,
                 'seri_nolari' => array_values(array_filter(array_map('trim', (array) ($kalem->seri_nolari ?? [])))),
                 'birim' => 'AD',
                 'hizmet_mi' => false,

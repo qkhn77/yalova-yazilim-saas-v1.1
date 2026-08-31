@@ -77,12 +77,34 @@ class FinansHareketServisi
         $paraBirimi = strtoupper((string) ($alanlar['para_birimi'] ?? 'TRY'));
         $tarih = $alanlar['tarih'] ?? null;
 
-        $donusum = $this->paraBirimiDonusumServisi->tutariBazParaBirimineHazirla(
-            $firmaId,
-            $tutar,
-            $paraBirimi,
-            is_string($tarih) || $tarih instanceof \DateTimeInterface ? $tarih : null
-        );
+        $snapshotVar = array_key_exists('baz_tutar', $alanlar)
+            && filled($alanlar['baz_tutar'])
+            && filled($alanlar['baz_para_birimi'] ?? null)
+            && filled($alanlar['kur'] ?? null);
+        $donusum = $snapshotVar
+            ? [
+                'tutar' => $tutar,
+                'baz_tutar' => (string) $alanlar['baz_tutar'],
+                'baz_para_birimi' => strtoupper((string) $alanlar['baz_para_birimi']),
+                'kur' => (string) $alanlar['kur'],
+                'para_birimi' => $paraBirimi,
+            ]
+            : $this->paraBirimiDonusumServisi->tutariBazParaBirimineHazirla(
+                $firmaId,
+                $tutar,
+                $paraBirimi,
+                is_string($tarih) || $tarih instanceof \DateTimeInterface ? $tarih : null
+            );
+
+        // Kurla ödeme/tahsilat akışında hesap tarafı baz para birimiyse,
+        // kullanıcının girdiği fiili hesap tutarı esas alınır. Aksi halde
+        // finans baz tutarı güncel kur tablosundan hesaplanır ve ödeme anında
+        // oluşan kur farkı kaybolur.
+        if (array_key_exists('baz_tutar', $alanlar) && $alanlar['baz_tutar'] !== null) {
+            $donusum['baz_tutar'] = number_format((float) $alanlar['baz_tutar'], 8, '.', '');
+            $donusum['baz_para_birimi'] = strtoupper((string) ($alanlar['baz_para_birimi'] ?? config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY')));
+            $donusum['kur'] = number_format((float) ($alanlar['kur'] ?? $donusum['kur']), 8, '.', '');
+        }
 
         return FinansHareketi::query()->create(array_merge(
             FinansAuditBaglami::otomatikFinansAlanlari(),
@@ -201,7 +223,7 @@ class FinansHareketServisi
                 'iptal_edilen_hareket_id' => null,
             ]);
 
-            $cariHareket = $this->cariHareketServisi->kayitOlustur($firmaId, [
+            $cariAlanlari = [
                 'cari_id' => (int) $cari->getKey(),
                 'belge_turu' => CariHareketBelgeTuru::Tahsilat,
                 'belge_id' => (int) $finans->getKey(),
@@ -210,7 +232,8 @@ class FinansHareketServisi
                 'alacak' => '0',
                 'para_birimi' => $paraBirimi,
                 'aciklama' => $aciklama,
-            ]);
+            ];
+            $cariHareket = $this->cariHareketServisi->kayitOlustur($firmaId, $cariAlanlari);
 
             $this->faturaKapamaVeOtomatikDagit($finans);
 
@@ -244,7 +267,7 @@ class FinansHareketServisi
         $cari = $this->cariyiYukleVeDogrula($firmaId, $cariId, $paraBirimi);
 
         return DB::transaction(function () use ($firmaId, $cari, $tutar, $paraBirimi, $tarih, $vadeTarihi, $tur, $cekId, $aciklama): array {
-            $finans = $this->finansKaydiOlustur([
+            $finansAlanlari = [
                 'firma_id' => $firmaId,
                 'tur' => $tur,
                 'tarih' => $tarih,
@@ -257,9 +280,10 @@ class FinansHareketServisi
                 'referans_id' => $cekId,
                 'durum' => FinansHareketDurumu::Aktif,
                 'iptal_edilen_hareket_id' => null,
-            ]);
+            ];
+            $finans = $this->finansKaydiOlustur($finansAlanlari);
 
-            $cariHareket = $this->cariHareketServisi->kayitOlustur($firmaId, [
+            $cariAlanlari = [
                 'cari_id' => (int) $cari->getKey(),
                 'belge_turu' => $tur === FinansHareketTuru::Tahsilat
                     ? CariHareketBelgeTuru::Tahsilat
@@ -271,7 +295,8 @@ class FinansHareketServisi
                 'alacak' => $tur === FinansHareketTuru::Odeme ? $tutar : '0',
                 'para_birimi' => strtoupper($paraBirimi),
                 'aciklama' => $aciklama,
-            ]);
+            ];
+            $cariHareket = $this->cariHareketServisi->kayitOlustur($firmaId, $cariAlanlari);
 
             $this->faturaKapamaVeOtomatikDagit($finans);
 
@@ -301,7 +326,7 @@ class FinansHareketServisi
         $kasa = $this->kasayiYukleVeDogrula($firmaId, $kasaHesapId, $paraBirimi);
 
         return DB::transaction(function () use ($firmaId, $cari, $kasa, $tutar, $paraBirimi, $tarih, $aciklama, $referansTuru, $referansId): array {
-            $finans = $this->finansKaydiOlustur([
+            $finansAlanlari = [
                 'firma_id' => $firmaId,
                 'tur' => FinansHareketTuru::Tahsilat,
                 'tarih' => $tarih,
@@ -314,7 +339,8 @@ class FinansHareketServisi
                 'referans_id' => $referansId,
                 'durum' => FinansHareketDurumu::Aktif,
                 'iptal_edilen_hareket_id' => null,
-            ]);
+            ];
+            $finans = $this->finansKaydiOlustur($finansAlanlari);
 
             $kasaHareket = KasaHareketi::query()->create([
                 'firma_id' => $firmaId,
@@ -362,7 +388,7 @@ class FinansHareketServisi
         $negatif = bcmul($tutar, '-1', 2);
 
         return DB::transaction(function () use ($firmaId, $cari, $kasa, $tutar, $negatif, $paraBirimi, $tarih, $aciklama, $referansTuru, $referansId): array {
-            $finans = $this->finansKaydiOlustur([
+            $finansAlanlari = [
                 'firma_id' => $firmaId,
                 'tur' => FinansHareketTuru::Odeme,
                 'tarih' => $tarih,
@@ -375,7 +401,8 @@ class FinansHareketServisi
                 'referans_id' => $referansId,
                 'durum' => FinansHareketDurumu::Aktif,
                 'iptal_edilen_hareket_id' => null,
-            ]);
+            ];
+            $finans = $this->finansKaydiOlustur($finansAlanlari);
 
             $kasaHareket = KasaHareketi::query()->create([
                 'firma_id' => $firmaId,
@@ -1172,8 +1199,8 @@ class FinansHareketServisi
         $aciklamaMetni = trim((string) $aciklama);
         $ekAciklama = $aciklamaMetni !== '' ? ($aciklamaMetni.' | '.$kurNotu) : $kurNotu;
 
-        return DB::transaction(function () use ($firmaId, $cari, $hesapTipi, $hesap, $cariTutari, $cariParaBirimi, $hesapTutari, $hesapParaBirimi, $tarih, $aciklama, $ekAciklama, $referansTuru, $referansId): array {
-            $finans = $this->finansKaydiOlustur([
+        return DB::transaction(function () use ($firmaId, $cari, $hesapTipi, $hesap, $cariTutari, $cariParaBirimi, $hesapTutari, $hesapParaBirimi, $kur, $tarih, $aciklama, $ekAciklama, $referansTuru, $referansId): array {
+            $finansAlanlari = [
                 'firma_id' => $firmaId,
                 'tur' => FinansHareketTuru::Tahsilat,
                 'tarih' => $tarih,
@@ -1187,7 +1214,13 @@ class FinansHareketServisi
                 'referans_id' => $referansId,
                 'durum' => FinansHareketDurumu::Aktif,
                 'iptal_edilen_hareket_id' => null,
-            ]);
+            ];
+            if ($hesapParaBirimi === strtoupper((string) config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY'))) {
+                $finansAlanlari['baz_tutar'] = $hesapTutari;
+                $finansAlanlari['baz_para_birimi'] = $hesapParaBirimi;
+                $finansAlanlari['kur'] = bcdiv($hesapTutari, $cariTutari, 8);
+            }
+            $finans = $this->finansKaydiOlustur($finansAlanlari);
 
             $hesapHareket = $this->virmanHareketiOlustur(
                 $firmaId,
@@ -1198,7 +1231,7 @@ class FinansHareketServisi
                 $hesapParaBirimi
             );
 
-            $cariHareket = $this->cariHareketServisi->kayitOlustur($firmaId, [
+            $cariAlanlari = [
                 'cari_id' => (int) $cari->getKey(),
                 'belge_turu' => CariHareketBelgeTuru::Tahsilat,
                 'belge_id' => (int) $finans->getKey(),
@@ -1207,7 +1240,16 @@ class FinansHareketServisi
                 'alacak' => '0',
                 'para_birimi' => $cariParaBirimi,
                 'aciklama' => $aciklama,
-            ]);
+            ];
+            if ($hesapParaBirimi === strtoupper((string) config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY'))) {
+                $cariAlanlari += [
+                    'baz_borc' => $hesapTutari,
+                    'baz_alacak' => '0',
+                    'baz_para_birimi' => $hesapParaBirimi,
+                    'kur' => $kur,
+                ];
+            }
+            $cariHareket = $this->cariHareketServisi->kayitOlustur($firmaId, $cariAlanlari);
 
             $this->faturaKapamaVeOtomatikDagit($finans);
 
@@ -1264,8 +1306,8 @@ class FinansHareketServisi
         $ekAciklama = $aciklamaMetni !== '' ? ($aciklamaMetni.' | '.$kurNotu) : $kurNotu;
         $negatifHesap = bcmul($hesapTutari, '-1', 2);
 
-        return DB::transaction(function () use ($firmaId, $cari, $hesapTipi, $hesap, $cariTutari, $cariParaBirimi, $hesapParaBirimi, $negatifHesap, $tarih, $aciklama, $ekAciklama, $referansTuru, $referansId): array {
-            $finans = $this->finansKaydiOlustur([
+        return DB::transaction(function () use ($firmaId, $cari, $hesapTipi, $hesap, $cariTutari, $cariParaBirimi, $hesapTutari, $hesapParaBirimi, $negatifHesap, $kur, $tarih, $aciklama, $ekAciklama, $referansTuru, $referansId): array {
+            $finansAlanlari = [
                 'firma_id' => $firmaId,
                 'tur' => FinansHareketTuru::Odeme,
                 'tarih' => $tarih,
@@ -1279,7 +1321,13 @@ class FinansHareketServisi
                 'referans_id' => $referansId,
                 'durum' => FinansHareketDurumu::Aktif,
                 'iptal_edilen_hareket_id' => null,
-            ]);
+            ];
+            if ($hesapParaBirimi === strtoupper((string) config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY'))) {
+                $finansAlanlari['baz_tutar'] = $hesapTutari;
+                $finansAlanlari['baz_para_birimi'] = $hesapParaBirimi;
+                $finansAlanlari['kur'] = bcdiv($hesapTutari, $cariTutari, 8);
+            }
+            $finans = $this->finansKaydiOlustur($finansAlanlari);
 
             $hesapHareket = $this->virmanHareketiOlustur(
                 $firmaId,
@@ -1290,7 +1338,7 @@ class FinansHareketServisi
                 $hesapParaBirimi
             );
 
-            $cariHareket = $this->cariHareketServisi->kayitOlustur($firmaId, [
+            $cariAlanlari = [
                 'cari_id' => (int) $cari->getKey(),
                 'belge_turu' => CariHareketBelgeTuru::Odeme,
                 'belge_id' => (int) $finans->getKey(),
@@ -1299,7 +1347,16 @@ class FinansHareketServisi
                 'alacak' => $cariTutari,
                 'para_birimi' => $cariParaBirimi,
                 'aciklama' => $aciklama,
-            ]);
+            ];
+            if ($hesapParaBirimi === strtoupper((string) config('muhasebe.coklu_para_birimi.baz_para_birimi', 'TRY'))) {
+                $cariAlanlari += [
+                    'baz_borc' => '0',
+                    'baz_alacak' => $hesapTutari,
+                    'baz_para_birimi' => $hesapParaBirimi,
+                    'kur' => $kur,
+                ];
+            }
+            $cariHareket = $this->cariHareketServisi->kayitOlustur($firmaId, $cariAlanlari);
 
             $this->faturaKapamaVeOtomatikDagit($finans);
 
@@ -1398,6 +1455,9 @@ class FinansHareketServisi
                     'vade_tarihi' => $finans->vade_tarihi,
                     'tutar' => $finans->tutar,
                     'para_birimi' => $finans->para_birimi,
+                    'baz_tutar' => $finans->baz_tutar,
+                    'baz_para_birimi' => $finans->baz_para_birimi,
+                    'kur' => $finans->kur,
                     'cari_id' => null,
                     'aciklama' => $aciklama ?? ('Finans ters kayıt: #'.$finans->getKey()),
                     'referans_turu' => 'finans_hareketi',
@@ -1524,6 +1584,9 @@ class FinansHareketServisi
                     'vade_tarihi' => $finans->vade_tarihi,
                     'tutar' => $finans->tutar,
                     'para_birimi' => $finans->para_birimi,
+                    'baz_tutar' => $finans->baz_tutar,
+                    'baz_para_birimi' => $finans->baz_para_birimi,
+                    'kur' => $finans->kur,
                     'cari_id' => null,
                     'aciklama' => $aciklama ?? ('Finans ters kayıt: #'.$finans->getKey()),
                     'referans_turu' => 'finans_hareketi',
@@ -1650,10 +1713,6 @@ class FinansHareketServisi
         if ((int) $cari->firma_id !== $firmaId) {
             throw new IsKuraliIstisnasi('Cari firmaya ait değil.');
         }
-        if (strtoupper((string) $cari->para_birimi) !== strtoupper($paraBirimi)) {
-            throw new IsKuraliIstisnasi('Cari para birimi ile işlem uyuşmuyor (kur dönüşümü bu adımda yok).');
-        }
-
         return $cari;
     }
 

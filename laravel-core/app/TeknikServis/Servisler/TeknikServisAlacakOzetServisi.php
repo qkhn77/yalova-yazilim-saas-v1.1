@@ -27,9 +27,18 @@ final class TeknikServisAlacakOzetServisi
 
         $plan = $this->sonPlan($servis);
         $teknikTahsilatlar = $this->teknikTahsilatlar($servis);
-        $teknikTahsilatToplami = $this->tutar($teknikTahsilatlar->sum('tutar'));
+        $teknikTahsilatDagilimi = $teknikTahsilatlar
+            ->groupBy(fn (TeknikServisTahsilati $tahsilat): string => strtoupper((string) ($tahsilat->kaynak_para_birimi ?: $paraBirimi)))
+            ->map(fn (Collection $satirlar): float => $this->tutar($satirlar->sum('tutar')))
+            ->all();
+        // Farklı para birimlerindeki tahsilatlar birbirine eklenemez. Servis
+        // bakiyesi yalnızca servis para birimindeki tahsilatla hesaplanır;
+        // diğerleri ekranda ayrı dağılım olarak gösterilir.
+        $teknikTahsilatToplami = $this->tutar($teknikTahsilatDagilimi[$paraBirimi] ?? 0);
         $servisOdenenToplami = $this->tutar($servis->odenen_tutar ?? 0);
-        $tahsilatToplami = max($teknikTahsilatToplami, $servisOdenenToplami);
+        $tahsilatToplami = $teknikTahsilatDagilimi !== []
+            ? $teknikTahsilatToplami
+            : $servisOdenenToplami;
 
         $planPesinatTutar = $plan ? $this->tutar($plan->pesinat_tutari) : 0.0;
         $planKapsamTutar = $plan ? $this->tutar($plan->planlanan_tutar) : 0.0;
@@ -47,6 +56,7 @@ final class TeknikServisAlacakOzetServisi
             'toplam_tutar' => $toplamTutar,
             'para_birimi' => $paraBirimi,
             'teknik_tahsilat_toplami' => $teknikTahsilatToplami,
+            'teknik_tahsilat_dagilimi' => $teknikTahsilatDagilimi,
             'servis_odenen_toplami' => $servisOdenenToplami,
             'tahsilat_toplami' => $tahsilatToplami,
             'servis_bakiye_tutar' => $servisBakiyeTutar,

@@ -17,6 +17,7 @@ class FirmaMuhasebeGuvenlikYardimcisi
         $tablolar = [
             'faturalar',
             'fatura_numara_sayaclari',
+            'kur_farki_hareketleri',
             'teklif_numara_sayaclari',
             'cariler',
             'cari_hareketleri',

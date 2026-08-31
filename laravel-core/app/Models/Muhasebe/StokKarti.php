@@ -21,8 +21,6 @@ use InvalidArgumentException;
 class StokKarti extends Model
 {
     public const STOK_TAKIP_TIPI_BASIT = 'basit';
-    /** Eski kayıtları okuyabilmek için korunur; yeni stok kartlarında kullanılmaz. */
-    public const STOK_TAKIP_TIPI_PARTI = 'parti';
     public const STOK_TAKIP_TIPI_SERI = 'seri';
 
     use HasFirmaTenantScope;
@@ -40,14 +38,6 @@ class StokKarti extends Model
     protected static function booted(): void
     {
         static::saving(function (self $model): void {
-            // Parti/Lot ve fiziksel stok parçası takibi uygulamadan kaldırıldı.
-            // Eski kayıtlar okunabilir tutulur; yeni veya güncellenen kartlar
-            // yalnızca basit ya da seri takipte kalabilir.
-            if ((string) $model->stok_takip_tipi === self::STOK_TAKIP_TIPI_PARTI) {
-                $model->stok_takip_tipi = self::STOK_TAKIP_TIPI_BASIT;
-            }
-            $model->parcali_kullanima_izin = false;
-
             if ($model->exists && ($model->isDirty('olculu_takip_turu') || $model->isDirty('olcu_yapisi'))) {
                 // Tenant kapsamı veya mevcut kullanıcı bağlamı değişmiş olsa bile
                 // kilit, kartın gerçek geçmiş kayıtlarına göre uygulanmalıdır.
@@ -92,11 +82,6 @@ class StokKarti extends Model
         static::saved($clear);
         static::deleted($clear);
         static::restored($clear);
-    }
-
-    public function partiTakibiAktifMi(): bool
-    {
-        return false;
     }
 
     protected $fillable = [

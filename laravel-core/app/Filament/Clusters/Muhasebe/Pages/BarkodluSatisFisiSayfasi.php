@@ -208,26 +208,8 @@ class BarkodluSatisFisiSayfasi extends Page
                 static fn ($seri): string => trim((string) $seri),
                 (array) ($kalem->seri_nolari ?? [])
             ), static fn (string $seri): bool => $seri !== ''));
-            $partiler = [];
-            if (filled($kalem->parca_kodu ?? null)) {
-                $partiler[] = (string) $kalem->parca_kodu;
-            }
-            foreach ((array) ($kalem->parca_dagilimi ?? []) as $parti) {
-                if (! is_array($parti) || blank($parti['parca_kodu'] ?? null)) {
-                    continue;
-                }
-                $etiket = (string) $parti['parca_kodu'];
-                if (filled($parti['miktar'] ?? null)) {
-                    $etiket .= ' ('.(string) $parti['miktar'].')';
-                }
-                $partiler[] = $etiket;
-            }
-            $partiler = array_values(array_unique($partiler));
             if ($seriler !== []) {
                 $urun .= '<div style="font-size:10px;color:#666;">Seri No Barkodu: '.e(implode(', ', $seriler)).'</div>';
-            }
-            if ($partiler !== []) {
-                $urun .= '<div style="font-size:10px;color:#666;">Parti / Lot: '.e(implode(', ', $partiler)).'</div>';
             }
 
             $satirlar[] = '<tr>'

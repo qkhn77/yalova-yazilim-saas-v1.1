@@ -4,6 +4,7 @@ namespace Tests\Feature\Muhasebe;
 
 use App\Models\Firma;
 use App\Models\Muhasebe\Cari;
+use App\Models\Muhasebe\DovizKuru;
 use App\Models\Muhasebe\KasaHesabi;
 use App\Models\Muhasebe\Senet;
 use App\Models\Muhasebe\SenetHareketi;
@@ -66,6 +67,65 @@ class SenetTakipTest extends TestCase
             'ad' => 'Senet Kasa',
             'para_birimi' => 'TRY',
             'durum' => HesapDurumu::Aktif,
+        ]);
+    }
+
+    public function test_usd_senet_try_kasa_ile_tahsil_edilir_ve_baz_tutar_snapshoti_kapanis_kurunu_tutar(): void
+    {
+        config([
+            'muhasebe.coklu_para_birimi.aktif' => true,
+            'muhasebe.coklu_para_birimi.kur_donusumu_aktif' => true,
+            'muhasebe.coklu_para_birimi.baz_para_birimi' => 'TRY',
+        ]);
+
+        $firma = $this->firmaOlustur('SN-USD');
+        $this->superAdminVeSession($firma);
+        $cari = $this->cariOlustur($firma, 'C-SN-USD');
+        $kasa = $this->kasaOlustur($firma);
+
+        foreach ([['2026-07-20', '40'], ['2026-08-01', '42']] as [$tarih, $kur]) {
+            DovizKuru::query()->create([
+                'firma_id' => $firma->id,
+                'kaynak_para_birimi' => 'USD',
+                'hedef_para_birimi' => 'TRY',
+                'is_sabit' => false,
+                'tanim_firma_kapsami' => $firma->id,
+                'tarih' => $tarih,
+                'kur' => $kur,
+                'manuel_mi' => true,
+            ]);
+        }
+
+        $senet = app(SenetServisi::class)->girisKaydet($firma->id, [
+            'cari_id' => $cari->id,
+            'senet_no' => 'SNT-USD-001',
+            'tutar' => '100.00',
+            'para_birimi' => 'USD',
+            'vade_tarihi' => '2026-08-15',
+            'islem_tarihi' => '2026-07-20 10:00:00',
+        ]);
+        $this->assertSame('4000.00', (string) $senet->baz_tutar);
+
+        $sonuc = app(SenetServisi::class)->tahsilatEkle($senet, [
+            'kanal' => 'kasa',
+            'kasa_hesap_id' => $kasa->id,
+            'tutar' => '100.00',
+            'doviz_kuru' => '42',
+            'hedef_tutar' => '4200.00',
+            'islem_tarihi' => '2026-08-01 10:00:00',
+            'kapanma_sekli' => 'odendi_iade',
+        ]);
+
+        $finans = FinansHareketi::query()->where('referans_turu', 'senet')->where('referans_id', $senet->id)->latest('id')->firstOrFail();
+        $this->assertSame('USD', (string) $sonuc->para_birimi);
+        $this->assertSame('4000.00', (string) $senet->fresh()->baz_tutar);
+        $this->assertSame('4200.00', (string) $finans->baz_tutar);
+        $this->assertSame('TRY', (string) $finans->baz_para_birimi);
+        $this->assertSame('42.00000000', (string) $finans->kur);
+        $this->assertDatabaseHas('kasa_hareketleri', [
+            'finans_hareket_id' => $finans->id,
+            'para_birimi' => 'TRY',
+            'tutar' => '4200.00',
         ]);
     }
 

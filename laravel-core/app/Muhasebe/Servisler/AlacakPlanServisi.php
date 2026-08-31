@@ -164,10 +164,6 @@ class AlacakPlanServisi
         }
 
         $paraBirimi = strtoupper((string) ($veri['para_birimi'] ?? $cari->para_birimi ?? 'TRY'));
-        $cariParaBirimi = strtoupper((string) ($cari->para_birimi ?: 'TRY'));
-        if ($paraBirimi !== $cariParaBirimi) {
-            throw new IsKuraliIstisnasi('Alacak plani para birimi cari para birimi ile ayni olmalidir.');
-        }
         $planTuru = strtolower(trim((string) ($veri['plan_turu'] ?? ($taksitSayisi > 1 ? 'taksit' : 'veresiye'))));
 
         return DB::transaction(function () use ($firmaId, $veri, $cariId, $kaynakTuru, $kaynakId, $toplamTutar, $pesinat, $vadeFarkiTipi, $vadeFarkiOrani, $vadeFarkiTutari, $planlanan, $paraBirimi, $planTuru, $taksitSayisi, $aralikGun, $ilkVade): AlacakPlani {
@@ -222,6 +218,7 @@ class AlacakPlanServisi
                     'sira_no' => $index + 1,
                     'vade_tarihi' => $vade->toDateString(),
                     'tutar' => $tutar,
+                    'para_birimi' => $paraBirimi,
                     'odenen_tutar' => '0.00',
                     'kalan_tutar' => $tutar,
                     'durum' => $vade->isPast() && ! $vade->isToday() ? 'gecikti' : 'bekliyor',
@@ -625,6 +622,7 @@ class AlacakPlanServisi
                 'sira_no' => ++$siraNo,
                 'vade_tarihi' => $vade->toDateString(),
                 'tutar' => $tutar,
+                'para_birimi' => (string) $plan->para_birimi,
                 'odenen_tutar' => '0.00',
                 'kalan_tutar' => $tutar,
                 'durum' => $vade->isPast() && ! $vade->isToday() ? 'gecikti' : 'bekliyor',
@@ -674,6 +672,7 @@ class AlacakPlanServisi
             'sira_no' => $siraNo,
             'vade_tarihi' => $vadeTarihi->toDateString(),
             'tutar' => $tutar,
+            'para_birimi' => (string) $plan->para_birimi,
             'odenen_tutar' => '0.00',
             'kalan_tutar' => $tutar,
             'durum' => $vadeTarihi->isPast() && ! $vadeTarihi->isToday() ? 'gecikti' : 'bekliyor',

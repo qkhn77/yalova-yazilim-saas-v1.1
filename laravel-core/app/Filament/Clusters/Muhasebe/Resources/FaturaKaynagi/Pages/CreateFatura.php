@@ -9,10 +9,12 @@ use App\Models\Muhasebe\StokKarti;
 use App\Models\Muhasebe\StokOlcuBakiyesi;
 use App\Models\Muhasebe\StokOlcusu;
 use App\Muhasebe\Enumlar\FaturaDurumu;
+use App\Muhasebe\Enumlar\FaturaSinifi;
 use App\Muhasebe\Enumlar\FaturaTuru;
 use App\Muhasebe\Exceptions\IsKuraliIstisnasi;
 use App\Muhasebe\Servisler\FaturaIslemServisi;
 use App\Muhasebe\Servisler\FaturaOlcuKalemiServisi;
+use App\Muhasebe\Servisler\FaturaParaBirimiDogrulamaServisi;
 use App\Muhasebe\Servisler\FaturaToplamSenkronizasyonServisi;
 use App\Services\TenantContextService;
 use Filament\Notifications\Notification;
@@ -74,12 +76,36 @@ class CreateFatura extends CreateRecord
                     $firmaId,
                     $varsayilanTur->value,
                 );
+                $ozet = FaturaKaynagi::hesaplaFormKalemleriVeOzet([
+                    'kalemler' => $kalemler,
+                    'odendi_tutari' => 0,
+                    'tevkifat_orani' => 0,
+                    'para_birimi' => (string) ($kaynak->para_birimi ?: 'TRY'),
+                ]);
+                // Form::fill() replaces the complete state. Include the
+                // return defaults explicitly so the source invoice does not
+                // clear the subclass-provided type and required fields.
                 $this->form->fill([
+                    'firma_id' => $firmaId,
+                    'tur' => $varsayilanTur->value,
+                    // Kaynak faturadan açılan iade, kullanıcı ayrıca taslak
+                    // seçmediği sürece standart onay akışına girsin.
+                    'durum' => FaturaDurumu::Onayli->value,
+                    'tarih' => now(),
+                    'kdv_dahil_fiyatlandirma_mi' => false,
+                    'tevkifat_orani' => 0,
                     'cari_id' => (int) $kaynak->cari_id,
                     'bagli_fatura_id' => (int) $kaynak->getKey(),
                     'para_birimi' => (string) ($kaynak->para_birimi ?: 'TRY'),
                     'doviz_kuru' => (string) ($kaynak->doviz_kuru ?: 1),
-                    'kalemler' => $kalemler,
+                    'kalemler' => $ozet['kalemler'] ?? $kalemler,
+                    'ara_toplam' => $ozet['ara_toplam'] ?? 0,
+                    'toplam_indirim' => $ozet['toplam_indirim'] ?? 0,
+                    'kdv_toplam' => $ozet['kdv_toplam'] ?? 0,
+                    'genel_toplam' => $ozet['genel_toplam'] ?? 0,
+                    'odenecek_tutar' => $ozet['odenecek_tutar'] ?? 0,
+                    'odendi_tutari' => 0,
+                    'acik_tutar' => $ozet['acik_tutar'] ?? 0,
                 ]);
             }
         }
@@ -127,6 +153,24 @@ class CreateFatura extends CreateRecord
         }
 
         $data['tur'] = $seciliTur;
+        // The return form preloads its relationship repeater from the source
+        // invoice. Filament may omit that disabled/relationship state from
+        // getState(), although the Livewire form state still contains it.
+        // Preserve the payload for the strict source-line validation below;
+        // the source IDs and quantities are still checked afterwards.
+        if (in_array($seciliTur, [FaturaTuru::SatisIadesi->value, FaturaTuru::AlisIadesi->value], true)
+            && (! is_array($data['kalemler'] ?? null) || $data['kalemler'] === [])
+            && is_array($this->data['kalemler'] ?? null)
+            && $this->data['kalemler'] !== []) {
+            $data['kalemler'] = $this->data['kalemler'];
+        }
+        if (in_array($seciliTur, [FaturaTuru::Gider->value, FaturaTuru::GiderFaturasi->value], true)) {
+            $data['fatura_sinifi'] = FaturaSinifi::Gider->value;
+        } elseif (in_array($seciliTur, [FaturaTuru::Gelen->value, FaturaTuru::GelenFatura->value], true)) {
+            $data['fatura_sinifi'] = $data['fatura_sinifi'] ?? FaturaSinifi::StokAlisi->value;
+        } else {
+            $data['fatura_sinifi'] = null;
+        }
         $firmaId = $this->resolveFirmaId($data);
         $data['firma_id'] = $firmaId;
         $this->validateTamSatisIadesiKaynak($data, $firmaId);
@@ -135,6 +179,7 @@ class CreateFatura extends CreateRecord
         $data = FaturaKaynagi::hesaplaFormKalemleriVeOzet($data);
         $this->onayOncesiKalemler = array_values(is_array($data['kalemler'] ?? null) ? $data['kalemler'] : []);
         $this->validateReferences($data, $firmaId);
+        $this->validateCariParaBirimi($data, $firmaId);
 
         // Onaylı oluşturma seçeneği standart onay servisinden geçsin; böylece
         // fatura numarası, cari ve stok hareketleri eksik kalmasın.
@@ -282,6 +327,26 @@ class CreateFatura extends CreateRecord
         }
     }
 
+    private function validateCariParaBirimi(array $data, int $firmaId): void
+    {
+        if (empty($data['cari_id'])) {
+            return;
+        }
+
+        try {
+            app(FaturaParaBirimiDogrulamaServisi::class)->dogrula(
+                $firmaId,
+                (int) $data['cari_id'],
+                (string) ($data['para_birimi'] ?? 'TRY'),
+            );
+        } catch (IsKuraliIstisnasi $e) {
+            throw ValidationException::withMessages([
+                'cari_id' => $e->getMessage(),
+                'para_birimi' => $e->getMessage(),
+            ]);
+        }
+    }
+
     private function validateTamSatisIadesiKaynak(array $data, int $firmaId): void
     {
         if (($data['tur'] ?? null) !== FaturaTuru::SatisIadesi->value) {
@@ -326,7 +391,7 @@ class CreateFatura extends CreateRecord
             }
             foreach ($beklenenDagilimlar as $dagilimIndex => $beklenenDagilim) {
                 $gelenDagilim = (array) ($gelenDagilimlar[$dagilimIndex] ?? []);
-                foreach (['kaynak_olcu_dagilimi_id', 'stok_olcusu_id', 'stok_olcu_bakiyesi_id', 'depo_id', 'stok_parcasi_id', 'islem_birimi_id'] as $alan) {
+                foreach (['kaynak_olcu_dagilimi_id', 'stok_olcusu_id', 'stok_olcu_bakiyesi_id', 'depo_id', 'islem_birimi_id'] as $alan) {
                     if ((int) ($gelenDagilim[$alan] ?? 0) !== (int) ($beklenenDagilim[$alan] ?? 0)) {
                         throw ValidationException::withMessages(["kalemler.{$index}.olcu_dagilimlari.{$dagilimIndex}.{$alan}" => 'Ölçü dağılımı kaynak dağılımla değiştirilemez.']);
                     }
@@ -373,7 +438,7 @@ class CreateFatura extends CreateRecord
             }
             foreach ($beklenenDagilimlar as $dagilimIndex => $beklenenDagilim) {
                 $gelenDagilim = (array) ($gelenDagilimlar[$dagilimIndex] ?? []);
-                foreach (['kaynak_olcu_dagilimi_id', 'stok_olcusu_id', 'stok_olcu_bakiyesi_id', 'depo_id', 'stok_parcasi_id', 'islem_birimi_id'] as $alan) {
+                foreach (['kaynak_olcu_dagilimi_id', 'stok_olcusu_id', 'stok_olcu_bakiyesi_id', 'depo_id', 'islem_birimi_id'] as $alan) {
                     if ((int) ($gelenDagilim[$alan] ?? 0) !== (int) ($beklenenDagilim[$alan] ?? 0)) {
                         throw ValidationException::withMessages(["kalemler.{$index}.olcu_dagilimlari.{$dagilimIndex}.{$alan}" => 'Alış iadesi ölçü dağılımı kaynak dağılımla değiştirilemez.']);
                     }

@@ -96,11 +96,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Filament'in Async Alpine bileşenleri (table/select) Livewire Alpine'i
-        // başlatmadan önce yüklenebilsin; özellikle SPA geçişlerinde yarış
-        // koşulunu engellemek için Livewire asset'i defer olarak çalışır.
-        Livewire::useScriptTagAttributes(['defer' => true]);
-
         // ADMIN DATATABLE STANDARDI:
         // Yeni ortak davranış eklemeden önce performans ve prototip kapısını okuyun:
         // docs/architecture/admin-table-standard.md

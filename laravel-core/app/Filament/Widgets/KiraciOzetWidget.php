@@ -181,7 +181,7 @@ class KiraciOzetWidget extends Widget
     }
 
     /**
-     * @return array<string, int|float>
+     * @return array<string, int|float|string>
      */
     private function dashboardMetrikleri(int $firmaId): array
     {
@@ -199,11 +199,14 @@ class KiraciOzetWidget extends Widget
             'yeni_siparis' => $siparisMetrikleri['yeni_siparis'],
             'bekleyen_siparis' => $siparisMetrikleri['bekleyen_siparis'],
             'bugunku_siparis_tutari' => $siparisMetrikleri['bugunku_siparis_tutari'],
+            'bugunku_siparis_tutari_etiket' => $this->bugunkuSiparisParaBirimiEtiketi($firmaId),
             'musteri_mesaji' => $mesajMetrikleri['musteri_mesaji'],
             'urun_mesaji' => $mesajMetrikleri['urun_mesaji'],
             'bugunku_barkodlu_satis' => $barkodMetrikleri['bugunku_barkodlu_satis'],
             'bugunku_barkodlu_satis_tutari' => $barkodMetrikleri['bugunku_barkodlu_satis_tutari'],
+            'bugunku_barkodlu_satis_tutari_etiket' => $this->bugunkuBarkodluSatisParaBirimiEtiketi($firmaId),
             'bugunku_barkodlu_satis_iade_tutari' => $this->bugunkuBarkodluSatisIadeTutari($firmaId),
+            'bugunku_barkodlu_satis_iade_tutari_etiket' => $this->bugunkuBarkodluSatisIadeParaBirimiEtiketi($firmaId),
             'bekleyen_tahsilat_tutari' => $alacakMetrikleri['bekleyen_tahsilat_tutari'],
             'geciken_taksit' => $alacakMetrikleri['geciken_taksit'],
             'kritik_stok' => $this->kritikStokSayisi($firmaId),
@@ -273,7 +276,7 @@ class KiraciOzetWidget extends Widget
     }
 
     /**
-     * @return array{teklif:int,onaylanan_teklif:int,bekleyen_teklif:int,teklif_tutari:float}
+     * @return array{teklif:int,onaylanan_teklif:int,bekleyen_teklif:int,teklif_tutari:string}
      */
     private function teklifDashboardMetrikleri(int $firmaId): array
     {
@@ -281,7 +284,7 @@ class KiraciOzetWidget extends Widget
             'teklif' => 0,
             'onaylanan_teklif' => 0,
             'bekleyen_teklif' => 0,
-            'teklif_tutari' => 0.0,
+            'teklif_tutari' => '0,00 TRY',
         ];
 
         if (! SaaSemaYardimcisi::tabloVarMi('teklifler')) {
@@ -297,8 +300,7 @@ class KiraciOzetWidget extends Widget
             ->selectRaw(
                 "COUNT(*) as teklif,
                 SUM(CASE WHEN durum = 'onaylandi' THEN 1 ELSE 0 END) as onaylanan_teklif,
-                SUM(CASE WHEN durum IN ({$bekleyenYerleri}) THEN 1 ELSE 0 END) as bekleyen_teklif,
-                COALESCE(SUM(genel_toplam), 0) as teklif_tutari",
+                SUM(CASE WHEN durum IN ({$bekleyenYerleri}) THEN 1 ELSE 0 END) as bekleyen_teklif",
                 $bekleyenDurumlar,
             )
             ->first();
@@ -307,7 +309,7 @@ class KiraciOzetWidget extends Widget
             'teklif' => (int) ($satir?->teklif ?? 0),
             'onaylanan_teklif' => (int) ($satir?->onaylanan_teklif ?? 0),
             'bekleyen_teklif' => (int) ($satir?->bekleyen_teklif ?? 0),
-            'teklif_tutari' => (float) ($satir?->teklif_tutari ?? 0),
+            'teklif_tutari' => $this->teklifTutari($firmaId),
         ];
     }
 
@@ -385,12 +387,12 @@ class KiraciOzetWidget extends Widget
     }
 
     /**
-     * @return array{bekleyen_tahsilat_tutari:float,geciken_taksit:int}
+     * @return array{bekleyen_tahsilat_tutari:string,geciken_taksit:int}
      */
     private function alacakDashboardMetrikleri(int $firmaId): array
     {
         $bos = [
-            'bekleyen_tahsilat_tutari' => 0.0,
+            'bekleyen_tahsilat_tutari' => '0,00 TRY',
             'geciken_taksit' => 0,
         ];
 
@@ -398,24 +400,26 @@ class KiraciOzetWidget extends Widget
             return $bos;
         }
 
-        $satir = DB::table('muhasebe_alacak_plan_taksitleri')
+        $satirlar = DB::table('muhasebe_alacak_plan_taksitleri')
             ->where('firma_id', $firmaId)
             ->when($this->kolonVarMi('muhasebe_alacak_plan_taksitleri', 'deleted_at'), fn ($q) => $q->whereNull('deleted_at'))
             ->whereDate('vade_tarihi', '<=', Carbon::today())
             ->whereNotIn('durum', ['odendi', 'iptal'])
-            ->selectRaw('COALESCE(SUM(kalan_tutar), 0) as toplam, COUNT(*) as adet')
-            ->first();
+            ->selectRaw("UPPER(COALESCE(para_birimi, 'TRY')) as para_birimi, COALESCE(SUM(kalan_tutar), 0) as toplam, COUNT(*) as adet")
+            ->groupByRaw("UPPER(COALESCE(para_birimi, 'TRY'))")
+            ->orderBy('para_birimi')
+            ->get();
 
         return [
-            'bekleyen_tahsilat_tutari' => (float) ($satir?->toplam ?? 0),
-            'geciken_taksit' => (int) ($satir?->adet ?? 0),
+            'bekleyen_tahsilat_tutari' => $this->paraBirimiToplamEtiketi($satirlar),
+            'geciken_taksit' => (int) $satirlar->sum(fn (object $satir): int => (int) $satir->adet),
         ];
     }
 
     /**
-     * @param  array<string, int|float>  $metrikler
+     * @param  array<string, int|float|string>  $metrikler
      */
-    private function metrik(array $metrikler, string $anahtar): int|float
+    private function metrik(array $metrikler, string $anahtar): int|float|string
     {
         return $metrikler[$anahtar] ?? 0;
     }
@@ -425,9 +429,9 @@ class KiraciOzetWidget extends Widget
      */
     private function gunlukOzetKartlari(int $firmaId, array $metrikler): array
     {
-        $siparisTutari = (float) $this->metrik($metrikler, 'bugunku_siparis_tutari');
-        $posTutari = (float) $this->metrik($metrikler, 'bugunku_barkodlu_satis_tutari');
-        $iadeTutari = (float) $this->metrik($metrikler, 'bugunku_barkodlu_satis_iade_tutari');
+        $siparisTutari = (string) $this->metrik($metrikler, 'bugunku_siparis_tutari_etiket');
+        $posTutari = (string) $this->metrik($metrikler, 'bugunku_barkodlu_satis_tutari_etiket');
+        $iadeTutari = (string) $this->metrik($metrikler, 'bugunku_barkodlu_satis_iade_tutari_etiket');
 
         return [
             [
@@ -450,13 +454,13 @@ class KiraciOzetWidget extends Widget
             ],
             [
                 'baslik' => 'Günlük ciro',
-                'deger' => $this->kisaParaBicimle($siparisTutari + $posTutari),
-                'aciklama' => 'Sipariş + POS',
+                'deger' => $siparisTutari.' · '.$posTutari,
+                'aciklama' => 'Sipariş + POS · para birimi bazında',
                 'url' => FinansDashboardSayfasi::getUrl(),
             ],
             [
                 'baslik' => 'Günlük iade',
-                'deger' => $this->kisaParaBicimle($iadeTutari),
+                'deger' => $iadeTutari,
                 'aciklama' => 'Barkodlu satış iadesi',
                 'url' => BarkodluSatisIadeGecmisiSayfasi::getUrl(),
             ],
@@ -470,7 +474,7 @@ class KiraciOzetWidget extends Widget
     {
         $gecikenServis = (int) $this->metrik($metrikler, 'geciken_servis');
         $teslimBekleyen = (int) $this->metrik($metrikler, 'teslim_bekleyen_servis');
-        $bekleyenTahsilat = (float) $this->metrik($metrikler, 'bekleyen_tahsilat_tutari');
+        $bekleyenTahsilat = (string) $this->metrik($metrikler, 'bekleyen_tahsilat_tutari');
         $kritikStok = (int) $this->metrik($metrikler, 'kritik_stok');
         $bekleyenMesaj = (int) $this->metrik($metrikler, 'musteri_mesaji') + (int) $this->metrik($metrikler, 'urun_mesaji');
 
@@ -491,10 +495,10 @@ class KiraciOzetWidget extends Widget
             ],
             [
                 'baslik' => 'Tahsilat',
-                'deger' => $this->kisaParaBicimle($bekleyenTahsilat),
+                'deger' => $bekleyenTahsilat,
                 'aciklama' => 'Vadesi gelen açık tutar',
                 'url' => VadeTakipSayfasi::getUrl(),
-                'renk' => $bekleyenTahsilat > 0 ? 'danger' : 'gray',
+                'renk' => $bekleyenTahsilat !== '0,00 TRY' ? 'danger' : 'gray',
             ],
             [
                 'baslik' => 'Stok',
@@ -585,12 +589,12 @@ class KiraciOzetWidget extends Widget
             ];
         }
 
-        $bekleyenTahsilat = (float) $this->metrik($metrikler, 'bekleyen_tahsilat_tutari');
-        if ($bekleyenTahsilat > 0) {
+        $bekleyenTahsilat = (string) $this->metrik($metrikler, 'bekleyen_tahsilat_tutari');
+        if ($bekleyenTahsilat !== '0,00 TRY') {
             $uyarilar[] = [
                 'baslik' => 'Vadesi gelen tahsilatı izle',
                 'aciklama' => 'Açık kalan alacak planı tutarı.',
-                'deger' => $this->kisaParaBicimle($bekleyenTahsilat),
+                'deger' => $bekleyenTahsilat,
                 'url' => VadeTakipSayfasi::getUrl(),
                 'seviye' => 'danger',
             ];
@@ -643,7 +647,7 @@ class KiraciOzetWidget extends Widget
                 'bilgiler' => [
                     ['etiket' => 'Yeni', 'deger' => (string) $this->metrik($metrikler, 'yeni_siparis'), 'url' => SiparisKaynagi::getUrl('index')],
                     ['etiket' => 'Bekl.', 'deger' => (string) $this->metrik($metrikler, 'bekleyen_siparis'), 'url' => SiparisKaynagi::getUrl('index')],
-                    ['etiket' => 'Ciro', 'deger' => $this->kisaParaBicimle((float) $this->metrik($metrikler, 'bugunku_siparis_tutari')), 'url' => SiparisKaynagi::getUrl('index')],
+                    ['etiket' => 'Ciro', 'deger' => (string) $this->metrik($metrikler, 'bugunku_siparis_tutari_etiket'), 'url' => SiparisKaynagi::getUrl('index')],
                     ['etiket' => 'Mesaj', 'deger' => (string) ((int) $this->metrik($metrikler, 'musteri_mesaji') + (int) $this->metrik($metrikler, 'urun_mesaji')), 'url' => MusteriMesajlariSayfasi::getUrl()],
                 ],
             ],
@@ -652,8 +656,8 @@ class KiraciOzetWidget extends Widget
                 'url' => BarkodluSatisGecmisiSayfasi::getUrl(),
                 'bilgiler' => [
                     ['etiket' => 'Fiş', 'deger' => (string) $this->metrik($metrikler, 'bugunku_barkodlu_satis'), 'url' => BarkodluSatisGecmisiSayfasi::getUrl()],
-                    ['etiket' => 'Ciro', 'deger' => $this->kisaParaBicimle((float) $this->metrik($metrikler, 'bugunku_barkodlu_satis_tutari')), 'url' => BarkodluSatisGecmisiSayfasi::getUrl()],
-                    ['etiket' => 'İade', 'deger' => $this->kisaParaBicimle((float) $this->metrik($metrikler, 'bugunku_barkodlu_satis_iade_tutari')), 'url' => BarkodluSatisIadeGecmisiSayfasi::getUrl()],
+                    ['etiket' => 'Ciro', 'deger' => (string) $this->metrik($metrikler, 'bugunku_barkodlu_satis_tutari_etiket'), 'url' => BarkodluSatisGecmisiSayfasi::getUrl()],
+                    ['etiket' => 'İade', 'deger' => (string) $this->metrik($metrikler, 'bugunku_barkodlu_satis_iade_tutari_etiket'), 'url' => BarkodluSatisIadeGecmisiSayfasi::getUrl()],
                     ['etiket' => 'Kritik', 'deger' => (string) $this->metrik($metrikler, 'kritik_stok'), 'url' => StokKartiKaynagi::getUrl('index')],
                 ],
             ],
@@ -661,7 +665,7 @@ class KiraciOzetWidget extends Widget
                 'baslik' => 'Muhasebe',
                 'url' => MuhasebeDashboardSayfasi::getUrl(),
                 'bilgiler' => [
-                    ['etiket' => 'Tahsil', 'deger' => $this->kisaParaBicimle((float) $this->metrik($metrikler, 'bekleyen_tahsilat_tutari')), 'url' => VadeTakipSayfasi::getUrl()],
+                    ['etiket' => 'Tahsil', 'deger' => (string) $this->metrik($metrikler, 'bekleyen_tahsilat_tutari'), 'url' => VadeTakipSayfasi::getUrl()],
                     ['etiket' => 'Taksit', 'deger' => (string) $this->metrik($metrikler, 'geciken_taksit'), 'url' => VadeTakipSayfasi::getUrl()],
                     ['etiket' => 'Fatura', 'deger' => (string) $this->metrik($metrikler, 'fatura'), 'url' => FaturaKaynagi::getUrl('index')],
                     ['etiket' => 'Cari', 'deger' => (string) $this->metrik($metrikler, 'cari'), 'url' => CariKartiKaynagi::getUrl('index')],
@@ -684,7 +688,7 @@ class KiraciOzetWidget extends Widget
                     ['etiket' => 'Toplam', 'deger' => (string) $this->metrik($metrikler, 'teklif'), 'url' => TeklifKaynagi::getUrl('index')],
                     ['etiket' => 'Onay', 'deger' => (string) $this->metrik($metrikler, 'onaylanan_teklif'), 'url' => TeklifKaynagi::getUrl('index')],
                     ['etiket' => 'Bekl.', 'deger' => (string) $this->metrik($metrikler, 'bekleyen_teklif'), 'url' => TeklifKaynagi::getUrl('index')],
-                    ['etiket' => 'Tutar', 'deger' => $this->kisaParaBicimle((float) $this->metrik($metrikler, 'teklif_tutari')), 'url' => TeklifKaynagi::getUrl('index')],
+                    ['etiket' => 'Tutar', 'deger' => (string) $this->metrik($metrikler, 'teklif_tutari'), 'url' => TeklifKaynagi::getUrl('index')],
                 ],
             ],
         ];
@@ -733,7 +737,7 @@ class KiraciOzetWidget extends Widget
                 'kartlar' => [
                     ['etiket' => 'Yeni sipariş', 'deger' => (string) $this->yeniSiparisSayisi($firmaId), 'aciklama' => 'Bugün açılan kayıt', 'url' => SiparisKaynagi::getUrl('index')],
                     ['etiket' => 'Onay bekleyen', 'deger' => (string) $this->bekleyenSiparisSayisi($firmaId), 'aciklama' => 'Ödeme/onay akışında', 'url' => SiparisKaynagi::getUrl('index')],
-                    ['etiket' => 'Bugünkü ciro', 'deger' => $this->paraBicimle($this->bugunkuSiparisTutari($firmaId)), 'aciklama' => 'Teslim/iptal hariç', 'url' => SiparisKaynagi::getUrl('index')],
+                    ['etiket' => 'Bugünkü ciro', 'deger' => $this->bugunkuSiparisParaBirimiEtiketi($firmaId), 'aciklama' => 'Teslim/iptal hariç · para birimi bazında', 'url' => SiparisKaynagi::getUrl('index')],
                     ['etiket' => 'Müşteri mesajı', 'deger' => (string) $this->okunmamisMesajKonusuSayisi($firmaId, EcommerceMesajTanimlari::KONU_TIPI_MUSTERI), 'aciklama' => 'Okunmamış konu', 'url' => MusteriMesajlariSayfasi::getUrl()],
                     ['etiket' => 'Ürün mesajı', 'deger' => (string) $this->okunmamisMesajKonusuSayisi($firmaId, EcommerceMesajTanimlari::KONU_TIPI_URUN), 'aciklama' => 'Okunmamış konu', 'url' => UrunMesajlariSayfasi::getUrl()],
                 ],
@@ -744,8 +748,8 @@ class KiraciOzetWidget extends Widget
                 'url' => BarkodluSatisGecmisiSayfasi::getUrl(),
                 'kartlar' => [
                     ['etiket' => 'Bugünkü satış', 'deger' => (string) $this->bugunkuBarkodluSatisSayisi($firmaId), 'aciklama' => 'İptal hariç fiş', 'url' => BarkodluSatisGecmisiSayfasi::getUrl()],
-                    ['etiket' => 'Bugünkü ciro', 'deger' => $this->paraBicimle($this->bugunkuBarkodluSatisTutari($firmaId)), 'aciklama' => 'Net satış toplamı', 'url' => BarkodluSatisGecmisiSayfasi::getUrl()],
-                    ['etiket' => 'Bugünkü iade', 'deger' => $this->paraBicimle($this->bugunkuBarkodluSatisIadeTutari($firmaId)), 'aciklama' => 'İade toplamı', 'url' => BarkodluSatisIadeGecmisiSayfasi::getUrl()],
+                    ['etiket' => 'Bugünkü ciro', 'deger' => $this->bugunkuBarkodluSatisParaBirimiEtiketi($firmaId), 'aciklama' => 'Net satış toplamı · para birimi bazında', 'url' => BarkodluSatisGecmisiSayfasi::getUrl()],
+                    ['etiket' => 'Bugünkü iade', 'deger' => $this->bugunkuBarkodluSatisIadeParaBirimiEtiketi($firmaId), 'aciklama' => 'İade toplamı · para birimi bazında', 'url' => BarkodluSatisIadeGecmisiSayfasi::getUrl()],
                 ],
             ],
             [
@@ -753,7 +757,7 @@ class KiraciOzetWidget extends Widget
                 'renk' => 'emerald',
                 'url' => MuhasebeDashboardSayfasi::getUrl(),
                 'kartlar' => [
-                    ['etiket' => 'Bekleyen tahsilat', 'deger' => $this->paraBicimle($this->bekleyenTahsilatTutari($firmaId)), 'aciklama' => 'Vadesi gelmiş açık tutar', 'url' => VadeTakipSayfasi::getUrl()],
+                    ['etiket' => 'Bekleyen tahsilat', 'deger' => $this->bekleyenTahsilatTutari($firmaId), 'aciklama' => 'Vadesi gelmiş açık tutar · para birimi bazında', 'url' => VadeTakipSayfasi::getUrl()],
                     ['etiket' => 'Geciken taksit', 'deger' => (string) $this->gecikenTaksitSayisi($firmaId), 'aciklama' => 'Bugün ve öncesi', 'url' => VadeTakipSayfasi::getUrl()],
                     ['etiket' => 'Kritik stok', 'deger' => (string) $this->kritikStokSayisi($firmaId), 'aciklama' => 'Minimum seviyede', 'url' => StokKartiKaynagi::getUrl('index')],
                 ],
@@ -775,7 +779,7 @@ class KiraciOzetWidget extends Widget
                 'kartlar' => [
                     ['etiket' => 'Teklifler', 'deger' => (string) $this->teklifSayisi($firmaId), 'aciklama' => 'Son 30 gün', 'url' => TeklifKaynagi::getUrl('index')],
                     ['etiket' => 'Onaylanan', 'deger' => (string) $this->onaylananTeklifSayisi($firmaId), 'aciklama' => 'Son 30 gün', 'url' => TeklifKaynagi::getUrl('index')],
-                    ['etiket' => 'Teklif toplamı', 'deger' => $this->paraBicimle($this->teklifTutari($firmaId)), 'aciklama' => 'Son 30 gün', 'url' => TeklifKaynagi::getUrl('index')],
+                    ['etiket' => 'Teklif toplamı', 'deger' => $this->teklifTutari($firmaId), 'aciklama' => 'Son 30 gün · para birimi bazında', 'url' => TeklifKaynagi::getUrl('index')],
                 ],
             ],
         ];
@@ -1006,6 +1010,24 @@ class KiraciOzetWidget extends Widget
             ->sum('genel_toplam');
     }
 
+    private function bugunkuSiparisParaBirimiEtiketi(int $firmaId): string
+    {
+        if (! SaaSemaYardimcisi::tabloVarMi('siparisler')) {
+            return '0,00 TRY';
+        }
+
+        $satirlar = DB::table('siparisler')
+            ->where('firma_id', $firmaId)
+            ->whereBetween('created_at', $this->bugunAraligi())
+            ->whereNotIn('durum', [Siparis::DURUM_IPTAL_EDILDI, Siparis::DURUM_IPTAL, Siparis::DURUM_BASARISIZ_ODEME])
+            ->selectRaw("UPPER(COALESCE(para_birimi, 'TRY')) as para_birimi, COALESCE(SUM(genel_toplam), 0) as toplam")
+            ->groupByRaw("UPPER(COALESCE(para_birimi, 'TRY'))")
+            ->orderBy('para_birimi')
+            ->get();
+
+        return $this->paraBirimiToplamEtiketi($satirlar);
+    }
+
     private function okunmamisMesajKonusuSayisi(int $firmaId, string $konuTipi): int
     {
         if (! SaaSemaYardimcisi::tabloVarMi('ecommerce_mesaj_konulari')) {
@@ -1081,6 +1103,26 @@ class KiraciOzetWidget extends Widget
             ->sum('genel_toplam');
     }
 
+    private function bugunkuBarkodluSatisParaBirimiEtiketi(int $firmaId): string
+    {
+        if (! SaaSemaYardimcisi::tabloVarMi('muhasebe_barkodlu_satislar')) {
+            return '0,00 TRY';
+        }
+
+        $satirlar = DB::table('muhasebe_barkodlu_satislar')
+            ->where('firma_id', $firmaId)
+            ->whereBetween('satis_tarihi', $this->bugunAraligi())
+            ->where(function ($q): void {
+                $q->whereNull('durum')->orWhere('durum', '!=', 'iptal');
+            })
+            ->selectRaw("UPPER(COALESCE(para_birimi, 'TRY')) as para_birimi, COALESCE(SUM(genel_toplam), 0) as toplam")
+            ->groupByRaw("UPPER(COALESCE(para_birimi, 'TRY'))")
+            ->orderBy('para_birimi')
+            ->get();
+
+        return $this->paraBirimiToplamEtiketi($satirlar);
+    }
+
     private function bugunkuBarkodluSatisIadeTutari(int $firmaId): float
     {
         if (! SaaSemaYardimcisi::tabloVarMi('muhasebe_barkodlu_satis_iadeler')) {
@@ -1093,18 +1135,60 @@ class KiraciOzetWidget extends Widget
             ->sum('toplam_iade_tutari');
     }
 
-    private function bekleyenTahsilatTutari(int $firmaId): float
+    private function bugunkuBarkodluSatisIadeParaBirimiEtiketi(int $firmaId): string
     {
-        if (! SaaSemaYardimcisi::tabloVarMi('muhasebe_alacak_plan_taksitleri')) {
-            return 0.0;
+        if (! SaaSemaYardimcisi::tabloVarMi('muhasebe_barkodlu_satis_iadeler')) {
+            return '0,00 TRY';
         }
 
-        return (float) DB::table('muhasebe_alacak_plan_taksitleri')
+        $satirlar = DB::table('muhasebe_barkodlu_satis_iadeler')
+            ->join('muhasebe_barkodlu_satislar as satis', 'satis.id', '=', 'muhasebe_barkodlu_satis_iadeler.satis_id')
+            ->where('firma_id', $firmaId)
+            ->whereBetween('iade_tarihi', $this->bugunAraligi())
+            ->selectRaw("UPPER(COALESCE(satis.para_birimi, 'TRY')) as para_birimi, COALESCE(SUM(toplam_iade_tutari), 0) as toplam")
+            ->groupByRaw("UPPER(COALESCE(satis.para_birimi, 'TRY'))")
+            ->orderBy('para_birimi')
+            ->get();
+
+        return $this->paraBirimiToplamEtiketi($satirlar);
+    }
+
+    private function paraBirimiToplamEtiketi(iterable $satirlar): string
+    {
+        $toplamlar = [];
+        foreach ($satirlar as $satir) {
+            $paraBirimi = strtoupper((string) ($satir->para_birimi ?? 'TRY'));
+            $toplamlar[$paraBirimi] = ($toplamlar[$paraBirimi] ?? 0.0) + (float) ($satir->toplam ?? 0);
+        }
+
+        if ($toplamlar === []) {
+            return '0,00 TRY';
+        }
+
+        ksort($toplamlar);
+
+        return collect($toplamlar)
+            ->map(fn (float $toplam, string $paraBirimi): string => number_format($toplam, 2, ',', '.').' '.$paraBirimi)
+            ->implode(' · ');
+    }
+
+    private function bekleyenTahsilatTutari(int $firmaId): string
+    {
+        if (! SaaSemaYardimcisi::tabloVarMi('muhasebe_alacak_plan_taksitleri')) {
+            return '0,00 TRY';
+        }
+
+        $satirlar = DB::table('muhasebe_alacak_plan_taksitleri')
             ->where('firma_id', $firmaId)
             ->when($this->kolonVarMi('muhasebe_alacak_plan_taksitleri', 'deleted_at'), fn ($q) => $q->whereNull('deleted_at'))
             ->whereDate('vade_tarihi', '<=', Carbon::today())
             ->whereNotIn('durum', ['odendi', 'iptal'])
-            ->sum('kalan_tutar');
+            ->selectRaw("UPPER(COALESCE(para_birimi, 'TRY')) as para_birimi, COALESCE(SUM(kalan_tutar), 0) as toplam")
+            ->groupByRaw("UPPER(COALESCE(para_birimi, 'TRY'))")
+            ->orderBy('para_birimi')
+            ->get();
+
+        return $this->paraBirimiToplamEtiketi($satirlar);
     }
 
     private function gecikenTaksitSayisi(int $firmaId): int
@@ -1189,17 +1273,29 @@ class KiraciOzetWidget extends Widget
             ->count();
     }
 
-    private function teklifTutari(int $firmaId): float
+    private function teklifTutari(int $firmaId): string
     {
         if (! SaaSemaYardimcisi::tabloVarMi('teklifler')) {
-            return 0.0;
+            return '0,00 TRY';
         }
 
-        return (float) DB::table('teklifler')
+        $satirlar = DB::table('teklifler')
             ->where('firma_id', $firmaId)
             ->when($this->kolonVarMi('teklifler', 'deleted_at'), fn ($q) => $q->whereNull('deleted_at'))
             ->where('created_at', '>=', now()->subDays(30))
-            ->sum('genel_toplam');
+            ->select(['para_birimi', 'genel_toplam'])
+            ->orderBy('para_birimi')
+            ->get()
+            ->groupBy(fn (object $satir): string => strtoupper((string) ($satir->para_birimi ?: 'TRY')))
+            ->map(fn ($satirlar): float => (float) $satirlar->sum(fn (object $satir): float => (float) $satir->genel_toplam));
+
+        if ($satirlar->isEmpty()) {
+            return '0,00 TRY';
+        }
+
+        return $satirlar
+            ->map(fn (float $toplam, string $paraBirimi): string => number_format($toplam, 2, ',', '.').' '.$paraBirimi)
+            ->implode(' · ');
     }
 
     private function webTabloSayisi(string $tablo, ?string $aktifKolonu = null): int

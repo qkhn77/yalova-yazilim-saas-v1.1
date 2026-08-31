@@ -71,18 +71,38 @@ class CariHareketServisi
             : null;
         $paraBirimi = (string) ($alanlar['para_birimi'] ?? 'TRY');
 
-        $borcDonusum = $this->paraBirimiDonusumServisi->tutariBazParaBirimineHazirla(
-            $firmaId,
-            (string) ($alanlar['borc'] ?? '0'),
-            $paraBirimi,
-            $islemTarihi
-        );
-        $alacakDonusum = $this->paraBirimiDonusumServisi->tutariBazParaBirimineHazirla(
-            $firmaId,
-            (string) ($alanlar['alacak'] ?? '0'),
-            $paraBirimi,
-            $islemTarihi
-        );
+        $snapshotVar = array_key_exists('baz_borc', $alanlar)
+            && array_key_exists('baz_alacak', $alanlar)
+            && filled($alanlar['baz_para_birimi'] ?? null)
+            && filled($alanlar['kur'] ?? null);
+        $borcDonusum = $snapshotVar
+            ? [
+                'tutar' => (string) ($alanlar['borc'] ?? '0'),
+                'baz_tutar' => (string) $alanlar['baz_borc'],
+                'baz_para_birimi' => strtoupper((string) $alanlar['baz_para_birimi']),
+                'kur' => (string) $alanlar['kur'],
+                'para_birimi' => $paraBirimi,
+            ]
+            : $this->paraBirimiDonusumServisi->tutariBazParaBirimineHazirla(
+                $firmaId,
+                (string) ($alanlar['borc'] ?? '0'),
+                $paraBirimi,
+                $islemTarihi
+            );
+        $alacakDonusum = $snapshotVar
+            ? [
+                'tutar' => (string) ($alanlar['alacak'] ?? '0'),
+                'baz_tutar' => (string) $alanlar['baz_alacak'],
+                'baz_para_birimi' => strtoupper((string) $alanlar['baz_para_birimi']),
+                'kur' => (string) $alanlar['kur'],
+                'para_birimi' => $paraBirimi,
+            ]
+            : $this->paraBirimiDonusumServisi->tutariBazParaBirimineHazirla(
+                $firmaId,
+                (string) ($alanlar['alacak'] ?? '0'),
+                $paraBirimi,
+                $islemTarihi
+            );
 
         $hareket = CariHareketi::query()->create([
             'firma_id' => $firmaId,
@@ -125,18 +145,35 @@ class CariHareketServisi
 
             $hareket->update(['durum' => CariHareketDurumu::Iptal]);
 
-            $donusumBorc = $this->paraBirimiDonusumServisi->tutariBazParaBirimineHazirla(
-                (int) $hareket->firma_id,
-                (string) $hareket->alacak,
-                (string) $hareket->para_birimi,
-                now()
-            );
-            $donusumAlacak = $this->paraBirimiDonusumServisi->tutariBazParaBirimineHazirla(
-                (int) $hareket->firma_id,
-                (string) $hareket->borc,
-                (string) $hareket->para_birimi,
-                now()
-            );
+            $snapshotVar = $hareket->baz_borc !== null
+                && $hareket->baz_alacak !== null
+                && filled($hareket->baz_para_birimi)
+                && filled($hareket->kur);
+            if ($snapshotVar) {
+                $donusumBorc = [
+                    'baz_tutar' => (string) $hareket->baz_alacak,
+                    'baz_para_birimi' => (string) $hareket->baz_para_birimi,
+                    'kur' => (string) $hareket->kur,
+                ];
+                $donusumAlacak = [
+                    'baz_tutar' => (string) $hareket->baz_borc,
+                    'baz_para_birimi' => (string) $hareket->baz_para_birimi,
+                    'kur' => (string) $hareket->kur,
+                ];
+            } else {
+                $donusumBorc = $this->paraBirimiDonusumServisi->tutariBazParaBirimineHazirla(
+                    (int) $hareket->firma_id,
+                    (string) $hareket->alacak,
+                    (string) $hareket->para_birimi,
+                    now()
+                );
+                $donusumAlacak = $this->paraBirimiDonusumServisi->tutariBazParaBirimineHazirla(
+                    (int) $hareket->firma_id,
+                    (string) $hareket->borc,
+                    (string) $hareket->para_birimi,
+                    now()
+                );
+            }
 
             $yeni = CariHareketi::query()->create([
                 'firma_id' => $hareket->firma_id,

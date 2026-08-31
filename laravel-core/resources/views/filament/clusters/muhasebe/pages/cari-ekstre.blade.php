@@ -74,7 +74,7 @@
                                 @php $h = $satir['hareket']; @endphp
                                 <tr class="hover:bg-gray-50/80 dark:hover:bg-white/5">
                                     <td class="px-3 py-2 whitespace-nowrap">{{ $h->islem_tarihi->format('d.m.Y H:i') }}</td>
-                                    <td class="px-3 py-2">{{ $h->belge_turu->etiket() }}</td>
+                                    <td class="px-3 py-2">{{ $h->belge_turu?->etiket() ?? '—' }}</td>
                                     <td class="px-3 py-2 text-right font-mono">{{ $h->belge_id }}</td>
                                     <td class="px-3 py-2 text-right font-mono">{{ $h->borc }}</td>
                                     <td class="px-3 py-2 text-right font-mono">{{ $h->alacak }}</td>

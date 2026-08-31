@@ -13,41 +13,60 @@ class TeknikServisRaporServisi
      */
     public function karlilik(int $firmaId, Carbon $baslangic, Carbon $bitis): array
     {
-        $kayitOzet = DB::table('teknik_servis_kayitlari as k')
+        $kayitOzetleri = DB::table('teknik_servis_kayitlari as k')
             ->where('k.firma_id', $firmaId)
             ->whereNull('k.deleted_at')
             ->whereBetween('k.kabul_tarihi', [$baslangic, $bitis])
+            ->selectRaw("COALESCE(NULLIF(k.tahsilat_para_birimi, ''), 'TRY') as para_birimi")
             ->selectRaw('COUNT(*) as servis_sayisi')
             ->selectRaw('COALESCE(SUM(k.toplam_tutar), 0) as servis_toplami')
             ->selectRaw('COALESCE(SUM(k.odenen_tutar), 0) as kayit_odenen_toplami')
-            ->first();
+            ->groupBy('k.tahsilat_para_birimi')
+            ->get()
+            ->keyBy('para_birimi');
 
-        $kalemOzet = DB::table('teknik_servis_kalemleri as kalem')
+        $kalemOzetleri = DB::table('teknik_servis_kalemleri as kalem')
             ->join('teknik_servis_kayitlari as k', 'k.id', '=', 'kalem.teknik_servis_kaydi_id')
             ->where('kalem.firma_id', $firmaId)
             ->whereNull('kalem.deleted_at')
             ->whereNull('k.deleted_at')
             ->whereBetween('k.kabul_tarihi', [$baslangic, $bitis])
+            ->selectRaw("COALESCE(NULLIF(kalem.para_birimi, ''), COALESCE(NULLIF(k.tahsilat_para_birimi, ''), 'TRY')) as para_birimi")
             ->selectRaw("COALESCE(SUM(CASE WHEN kalem.kalem_rolu = 'satis' THEN kalem.satir_toplami ELSE 0 END), 0) as satis_toplami")
             ->selectRaw("COALESCE(SUM(CASE WHEN kalem.kalem_rolu = 'gider' THEN kalem.satir_toplami ELSE 0 END), 0) as gider_toplami")
-            ->first();
+            ->groupBy('kalem.para_birimi', 'k.tahsilat_para_birimi')
+            ->get()
+            ->keyBy('para_birimi');
 
-        $tahsilatToplami = $this->aktifTahsilatSorgusu($firmaId)
+        $tahsilatOzetleri = $this->aktifTahsilatSorgusu($firmaId)
             ->whereBetween('t.tarih', [$baslangic, $bitis])
-            ->sum(DB::raw('COALESCE(t.hedef_tutar, t.tutar)'));
+            ->selectRaw("COALESCE(NULLIF(t.kaynak_para_birimi, ''), 'TRY') as para_birimi")
+            ->selectRaw('COALESCE(SUM(t.tutar), 0) as toplam_tutar')
+            ->groupBy('t.kaynak_para_birimi')
+            ->get()
+            ->keyBy('para_birimi');
 
-        $gelir = max((float) ($kayitOzet->servis_toplami ?? 0), (float) ($kalemOzet->satis_toplami ?? 0));
-        $gider = (float) ($kalemOzet->gider_toplami ?? 0);
-        $kar = $gelir - $gider;
-        $karOrani = $gelir > 0 ? ($kar / $gelir) * 100 : 0;
+        $paraBirimleri = $kayitOzetleri->keys()->merge($kalemOzetleri->keys())->merge($tahsilatOzetleri->keys())->unique();
+        $gelirDagilimi = [];
+        $giderDagilimi = [];
+        $karDagilimi = [];
+        foreach ($paraBirimleri as $paraBirimi) {
+            $kayit = $kayitOzetleri->get($paraBirimi);
+            $kalem = $kalemOzetleri->get($paraBirimi);
+            $gelir = max((float) ($kayit?->servis_toplami ?? 0), (float) ($kalem?->satis_toplami ?? 0));
+            $gider = (float) ($kalem?->gider_toplami ?? 0);
+            $gelirDagilimi[$paraBirimi] = $gelir;
+            $giderDagilimi[$paraBirimi] = $gider;
+            $karDagilimi[$paraBirimi] = $gelir - $gider;
+        }
 
         return [
             'kartlar' => [
-                ['etiket' => 'Servis adedi', 'deger' => (string) (int) ($kayitOzet->servis_sayisi ?? 0), 'alt' => $this->tarihAraligi($baslangic, $bitis)],
-                ['etiket' => 'Gelir toplamı', 'deger' => $this->para($gelir), 'alt' => 'Kayıt/kalem gelir toplamı'],
-                ['etiket' => 'Gider toplamı', 'deger' => $this->para($gider), 'alt' => 'Gider kalemleri'],
-                ['etiket' => 'Brüt kar', 'deger' => $this->para($kar), 'alt' => $this->yuzde($karOrani).' marj'],
-                ['etiket' => 'Tahsilat', 'deger' => $this->para((float) $tahsilatToplami), 'alt' => 'Dönem içi aktif tahsilat'],
+                ['etiket' => 'Servis adedi', 'deger' => (string) (int) $kayitOzetleri->sum('servis_sayisi'), 'alt' => $this->tarihAraligi($baslangic, $bitis)],
+                ['etiket' => 'Gelir toplamı', 'deger' => $this->paraDagilimi($gelirDagilimi), 'alt' => 'Para birimi bazında'],
+                ['etiket' => 'Gider toplamı', 'deger' => $this->paraDagilimi($giderDagilimi), 'alt' => 'Para birimi bazında'],
+                ['etiket' => 'Brüt kar', 'deger' => $this->paraDagilimi($karDagilimi), 'alt' => 'Aynı para birimi içinde hesaplandı'],
+                ['etiket' => 'Tahsilat', 'deger' => $this->paraDagilimi($tahsilatOzetleri->mapWithKeys(fn (object $satir): array => [(string) $satir->para_birimi => (float) $satir->toplam_tutar])->all()), 'alt' => 'Dönem içi aktif tahsilat'],
             ],
             'tablolar' => [
                 [
@@ -104,9 +123,10 @@ class TeknikServisRaporServisi
             ->whereNull('k.deleted_at')
             ->whereBetween('k.kabul_tarihi', [$baslangic, $bitis])
             ->selectRaw("COALESCE(NULLIF(u.ad_soyad, ''), u.name, CONCAT('#', k.olusturan_id)) as personel")
+            ->selectRaw("COALESCE(NULLIF(k.tahsilat_para_birimi, ''), 'TRY') as para_birimi")
             ->selectRaw('COUNT(*) as kayit_sayisi')
             ->selectRaw('COALESCE(SUM(k.toplam_tutar), 0) as toplam_tutar')
-            ->groupBy('k.olusturan_id', 'u.ad_soyad', 'u.name')
+            ->groupBy('k.olusturan_id', 'u.ad_soyad', 'u.name', 'k.tahsilat_para_birimi')
             ->orderByDesc('kayit_sayisi')
             ->limit(15)
             ->get();
@@ -118,9 +138,10 @@ class TeknikServisRaporServisi
             ->whereNotNull('k.teslim_eden_kullanici_id')
             ->whereBetween('k.teslim_tarihi', [$baslangic, $bitis])
             ->selectRaw("COALESCE(NULLIF(u.ad_soyad, ''), u.name, CONCAT('#', k.teslim_eden_kullanici_id)) as personel")
+            ->selectRaw("COALESCE(NULLIF(k.tahsilat_para_birimi, ''), 'TRY') as para_birimi")
             ->selectRaw('COUNT(*) as teslim_sayisi')
             ->selectRaw('COALESCE(SUM(k.toplam_tutar), 0) as toplam_tutar')
-            ->groupBy('k.teslim_eden_kullanici_id', 'u.ad_soyad', 'u.name')
+            ->groupBy('k.teslim_eden_kullanici_id', 'u.ad_soyad', 'u.name', 'k.tahsilat_para_birimi')
             ->orderByDesc('teslim_sayisi')
             ->limit(15)
             ->get();
@@ -130,8 +151,8 @@ class TeknikServisRaporServisi
                 ['etiket' => 'Atanan görev', 'deger' => (string) (int) $gorevler->sum('gorev_sayisi'), 'alt' => $this->tarihAraligi($baslangic, $bitis)],
                 ['etiket' => 'Aktif görev', 'deger' => (string) (int) $gorevler->sum('aktif_gorev'), 'alt' => 'Dönemde atanan'],
                 ['etiket' => 'Tamamlanan görev', 'deger' => (string) (int) $gorevler->sum('tamamlanan_gorev'), 'alt' => 'Bitiş/durum bilgisine göre'],
-                ['etiket' => 'Kayıt açan kullanıcı', 'deger' => (string) $kayitAcanlar->count(), 'alt' => (int) $kayitAcanlar->sum('kayit_sayisi').' kayıt'],
-                ['etiket' => 'Teslim eden kullanıcı', 'deger' => (string) $teslimEdenler->count(), 'alt' => (int) $teslimEdenler->sum('teslim_sayisi').' teslim'],
+                ['etiket' => 'Kayıt açan kullanıcı', 'deger' => (string) $kayitAcanlar->pluck('personel')->unique()->count(), 'alt' => (int) $kayitAcanlar->sum('kayit_sayisi').' kayıt'],
+                ['etiket' => 'Teslim eden kullanıcı', 'deger' => (string) $teslimEdenler->pluck('personel')->unique()->count(), 'alt' => (int) $teslimEdenler->sum('teslim_sayisi').' teslim'],
             ],
             'tablolar' => [
                 [
@@ -144,7 +165,7 @@ class TeknikServisRaporServisi
                         ['key' => 'son', 'label' => 'Son hareket'],
                     ],
                     'satirlar' => $gorevler->map(fn (object $satir): array => [
-                        'personel' => (string) $satir->personel,
+                        'personel' => (string) $satir->personel.' ('.strtoupper((string) ($satir->para_birimi ?: 'TRY')).')',
                         'gorev' => (string) (int) $satir->gorev_sayisi,
                         'aktif' => (string) (int) $satir->aktif_gorev,
                         'tamamlanan' => (string) (int) $satir->tamamlanan_gorev,
@@ -162,7 +183,7 @@ class TeknikServisRaporServisi
                     'satirlar' => $kayitAcanlar->map(fn (object $satir): array => [
                         'personel' => (string) $satir->personel,
                         'kayit' => (string) (int) $satir->kayit_sayisi,
-                        'toplam' => $this->para((float) $satir->toplam_tutar),
+                        'toplam' => $this->para((float) $satir->toplam_tutar, (string) ($satir->para_birimi ?: 'TRY')),
                     ])->all(),
                     'bos' => 'Bu dönemde kullanıcı bazlı kayıt yok.',
                 ],
@@ -174,9 +195,9 @@ class TeknikServisRaporServisi
                         ['key' => 'toplam', 'label' => 'Toplam', 'align' => 'right'],
                     ],
                     'satirlar' => $teslimEdenler->map(fn (object $satir): array => [
-                        'personel' => (string) $satir->personel,
+                        'personel' => (string) $satir->personel.' ('.strtoupper((string) ($satir->para_birimi ?: 'TRY')).')',
                         'teslim' => (string) (int) $satir->teslim_sayisi,
-                        'toplam' => $this->para((float) $satir->toplam_tutar),
+                        'toplam' => $this->para((float) $satir->toplam_tutar, (string) ($satir->para_birimi ?: 'TRY')),
                     ])->all(),
                     'bos' => 'Bu dönemde teslim kaydı yok.',
                 ],
@@ -198,11 +219,12 @@ class TeknikServisRaporServisi
             ->selectRaw('COALESCE(d.is_teslim_edildi, 0) as teslim')
             ->selectRaw('COALESCE(d.is_iptal, 0) as iptal')
             ->selectRaw('COALESCE(d.is_iade, 0) as iade')
+            ->selectRaw("COALESCE(NULLIF(k.tahsilat_para_birimi, ''), 'TRY') as para_birimi")
             ->selectRaw('COUNT(*) as servis_sayisi')
             ->selectRaw('COALESCE(SUM(k.toplam_tutar), 0) as toplam_tutar')
             ->selectRaw('COALESCE(SUM(k.odenen_tutar), 0) as odenen_tutar')
             ->selectRaw('MIN(k.kabul_tarihi) as ilk_kabul')
-            ->groupBy('k.servis_durumu_id', 'd.ad', 'd.is_teslim_edildi', 'd.is_iptal', 'd.is_iade')
+            ->groupBy('k.servis_durumu_id', 'd.ad', 'd.is_teslim_edildi', 'd.is_iptal', 'd.is_iade', 'k.tahsilat_para_birimi')
             ->orderByDesc('servis_sayisi')
             ->get();
 
@@ -217,7 +239,7 @@ class TeknikServisRaporServisi
                 ['etiket' => 'Açık servis', 'deger' => (string) $acik, 'alt' => 'Teslim/iptal/iade hariç'],
                 ['etiket' => 'Teslim edilen', 'deger' => (string) $teslim, 'alt' => 'Durum bayrağına göre'],
                 ['etiket' => 'İptal / iade', 'deger' => (string) $iptalIade, 'alt' => 'Operasyon dışı kayıtlar'],
-                ['etiket' => 'Toplam tutar', 'deger' => $this->para((float) $durumlar->sum('toplam_tutar')), 'alt' => 'Dönem servisleri'],
+                ['etiket' => 'Toplam tutar', 'deger' => $this->paraDagilimi($durumlar->groupBy('para_birimi')->mapWithKeys(fn ($satirlar, $paraBirimi): array => [(string) $paraBirimi => (float) $satirlar->sum('toplam_tutar')])->all()), 'alt' => 'Para birimi bazında'],
             ],
             'tablolar' => [
                 [
@@ -233,8 +255,8 @@ class TeknikServisRaporServisi
                         'durum' => (string) $satir->durum,
                         'servis' => (string) (int) $satir->servis_sayisi,
                         'oran' => $this->yuzde($toplamServis > 0 ? ((int) $satir->servis_sayisi / $toplamServis) * 100 : 0),
-                        'toplam' => $this->para((float) $satir->toplam_tutar),
-                        'odenen' => $this->para((float) $satir->odenen_tutar),
+                'toplam' => $this->para((float) $satir->toplam_tutar, (string) ($satir->para_birimi ?: 'TRY')),
+                'odenen' => $this->para((float) $satir->odenen_tutar, (string) ($satir->para_birimi ?: 'TRY')),
                     ])->all(),
                     'bos' => 'Bu dönemde durum raporu için kayıt yok.',
                 ],
@@ -322,24 +344,31 @@ class TeknikServisRaporServisi
             ->whereBetween('t.tarih', [$baslangic, $bitis]);
 
         $tahsilatSayisi = (clone $tahsilatlar)->count();
-        $tahsilatToplami = (float) (clone $tahsilatlar)->sum(DB::raw('COALESCE(t.hedef_tutar, t.tutar)'));
+        $tahsilatOzetleri = (clone $tahsilatlar)
+            ->selectRaw("COALESCE(NULLIF(t.kaynak_para_birimi, ''), 'TRY') as para_birimi")
+            ->selectRaw('COALESCE(SUM(t.tutar), 0) as toplam_tutar')
+            ->groupBy('t.kaynak_para_birimi')
+            ->get();
         $servisSayisi = DB::table('teknik_servis_kayitlari')
             ->where('firma_id', $firmaId)
             ->whereNull('deleted_at')
             ->whereBetween('kabul_tarihi', [$baslangic, $bitis])
             ->count();
-        $acikBakiye = DB::table('teknik_servis_kayitlari')
+        $acikBakiyeOzetleri = DB::table('teknik_servis_kayitlari')
             ->where('firma_id', $firmaId)
             ->whereNull('deleted_at')
             ->whereBetween('kabul_tarihi', [$baslangic, $bitis])
-            ->sum(DB::raw('CASE WHEN COALESCE(toplam_tutar, 0) > COALESCE(odenen_tutar, 0) THEN COALESCE(toplam_tutar, 0) - COALESCE(odenen_tutar, 0) ELSE 0 END'));
+            ->selectRaw("COALESCE(NULLIF(tahsilat_para_birimi, ''), 'TRY') as para_birimi")
+            ->selectRaw('COALESCE(SUM(CASE WHEN COALESCE(toplam_tutar, 0) > COALESCE(odenen_tutar, 0) THEN COALESCE(toplam_tutar, 0) - COALESCE(odenen_tutar, 0) ELSE 0 END), 0) as toplam_tutar')
+            ->groupBy('tahsilat_para_birimi')
+            ->get();
 
         return [
             'kartlar' => [
                 ['etiket' => 'Servis adedi', 'deger' => (string) $servisSayisi, 'alt' => $this->tarihAraligi($baslangic, $bitis)],
                 ['etiket' => 'Tahsilat işlemi', 'deger' => (string) $tahsilatSayisi, 'alt' => 'Aktif tahsilatlar'],
-                ['etiket' => 'Tahsilat toplamı', 'deger' => $this->para($tahsilatToplami), 'alt' => 'Hedef tutar öncelikli'],
-                ['etiket' => 'Açık bakiye', 'deger' => $this->para((float) $acikBakiye), 'alt' => 'Dönem servisleri'],
+                ['etiket' => 'Tahsilat toplamı', 'deger' => $this->paraDagilimi($tahsilatOzetleri->mapWithKeys(fn (object $satir): array => [(string) $satir->para_birimi => (float) $satir->toplam_tutar])->all()), 'alt' => 'Kaynak para birimi bazında'],
+                ['etiket' => 'Açık bakiye', 'deger' => $this->paraDagilimi($acikBakiyeOzetleri->mapWithKeys(fn (object $satir): array => [(string) $satir->para_birimi => (float) $satir->toplam_tutar])->all()), 'alt' => 'Dönem servisleri'],
             ],
             'tablolar' => [
                 [
@@ -387,9 +416,10 @@ class TeknikServisRaporServisi
             ->whereNull('k.deleted_at')
             ->whereBetween('k.kabul_tarihi', [$baslangic, $bitis])
             ->selectRaw('k.servis_tipi')
+            ->selectRaw("COALESCE(NULLIF(k.tahsilat_para_birimi, ''), 'TRY') as para_birimi")
             ->selectRaw('COUNT(*) as servis_sayisi')
             ->selectRaw('COALESCE(SUM(k.toplam_tutar), 0) as kayit_toplami')
-            ->groupBy('k.servis_tipi')
+            ->groupBy('k.servis_tipi', 'k.tahsilat_para_birimi')
             ->orderByDesc('servis_sayisi')
             ->get()
             ->keyBy('servis_tipi');
@@ -401,24 +431,26 @@ class TeknikServisRaporServisi
             ->whereNull('k.deleted_at')
             ->whereBetween('k.kabul_tarihi', [$baslangic, $bitis])
             ->selectRaw('k.servis_tipi')
+            ->selectRaw("COALESCE(NULLIF(kalem.para_birimi, ''), COALESCE(NULLIF(k.tahsilat_para_birimi, ''), 'TRY')) as para_birimi")
             ->selectRaw("COALESCE(SUM(CASE WHEN kalem.kalem_rolu = 'satis' THEN kalem.satir_toplami ELSE 0 END), 0) as gelir")
             ->selectRaw("COALESCE(SUM(CASE WHEN kalem.kalem_rolu = 'gider' THEN kalem.satir_toplami ELSE 0 END), 0) as gider")
-            ->groupBy('k.servis_tipi')
+            ->groupBy('k.servis_tipi', 'kalem.para_birimi', 'k.tahsilat_para_birimi')
             ->get()
-            ->keyBy('servis_tipi');
+            ->keyBy(fn (object $satir): string => (string) $satir->servis_tipi.'|'.(string) $satir->para_birimi);
 
         return $kayitlar
             ->map(function (object $satir) use ($kalemler): array {
-                $kalem = $kalemler->get($satir->servis_tipi);
-                $gelir = max((float) ($kalem->gelir ?? 0), (float) $satir->kayit_toplami);
-                $gider = (float) ($kalem->gider ?? 0);
+                $paraBirimi = strtoupper((string) ($satir->para_birimi ?: 'TRY'));
+                $kalem = $kalemler->get((string) $satir->servis_tipi.'|'.$paraBirimi);
+                $gelir = max((float) ($kalem?->gelir ?? 0), (float) $satir->kayit_toplami);
+                $gider = (float) ($kalem?->gider ?? 0);
 
                 return [
-                    'tip' => $this->servisTipi((string) $satir->servis_tipi),
+                    'tip' => $this->servisTipi((string) $satir->servis_tipi).' ('.$paraBirimi.')',
                     'servis' => (string) (int) $satir->servis_sayisi,
-                    'gelir' => $this->para($gelir),
-                    'gider' => $this->para($gider),
-                    'kar' => $this->para($gelir - $gider),
+                    'gelir' => $this->para($gelir, $paraBirimi),
+                    'gider' => $this->para($gider, $paraBirimi),
+                    'kar' => $this->para($gelir - $gider, $paraBirimi),
                 ];
             })
             ->all();
@@ -439,14 +471,14 @@ class TeknikServisRaporServisi
             ->whereBetween('k.kabul_tarihi', [$baslangic, $bitis])
             ->orderByDesc('k.toplam_tutar')
             ->limit(12)
-            ->get(['k.id', 'k.fis_no', 'k.musteri_ad_soyad', 'k.toplam_tutar', 'k.odenen_tutar', 'c.ad as cari_adi', 'd.ad as durum_adi'])
+            ->get(['k.id', 'k.fis_no', 'k.musteri_ad_soyad', 'k.toplam_tutar', 'k.odenen_tutar', 'k.tahsilat_para_birimi', 'c.ad as cari_adi', 'd.ad as durum_adi'])
             ->map(fn (object $satir): array => [
                 '_url' => TeknikServisKaydiKaynagi::getUrl('edit', ['record' => (int) $satir->id]),
                 'fis' => (string) ($satir->fis_no ?: '-'),
                 'musteri' => (string) (($satir->cari_adi ?? null) ?: ($satir->musteri_ad_soyad ?? null) ?: '-'),
                 'durum' => (string) ($satir->durum_adi ?: '-'),
-                'toplam' => $this->para((float) $satir->toplam_tutar),
-                'tahsilat' => $this->para((float) $satir->odenen_tutar),
+                'toplam' => $this->para((float) $satir->toplam_tutar, (string) ($satir->tahsilat_para_birimi ?: 'TRY')),
+                'tahsilat' => $this->para((float) $satir->odenen_tutar, (string) ($satir->tahsilat_para_birimi ?: 'TRY')),
             ])
             ->all();
     }
@@ -461,9 +493,10 @@ class TeknikServisRaporServisi
             ->whereNull('deleted_at')
             ->whereBetween('kabul_tarihi', [$baslangic, $bitis])
             ->selectRaw($kolon.' as grup')
+            ->selectRaw("COALESCE(NULLIF(tahsilat_para_birimi, ''), 'TRY') as para_birimi")
             ->selectRaw('COUNT(*) as servis_sayisi')
             ->selectRaw('COALESCE(SUM(toplam_tutar), 0) as toplam_tutar')
-            ->groupBy($kolon)
+            ->groupBy($kolon, 'tahsilat_para_birimi')
             ->orderByDesc('servis_sayisi')
             ->get();
 
@@ -477,7 +510,7 @@ class TeknikServisRaporServisi
             'satirlar' => $satirlar->map(fn (object $satir): array => [
                 'grup' => $kolon === 'servis_tipi' ? $this->servisTipi((string) $satir->grup) : $this->etiket((string) $satir->grup),
                 'servis' => (string) (int) $satir->servis_sayisi,
-                'toplam' => $this->para((float) $satir->toplam_tutar),
+                'toplam' => $this->para((float) $satir->toplam_tutar, (string) ($satir->para_birimi ?: 'TRY')),
             ])->all(),
             'bos' => $baslik.' için kayıt yok.',
         ];
@@ -536,15 +569,16 @@ class TeknikServisRaporServisi
         return $this->aktifTahsilatSorgusu($firmaId)
             ->whereBetween('t.tarih', [$baslangic, $bitis])
             ->selectRaw('t.kanal')
+            ->selectRaw("COALESCE(NULLIF(t.kaynak_para_birimi, ''), 'TRY') as para_birimi")
             ->selectRaw('COUNT(*) as islem_sayisi')
-            ->selectRaw('COALESCE(SUM(COALESCE(t.hedef_tutar, t.tutar)), 0) as toplam_tutar')
-            ->groupBy('t.kanal')
+            ->selectRaw('COALESCE(SUM(t.tutar), 0) as toplam_tutar')
+            ->groupBy('t.kanal', 't.kaynak_para_birimi')
             ->orderByDesc('toplam_tutar')
             ->get()
             ->map(fn (object $satir): array => [
                 'kanal' => $this->kanal((string) $satir->kanal),
                 'islem' => (string) (int) $satir->islem_sayisi,
-                'tutar' => $this->para((float) $satir->toplam_tutar),
+                'tutar' => $this->para((float) $satir->toplam_tutar, (string) ($satir->para_birimi ?: 'TRY')),
             ])
             ->all();
     }
@@ -559,10 +593,11 @@ class TeknikServisRaporServisi
             ->whereNull('deleted_at')
             ->whereBetween('kabul_tarihi', [$baslangic, $bitis])
             ->selectRaw('odeme_durumu')
+            ->selectRaw("COALESCE(NULLIF(tahsilat_para_birimi, ''), 'TRY') as para_birimi")
             ->selectRaw('COUNT(*) as servis_sayisi')
             ->selectRaw('COALESCE(SUM(toplam_tutar), 0) as toplam_tutar')
             ->selectRaw('COALESCE(SUM(odenen_tutar), 0) as odenen_tutar')
-            ->groupBy('odeme_durumu')
+            ->groupBy('odeme_durumu', 'tahsilat_para_birimi')
             ->orderByDesc('servis_sayisi')
             ->get();
 
@@ -578,9 +613,9 @@ class TeknikServisRaporServisi
             'satirlar' => $satirlar->map(fn (object $satir): array => [
                 'durum' => $this->etiket((string) $satir->odeme_durumu),
                 'servis' => (string) (int) $satir->servis_sayisi,
-                'toplam' => $this->para((float) $satir->toplam_tutar),
-                'odenen' => $this->para((float) $satir->odenen_tutar),
-                'kalan' => $this->para(max(0, (float) $satir->toplam_tutar - (float) $satir->odenen_tutar)),
+                'toplam' => $this->para((float) $satir->toplam_tutar, (string) ($satir->para_birimi ?: 'TRY')),
+                'odenen' => $this->para((float) $satir->odenen_tutar, (string) ($satir->para_birimi ?: 'TRY')),
+                'kalan' => $this->para(max(0, (float) $satir->toplam_tutar - (float) $satir->odenen_tutar), (string) ($satir->para_birimi ?: 'TRY')),
             ])->all(),
             'bos' => 'Bu dönemde ödeme durumu verisi yok.',
         ];
@@ -600,21 +635,30 @@ class TeknikServisRaporServisi
             ->whereBetween('t.tarih', [$baslangic, $bitis])
             ->orderByDesc('t.tarih')
             ->limit(20)
-            ->get(['k.id', 'k.fis_no', 'k.musteri_ad_soyad', 'c.ad as cari_adi', 't.tarih', 't.kanal', 't.tutar', 't.hedef_tutar'])
+            ->get(['k.id', 'k.fis_no', 'k.musteri_ad_soyad', 'c.ad as cari_adi', 't.tarih', 't.kanal', 't.tutar', 't.hedef_tutar', 't.kaynak_para_birimi'])
             ->map(fn (object $satir): array => [
                 '_url' => TeknikServisKaydiKaynagi::getUrl('edit', ['record' => (int) $satir->id]),
                 'tarih' => $this->tarihSaat($satir->tarih),
                 'fis' => (string) ($satir->fis_no ?: '-'),
                 'musteri' => (string) (($satir->cari_adi ?? null) ?: ($satir->musteri_ad_soyad ?? null) ?: '-'),
                 'kanal' => $this->kanal((string) $satir->kanal),
-                'tutar' => $this->para((float) ($satir->hedef_tutar ?? $satir->tutar ?? 0)),
+                'tutar' => $this->para((float) ($satir->hedef_tutar ?? $satir->tutar ?? 0), (string) ($satir->kaynak_para_birimi ?: 'TRY')),
             ])
             ->all();
     }
 
-    private function para(float $deger): string
+    private function para(float $deger, string $paraBirimi = 'TRY'): string
     {
-        return number_format($deger, 2, ',', '.').' TL';
+        return number_format($deger, 2, ',', '.').' '.strtoupper($paraBirimi ?: 'TRY');
+    }
+
+    /** @param array<string,float|int> $dagilim */
+    private function paraDagilimi(array $dagilim): string
+    {
+        return collect($dagilim)
+            ->filter(fn ($tutar): bool => abs((float) $tutar) > 0.000001)
+            ->map(fn ($tutar, $paraBirimi): string => $this->para((float) $tutar, (string) $paraBirimi))
+            ->implode(' · ') ?: $this->para(0);
     }
 
     private function yuzde(float $deger): string

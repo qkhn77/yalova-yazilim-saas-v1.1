@@ -27,17 +27,13 @@ body.fi-panel-admin.saas-layout-modern-vertical .fi-sidebar {
     text-transform: uppercase;
 }
 
-.saas-layout-switcher__current {
-    overflow: hidden;
-    max-width: 7rem;
-    color: rgb(67 97 238);
-    font-size: 0.65rem;
+.saas-layout-switcher__section-label {
+    padding: .15rem .25rem .45rem;
+    color: var(--saas-text-muted, rgb(107 114 128));
+    font-size: .6875rem;
     font-weight: 700;
-    padding: .2rem .45rem;
-    border-radius: 999px;
-    background: rgb(255 255 255 / 75%);
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    letter-spacing: .04em;
+    text-transform: uppercase;
 }
 
 .saas-layout-switcher [aria-current='true'] {
@@ -46,8 +42,8 @@ body.fi-panel-admin.saas-layout-modern-vertical .fi-sidebar {
 }
 
 .saas-layout-switcher .fi-dropdown-list {
-    width: 15rem;
-    min-width: 15rem;
+    width: 100%;
+    min-width: 0;
     padding: .625rem;
     border: 1px solid rgb(226 232 240 / 90%);
     border-radius: 1rem;
@@ -105,13 +101,35 @@ body.fi-panel-admin.saas-layout-modern-vertical .fi-sidebar {
     box-shadow: inset 3px 0 0 rgb(67 97 238);
 }
 
-/* Profil menüsünün sağ kenarında panel viewport dışına taşmasın. */
-.fi-user-menu .fi-dropdown-panel:has(.saas-layout-switcher) {
+/* Tema ve menü düzeni paneli viewport dışına taşmasın. */
+.saas-layout-switcher .fi-dropdown-panel {
     inset-inline-start: auto !important;
     inset-inline-end: .5rem !important;
     width: 15rem !important;
     max-width: calc(100vw - 1rem) !important;
+    overflow: visible !important;
     z-index: 120 !important;
+}
+
+/* Teleport/absolute konumlandırmada Filament'in varsayılan 14rem sınırı
+   panelin sol kenarındaki içeriği daraltmasın. */
+body.fi-panel-admin .fi-topbar .fi-dropdown-panel:has(.saas-layout-switcher__heading) {
+    width: 15rem !important;
+    max-width: min(15rem, calc(100vw - 1rem)) !important;
+    inset-inline-end: .5rem !important;
+    overflow: visible !important;
+}
+
+.saas-appearance-trigger {
+    border-radius: .65rem;
+}
+
+.saas-message-center-trigger {
+    border-radius: .65rem;
+}
+
+.saas-layout-switcher .fi-theme-switcher {
+    justify-content: space-between;
 }
 
 /* Profil açılır menüsü datatable araç çubuklarının stacking context'inin
@@ -249,6 +267,12 @@ html.dark .saas-layout-switcher__message-link {
         object-position: center;
     }
 
+    /* Compact Vertical masaüstünde genişleme hover/focus ile yapılır. Filament'in
+       ayrı isOpen düğmesi bu düzeni drawer gibi kapattığı için gösterilmez. */
+    body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar-header .fi-sidebar-logo-toggle {
+        display: none !important;
+    }
+
     /* Tema collapse kuralları logoyu gizlese bile Compact Vertical kendi
        kompakt logosunu göstermeye devam eder. */
     body.fi-panel-admin.saas-layout-compact-vertical .fi-main-sidebar:not(.fi-sidebar-open) .fi-sidebar-header .fi-logo,
@@ -329,6 +353,35 @@ html.dark .saas-layout-switcher__message-link {
         display: block !important;
     }
 
+    /* Compact Vertical dar durumda footer da ikon kolonuna uyum sağlar;
+       sidebar açılınca marka bilgisi tam metin olarak görünür. */
+    body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:focus-within) .saas-sidebar-footer {
+        padding-inline: 0.25rem;
+        overflow: hidden;
+    }
+
+    body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:focus-within) .saas-sidebar-footer__full {
+        display: none;
+    }
+
+    body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:focus-within) .saas-sidebar-footer__short {
+        display: inline;
+    }
+
+    body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:is(:hover, :focus-within) .saas-sidebar-footer__full {
+        display: inline;
+    }
+
+body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:is(:hover, :focus-within) .saas-sidebar-footer__short {
+        display: none;
+    }
+
+    /* Footer yalnızca iki dikey sidebar düzenine aittir; Horizontal düzende
+       navigasyon üst menü olarak çalıştığı için görünmez kalır. */
+    body.fi-panel-admin.saas-layout-horizontal .saas-sidebar-footer {
+        display: none;
+    }
+
     /* Horizontal: aynı navigation ağacı topbar altında çok satırlı modül barına dönüşür. */
     body.fi-panel-admin.saas-layout-horizontal .fi-main-ctn {
         width: 100%;
@@ -349,6 +402,7 @@ html.dark .saas-layout-switcher__message-link {
         max-width: none !important;
         height: auto !important;
         min-height: 0 !important;
+        align-self: flex-start !important;
         transform: none !important;
         border: 0 !important;
         border-bottom: 1px solid var(--saas-border) !important;
@@ -361,6 +415,9 @@ html.dark .saas-layout-switcher__message-link {
 
     body.fi-panel-admin.saas-layout-horizontal .fi-sidebar-nav {
         display: block;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
         overflow: visible !important;
         margin-top: 0.5rem;
         padding: 0.375rem var(--saas-shell-gap) !important;
@@ -369,10 +426,13 @@ html.dark .saas-layout-switcher__message-link {
     }
 
 body.fi-panel-admin.saas-layout-horizontal .custom-sidebar {
-        position: relative;
-        width: 100%;
-        display: flex;
-        align-items: center;
+         position: relative;
+         width: 100%;
+         display: flex;
+         height: auto !important;
+         min-height: 0 !important;
+         flex: 0 0 auto !important;
+         align-items: center;
         gap: 0.5rem;
 }
 
@@ -400,9 +460,11 @@ body.fi-panel-admin.saas-layout-horizontal .fi-topbar > nav::before {
     body.fi-panel-admin.saas-layout-horizontal .custom-sidebar > nav {
         position: relative;
         display: flex;
-        flex: 1 1 auto;
+        flex: 0 0 auto;
         flex-flow: row wrap;
         align-items: center;
+        height: auto !important;
+        min-height: 0 !important;
         gap: 0;
         width: 100%;
         min-width: 0;
@@ -434,7 +496,7 @@ body.fi-panel-admin.saas-layout-horizontal .fi-topbar > nav::before {
     }
 
     body.fi-panel-admin.saas-layout-horizontal .custom-sidebar .nav-item > .chevron {
-        display: block !important;
+        display: none !important;
     }
 
     body.fi-panel-admin.saas-layout-horizontal .custom-sidebar > nav > .nav-item.is-active {
@@ -555,6 +617,13 @@ body.fi-panel-admin.saas-layout-horizontal .fi-topbar > nav::before {
 
 /* Compact sidebar'da da logo, hamburgerden sonra kalan başlık alanını
    doldursun; intrinsic boyutu ne olursa olsun contain ile oran korunsun. */
+body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:focus-within) .fi-sidebar-header > div:has(.fi-logo) > a {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
 body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:focus-within) .fi-sidebar-header > div:has(.fi-logo) .fi-logo,
 body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:focus-within) .fi-sidebar-header > div:has(> .fi-logo) .fi-logo {
     width: 100% !important;

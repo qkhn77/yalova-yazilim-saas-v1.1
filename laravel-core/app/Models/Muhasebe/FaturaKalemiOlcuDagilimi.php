@@ -14,7 +14,7 @@ class FaturaKalemiOlcuDagilimi extends Model
 
     protected $fillable = [
         'firma_id', 'fatura_kalemi_id', 'kaynak_olcu_dagilimi_id', 'stok_id', 'stok_olcusu_id', 'stok_olcu_bakiyesi_id',
-        'depo_id', 'stok_parcasi_id', 'islem_birimi_id', 'girilen_miktar', 'ana_miktar', 'adet_esdegeri',
+        'depo_id', 'islem_birimi_id', 'girilen_miktar', 'ana_miktar', 'adet_esdegeri',
         'sira', 'takip_turu', 'olcu_birimi', 'en', 'boy', 'yukseklik', 'en_m', 'boy_m', 'yukseklik_m', 'bir_adet_ana_miktar',
     ];
 
@@ -29,5 +29,4 @@ class FaturaKalemiOlcuDagilimi extends Model
     public function olcu(): BelongsTo { return $this->belongsTo(StokOlcusu::class, 'stok_olcusu_id'); }
     public function bakiye(): BelongsTo { return $this->belongsTo(StokOlcuBakiyesi::class, 'stok_olcu_bakiyesi_id'); }
     public function depo(): BelongsTo { return $this->belongsTo(Depo::class, 'depo_id'); }
-    public function parca(): BelongsTo { return $this->belongsTo(StokParcasi::class, 'stok_parcasi_id'); }
 }
