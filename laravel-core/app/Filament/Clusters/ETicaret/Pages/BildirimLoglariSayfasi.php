@@ -183,7 +183,9 @@ class BildirimLoglariSayfasi extends Page implements HasTable
                     }),
             ])
             ->defaultSort('id', 'desc')
-            ->paginated([10, 20, 50, 100, 1000, 'all']);
+            // Büyük sayfa seçenekleri yalnız açıkça gerekli rapor aksiyonlarında
+            // kullanılmalı; normal açılışta tarayıcıya binlerce kayıt taşınmaz.
+            ->paginated([10, 20, 50, 100]);
     }
 
     private function aktifFirmaId(): int

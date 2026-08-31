@@ -10,7 +10,8 @@ use App\Models\Setting;
  */
 class AdminLogoServisi
 {
-    private const VARSAYILAN_YOL = 'teknik-servis-sablon-logolari/iV8V8hfdaQcYmGA4aF6QcjPweytbx7vZtweJFqso.png';
+    /** Projede kullanılan güncel Yalova Kamera logosu. */
+    private const VARSAYILAN_YOL = 'images/logo/yalova-yazilim.svg';
 
     public function yol(?int $firmaId = null): string
     {
@@ -32,6 +33,18 @@ class AdminLogoServisi
 
     public function url(?int $firmaId = null): string
     {
-        return asset('storage/'.$this->yol($firmaId));
+        $yol = $this->yol($firmaId);
+
+        if (str_starts_with($yol, 'public/')) {
+            return asset(ltrim(substr($yol, strlen('public/')), '/'));
+        }
+
+        // public_html altındaki statik marka varlıkları storage üzerinden değil,
+        // doğrudan web kökünden servis edilir.
+        if (str_starts_with($yol, 'images/')) {
+            return asset($yol);
+        }
+
+        return asset('storage/'.$yol);
     }
 }
