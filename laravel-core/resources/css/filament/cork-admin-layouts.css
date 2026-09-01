@@ -648,4 +648,17 @@ body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:fo
     body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:focus-within) .saas-sidebar-footer {
         display: none !important;
     }
+
+    /* Modern vertical düzende de kapalı sidebar aynı davranışı kullanır. */
+    body.fi-panel-admin .fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-header > div:has(.fi-logo),
+    body.fi-panel-admin .fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-header .fi-logo {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    body.fi-panel-admin .fi-sidebar:not(.fi-sidebar-open) .saas-sidebar-footer {
+        display: none !important;
+    }
 }
