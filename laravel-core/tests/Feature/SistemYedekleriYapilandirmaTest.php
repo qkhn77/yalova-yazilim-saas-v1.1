@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Services\SistemYedekleriServisi;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
@@ -71,5 +72,20 @@ PHP);
             $this->geciciDizin.DIRECTORY_SEPARATOR.$yedek['name']
         )));
         $this->assertFileDoesNotExist($this->geciciDizin.DIRECTORY_SEPARATOR.$yedek['name'].'.part');
+    }
+
+    public function test_indirme_baglantisi_spa_yonlendirmesi_yapmaz(): void
+    {
+        $html = Blade::render(<<<'BLADE'
+<x-filament::button
+    tag="a"
+    href="/admin/sistem-yedekleri/test.sql.gz/download"
+    :spa-mode="false"
+    download="test.sql.gz"
+>İndir</x-filament::button>
+BLADE);
+
+        $this->assertStringContainsString('download="test.sql.gz"', $html);
+        $this->assertStringNotContainsString('wire:navigate', $html);
     }
 }

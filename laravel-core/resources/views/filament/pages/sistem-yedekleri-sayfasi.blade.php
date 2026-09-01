@@ -48,6 +48,7 @@
                                         color="gray"
                                         icon="heroicon-o-arrow-down-tray"
                                         href="{{ route('admin.sistem-yedekleri.download', ['yedek' => $yedek['name']]) }}"
+                                        :spa-mode="false"
                                         download="{{ $yedek['name'] }}"
                                     >İndir</x-filament::button>
                                     <x-filament::button size="sm" color="danger" icon="heroicon-o-trash" wire:click="sil(@js($yedek['name']))" wire:confirm="Bu yedeği silmek istediğinize emin misiniz?">Sil</x-filament::button>
