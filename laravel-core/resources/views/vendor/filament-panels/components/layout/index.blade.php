@@ -47,7 +47,9 @@
             @endif
 
             @if ($horizontalLayout && (filament()->hasNavigation() || filament()->getId() === 'admin'))
-                @include('filament.components.admin-sidebar-shell', ['navigation' => $navigation])
+                @persist('admin-sidebar')
+                    @include('filament.components.admin-sidebar-shell', ['navigation' => $navigation])
+                @endpersist
             @endif
 
             <main
@@ -91,7 +93,9 @@
 
         {{-- Modern/compact sidebar flex kolonunda kalır; horizontal aynı ağacı topbar altına taşır. --}}
         @if (! $horizontalLayout && (filament()->hasNavigation() || filament()->getId() === 'admin'))
-            @include('filament.components.admin-sidebar-shell', ['navigation' => $navigation])
+            @persist('admin-sidebar')
+                @include('filament.components.admin-sidebar-shell', ['navigation' => $navigation])
+            @endpersist
         @endif
     </div>
 </x-filament-panels::layout.base>
