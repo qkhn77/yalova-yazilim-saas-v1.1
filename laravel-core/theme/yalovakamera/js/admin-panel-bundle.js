@@ -657,7 +657,10 @@ if (! window.__ykCustomSidebarNavigateBound) {
 
             sidebar.querySelectorAll('a.nav-item[href]').forEach((link) => {
                 const linkPath = normalizePath(new URL(link.href, window.location.href).pathname)
-                const isActive = currentPath === linkPath || currentPath.startsWith(`${linkPath}/`)
+                const isHomeLink = linkPath === '/admin'
+                const isActive = isHomeLink
+                    ? currentPath === linkPath
+                    : currentPath === linkPath || currentPath.startsWith(`${linkPath}/`)
 
                 link.classList.toggle('is-active', isActive)
             })
