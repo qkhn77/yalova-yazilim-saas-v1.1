@@ -633,3 +633,19 @@ body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:fo
     object-fit: contain;
     object-position: center;
 }
+
+/* Daraltılmış compact sidebar'da marka alanı ve yasal footer metni
+   görünmesin; sidebar açıldığında/üzerine gelindiğinde geri gösterilir. */
+@media (min-width: 1024px) {
+    body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:focus-within) .fi-sidebar-header > div:has(.fi-logo),
+    body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:focus-within) .fi-sidebar-header .fi-logo {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:focus-within) .saas-sidebar-footer {
+        display: none !important;
+    }
+}
