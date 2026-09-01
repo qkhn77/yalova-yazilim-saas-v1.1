@@ -681,12 +681,15 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
                         'title' => 'M² seçerseniz miktar m² üzerinden, Adet seçerseniz adet üzerinden hesaplanır.',
                         'aria-label' => 'Satış ölçüsü. M² veya Adet seçebilirsiniz.',
                     ]), 'Satış ölçüsü', ['dar' => true, 'span' => 1]),
-                        $h(Select::make('birim')
+                $h(Select::make('birim')
                     ->label('Birim')
                     ->placeholder('Seçin')
-                    ->helperText(fn (Get $get): ?HtmlString => static::birimYedekSecenekUyarisi(
-                        (int) ($get('../../firma_id') ?: static::aktifFirmaId()),
-                    ))
+                    ->hintIcon(
+                        fn (Get $get): ?string => static::birimYedekSecenekUyarisi(
+                            (int) ($get('../../firma_id') ?: static::aktifFirmaId()),
+                        ) !== null ? 'heroicon-o-exclamation-triangle' : null,
+                        'Tanımlı aktif birim bulunamadı. Faturayı kaydetmeden önce Tanımlar > Birimler bölümünden birim ekleyin.',
+                    )
                     ->columnSpan(['default' => 2, 'md' => 2, 'xl' => 2])
                     ->extraAttributes(['class' => 'fatura-kalem-birim'])
                     ->options(fn (Get $get): array => static::faturaSatirBirimSecenekleri(

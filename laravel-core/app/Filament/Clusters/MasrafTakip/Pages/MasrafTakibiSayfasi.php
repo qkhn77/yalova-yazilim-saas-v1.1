@@ -845,6 +845,7 @@ class MasrafTakibiSayfasi extends Page implements HasForms, HasTable
                     ])
                     ->action(fn (Masraf $record, array $data): mixed => $this->masrafiIptalEt((int) $record->getKey(), $data['neden'] ?? null)),
             ])
+            ->emptyStateHeading('Masraf Yok')
             ->paginated([10, 20, 50, 100, 1000, 'all']);
     }
 
