@@ -155,8 +155,14 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
             return $alan;
         }
 
-        $p = $alan->hiddenLabel()->placeholder($kolonBasligi);
-        if (($meta['dar'] ?? false) === true) {
+        // Toggle bileşeni placeholder desteği sunmaz. Kompakt görünümde
+        // etiketi gizlemek yeterlidir; diğer alanlar kolon başlığını
+        // placeholder olarak göstermeye devam eder.
+        $p = $alan->hiddenLabel();
+        if (! $alan instanceof Toggle) {
+            $p = $p->placeholder($kolonBasligi);
+        }
+        if (($meta['dar'] ?? false) === true && ! $alan instanceof Toggle) {
             $p = $p->extraInputAttributes(['class' => 'kanakku-kalem-input-dar']);
         }
         // Tek satır görünümünde teknik servisle aynı kolon genişliklerini kullan.
