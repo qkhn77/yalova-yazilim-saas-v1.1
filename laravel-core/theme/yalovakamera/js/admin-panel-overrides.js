@@ -267,40 +267,15 @@
             })
         }
 
-        const syncCollapsedSidebarLogoVisibility = () => {
-            if (window.innerWidth < 1024) {
-                document
-                    .querySelectorAll('.fi-sidebar-header .fi-logo, .fi-sidebar-header a:has(.fi-logo)')
-                    .forEach((element) => {
-                        element.style.display = ''
-                        element.style.opacity = ''
-                        element.style.visibility = ''
-                        element.style.pointerEvents = ''
-                    })
-
-                return
-            }
-
-            document.querySelectorAll('.fi-main-sidebar, .fi-sidebar').forEach((sidebar) => {
-                const isOpen = sidebar.classList.contains('fi-sidebar-open')
-                const logoElements = sidebar.querySelectorAll('.fi-sidebar-header .fi-logo, .fi-sidebar-header a:has(.fi-logo)')
-
-                logoElements.forEach((element) => {
-                    if (isOpen) {
-                        element.style.display = ''
-                        element.style.opacity = ''
-                        element.style.visibility = ''
-                        element.style.pointerEvents = ''
-
-                        return
-                    }
-
-                    element.style.display = 'none'
-                    element.style.opacity = '0'
-                    element.style.visibility = 'hidden'
-                    element.style.pointerEvents = 'none'
+        const clearSidebarLogoInlineVisibility = () => {
+            document
+                .querySelectorAll('.fi-sidebar-header .fi-logo, .fi-sidebar-header a:has(.fi-logo)')
+                .forEach((element) => {
+                    element.style.removeProperty('display')
+                    element.style.removeProperty('opacity')
+                    element.style.removeProperty('visibility')
+                    element.style.removeProperty('pointer-events')
                 })
-            })
         }
 
         const enhanceGlobalSearch = () => {
@@ -607,7 +582,7 @@
             translateAdminControlLabels()
             movePageHeadingToTopbar()
             scheduleSidebarWidthUpdate()
-            syncCollapsedSidebarLogoVisibility()
+            clearSidebarLogoInlineVisibility()
             enhanceGlobalSearch()
         }
 
