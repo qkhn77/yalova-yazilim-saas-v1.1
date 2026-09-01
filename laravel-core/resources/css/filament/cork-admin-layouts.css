@@ -637,6 +637,24 @@ body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:fo
 /* Daraltılmış compact sidebar'da marka alanı ve yasal footer metni
    görünmesin; sidebar açıldığında/üzerine gelindiğinde geri gösterilir. */
 @media (min-width: 1024px) {
+    /* Compact vertical sidebar açıkken logo, iki kontrolün arasında ortalanır. */
+    body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:is(:hover, :focus-within, .fi-sidebar-open) .fi-sidebar-header > div:has(.fi-logo),
+    body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:is(:hover, :focus-within, .fi-sidebar-open) .fi-sidebar-header > div:has(.fi-logo) > a {
+        justify-content: center !important;
+    }
+
+    body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:is(:hover, :focus-within, .fi-sidebar-open) .fi-sidebar-header > div:has(.fi-logo) > a {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:is(:hover, :focus-within, .fi-sidebar-open) .fi-sidebar-header .fi-logo {
+        margin-inline: auto !important;
+        object-position: center !important;
+    }
+
     body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:focus-within) .fi-sidebar-header > div:has(.fi-logo),
     body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:focus-within) .fi-sidebar-header .fi-logo {
         display: none !important;
@@ -650,15 +668,15 @@ body.fi-panel-admin.saas-layout-compact-vertical .fi-sidebar:not(:hover):not(:fo
     }
 
     /* Modern vertical düzende de kapalı sidebar aynı davranışı kullanır. */
-    body.fi-panel-admin .fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-header > div:has(.fi-logo),
-    body.fi-panel-admin .fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-header .fi-logo {
+    body.fi-panel-admin.saas-layout-modern-vertical .fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-header > div:has(.fi-logo),
+    body.fi-panel-admin.saas-layout-modern-vertical .fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-header .fi-logo {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
         pointer-events: none !important;
     }
 
-    body.fi-panel-admin .fi-sidebar:not(.fi-sidebar-open) .saas-sidebar-footer {
+    body.fi-panel-admin.saas-layout-modern-vertical .fi-sidebar:not(.fi-sidebar-open) .saas-sidebar-footer {
         display: none !important;
     }
 }
