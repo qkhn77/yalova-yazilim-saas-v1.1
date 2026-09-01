@@ -5,10 +5,22 @@
                 <h2 class="text-base font-semibold text-gray-950 dark:text-white">Alınan SQL yedekleri</h2>
                 <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Web kök dizini dışında saklanan veritabanı yedeklerini yönetin.</p>
             </div>
-            <div class="w-full sm:max-w-xs">
-                <x-filament::input.wrapper>
-                    <x-filament::input type="search" wire:model.live.debounce.300ms="arama" placeholder="Dosya ara..." aria-label="Yedek ara" />
-                </x-filament::input.wrapper>
+            <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+                <x-filament::button
+                    icon="heroicon-o-circle-stack"
+                    wire:click="yedekAl"
+                    wire:loading.attr="disabled"
+                    wire:target="yedekAl"
+                >
+                    <span wire:loading.remove wire:target="yedekAl">Yedek Al</span>
+                    <span wire:loading wire:target="yedekAl">Yedek alınıyor...</span>
+                </x-filament::button>
+
+                <div class="w-full sm:w-80">
+                    <x-filament::input.wrapper>
+                        <x-filament::input type="search" wire:model.live.debounce.300ms="arama" placeholder="Dosya ara..." aria-label="Yedek ara" />
+                    </x-filament::input.wrapper>
+                </div>
             </div>
         </div>
 

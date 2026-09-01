@@ -8,7 +8,9 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\WithPagination;
+use Throwable;
 
 class SistemYedekleriSayfasi extends Page
 {
@@ -71,6 +73,33 @@ class SistemYedekleriSayfasi extends Page
             ->title('Yedek silindi.')
             ->success()
             ->send();
+    }
+
+    public function yedekAl(SistemYedekleriServisi $yedekServisi): void
+    {
+        abort_unless(static::canAccess(), 403);
+
+        try {
+            $yedek = $yedekServisi->yedekAl();
+
+            $this->resetPage();
+
+            Notification::make()
+                ->title('Veritabanı yedeği alındı.')
+                ->body($yedek['name'])
+                ->success()
+                ->send();
+        } catch (Throwable $exception) {
+            Log::error('Yönetim panelinden veritabanı yedeği alınamadı.', [
+                'exception' => $exception,
+            ]);
+
+            Notification::make()
+                ->title('Veritabanı yedeği alınamadı.')
+                ->body('Sunucu yapılandırmasını ve Laravel loglarını kontrol edin.')
+                ->danger()
+                ->send();
+        }
     }
 
     public function formatBoyut(int $bytes): string
