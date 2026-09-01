@@ -353,8 +353,9 @@ class FaturaKaynagi extends AbstractFaturaKaynagi
                 $h(Select::make('stok_id')
                     ->label('Stok Adı')
                     ->placeholder('Bir seçenek seçin')
-                    ->columnSpan(['default' => 1, 'md' => 2, 'xl' => 2])
-                    ->columnSpan(['default' => 1, 'md' => 2, 'xl' => 2])
+                    // Orta ekranlarda stok adı, satırın kullanılmayan yatay
+                    // alanını dolduracak şekilde genişletilir.
+                    ->columnSpan(['default' => 1, 'md' => 4, 'xl' => 4])
                     ->extraAttributes(['class' => 'fatura-kalem-stok-adi'])
                     ->searchable()
                     ->searchDebounce(300)
