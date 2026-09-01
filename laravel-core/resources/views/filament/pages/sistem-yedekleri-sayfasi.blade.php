@@ -42,7 +42,14 @@
                             <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">{{ $this->formatBoyut($yedek['size']) }}</td>
                             <td class="px-4 py-3 text-end">
                                 <div class="flex justify-end gap-2">
-                                    <x-filament::button tag="a" size="sm" color="gray" icon="heroicon-o-arrow-down-tray" href="{{ route('admin.sistem-yedekleri.download', ['yedek' => $yedek['name']]) }}">İndir</x-filament::button>
+                                    <x-filament::button
+                                        tag="a"
+                                        size="sm"
+                                        color="gray"
+                                        icon="heroicon-o-arrow-down-tray"
+                                        href="{{ route('admin.sistem-yedekleri.download', ['yedek' => $yedek['name']]) }}"
+                                        download="{{ $yedek['name'] }}"
+                                    >İndir</x-filament::button>
                                     <x-filament::button size="sm" color="danger" icon="heroicon-o-trash" wire:click="sil(@js($yedek['name']))" wire:confirm="Bu yedeği silmek istediğinize emin misiniz?">Sil</x-filament::button>
                                 </div>
                             </td>
