@@ -74,7 +74,7 @@ class ServisGiderFaturasiDestegi
                 ]),
             Forms\Components\Section::make('Kalemler')
                 ->schema([
-                    static::kalemlerRepeater($firmaId),
+                    static::stokKalemleriRepeater($firmaId),
                 ])
                 ->columnSpanFull(),
             Forms\Components\Section::make('Tutar Özeti')
@@ -290,10 +290,23 @@ class ServisGiderFaturasiDestegi
      */
     public static function stokKalemleriRepeater(int $firmaId): Forms\Components\Repeater
     {
-        return static::kalemlerRepeater($firmaId);
+        // Masraf ve teknik servis formları, Yeni Fatura ekranındaki kalem
+        // şemasının aynı kaynağını kullanır. Böylece fatura ekranında yapılan
+        // alan, doğrulama veya hesaplama değişiklikleri burada ayrıca kopya
+        // kod güncellenmeden otomatik olarak uygulanır.
+        return FaturaKaynagi::kalemlerRepeaterAlani(true, false)
+            ->extraAttributes([
+                'class' => 'fatura-kalemler-repeater kanakku-kalemler-repeater kanakku-kalemler-force teklif-line-repeater teknik-servis-line-repeater masraf-fatura-line-repeater',
+                'data-firma-id' => (string) $firmaId,
+            ]);
     }
 
-    private static function kalemlerRepeater(int $firmaId): Forms\Components\Repeater
+    /**
+     * Eski, masraf ekranına özel kalem şeması geriye dönük referans için
+     * korunur; yeni formlar stokKalemleriRepeater() üzerinden ortak fatura
+     * şemasını kullanır.
+     */
+    private static function kalemlerRepeaterLegacy(int $firmaId): Forms\Components\Repeater
     {
         return Forms\Components\Repeater::make('kalemler')
             ->label('Kalemler')
