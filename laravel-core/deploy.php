@@ -77,5 +77,11 @@ foreach ($commands as [$command, $arguments]) {
     }
 }
 
+if (function_exists('opcache_reset')) {
+    echo opcache_reset()
+        ? "PHP OPcache temizlendi.\n"
+        : "PHP OPcache temizlenemedi; hosting panelinden PHP yeniden baslatilmali.\n";
+}
+
 echo "Deploy tamamlandi: ".date('Y-m-d H:i:s')."\n";
 echo "Guvenlik icin deploy.php dosyasini FTP'den hemen silin.\n";

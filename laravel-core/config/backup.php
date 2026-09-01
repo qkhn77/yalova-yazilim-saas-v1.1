@@ -20,6 +20,7 @@ return [
     | directory expected by the cPanel cron.
     */
     'path' => $configuredPath !== '' ? $configuredPath : $defaultPath,
+    'driver' => env('BACKUP_DRIVER', 'auto'),
 
     /*
     | mysqldump is executed without a shell. Production normally reads the

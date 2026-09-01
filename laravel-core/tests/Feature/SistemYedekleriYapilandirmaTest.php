@@ -51,6 +51,7 @@ PHP);
 
         config([
             'backup.path' => $this->geciciDizin,
+            'backup.driver' => 'mysqldump',
             'backup.mysqldump_command' => [PHP_BINARY, $fakeDump],
             'backup.defaults_file' => '',
             'backup.timeout_seconds' => 30,
